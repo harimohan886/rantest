@@ -17,6 +17,11 @@ app.use(cors());
 app.use(express.json());
 
 
+app.get('/list', (req, res) => res.send("In hotel list"));
+
+app.get('/', (req, res) => res.send("In hotel info page"));
+
+
 app.listen(process.env.PORT || 5000, () => {
     console.log("Hotel server is running on port! ", process.env.PORT);
 });

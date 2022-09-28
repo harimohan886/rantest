@@ -16,7 +16,11 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
+app.get('/list', (req, res) => res.send("In package list"));
+
+app.get('/', (req, res) => res.send("In package info page"));
+
 
 app.listen(process.env.PORT || 5001, () => {
-    console.log("Hotel server is running on port! ", process.env.PORT);
+    console.log("Package server is running on port! ", process.env.PORT);
 });
