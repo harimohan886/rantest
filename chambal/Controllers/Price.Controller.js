@@ -5,7 +5,9 @@ const Price = require('../Models/Price.model');
 
 module.exports = {
   getAllPrices: async (req, res, next) => {
-  	console.log(req.body);
+    console.log(req.body);
+
+    // res.send("get prices");
     try {
       const results = await Price.find({}, { __v: 0 });
       // const results = await Price.find({}, { name: 1, price: 1, _id: 0 });
@@ -17,7 +19,7 @@ module.exports = {
   },
 
   createNewPrice: async (req, res, next) => {
-  	console.log(req.body);
+    console.log(req.body);
     try {
       const product = new Price(req.body);
       const result = await product.save();

@@ -22,6 +22,6 @@ app.get('/list', (req, res) => res.send("In hotel list"));
 app.get('/', (req, res) => res.send("In hotel info page"));
 
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 5005, () => {
     console.log("Hotel server is running on port! ", process.env.PORT);
 });
