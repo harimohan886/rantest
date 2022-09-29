@@ -19,7 +19,7 @@ app.use(express.json());
 const server = gateway({
     routes: [
         {
-            prefix: "/hotel",
+            prefix: "/newhotel",
             target: process.env.HOTEL_MICROSERVICE_URL,
 
         },
