@@ -20,22 +20,32 @@ const server = gateway({
     routes: [
         {
             prefix: "/hotel",
-            target: process.env.HOTEL_MiCROSERVICE_URL,
+            target: process.env.HOTEL_MICROSERVICE_URL,
 
         },
         {
             prefix: "/package",
-            target: process.env.PACKAGE_MiCROSERVICE_URL,
+            target: process.env.PACKAGE_MICROSERVICE_URL,
 
         },
         {
             prefix: "/safari",
-            target: process.env.SAFARI_MiCROSERVICE_URL,
+            target: process.env.SAFARI_MICROSERVICE_URL,
 
         },
         {
             prefix: "/payment",
-            target: process.env.PAYMENT_MiCROSERVICE_URL,
+            target: process.env.PAYMENT_MICROSERVICE_URL,
+
+        },
+        {
+            prefix: "/admin",
+            target: process.env.ADMIN_MICROSERVICE_URL,
+
+        },
+        {
+            prefix: "/chambal",
+            target: process.env.CHAMBAL_MICROSERVICE_URL,
 
         },
 
