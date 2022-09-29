@@ -13,6 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 const PriceRoute = require('./Routes/Price.route');
 app.use('/prices', PriceRoute);
 
+
+const DateRoute = require('./Routes/Date.route');
+app.use('/dates', DateRoute);
+
+
 //404 handler and pass to error handler
 app.use((req, res, next) => {
   next(createError(404, 'Not found'));
