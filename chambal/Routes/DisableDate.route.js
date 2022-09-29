@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 var multer      = require('multer');
 
 var storage = multer.diskStorage({  
@@ -12,27 +13,24 @@ var storage = multer.diskStorage({
 });  
 var uploads = multer({storage:storage});
 
-const DateController = require('../Controllers/Date.Controller');
+
+const DisableDateController = require('../Controllers/DisableDate.Controller');
 
 //Get a list of all products
-router.get('/', DateController.getAllDates);
+router.get('/', DisableDateController.getAllDisableDates);
+
+router.post('/import-csv', uploads.single('csv'), DisableDateController.uploadCsv);
 
 //Create a new product
-router.post('/', DateController.createNewDate);
+router.post('/', DisableDateController.createNewDisableDate);
 
 //Get a product by id
-router.get('/:id', DateController.findDateById);
+router.get('/:id', DisableDateController.findDisableDateById);
 
 //Update a product by id
-router.patch('/:id', DateController.updateADate);
-
-//Update a product by id
-router.put('/avilability/:id', DateController.updateAvilability);
-
-router.post('/import-csv', uploads.single('csv'), DateController.uploadCsv);
-
+router.patch('/:id', DisableDateController.updateADisableDate);
 
 //Delete a product by id
-router.delete('/:id', DateController.deleteADate);
+router.delete('/:id', DisableDateController.deleteADisableDate);
 
 module.exports = router;

@@ -1,11 +1,11 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const csv=require('csvtojson');
 
 const Date = require('../Models/Date.model');
 
 module.exports = {
   getAllDates: async (req, res, next) => {
-  	console.log(req.body);
     try {
       const results = await Date.find({}, { __v: 0 });
       // const results = await Date.find({}, { name: 1, price: 1, _id: 0 });
@@ -69,6 +69,29 @@ module.exports = {
   },
 
   updateADate: async (req, res, next) => {
+    console.log(req.params.id);
+    try {
+      const id = req.params.id;
+      const updates = req.body;
+      const options = { new: true };
+
+      const result = await Date.findByIdAndUpdate(id, updates, options);
+      if (!result) {
+        throw createError(404, 'Date does not exist');
+      }
+      res.send(result);
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        return next(createError(400, 'Invalid Date Id'));
+      }
+
+      next(error);
+    }
+  },
+
+  updateAvilability: async (req, res, next) => {
+    console.log(req.params.id);
     try {
       const id = req.params.id;
       const updates = req.body;
@@ -106,5 +129,18 @@ module.exports = {
       }
       next(error);
     }
+  },
+
+  uploadCsv: async (req, res, next) => {
+    var file_path = req.file.path;
+    csv()
+    .fromFile(file_path)
+    .then( async(jsonObj) =>{
+      await Date.deleteMany({});
+      const result = await  Date.insertMany(jsonObj);
+      res.send('csv uploadCsv');      
+    });
+
   }
+
 };

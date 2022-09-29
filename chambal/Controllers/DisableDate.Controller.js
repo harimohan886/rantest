@@ -1,24 +1,25 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const csv=require('csvtojson');
 
-const Price = require('../Models/Price.model');
+const DisableDate = require('../Models/DisableDate.model');
 
 module.exports = {
-  getAllPrices: async (req, res, next) => {
+  getAllDisableDates: async (req, res, next) => {
   	console.log(req.body);
     try {
-      const results = await Price.find({}, { __v: 0 });
-      // const results = await Price.find({}, { name: 1, price: 1, _id: 0 });
-      // const results = await Price.find({ price: 699 }, {});
+      const results = await DisableDate.find({}, { __v: 0 });
+      // const results = await DisableDate.find({}, { name: 1, price: 1, _id: 0 });
+      // const results = await DisableDate.find({ price: 699 }, {});
       res.send(results);
     } catch (error) {
       console.log(error.message);
     }
   },
 
-  createNewPrice: async (req, res, next) => {
+  createNewDisableDate: async (req, res, next) => {
     try {
-      const product = new Price(req.body);
+      const product = new DisableDate(req.body);
       const result = await product.save();
       res.send(result);
     } catch (error) {
@@ -33,7 +34,7 @@ module.exports = {
     /*Or:
   If you want to use the Promise based approach*/
     /*
-  const product = new Price({
+  const product = new DisableDate({
     name: req.body.name,
     price: req.body.price
   });
@@ -49,62 +50,75 @@ module.exports = {
     */
   },
 
-  findPriceById: async (req, res, next) => {
+  findDisableDateById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const product = await Price.findById(id);
-      // const product = await Price.findOne({ _id: id });
+      const product = await DisableDate.findById(id);
+      // const product = await DisableDate.findOne({ _id: id });
       if (!product) {
-        throw createError(404, 'Price does not exist.');
+        throw createError(404, 'DisableDate does not exist.');
       }
       res.send(product);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Price id'));
+        next(createError(400, 'Invalid DisableDate id'));
         return;
       }
       next(error);
     }
   },
 
-  updateAPrice: async (req, res, next) => {
+  updateADisableDate: async (req, res, next) => {
     try {
       const id = req.params.id;
       const updates = req.body;
       const options = { new: true };
 
-      const result = await Price.findByIdAndUpdate(id, updates, options);
+      const result = await DisableDate.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Price does not exist');
+        throw createError(404, 'DisableDate does not exist');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Price Id'));
+        return next(createError(400, 'Invalid DisableDate Id'));
       }
 
       next(error);
     }
   },
 
-  deleteAPrice: async (req, res, next) => {
+  deleteADisableDate: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await Price.findByIdAndDelete(id);
+      const result = await DisableDate.findByIdAndDelete(id);
       // console.log(result);
       if (!result) {
-        throw createError(404, 'Price does not exist.');
+        throw createError(404, 'DisableDate does not exist.');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Price id'));
+        next(createError(400, 'Invalid DisableDate id'));
         return;
       }
       next(error);
     }
+  },
+
+  uploadCsv: async (req, res, next) => {
+    var file_path = req.file.path;
+    csv()
+    .fromFile(file_path)
+    .then( async(jsonObj) =>{
+      await  DisableDate.deleteMany({});
+      const result = await  DisableDate.insertMany(jsonObj);
+      res.send('csv uploadCsv');      
+    });
+
   }
+
 };

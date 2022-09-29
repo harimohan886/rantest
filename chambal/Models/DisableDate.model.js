@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PriceSchema = new Schema({
-	name: {
+const DisableDateSchema = new Schema({
+	date: {
 		type: String,
 		index: true,
-	},
-	price: {
-		type: Number,
 	},
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -19,5 +16,5 @@ const PriceSchema = new Schema({
 	},
 });
 
-const Price = mongoose.model('price', PriceSchema);
-module.exports = Price;
+const DisableDate = mongoose.model('disable_dates', DisableDateSchema);
+module.exports = DisableDate;
