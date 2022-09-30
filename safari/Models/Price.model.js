@@ -6,6 +6,15 @@ const PriceSchema = new Schema({
 		type: String,
 		index: true,
 	},
+	date_from: {
+		type: String,
+	},
+	date_to: {
+		type: String,
+	},
+	type: {
+		type: String,
+	},
 	price: {
 		type: Number,
 	},

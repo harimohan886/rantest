@@ -5,11 +5,9 @@ const Price = require('../Models/Price.model');
 
 module.exports = {
   getAllPrices: async (req, res, next) => {
-  	console.log(req.body);
+    var type = req.query.type || 'default';
     try {
-      const results = await Price.find({}, { __v: 0 });
-      // const results = await Price.find({}, { name: 1, price: 1, _id: 0 });
-      // const results = await Price.find({ price: 699 }, {});
+      const results = await Price.find({type: type}, { __v: 0 });
       res.send(results);
     } catch (error) {
       console.log(error.message);

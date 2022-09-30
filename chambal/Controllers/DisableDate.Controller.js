@@ -6,7 +6,6 @@ const DisableDate = require('../Models/DisableDate.model');
 
 module.exports = {
   getAllDisableDates: async (req, res, next) => {
-  	console.log(req.body);
     try {
       const results = await DisableDate.find({}, { __v: 0 });
       // const results = await DisableDate.find({}, { name: 1, price: 1, _id: 0 });
