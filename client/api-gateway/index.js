@@ -1,19 +1,20 @@
 const express = require("express");
 const app = express();
-//const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const gateway = require("fast-gateway");
 
 dotenv.config();
 
-// mongoose.connect(process.env.MONGO_URL)
-//     .then(() => console.log("DB Connection Successfull!"))
-//     .catch((err) => {
-//         console.log(err);
-//     });
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
+
+
 app.use(express.json());
 
 const server = gateway({
@@ -56,5 +57,5 @@ server.get('/testing', (req, res) => res.send("yes test called"));
 
 
 server.start(process.env.PORT || 5004).then(server => {
-    console.log("Hotel server is running on port! ", process.env.PORT);
+    console.log("API Gateway server is running on port! ", process.env.PORT);
 });

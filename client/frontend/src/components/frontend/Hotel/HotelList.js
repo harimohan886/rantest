@@ -57,7 +57,7 @@ export default function HotelList() {
                     </div>
                     </Link>
                     <div className="findButton">
-                        <Link href="https://jimcorbett.in/jim-corbett-hotel/maya-the-forest-resort-spa" className="btn btn-danger">View Hotel</Link>
+                        <Link to="/hotel-details" className="btn btn-danger">View Hotel</Link>
                     </div>
                 </div>
             </div>

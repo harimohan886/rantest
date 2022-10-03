@@ -1,6 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {useLocation} from "react-router-dom"
 
 export default function TopHead() {
+    const location = useLocation();
+    const isAdminurl = location.pathname.split("/")[1];
+
+    if(isAdminurl === 'admin') {
+        return null;
+    }
+
   return (
     <div className="top-header">
         <div className="container">

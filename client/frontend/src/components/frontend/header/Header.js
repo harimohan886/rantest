@@ -1,8 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import CurrentBooking from '../Home/CurrentBooking'
 
 export default function Header() {
+
+    const location = useLocation();
+    const isAdminurl = location.pathname.split("/")[1];
+
+    if(isAdminurl === 'admin') {
+        return null;
+    }
+    
+
+
+
   return (
     <>
     <header className="hidden-xs">
