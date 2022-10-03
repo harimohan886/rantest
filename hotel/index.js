@@ -19,6 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 const AmenityRoute = require('./Routes/Amenity.route');
 app.use('/amenities', AmenityRoute);
 
+const FacilityRoute = require('./Routes/Facility.route');
+app.use('/facilities', FacilityRoute);
+
+const HotelRoute = require('./Routes/Hotel.route');
+app.use('/hotels', HotelRoute);
+
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

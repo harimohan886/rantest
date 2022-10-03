@@ -2,12 +2,12 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 
-const Amenity = require('../Models/Amenity.model');
+const Facility = require('../Models/Facility.model');
 
 module.exports = {
-  getAllAmenitys: async (req, res, next) => {
+  getAllFacilitys: async (req, res, next) => {
     try {
-      const results = await Amenity.find({}, { __v: 0 });
+      const results = await Facility.find({}, { __v: 0 });
       res.send({
         success: true,
         message: 'Data fetched',
@@ -18,24 +18,10 @@ module.exports = {
     }
   },
 
-  getAllAmenityHotel: async (req, res, next) => {
-    try {
-      const results = await Amenity.find({status:1}, { __v: 0 });
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  },
-
-  createNewAmenity: async (req, res, next) => {
-    req.body.image = req.file.path;
+  createNewFacility: async (req, res, next) => {
 
     let rules = {
-      amenity: 'required'
+      facility: 'required'
     };
 
     await validator(req.body, rules, {}, (err, status) => {
@@ -50,8 +36,8 @@ module.exports = {
     }).catch( err => console.log(err))
 
     try {
-      const amenity = new Amenity(req.body);
-      const result = await amenity.save();
+      const facility = new Facility(req.body);
+      const result = await facility.save();
       res.send({
         success: true,
         message: 'Data inserted',
@@ -67,60 +53,58 @@ module.exports = {
     }
   },
 
-  findAmenityById: async (req, res, next) => {
+  findFacilityById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const amenity = await Amenity.findById(id);
-      if (!amenity) {
-        throw createError(404, 'Amenity does not exist.');
+      const facility = await Facility.findById(id);
+      if (!facility) {
+        throw createError(404, 'Facility does not exist.');
       }
       res.send({
         success: true,
         message: 'Data fetched',
-        data: amenity
+        data: facility
       });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Amenity id'));
+        next(createError(400, 'Invalid Facility id'));
         return;
       }
       next(error);
     }
   },
 
-  updateAAmenity: async (req, res, next) => {
+  updateAFacility: async (req, res, next) => {
     try {
-      req.body.image = req.file.path;
       const id = req.params.id;
       const updates = req.body;
       const options = { new: true };
 
-      const result = await Amenity.findByIdAndUpdate(id, updates, options);
+      const result = await Facility.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Amenity does not exist');
+        throw createError(404, 'Facility does not exist');
       }
       res.send({
         success: true,
         message: 'Data updated',
-        data: result
       });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Amenity Id'));
+        return next(createError(400, 'Invalid Facility Id'));
       }
 
       next(error);
     }
   },
 
-  deleteAAmenity: async (req, res, next) => {
+  deleteAFacility: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await Amenity.findByIdAndDelete(id);
+      const result = await Facility.findByIdAndDelete(id);
       if (!result) {
-        throw createError(404, 'Amenity does not exist.');
+        throw createError(404, 'Facility does not exist.');
       }
       res.send({
         success: true,
@@ -129,7 +113,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Amenity id'));
+        next(createError(400, 'Invalid Facility id'));
         return;
       }
       next(error);

@@ -7,10 +7,28 @@ const Date = require('../Models/Date.model');
 module.exports = {
   getAllDates: async (req, res, next) => {
     try {
-      const results = await Date.find({}, { __v: 0 });
-      // const results = await Date.find({}, { name: 1, price: 1, _id: 0 });
-      // const results = await Date.find({ price: 699 }, {});
-      res.send(results);
+
+      var page = parseInt(req.query.page)||1;
+      var size = parseInt(req.query.size)||15;
+      var query = {}
+      if(page < 0 || page === 0) {
+        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var  totalPosts = await Date.find({}).countDocuments().exec();
+
+      Date.find({},{},
+        query,function(err,data) {
+          if(err) {
+            response = {"error": true, "message": "Error fetching data"+err};
+          } else {
+            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 });
     } catch (error) {
       console.log(error.message);
     }
@@ -18,9 +36,13 @@ module.exports = {
 
   createNewDate: async (req, res, next) => {
     try {
-      const product = new Date(req.body);
-      const result = await product.save();
-      res.send(result);
+      const date = new Date(req.body);
+      const result = await date.save();
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: result
+      });
     } catch (error) {
       console.log(error.message);
       if (error.name === 'ValidationError') {
@@ -29,35 +51,20 @@ module.exports = {
       }
       next(error);
     }
-
-    /*Or:
-  If you want to use the Promise based approach*/
-    /*
-  const product = new Date({
-    name: req.body.name,
-    price: req.body.price
-  });
-  product
-    .save()
-    .then(result => {
-      console.log(result);
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err.message);
-    }); 
-    */
   },
 
   findDateById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const product = await Date.findById(id);
-      // const product = await Date.findOne({ _id: id });
-      if (!product) {
+      const date = await Date.findById(id);
+      if (!date) {
         throw createError(404, 'Date does not exist.');
       }
-      res.send(product);
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: date
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -69,7 +76,6 @@ module.exports = {
   },
 
   updateADate: async (req, res, next) => {
-    console.log(req.params.id);
     try {
       const id = req.params.id;
       const updates = req.body;
@@ -79,7 +85,11 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Date does not exist');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data updated',
+        data: result
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -101,7 +111,11 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Date does not exist');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data updated',
+        data: result
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -120,7 +134,10 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Date does not exist.');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data deleted',
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -138,7 +155,10 @@ module.exports = {
     .then( async(jsonObj) =>{
       await Date.deleteMany({});
       const result = await  Date.insertMany(jsonObj);
-      res.send('csv uploadCsv');      
+      res.send({
+        success: true,
+        message: 'Csv data uploaded',
+      });      
     });
 
   }
