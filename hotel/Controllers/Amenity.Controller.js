@@ -5,22 +5,22 @@ const validator = require('../helpers/validate');
 const Amenity = require('../Models/Amenity.model');
 
 module.exports = {
-  getAllAmenitys: async (req, res, next) => {
+  getAllAmenities: async (req, res, next) => {
     try {
-      const results = await Amenity.find({}, { __v: 0 });
+      const results = await Amenity.find({});
       res.send({
         success: true,
         message: 'Data fetched',
         data: results
       });
     } catch (error) {
-      console.log(error.message);
+      console.log(" test all amenities", error.message);
     }
   },
 
   getAllAmenityHotel: async (req, res, next) => {
     try {
-      const results = await Amenity.find({status:1}, { __v: 0 });
+      const results = await Amenity.find({ status: 1 }, { __v: 0 });
       res.send({
         success: true,
         message: 'Data fetched',
@@ -41,13 +41,13 @@ module.exports = {
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
         res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: err
+          });
       }
-    }).catch( err => console.log(err))
+    }).catch(err => console.log(err))
 
     try {
       const amenity = new Amenity(req.body);
