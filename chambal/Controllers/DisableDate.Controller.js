@@ -8,9 +8,11 @@ module.exports = {
   getAllDisableDates: async (req, res, next) => {
     try {
       const results = await DisableDate.find({}, { __v: 0 });
-      // const results = await DisableDate.find({}, { name: 1, price: 1, _id: 0 });
-      // const results = await DisableDate.find({ price: 699 }, {});
-      res.send(results);
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: results
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -18,9 +20,13 @@ module.exports = {
 
   createNewDisableDate: async (req, res, next) => {
     try {
-      const product = new DisableDate(req.body);
-      const result = await product.save();
-      res.send(result);
+      const date = new DisableDate(req.body);
+      const result = await date.save();
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: result
+      });
     } catch (error) {
       console.log(error.message);
       if (error.name === 'ValidationError') {
@@ -29,35 +35,20 @@ module.exports = {
       }
       next(error);
     }
-
-    /*Or:
-  If you want to use the Promise based approach*/
-    /*
-  const product = new DisableDate({
-    name: req.body.name,
-    price: req.body.price
-  });
-  product
-    .save()
-    .then(result => {
-      console.log(result);
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err.message);
-    }); 
-    */
   },
 
   findDisableDateById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const product = await DisableDate.findById(id);
-      // const product = await DisableDate.findOne({ _id: id });
-      if (!product) {
+      const date = await DisableDate.findById(id);
+      if (!date) {
         throw createError(404, 'DisableDate does not exist.');
       }
-      res.send(product);
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: date
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -78,7 +69,10 @@ module.exports = {
       if (!result) {
         throw createError(404, 'DisableDate does not exist');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data updated',
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -97,7 +91,10 @@ module.exports = {
       if (!result) {
         throw createError(404, 'DisableDate does not exist.');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data deleted',
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -115,9 +112,10 @@ module.exports = {
     .then( async(jsonObj) =>{
       await  DisableDate.deleteMany({});
       const result = await  DisableDate.insertMany(jsonObj);
-      res.send('csv uploadCsv');      
+      res.send({
+        success: true,
+        message: 'Csv Data uploaded',
+      });      
     });
-
   }
-
 };

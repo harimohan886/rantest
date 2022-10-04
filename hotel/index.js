@@ -25,6 +25,8 @@ app.use('/facilities', FacilityRoute);
 const HotelRoute = require('./Routes/Hotel.route');
 app.use('/hotels', HotelRoute);
 
+const HotelRoomRoute = require('./Routes/HotelRoom.route');
+app.use('/hotel-rooms', HotelRoomRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

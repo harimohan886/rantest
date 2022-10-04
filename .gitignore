@@ -16,7 +16,8 @@ package-lock.json
 
 
 client/frontend/public/uploads/
-
+hotel/
+package/
 # production
 /build
 

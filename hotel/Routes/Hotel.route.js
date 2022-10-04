@@ -26,8 +26,12 @@ router.post('/', uploads.any(), HotelController.createNewHotel);
 //Get a product by id
 router.get('/:id', HotelController.findHotelById);
 
+router.get('/:id/amenities', HotelController.findHotelAmenitiesById);
+
 //Update a product by id
 router.patch('/:id', HotelController.updateAHotel);
+
+router.patch('/:id/amenities', HotelController.updateHotelAmenities);
 
 //Delete a product by id
 router.delete('/:id', HotelController.deleteAHotel);

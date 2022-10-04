@@ -4,6 +4,7 @@ const validator = require('../helpers/validate');
 
 const Hotel = require('../Models/Hotel.model');
 const hotelImage = require('../Models/hotelImage.model');
+const HotelAmenity = require('../Models/HotelAmenity.model');
 
 const titleToSlug = title => {
     let slug;
@@ -65,8 +66,8 @@ module.exports = {
       const slug = await titleToSlug(req.body.name);
       req.body.slug = slug;
       req.body.image = req.files[0].path;
-      const facility = new Hotel(req.body);
-      const result = await facility.save();
+      const hotel = new Hotel(req.body);
+      const result = await hotel.save();
 
       const image_arr = [];
 
@@ -109,14 +110,36 @@ module.exports = {
   findHotelById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const facility = await Hotel.findById(id);
-      if (!facility) {
+      const hotel = await Hotel.findById(id);
+      if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
       res.send({
         success: true,
         message: 'Data fetched',
-        data: facility
+        data: hotel
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Hotel id'));
+        return;
+      }
+      next(error);
+    }
+  },
+
+  findHotelAmenitiesById: async (req, res, next) => {
+    const id = req.params.id;
+    try {
+      const hotel = await Hotel.findById(id);
+      if (!hotel) {
+        throw createError(404, 'Hotel does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: hotel
       });
     } catch (error) {
       console.log(error.message);
@@ -141,6 +164,36 @@ module.exports = {
       res.send({
         success: true,
         message: 'Data updated',
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        return next(createError(400, 'Invalid Hotel Id'));
+      }
+
+      next(error);
+    }
+  },
+
+  updateHotelAmenities: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+
+      await HotelAmenity.find({hotel_id:id}).remove();
+
+      for (const amenity of req.body.amenities) 
+      { 
+      const hotel_amenity = new HotelAmenity({
+          hotel_id:id,
+          amenity_id:amenity
+        });
+
+        const result = await hotel_amenity.save();
+      }
+
+      res.send({
+        success: true,
+        message: 'Hotel Amenity Data updated',
       });
     } catch (error) {
       console.log(error.message);

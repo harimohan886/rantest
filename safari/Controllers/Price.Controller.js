@@ -8,7 +8,11 @@ module.exports = {
     var type = req.query.type || 'default';
     try {
       const results = await Price.find({type: type}, { __v: 0 });
-      res.send(results);
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: results
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -16,48 +20,35 @@ module.exports = {
 
   createNewPrice: async (req, res, next) => {
     try {
-      const product = new Price(req.body);
-      const result = await product.save();
-      res.send(result);
+      const price = new Price(req.body);
+      const result = await price.save();
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: result
+      });
     } catch (error) {
-      console.log(error.message);
       if (error.name === 'ValidationError') {
         next(createError(422, error.message));
         return;
       }
       next(error);
     }
-
-    /*Or:
-  If you want to use the Promise based approach*/
-    /*
-  const product = new Price({
-    name: req.body.name,
-    price: req.body.price
-  });
-  product
-    .save()
-    .then(result => {
-      console.log(result);
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err.message);
-    }); 
-    */
   },
 
   findPriceById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const product = await Price.findById(id);
-      // const product = await Price.findOne({ _id: id });
-      if (!product) {
+      const price = await Price.findById(id);
+      if (!price) {
         throw createError(404, 'Price does not exist.');
       }
-      res.send(product);
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: price
+      });
     } catch (error) {
-      console.log(error.message);
       if (error instanceof mongoose.CastError) {
         next(createError(400, 'Invalid Price id'));
         return;
@@ -76,7 +67,10 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Price does not exist');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data updated',
+      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -91,13 +85,14 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await Price.findByIdAndDelete(id);
-      // console.log(result);
       if (!result) {
         throw createError(404, 'Price does not exist.');
       }
-      res.send(result);
+      res.send({
+        success: true,
+        message: 'Data deleted',
+      });
     } catch (error) {
-      console.log(error.message);
       if (error instanceof mongoose.CastError) {
         next(createError(400, 'Invalid Price id'));
         return;
