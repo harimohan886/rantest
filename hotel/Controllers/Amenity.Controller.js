@@ -7,12 +7,28 @@ const Amenity = require('../Models/Amenity.model');
 module.exports = {
   getAllAmenities: async (req, res, next) => {
     try {
-      const results = await Amenity.find({});
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
+
+      var page = parseInt(req.query.page)||1;
+      var size = parseInt(req.query.size)||15;
+      var query = {}
+      if(page < 0 || page === 0) {
+        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var  totalPosts = await Amenity.find({}).countDocuments().exec();
+
+      Amenity.find({},{},
+        query,function(err,data) {
+          if(err) {
+            response = {"error": true, "message": "Error fetching data"+err};
+          } else {
+            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 });
     } catch (error) {
       console.log(" test all amenities", error.message);
     }
