@@ -20,6 +20,8 @@ router.get('/', DateController.getAllDates);
 //Create a new date
 router.post('/', DateController.createNewDate);
 
+router.post('/checkAvilabilityByDate', DateController.checkAvilabilityByDate);
+
 //Get a date by id
 router.get('/:id', DateController.findDateById);
 

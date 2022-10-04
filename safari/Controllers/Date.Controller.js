@@ -53,6 +53,28 @@ module.exports = {
     }
   },
 
+  checkAvilabilityByDate: async (req, res, next) => {
+    try {
+      const date = await Date.find({date:req.body.date});
+      console.log(date);
+      if (!date.length) {
+        throw createError(404, 'Date does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'Data fateched',
+        data: date
+      });
+    } catch (error) {
+      console.log('kkk'+error.message);
+      if (error.name === 'ValidationError') {
+        next(createError(422, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
   findDateById: async (req, res, next) => {
     const id = req.params.id;
     try {
@@ -130,7 +152,6 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await Date.findByIdAndDelete(id);
-      // console.log(result);
       if (!result) {
         throw createError(404, 'Date does not exist.');
       }

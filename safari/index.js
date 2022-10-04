@@ -17,6 +17,9 @@ app.use('/prices', PriceRoute);
 const DateRoute = require('./Routes/Date.route');
 app.use('/dates', DateRoute);
 
+const SafariRoute = require('./Routes/Safari.route');
+app.use('/', SafariRoute);
+
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {
