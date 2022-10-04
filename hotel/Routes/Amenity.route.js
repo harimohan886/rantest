@@ -3,21 +3,21 @@ const router = express.Router();
 
 var multer = require('multer');
 
-var storage = multer.diskStorage({  
-  destination:(req,file,cb)=>{  
-    cb(null,__dirname.split('hotel')[0]+'client/frontend/public/uploads/');  
-  },  
-  filename:(req,file,cb)=>{  
-    cb(null,file.originalname);  
-  }  
-});  
-var uploads = multer({storage:storage});
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, __dirname.split('hotel')[0] + 'client/frontend/public/uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+var uploads = multer({ storage: storage });
 
 
 const AmenityController = require('../Controllers/Amenity.Controller');
 
 //Get a list of all products
-router.get('/', AmenityController.getAllAmenitys);
+router.get('/', AmenityController.getAllAmenities);
 
 //Get a list of all products
 router.get('/hotel', AmenityController.getAllAmenityHotel);

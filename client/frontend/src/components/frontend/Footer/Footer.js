@@ -1,7 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Footer() {
+    const location = useLocation();
+    const isAdminurl = location.pathname.split("/")[1];
+
+    if(isAdminurl === 'admin') {
+        return null;
+    }
+
   return (
     <footer className="footer">
         <div className="container-fluid">
