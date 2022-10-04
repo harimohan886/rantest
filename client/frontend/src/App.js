@@ -132,7 +132,7 @@ function App() {
           <Route exact path="/admin/amenities" element={<HotelAmenities />} />
           <Route exact path="/admin/hotel-amenities" element={<HotelAmenitiesUpdate />} />
           <Route exact path="/admin/add-hotel-amenity" element={<AddAmenity />} />
-          <Route exact path="/admin/edit-hotel-amenity" element={<EditAmenity />} />
+          <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
           <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
           <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
           <Route exact path="/admin/edit-room-facility" element={<EditFacility />} />
