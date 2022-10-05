@@ -9,7 +9,7 @@ module.exports = {
     try {
 
       var page = parseInt(req.query.page) || 1;
-      var size = parseInt(req.query.size) || 2;
+      var size = parseInt(req.query.size) || 15;
       var query = {}
       if (page < 0 || page === 0) {
         response = { "error": true, "message": "invalid page number, should start with 1" };
