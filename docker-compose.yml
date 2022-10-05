@@ -1,0 +1,97 @@
+version: "3"
+services:
+
+  api-gateway:
+    build:
+      context: "."
+      dockerfile: "./client/api-gateway/Dockerfile"
+    depends_on:
+      - chambal
+      - hotel
+      - safari
+      - package
+      - payment
+    ports:
+      - "5005:5004"
+    volumes:
+      - ./api-gateway:/usr/src/app
+  admin:
+    build:
+      context: "."
+      dockerfile: "./admin/Dockerfile"
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./admin:/usr/src/app
+
+  chambal:
+    build:
+      context: "."
+      dockerfile: "./chambal/Dockerfile"
+    depends_on:
+      - payment
+    ports:
+      - "5006:5006"
+    volumes:
+      - ./chambal:/usr/src/app
+
+  hotel:
+    build:
+      context: "."
+      dockerfile: "./hotel/Dockerfile"
+    depends_on:
+      - payment
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./hotel:/usr/src/app    
+  package:
+    build:
+      context: "."
+      dockerfile: "./package/Dockerfile"
+    depends_on:
+      - payment
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./package:/usr/src/app 
+
+  payment:
+    build:
+      context: "."
+      dockerfile: "./payment/Dockerfile"
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./payment:/usr/src/app 
+
+  safari:
+    build:
+      context: "."
+      dockerfile: "./safari/Dockerfile"
+    depends_on:
+      - payment
+    ports:
+      - "5003:5003"
+    volumes:
+      - ./safari:/usr/src/app 
+
+  mongo-db:
+    environment:
+      - PUID=1000
+      - PGID=1000
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
+  client:
+    build:
+      context: "."
+      dockerfile: "./client/frontend/Dockerfile"
+    depends_on:
+      - payment
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/src/app
