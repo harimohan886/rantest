@@ -1,3 +1,6 @@
+stages:
+  - deploy
+
 before_script:
   - apt-get update -qq
   - apt-get install -qq git
@@ -14,6 +17,6 @@ deploy_staging:
     name: staging
     url: 38.242.196.238
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/ && git checkout master && git pull origin master && exit"
+    - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
   only:
     - master
