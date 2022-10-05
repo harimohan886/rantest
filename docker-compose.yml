@@ -1,97 +1,117 @@
 version: "3"
 services:
-
-  api-gateway:
-    build:
-      context: "."
-      dockerfile: "./client/api-gateway/Dockerfile"
-    depends_on:
-      - chambal
-      - hotel
-      - safari
-      - package
-      - payment
-    ports:
-      - "5005:5004"
-    volumes:
-      - ./api-gateway:/usr/src/app
-  admin:
-    build:
-      context: "."
-      dockerfile: "./admin/Dockerfile"
-    ports:
-      - "5005:5005"
-    volumes:
-      - ./admin:/usr/src/app
-
-  chambal:
-    build:
-      context: "."
-      dockerfile: "./chambal/Dockerfile"
-    depends_on:
-      - payment
-    ports:
-      - "5006:5006"
-    volumes:
-      - ./chambal:/usr/src/app
-
-  hotel:
-    build:
-      context: "."
-      dockerfile: "./hotel/Dockerfile"
-    depends_on:
-      - payment
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./hotel:/usr/src/app    
-  package:
-    build:
-      context: "."
-      dockerfile: "./package/Dockerfile"
-    depends_on:
-      - payment
-    ports:
-      - "5001:5001"
-    volumes:
-      - ./package:/usr/src/app 
-
-  payment:
-    build:
-      context: "."
-      dockerfile: "./payment/Dockerfile"
-    ports:
-      - "5002:5002"
-    volumes:
-      - ./payment:/usr/src/app 
-
-  safari:
-    build:
-      context: "."
-      dockerfile: "./safari/Dockerfile"
-    depends_on:
-      - payment
-    ports:
-      - "5003:5003"
-    volumes:
-      - ./safari:/usr/src/app 
-
-  mongo-db:
-    environment:
-      - PUID=1000
-      - PGID=1000
+  nosql-db:
     image: mongo
     ports:
-      - 27017:27017
-    restart: unless-stopped
-
-  client:
-    build:
-      context: "."
-      dockerfile: "./client/frontend/Dockerfile"
-    depends_on:
-      - payment
-    ports:
-      - 3000:3000
+      - "27018:27017"
+    container_name: nosql-db
     volumes:
-      - ./client:/usr/src/app
+      - ./db/:/data/db
+  admin:
+    build:
+      dockerfile: Dockerfile
+      context: ./admin
+    container_name: admin
+    ports:
+      - "5005:5005"
+    restart: always
+    depends_on:
+      - "nosql-db"
+    volumes:
+      - .:/opt/docker_app
+      - /opt/docker_app/admin/node_modules
+
+    env_file:
+      - ./admin/.env.dev
+  chambal:
+    build:
+      dockerfile: Dockerfile
+      context: ./chambal
+    container_name: chambal
+    ports:
+      - "5006:5006"
+    restart: always
+    depends_on:
+      - "nosql-db"
+    volumes:
+      - .:/opt/docker_app
+      - /opt/docker_app/chambal/node_modules
+    env_file:
+      - ./chambal/.env.dev
+  hotel:
+    build:
+      dockerfile: Dockerfile
+      context: ./hotel
+    container_name: hotel
+    ports:
+      - "5000:5000"
+    restart: always
+    depends_on:
+      - "nosql-db"
+
+    volumes:
+      - .:/opt/docker_app/
+      - /opt/docker_app/hotel/node_modules
+    env_file:
+      - ./hotel/.env.dev
+  package:
+    build:
+      dockerfile: Dockerfile
+      context: ./package
+    container_name: package
+    ports:
+      - "5001:5001"
+    restart: always
+    depends_on:
+      - "nosql-db"
+
+    volumes:
+      - .:/opt/docker_app/
+      - /opt/docker_app/package/node_modules
+    env_file:
+      - ./package/.env.dev
+  payment:
+    build:
+      dockerfile: Dockerfile
+      context: ./payment
+    container_name: payment
+    ports:
+      - "5002:5002"
+    restart: always
+    depends_on:
+      - "nosql-db"
+
+    volumes:
+      - .:/opt/docker_app/
+      - /opt/docker_app/payment/node_modules
+    env_file:
+      - ./payment/.env.dev
+  safari:
+    build:
+      dockerfile: Dockerfile
+      context: ./safari
+    container_name: safari
+    ports:
+      - "5003:5003"
+    restart: always
+    depends_on:
+      - "nosql-db"
+
+    volumes:
+      - .:/opt/docker_app/
+      - /opt/docker_app/safari/node_modules
+    env_file:
+      - ./safari/.env.dev
+  nginx-proxy:
+    build:
+      dockerfile: Dockerfile
+      context: ./proxy
+    depends_on:
+      - admin
+      - chambal
+      - hotel
+      - package
+      - payment
+      - safari
+    ports:
+      - 8080:8080

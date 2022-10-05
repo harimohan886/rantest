@@ -1,6 +1,6 @@
 FROM node:16
-WORKDIR /usr/src/app
-COPY package*.json ./
+WORKDIR /opt/docker_app/admin
+COPY ./package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 5005
