@@ -42,6 +42,8 @@ export default function EditAmenity() {
     try {
       const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`, data);
       console.log('Amenity updated');
+      swal('high test');
+
 
       setTimeout(() => {
         navigate('/admin/amenities');
@@ -73,7 +75,6 @@ export default function EditAmenity() {
   }
 
   useEffect(() => {
-    swal('high test');
     getAmenity();
 
   }, []);
