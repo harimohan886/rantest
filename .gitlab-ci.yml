@@ -19,4 +19,4 @@ deploy_staging:
   script:
     - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
   only:
-    - master
+    - main
