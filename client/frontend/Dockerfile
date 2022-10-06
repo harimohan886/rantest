@@ -13,6 +13,7 @@ COPY . .
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx
 
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
