@@ -10,7 +10,7 @@ services:
   api-gateway:
     build:
       dockerfile: Dockerfile
-      context: ./api-gateway
+      context: ./client/api-gateway
     container_name: api-gateway
     ports:
       - "5005:5005"
