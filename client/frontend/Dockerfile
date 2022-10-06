@@ -8,8 +8,6 @@ RUN npm install --legacy-peer-deps
 
 COPY . .
 
-COPY ./.env.dev ./.env
-
 RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
