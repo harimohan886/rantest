@@ -14,7 +14,7 @@ export default function EditAmenity() {
   const params = useParams();
 
   const [amenity, setAmenity] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(1);
   const [image, setImage] = useState('');
   const [src, setSrc] = useState('');
   const placeholder = '../../image/icons/swimming-pool.png';
@@ -32,31 +32,27 @@ export default function EditAmenity() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("in handlesubmit", amenity);
+
     const data = new FormData()
     data.append('amenity', amenity);
     data.append('image', image);
     data.append('status', status);
-    console.warn(image);
 
     try {
       const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`, data);
-      console.log('Amenity updated');
-      swal('high test');
 
+      navigate('/admin/amenities');
 
-      setTimeout(() => {
-        navigate('/admin/amenities');
-      }, 1000);
+      swal(res.data.message, "success").then(() => {
+
+      });
+
 
     } catch (err) {
-      alert.show(err)
 
+      swal(err.response.data.error.message, "error");
 
     }
-
-
-
   }
 
 
@@ -97,10 +93,10 @@ export default function EditAmenity() {
             </div>
             <div className='mb-6'>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Availability</label>
-              <select id="amenityStatus" onChange={(e) => { setStatus(e.target.value) }} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="amenityStatus" value={status} onChange={(e) => { setStatus(e.target.value) }} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option>Please Select</option>
-                <option value="1" selected={status === 1 ? ("selected") : ""}>Available</option>
-                <option value="0" selected={status === 0 ? ("selected") : ""}>Not available</option>
+                <option value="1" >Available</option>
+                <option value="0" >Not available</option>
               </select>
             </div>
             <div className='mb-6'>
