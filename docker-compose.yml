@@ -13,7 +13,7 @@ services:
       context: ./client/api-gateway
     container_name: api-gateway
     ports:
-      - "5005:5005"
+      - "5004:5004"
     restart: always
     depends_on:
       - "nosql-db"
