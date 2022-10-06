@@ -4,7 +4,7 @@ WORKDIR /opt/docker_app/client/frontend
  
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
  
