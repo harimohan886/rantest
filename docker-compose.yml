@@ -128,3 +128,5 @@ services:
     volumes:
       - .:/opt/docker_app/
       - /opt/docker_app/client/frontend/node_modules
+    environment:
+    NODE_ENV: production
