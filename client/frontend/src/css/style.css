@@ -1156,7 +1156,7 @@ border-left:1px solid #5d5d5d;
 	padding-bottom: 20px;
 }
 .disc-bottom img {
-	max-width: 25%;
+	max-width: 100%;
 	margin-right: 20px;;
 }
 .disc-bottom .zoneinfo.option{
@@ -1299,10 +1299,14 @@ border-left:1px solid #5d5d5d;
     font-size: 14px;
     font-weight: 800;
 }
+.hotel-listing-page{
+	padding-bottom: 30px;
+}
 .hotel-listing-page h2{
 	text-align: center;
     font-weight: 800;
     margin-top: 50px;
+	font-size: 36px;
 }
 .hotel-listing-page p.book-special{
 	text-align: center;
@@ -1310,11 +1314,11 @@ border-left:1px solid #5d5d5d;
     font-size: 17px;
 }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-    z-index: 3;
-    color: #222;
-    cursor: default;
-    background-color: #ffc419;
-    border-color: #ffc419;
+    z-index: 3 !important;
+    color: #222 !important;
+    cursor: default !important;
+    background-color: #ffc419 !important;
+    border-color: #ffc419 !important;
 }
 .pagination>li>a, .pagination>li>span {
     position: relative;
@@ -1379,10 +1383,14 @@ border-left:1px solid #5d5d5d;
     border: 1px solid #ccc;
 }
 .hotel-listing-page .width70 {
-    width: 70%;
+    width: 70% !important;
+    flex: unset;
+    max-width: 70%;
 }
 .hotel-listing-page .width30 {
-    width: 30%;
+    width: 30% !important;
+    flex: unset;
+    max-width: 30%;;
 }
 .hotel-detail-page{
 	margin-top: 50px;
@@ -1553,8 +1561,16 @@ border-left:1px solid #5d5d5d;
 .chm2 .title{
 	padding-top: 60px;
 }
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107 !important;
+    border-color: #ffc107;
+}
 .sectionFrame{
-	max-width: 1170px;
+	max-width: 1170px !important;
+}
+.slotform .input-group-addon img{
+	padding: 7px;
 }
 /********End***********/
 @media (max-width: 767px){

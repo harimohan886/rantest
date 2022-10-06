@@ -8,7 +8,7 @@ export default function Hotel() {
   return (
     <div className='hotel-listing-page'>
         <HotelBanner/>
-        <div className='container'>
+        <div className='container sectionFrame'>
             <h2>Hotels Available</h2>
             <p className='book-special'>Book your hotel &amp; enjoy your holidays with distinctive experience</p>
             <div className='row'>
