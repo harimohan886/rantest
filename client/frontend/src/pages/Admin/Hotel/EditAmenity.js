@@ -56,24 +56,27 @@ export default function EditAmenity() {
     }
 
 
-    const getAmenity = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`);
 
-            setAmenity(res.data.data.amenity);
-            setStatus(res.data.data.status);
-            setSrc(`../../image/icons/${res.data.data.image}`);
-
-
-        } catch (err) {
-
-        }
-    }
 
     useEffect(() => {
+
+        const getAmenity = async () => {
+            try {
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`);
+
+                setAmenity(res.data.data.amenity);
+                setStatus(res.data.data.status);
+                setSrc(`../../image/icons/${res.data.data.image}`);
+
+
+            } catch (err) {
+
+            }
+        }
+
         getAmenity();
 
-    }, []);
+    }, [params.id]);
 
 
 
@@ -102,7 +105,7 @@ export default function EditAmenity() {
                         <div className='mb-6'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Amenity Logo</label>
                             <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={handleInputImageChange} />
-                            <img src={src || placeholder} alt="image-icons" className="img-responsive mt-2" width="85" height="85" />
+                            <img src={src || placeholder} alt={amenity} className="img-responsive mt-2" width="85" height="85" />
 
 
                         </div>
