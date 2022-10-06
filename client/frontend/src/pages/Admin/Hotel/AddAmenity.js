@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
@@ -10,8 +10,6 @@ import swal from 'sweetalert';
 
 export default function AddAmenity() {
   const navigate = useNavigate();
-  const params = useParams();
-
   const [amenity, setAmenity] = useState('');
   const [status, setStatus] = useState(1);
   const [image, setImage] = useState('');
@@ -73,7 +71,7 @@ export default function AddAmenity() {
             <div className='mb-6'>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Amenity Logo</label>
               <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={handleInputImageChange} />
-              <img src={src || placeholder} alt="image-icons" className="img-responsive mt-2" width="85" height="85" />
+              <img src={src || placeholder} alt="icons" className="img-responsive mt-2" width="85" height="85" />
 
             </div>
             <div className='flex'>

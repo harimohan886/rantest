@@ -136,7 +136,7 @@ function App() {
           <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
           <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
           <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
-          <Route exact path="/admin/edit-room-facility" element={<EditFacility />} />
+          <Route exact path="/admin/edit-room-facility/:id" element={<EditFacility />} />
           <Route exact path="/admin/hotel-rooms" element={<HotelRooms />} />
           <Route exact path="/admin/add-room" element={<AddRoom />} />
           <Route exact path="/admin/edit-room" element={<EditRoom />} />

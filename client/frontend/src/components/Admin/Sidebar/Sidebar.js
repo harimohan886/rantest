@@ -83,7 +83,7 @@ export default function Sidebar() {
                         <ul className="list-none">
                           <li className="items-center">
                             <Link to="/admin/gir-events" className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block">
-                            <i className="fas fa-dot-circle mr-2"></i> Gir Jungle Trial </Link>
+                              <i className="fas fa-dot-circle mr-2"></i> Gir Jungle Trial </Link>
                           </li>
                           <li className="items-center">
                             <Link to='/admin/devalia-events' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Devalia Safari</Link>
@@ -106,26 +106,26 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-prices" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Weekend Price</Link>
-                              </li>
-                              <li className="items-center">
-                              <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Weekend Price</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
 
               <li className="items-center">
-              <div className="accordion" id="accordionMenu">
+                <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
                     <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-booking" aria-expanded="true" aria-controls="collapse-booking">
                       <i className="fas fa-suitcase mr-2 text-md opacity-75"></i>{" "}
@@ -133,25 +133,25 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-booking" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/customers' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Customers</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/safari-booking' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Safari Booking</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-booking' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Package Booking</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/customers' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Customers</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/safari-booking' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Safari Booking</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-booking' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Package Booking</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
               <li className="items-center">
-              <div className="accordion" id="accordionMenu">
+                <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
                     <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-hotel" aria-expanded="true" aria-controls="collapse-hotel">
                       <i className="fas fa-hotel mr-2 text-md opacity-75"></i>{" "}
@@ -159,25 +159,25 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-hotel" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/hotels' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotels</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/amenities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Amenities</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/room-facilities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Room Facilities</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/hotels' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotels</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/hotel-amenities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Amenities</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/room-facilities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Room Facilities</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
               <li className="items-center">
-              <div className="accordion" id="accordionMenu">
+                <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
                     <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-package" aria-expanded="false" aria-controls="collapse-package">
                       <i className="fas fa-chart-pie mr-2 text-md opacity-75"></i>{" "}
@@ -185,37 +185,37 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-package" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/packages' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Packages</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-features' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Features</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-inclusion' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Inclusion</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-exclusion' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Exclusion</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-terms' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Terms</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-payment-policy' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Payment Policy</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/package-cancellation-policy' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Cancellation Policy</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/packages' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Packages</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-features' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Features</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-inclusion' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Inclusion</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-exclusion' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Exclusion</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-terms' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Terms</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-payment-policy' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Payment Policy</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/package-cancellation-policy' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Cancellation Policy</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
               <li className="items-center">
-              <div className="accordion" id="accordionMenu">
+                <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
                     <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-enquiry" aria-expanded="false" aria-controls="collapse-enquiry">
                       <i className="fas fa-phone-volume mr-2 text-md opacity-75"></i>{" "}
@@ -223,22 +223,22 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-enquiry" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/general-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> General Enquiries</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/hotel-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotel Enquiries</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/general-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> General Enquiries</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/hotel-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotel Enquiries</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
               <li className="items-center">
-              <div className="accordion" id="accordionMenu">
+                <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
                     <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-settings" aria-expanded="false" aria-controls="collapse-settings">
                       <i className="fas fa-wrench mr-2 text-md opacity-75"></i>{" "}
@@ -246,28 +246,28 @@ export default function Sidebar() {
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
                     <div id="collapse-settings" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
-                        <div className="accordion-body">
-                            <ul className="list-none">
-                              <li className="items-center">
-                                <Link to='/admin/razorpay-settings' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Razorpay</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/contact-details' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Contact details</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/my-account' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> My account</Link>
-                              </li>
-                              <li className="items-center">
-                                <Link to='/admin/change-password' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Change password</Link>
-                              </li>
-                            </ul>
-                        </div>
+                      <div className="accordion-body">
+                        <ul className="list-none">
+                          <li className="items-center">
+                            <Link to='/admin/razorpay-settings' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Razorpay</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/contact-details' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Contact details</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/my-account' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> My account</Link>
+                          </li>
+                          <li className="items-center">
+                            <Link to='/admin/change-password' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Change password</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
             </ul>
-            
+
           </div>
         </div>
       </nav>
