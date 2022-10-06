@@ -4,7 +4,7 @@ import '../../../css/blog.css';
 export default function Blogs() {
   return (
     <div className="blogsection">
-        <div className="container">
+        <div className="container sectionFrame">
             <h2>Latest News &amp; Blog - Ranthambore Jungle Safari</h2>
             <div className="row">
             <div className="col-sm-4 col-xs-12">

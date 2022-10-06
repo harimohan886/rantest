@@ -5,8 +5,8 @@ import BookSafari from './BookSafari'
 export default function Dates() {
   return (
     <section id='select-date'>
-        <div className='container'>
-            <h3>Please select the dates</h3>
+        <div className='container sectionFrame'>
+            <h3 className='text-2xl'>Please select the dates</h3>
             <div className='row'>
                 <div className='col-sm-6 col-xs-12'>
                     <Calendar/>

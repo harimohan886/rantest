@@ -3,8 +3,8 @@ import React from 'react'
 export default function Timing() {
   return (
     <section id='jungle-safari'>
-        <div className="container">
-        <h3>Jungle Safari Timing</h3>
+        <div className="container sectionFrame">
+        <h3 className='text-2xl'>Jungle Safari Timing</h3>
         <div className="row">
             <div className="col-sm-6 col-xs-12">
             <div className="timetable">

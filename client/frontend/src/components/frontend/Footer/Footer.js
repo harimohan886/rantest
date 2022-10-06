@@ -16,19 +16,19 @@ export default function Footer() {
             <div className="col-sm-3 col-xs-12">
                 <div className="socialmedia">
                 <ul className="social-circle list-inline">
-                    <li>
+                    <li className='list-inline-item'>
                     <a className="icoFacebook" href="#!" title="Facebook">
-                        <i className="fa fa-facebook"></i>
+                        <i className="fas fa-facebook"></i>
                     </a>
                     </li>
-                    <li>
+                    <li className='list-inline-item'>
                     <a className="icoYoutube" href="#!" title="Twitter">
-                        <i className="fa fa-twitter"></i>
+                        <i className="fas fa-twitter"></i>
                     </a>
                     </li>
-                    <li>
+                    <li className='list-inline-item'>
                     <a className="icoInstagram" href="#!" title="Email">
-                        <i className="fa fa-envelope"></i>
+                        <i className="fas fa-envelope"></i>
                     </a>
                     </li>
                 </ul>
@@ -42,22 +42,22 @@ export default function Footer() {
                     </Link>
                 </div>
                 <ul className="list-inline">
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                         <Link to="/about-us">About Us</Link>|
                     </li>
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                         <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>|
                     </li>
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                         <Link to="/privacy-policy">Privacy Policy</Link>|
                     </li>
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                         <Link to="/cancellation-policy">Cancellation Policy</Link>|
                     </li>
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                         <Link to="/blog">Blog</Link>|
                     </li>
-                    <li style={{listStyle: "disc"}}>
+                    <li className='list-inline-item' style={{listStyle: "disc"}}>
                     <Link to="/contact-us">Contact Us</Link>
                     </li>
                 </ul>
