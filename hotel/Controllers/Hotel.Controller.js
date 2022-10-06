@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 
 const Hotel = require('../Models/Hotel.model');
-const hotelImage = require('../Models/hotelImage.model');
+const hotelImage = require('../Models/HotelImage.model');
 const HotelAmenity = require('../Models/HotelAmenity.model');
 
 const titleToSlug = title => {

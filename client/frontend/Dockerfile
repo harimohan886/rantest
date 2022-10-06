@@ -1,21 +1,21 @@
 FROM node:16 as build
  
-WORKDIR /opt/docker_app/client/frontend
+WORKDIR /app/client/frontend
  
-COPY package.json /opt/docker_app/client/frontend
+COPY package.json /app/client/frontend
 
 RUN npm install --legacy-peer-deps
 
-COPY . /opt/docker_app/client/frontend
+COPY . /app/client/frontend
 
-COPY ./.env.dev /opt/docker_app/client/frontend/.env
+COPY ./.env.dev /app/client/frontend/.env
 
 RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx
 
-COPY --from=build /opt/docker_app/client/frontend/build /usr/share/nginx/html
+COPY --from=build /app/client/frontend/build /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
