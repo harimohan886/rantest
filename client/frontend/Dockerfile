@@ -2,13 +2,13 @@ FROM node:16 as build
  
 WORKDIR /opt/docker_app/client/frontend
  
-COPY package*.json ./
+COPY package.json /opt/docker_app/client/frontend
 
 RUN npm install --legacy-peer-deps
 
-COPY . .
+COPY . /opt/docker_app/client/frontend
 
-COPY ./.env.dev ./.env
+COPY ./.env.dev /opt/docker_app/client/frontend/.env
 
 RUN npm run build
 

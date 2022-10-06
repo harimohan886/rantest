@@ -1,8 +1,8 @@
 FROM node:16
 WORKDIR /opt/docker_app/hotel
-COPY package*.json ./
+COPY package.json /opt/docker_app/hotel
 RUN npm install
-COPY . .
-COPY ./.env.dev ./.env
+COPY . /opt/docker_app/hotel
+COPY ./.env.dev /opt/docker_app/hotel/.env
 EXPOSE 5000
 CMD [ "node", "index.js" ]
