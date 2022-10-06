@@ -19,7 +19,7 @@ client/frontend/public/uploads/
 package/
 # production
 /build
-
+/client/frontend/build
 # misc
 .DS_Store
 .env.local
