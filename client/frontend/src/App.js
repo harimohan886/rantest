@@ -42,7 +42,6 @@ import PackageBooking from './pages/Admin/BookingManagement/PackageBooking';
 import ViewPackageBooking from './pages/Admin/BookingManagement/ViewPackageBooking';
 import Hotels from './pages/Admin/Hotel/Hotels';
 import HotelAmenities from './pages/Admin/Hotel/HotelAmenities';
-import HotelAmenitiesUpdate from './pages/Admin/Hotel/HotelAmenities';
 import AddAmenity from './pages/Admin/Hotel/AddAmenity';
 import EditAmenity from './pages/Admin/Hotel/EditAmenity';
 import AddHotel from './pages/Admin/Hotel/AddHotel';
@@ -132,8 +131,7 @@ function App() {
           <Route exact path="/admin/hotels" element={<Hotels />} />
           <Route exact path="/admin/add-hotel" element={<AddHotel />} />
           <Route exact path="/admin/edit-hotel" element={<EditHotel />} />
-          <Route exact path="/admin/amenities" element={<HotelAmenities />} />
-          <Route exact path="/admin/hotel-amenities" element={<HotelAmenitiesUpdate />} />
+          <Route exact path="/admin/hotel-amenities" element={<HotelAmenities />} />
           <Route exact path="/admin/add-hotel-amenity" element={<AddAmenity />} />
           <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
           <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
@@ -162,7 +160,7 @@ function App() {
           <Route exact path="/admin/package-categories" element={<PackageCategories />} />
           <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
           <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
-          </>
+        </>
         }
 
       </Routes>
