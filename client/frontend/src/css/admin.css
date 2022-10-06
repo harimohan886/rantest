@@ -156,3 +156,6 @@ table tbody tr td{
 .md\:ml-64{
   margin-left: 15rem !important;
 }
+.indianCategory input::placeholder{
+  font-size: 12px;
+}

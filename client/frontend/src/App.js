@@ -70,6 +70,9 @@ import Razorpay from './pages/Admin/Settings/Razorpay';
 import ContactDetails from './pages/Admin/Settings/ContactDetails';
 import MyAccount from './pages/Admin/Settings/MyAccount';
 import ChangePassword from './pages/Admin/Settings/ChangePassword';
+import PackageCategories from './pages/Admin/Packages/PackageCategories';
+import AddPackageCategory from './pages/Admin/Packages/AddPackageCategory';
+import EditPackageCategory from './pages/Admin/Packages/EditPackageCategory';
 import { AuthContext } from './context/admin/AuthContext';
 
 
@@ -156,8 +159,10 @@ function App() {
           <Route exact path="/admin/contact-details" element={<ContactDetails />} />
           <Route exact path="/admin/my-account" element={<MyAccount />} />
           <Route exact path="/admin/change-password" element={<ChangePassword />} />
-
-        </>
+          <Route exact path="/admin/package-categories" element={<PackageCategories />} />
+          <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
+          <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
+          </>
         }
 
       </Routes>

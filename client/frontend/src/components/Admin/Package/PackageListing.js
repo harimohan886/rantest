@@ -49,7 +49,7 @@ export default function PackageListing() {
                             <Link to='/admin/package-features' style={{borderBottom: "1px solid #ddd"}} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                 Exclusion
                             </Link>
-                            <Link to='/admin/package-features' style={{borderBottom: "1px solid #ddd"}} className="text-sm py-2 px-2 font-normal block  whitespace-no-wrap bg-transparent text-black">
+                            <Link to='/admin/package-categories' style={{borderBottom: "1px solid #ddd"}} className="text-sm py-2 px-2 font-normal block  whitespace-no-wrap bg-transparent text-black">
                                 Categories
                             </Link>
                             <Link to='/admin/package-features' className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
