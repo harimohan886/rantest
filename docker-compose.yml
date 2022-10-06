@@ -118,16 +118,13 @@ services:
       - /opt/docker_app/safari/node_modules
     env_file:
       - ./safari/.env.dev
-  nginx-proxy:
+  client:
     build:
       dockerfile: Dockerfile
-      context: ./proxy
-    depends_on:
-      - admin
-      - chambal
-      - hotel
-      - package
-      - payment
-      - safari
+      context: ./client/frontend
+    container_name: client
     ports:
       - 80:80
+    volumes:
+      - .:/opt/docker_app/
+      - /opt/docker_app/client/frontend/node_modules
