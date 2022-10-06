@@ -13,7 +13,7 @@ RUN npm run build
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx
 
-#COPY build/ /usr/share/nginx/html
+COPY build /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
