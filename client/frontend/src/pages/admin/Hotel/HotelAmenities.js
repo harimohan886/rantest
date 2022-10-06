@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate";
 export default function HotelAmenities() {
     const [amenities, setAmenities] = useState([]);
     const [pageCount, setpageCount] = useState(0);
-    let limit = 2;
+    let limit = 10;
     //const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
@@ -25,20 +25,17 @@ export default function HotelAmenities() {
         try {
             const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/?page=1&size=${limit}`);
 
-
             setAmenities(result.data.data);
             setpageCount(Math.ceil(result.data.total / result.data.perPage));
             //setPage(result.data.page);
             setLoading(false);
-
-
 
         } catch (err) {
 
             setLoading(false);
         }
 
-    }
+    };
 
 
     useEffect(() => {
@@ -51,7 +48,6 @@ export default function HotelAmenities() {
         setLoading(true);
 
         try {
-
 
             let currentPage = data.selected + 1;
             const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/?page=${currentPage}`);
@@ -98,7 +94,7 @@ export default function HotelAmenities() {
                             <Link to='/admin/add-hotel-amenity' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Amenity</Link>
                         </div>
                     </div>
-                    <AmenityStatus />
+                    <AmenityStatus amenities={amenities} />
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>
@@ -118,8 +114,8 @@ export default function HotelAmenities() {
                                     <img style={{ margin: "0 auto" }} src={`../image/icons/${item.image}`} alt='swimming pool' />
                                 </td>
                                 <td className='border border-slate-300 text-center'>
-                                    <label htmlFor="default-toggle-1" className="inline-flex relative w-full cursor-pointer">
-                                        <input type="checkbox" value="" id="default-toggle-1" className="sr-only peer" />
+                                    <label htmlFor={`default-toggle-${item._id}`} className="inline-flex relative w-full cursor-pointer">
+                                        <input type="checkbox" defaultChecked={item.status} value={item.status} id={`default-toggle-${item._id}`} className="sr-only peer" />
                                         <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
                                         <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Available</span>
                                     </label>
