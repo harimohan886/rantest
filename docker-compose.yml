@@ -7,6 +7,22 @@ services:
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
+  api-gateway:
+    build:
+      dockerfile: Dockerfile
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "5005:5005"
+    restart: always
+    depends_on:
+      - "nosql-db"
+    volumes:
+      - .:/opt/docker_app
+      - /opt/docker_app/client/api-gateway/node_modules
+
+    env_file:
+      - ./client/api-gateway/.env.dev
   admin:
     build:
       dockerfile: Dockerfile
