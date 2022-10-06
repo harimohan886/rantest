@@ -18,7 +18,7 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
+      - .:/app
       - /app/client/api-gateway/node_modules
 
     env_file:
@@ -34,7 +34,7 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
+      - .:/app
       - /app/admin/node_modules
 
     env_file:
@@ -50,7 +50,7 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
+      - .:/app
       - /app/chambal/node_modules
     env_file:
       - ./chambal/.env.dev
