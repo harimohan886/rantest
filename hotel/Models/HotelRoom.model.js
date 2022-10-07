@@ -5,12 +5,21 @@ const HotelRoomSchema = new Schema({
 	hotel_id: {
 		type: String,
 	},
-	amenity_id: {
+	room: {
+		type: String,
+	},
+	image: {
 		type: String,
 	},
 	status: {
 		type: Number,
 	},
+	facilities: [
+	{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "hotel_room_facilities"
+	}
+	],
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,

@@ -17,7 +17,9 @@ package-lock.json
 
 
 client/frontend/public/uploads/
-package/
+package/Controllers
+package/Models
+package/Routes
 # production
 /build
 /client/frontend/build
