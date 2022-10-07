@@ -1,6 +1,6 @@
 const express = require("express");
 const createError = require('http-errors');
-onst app = express();
+const app = express();
 const dotenv = require("dotenv").config();
 require('./initDB')();
 const cors = require("cors");
