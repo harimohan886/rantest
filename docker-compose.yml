@@ -70,6 +70,22 @@ services:
       - /app/hotel/node_modules
     env_file:
       - ./hotel/.env.dev
+  package:
+    build:
+      dockerfile: Dockerfile
+      context: ./package
+    container_name: package
+    ports:
+      - "5001:5001"
+    restart: always
+    depends_on:
+      - "nosql-db"
+
+    volumes:
+      - .:/app/
+      - /app/payment/node_modules
+    env_file:
+      - ./payment/.env.dev
   payment:
     build:
       dockerfile: Dockerfile
