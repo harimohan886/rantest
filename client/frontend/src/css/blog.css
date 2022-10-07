@@ -9,6 +9,7 @@
 }
 .blogsection {
     padding-bottom: 50px;
+    margin-top: 40px;
 }
 .blogimage img{
     display: block;
@@ -56,6 +57,7 @@ position: absolute;
     text-align: justify;
     color: #444;
     text-transform: capitalize;
+    margin-bottom: 15px;
 }
 .blog{
     background: #fff;

@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 
 const Hotel = require('../Models/Hotel.model');
-const HotelImage = require('../Models/HotelImage.model');
+const hotelImage = require('../Models/HotelImage.model');
 const HotelAmenity = require('../Models/HotelAmenity.model');
-const HotelRoom = require('../Models/HotelRoom.model');
 
 const titleToSlug = title => {
     let slug;
@@ -46,20 +45,6 @@ module.exports = {
     }
   },
 
-  findHotelRoomsById: async (req, res, next) => {
-    try {
-      var id = req.params.id; 
-      const results = await HotelRoom.find({'hotel_id':id}, { __v: 0 }).populate('facilities');
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  },
-
   createNewHotel: async (req, res, next) => {
 
     let rules = {
@@ -80,17 +65,11 @@ module.exports = {
     try {
       const slug = await titleToSlug(req.body.name);
       req.body.slug = slug;
-      
-      if (req.files && req.files.length) {
-        req.body.image = req.files[0].path;
-      }
-
+      req.body.image = req.files[0].path;
       const hotel = new Hotel(req.body);
       const result = await hotel.save();
 
       const image_arr = [];
-
-      if (req.files && req.files.length) {
 
       arr = req.files.filter(function(item) {
         return item !== req.files[0]
@@ -98,7 +77,7 @@ module.exports = {
 
       for (const image of arr) 
       { 
-        const hotel_images = new HotelImage({
+        const hotel_images = new hotelImage({
           image:image.path,
           hotel_id:result._id
         });
@@ -106,7 +85,6 @@ module.exports = {
         const result1 = await hotel_images.save();
         image_arr.push(result1);
       }
-    }
 
       const id = result._id;
       const updates = {images:image_arr};
@@ -154,7 +132,7 @@ module.exports = {
   findHotelAmenitiesById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const hotel = await HotelAmenity.find({hotel_id:id}).populate('amenity');
+      const hotel = await Hotel.findById(id);
       if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
@@ -207,7 +185,7 @@ module.exports = {
       { 
       const hotel_amenity = new HotelAmenity({
           hotel_id:id,
-          amenity:amenity
+          amenity_id:amenity
         });
 
         const result = await hotel_amenity.save();
@@ -230,9 +208,6 @@ module.exports = {
   deleteAHotel: async (req, res, next) => {
     const id = req.params.id;
     try {
-      await HotelAmenity.deleteMany({hotel_id:id});
-      await HotelImage.deleteMany({hotel_id:id});
-      await HotelRoom.deleteMany({hotel_id:id});
       const result = await Hotel.findByIdAndDelete(id);
       if (!result) {
         throw createError(404, 'Hotel does not exist.');

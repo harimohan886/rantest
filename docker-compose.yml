@@ -18,8 +18,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
-      - /opt/docker_app/client/api-gateway/node_modules
+      - .:/app
+      - /app/client/api-gateway/node_modules
 
     env_file:
       - ./client/api-gateway/.env.dev
@@ -34,8 +34,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
-      - /opt/docker_app/admin/node_modules
+      - .:/app
+      - /app/admin/node_modules
 
     env_file:
       - ./admin/.env.dev
@@ -50,8 +50,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/opt/docker_app
-      - /opt/docker_app/chambal/node_modules
+      - .:/app
+      - /app/chambal/node_modules
     env_file:
       - ./chambal/.env.dev
   hotel:
@@ -66,26 +66,10 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/opt/docker_app/
-      - /opt/docker_app/hotel/node_modules
+      - .:/app/
+      - /app/hotel/node_modules
     env_file:
       - ./hotel/.env.dev
-  package:
-    build:
-      dockerfile: Dockerfile
-      context: ./package
-    container_name: package
-    ports:
-      - "5001:5001"
-    restart: always
-    depends_on:
-      - "nosql-db"
-
-    volumes:
-      - .:/opt/docker_app/
-      - /opt/docker_app/package/node_modules
-    env_file:
-      - ./package/.env.dev
   payment:
     build:
       dockerfile: Dockerfile
@@ -98,8 +82,8 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/opt/docker_app/
-      - /opt/docker_app/payment/node_modules
+      - .:/app/
+      - /app/payment/node_modules
     env_file:
       - ./payment/.env.dev
   safari:
@@ -114,8 +98,8 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/opt/docker_app/
-      - /opt/docker_app/safari/node_modules
+      - .:/app/
+      - /app/safari/node_modules
     env_file:
       - ./safari/.env.dev
   client:
@@ -126,7 +110,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - .:/opt/docker_app/
-      - /opt/docker_app/client/frontend/node_modules
+      - .:/app/
+      - /app/client/frontend/node_modules
     environment:
       NODE_ENV: production

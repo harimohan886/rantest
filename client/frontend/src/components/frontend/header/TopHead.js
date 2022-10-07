@@ -15,9 +15,9 @@ export default function TopHead() {
             <div className="row">
                 <div className="col-sm-8 col-xs-12">
                     <ul className="list-inline">
-                        <li><a href="tel:7838498645"><img alt="Call" src="../image/icons/callicon.png" /> +91 7838 4986 45</a>|</li>
-                        <li><a href="tel:7289842772">+91 7289 8427 72</a>|</li>
-                        <li><a href="tel:9718717119">+91 9718 7171 19</a></li>
+                        <li className="list-inline-item"><a href="tel:7838498645"><img alt="Call" src="../image/icons/callicon.png" /> +91 7838 4986 45</a>|</li>
+                        <li className="list-inline-item"><a href="tel:7289842772">+91 7289 8427 72</a>|</li>
+                        <li className="list-inline-item"><a href="tel:9718717119">+91 9718 7171 19</a></li>
                     </ul>
                 </div>
                 <div className="col-sm-4 col-xs-12">

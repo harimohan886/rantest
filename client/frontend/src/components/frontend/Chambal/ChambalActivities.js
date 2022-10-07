@@ -3,7 +3,7 @@ import React from 'react'
 export default function ChambalActivities() {
   return (
     <div className="chambalsafari">
-        <div className="container">
+        <div className="container sectionFrame">
             <div className="row">
             <div className="col-sm-6 col-xs-12">
                 <div className="chambalimg">
@@ -31,7 +31,7 @@ export default function ChambalActivities() {
                 </div>
             </div>
             <div className="col-sm-6 col-xs-12">
-                <div className="chambal-disc">
+                <div className="chambal-disc chm2">
                 <div className="title">
                     <strong>Why is Chambal Safari the Best Option for Tourists Looking to Explore Nearby Places of Ranthambhore?</strong>
                 </div>
@@ -59,7 +59,7 @@ export default function ChambalActivities() {
                 </div>
             </div>
             <div className="col-sm-6 col-xs-12">
-                <div className="chambal-disc">
+                <div className="chambal-disc chm2">
                 <div className="title">
                     <strong>Chambal Gharial Safari Booking</strong>
                 </div>
@@ -106,7 +106,7 @@ export default function ChambalActivities() {
             </div>
             <div className="row margintop">
             <div className="col-sm-6 col-xs-12">
-                <div className="chambal-disc">
+                <div className="chambal-disc chm2">
                 <div className="title">
                     <strong>How to Book Pre-Book Vehicles Online For Chambal Safari?</strong>
                 </div>

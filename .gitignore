@@ -13,10 +13,13 @@ package-lock.json
 
 # testing
 /coverage
+/db
 
 
 client/frontend/public/uploads/
-package/
+package/Controllers
+package/Models
+package/Routes
 # production
 /build
 /client/frontend/build

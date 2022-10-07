@@ -24,13 +24,13 @@ export default function HotelList() {
                     <p>Corbett Maya Resort is spread over an area of 3 acres. It is situated in Swaldeh village of Ramnagar near...</p>
                     <div className="Resort">
                         <ul className="list-inline">
-                        <li>
+                        <li className='list-inline-item'>
                             <span> Wi-Fi</span>
                         </li>
-                        <li>
+                        <li className='list-inline-item'>
                             <span> Swimming Pool</span>
                         </li>
-                        <li>
+                        <li className='list-inline-item'>
                             <span> In-House Restaurant</span>
                         </li>
                         </ul>

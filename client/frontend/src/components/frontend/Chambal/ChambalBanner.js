@@ -3,7 +3,7 @@ import React from 'react'
 export default function ChambalBanner() {
   return (
     <section id="chambalmainbanner" style={{backgroundImage: "url(../image/bannernew2.jpeg)"}}>
-        <div className="container">
+        <div className="container sectionFrame">
             <div className="row">
             <div className="col-sm-12 col-xs-12">
                 <div className="chambalcaption">

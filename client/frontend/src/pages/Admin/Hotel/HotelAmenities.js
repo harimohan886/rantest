@@ -12,33 +12,33 @@ import ReactPaginate from "react-paginate";
 export default function HotelAmenities() {
     const [amenities, setAmenities] = useState([]);
     const [pageCount, setpageCount] = useState(0);
-    let limit = 10;
-    //const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
 
 
-    const getAmenities = async () => {
-
-        setLoading(true);
-
-        try {
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/?page=1&size=${limit}`);
-
-            setAmenities(result.data.data);
-            setpageCount(Math.ceil(result.data.total / result.data.perPage));
-            //setPage(result.data.page);
-            setLoading(false);
-
-        } catch (err) {
-
-            setLoading(false);
-        }
-
-    };
-
 
     useEffect(() => {
+        let limit = 10;
+
+        const getAmenities = async () => {
+
+            setLoading(true);
+
+            try {
+                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/?page=1&size=${limit}`);
+
+                setAmenities(result.data.data);
+                setpageCount(Math.ceil(result.data.total / result.data.perPage));
+                //setPage(result.data.page);
+                setLoading(false);
+
+            } catch (err) {
+
+                setLoading(false);
+            }
+
+        };
+
         getAmenities();
 
     }, []);
@@ -124,7 +124,7 @@ export default function HotelAmenities() {
                                     <Link to={`/admin/edit-hotel-amenity/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                         <i className="fas fa-pencil"></i>
                                     </Link>
-                                    <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" to="#!" onClick={() => handleDelete(item.id)}>
+                                    <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" onClick={() => handleDelete(item._id)}>
                                         <i className="fas fa-trash"></i>
                                     </Link>
                                 </td>

@@ -3,26 +3,26 @@ import React from 'react'
 export default function HomeTabs() {
   return (
     <section id="tableinformation">
-        <div className="container">
+        <div className="container sectionFrame">
             <div className="row">
                 <div className="col-sm-12 col-xs-12">
                     <div className="tabletabs tabletabs2">
-                        <ul className="nav nav-tabs">
-                            <li className="active">
-                                <a data-toggle="tab" href="#tab-history">History of Ranthambhore</a>
+                        <ul className="nav nav-tabs" id="myTab" role="tablist">
+                            <li className="nav-item">
+                                <a className='nav-link active' data-toggle="tab" href="#tab-history" role="tab" aria-controls="tab-history" aria-selected="true">History of Ranthambhore</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#tab-reach">How to Reach</a>
+                            <li className="nav-item">
+                                <a className='nav-link' data-toggle="tab" href="#tab-reach" role="tab" aria-controls="tab-reach" aria-selected="false">How to Reach</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#tab-visit">Best Time to Visit</a>
+                            <li className="nav-item">
+                                <a className='nav-link' data-toggle="tab" href="#tab-visit" role="tab" aria-controls="tab-visit" aria-selected="false">Best Time to Visit</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#tab-faq">FAQ</a>
+                            <li className="nav-item">
+                                <a className='nav-link' data-toggle="tab" href="#tab-faq" role="tab" aria-controls="tab-faq" aria-selected="false">FAQ</a>
                             </li>
                         </ul>
-                        <div className="tab-content">
-                            <div className="tab-pane" id="tab-reach">
+                        <div className="tab-content" id="myTabContent">
+                            <div className="tab-pane fade" id="tab-reach">
                                 <div className="canalList">
                                     <div className="lists">
                                         <p style={{textAlign: "center"}}>
@@ -149,7 +149,7 @@ export default function HomeTabs() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane" id="tab-visit">
+                            <div className="tab-pane fade" id="tab-visit">
                                 <div className="canalList">
                                     <div className="lists">
                                         <p style={{textAlign: "center"}}>
@@ -226,7 +226,7 @@ export default function HomeTabs() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane" id="tab-faq">
+                            <div className="tab-pane fade" id="tab-faq">
                                 <div className="canalList">
                                     <div className="lists">
                                         <h3 style={{textAlign: "center", paddingTop: "0px", marginTop: "5px", marginBottom: "0px"}}>

@@ -3,7 +3,7 @@ import React from 'react'
 export default function Attraction() {
   return (
     <section id="tourist-attraction">
-    <div className="container">
+    <div className="container sectionFrame">
         <h3>Tourist Attractions in Ranthambore</h3>
         <div className="row">
         <div className="col-sm-4 col-xs-12 padding-right-zero">

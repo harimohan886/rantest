@@ -3,12 +3,12 @@ import React from 'react'
 export default function SafariZone() {
   return (
     <section id="safarizoneinfo">
-        <div className="container">
+        <div className="container sectionFrame">
             <h4>Safari Zone Information</h4>
             <div className="row">
             <div className="col-sm-12 col-xs-12">
                 <div className="zoneinfo">
-                <ul className="list-unstyled">
+                <ul className="list-group">
                     <li>
                     <img alt="right-arrow" src="../image/icons/checked-arrow.png" />Zone will be allowed as per availability
                     </li>

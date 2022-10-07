@@ -3,7 +3,7 @@ import React from 'react'
 export default function Info() {
   return (
     <section id="information">
-        <div className="container">
+        <div className="container sectionFrame">
             <div className="row">
             <div className="col-sm-12 col-xs-12">
                 <div className="information">
