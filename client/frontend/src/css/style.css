@@ -13,8 +13,8 @@ h1,h2,h3,h4,h5,h6{
 }
 .btn-danger {
     color: #fff;
-    background-color: #df1226;
-    border-color: #df1226;
+    background-color: #df1226 !important;
+    border-color: #df1226 !important;
 }
 .bodyHeight{
 	min-height: 600px;
@@ -312,8 +312,10 @@ margin-top: 30px;
 margin-bottom: 30px;
 }
 .passanger h3{
-margin-bottom: 20px;
-padding-left: 15px;
+	margin-bottom: 10px;
+	padding-left: 15px;
+	font-size: 21px;
+    margin-top: 20px;
 }
 .form-inline .control-label{
 margin-top: 15px;
@@ -323,10 +325,11 @@ margin-bottom: 5px;
 margin-bottom: 20px !important;
 }
 .addperson{
-border-radius: 100px;
+border-radius: 100px!important;
 padding: 6px 12px !important;
-background: green;
-border-color: green;
+background: green !important;
+border-color: green !important;
+margin-right: 10px;
 }
 .deletePerson{
 border-radius: 100px;
@@ -358,17 +361,22 @@ left: -7px;
 .paybtn{
 background: #ce1511;
 color: #fff;
-padding: 10px;
+padding: 8px;
 font-weight: 600;
 font-size: 17px;
 min-width: 220px;
+height: 42px;
+border-radius: 3px;
 }
 .paynow li .btn-primary{
-padding: 7px 24px;
-position: relative;
-top: -2px;
-background: green;
-border-color: green;
+	padding: 6.5px 24px;
+    border-radius: 3px;
+    background: green;
+    border-color: green;
+}
+.paynow li .btn-default{
+	padding: 6.5px 24px;
+    border-radius: 3px;
 }
 .col-sm-12.padding-left-zero.mobpad0 {
 padding-left: 15px;
@@ -1044,16 +1052,26 @@ border-left:1px solid #5d5d5d;
 .travellerBook input{
 	background: #f5f7fa;
     color: #98a3ae;
-    height: 45px;
-    font-size: 15px;
+    height: 40px;
+    font-size: 14px;
 	min-width: 227px;
+	border-color: #ccc;
 }
 .travellerBook select{
-	max-width: 227px;
-	background: #f5f7fa;
+	min-width: 227px;
     color: #98a3ae;
-    height: 45px;
-    font-size: 15px;
+    height: 40px !important;
+    font-size: 14px;
+    background: #f5f7fb;
+}
+.trvldetails{
+	margin-bottom: 10px;
+    font-size: 21px;
+    margin-top: 20px;
+    background: #000;
+    text-align: center;
+    color: #fff;
+    padding: 12px 0;
 }
 .travellerBook textarea{
 	background: #f5f7fa;
@@ -1071,9 +1089,15 @@ border-left:1px solid #5d5d5d;
 .fillTraveller select, .fillTraveller input{
     background: #f5f7fa;
     color: #98a3ae;
-    height: 45px;
+    height: 40px;
     font-size: 15px;
-	max-width: 185px;
+    max-width: 193px;
+    border-color: #ccc;
+    border-radius: 4px;
+}
+.bookPadding label{
+	font-weight: bold;
+    margin-top: 7px;
 }
 #safaribanner h1 {
 	font-weight: 600;
@@ -1572,11 +1596,38 @@ border-left:1px solid #5d5d5d;
 .slotform .input-group-addon img{
 	padding: 7px;
 }
+.chambaBooking h1{
+	background: #000;
+    color: #fff;
+    font-size: 21px;
+    text-align: center;
+    padding: 14px 0;
+    margin-top: 30px;
+	font-weight: bold;
+}
+.chambaBooking form{
+	border: 1px solid #ddd;
+    border-top: none;
+    padding: 30px 15px 30px 15px;
+}
+.chambaBooking form label{
+	font-weight: bold;
+}
+.chambaBooking form input, .chambaBooking form select{
+	background: #f5f7fa;
+    color: #98a3ae;
+    border-color: #ccc;
+    font-size: 14px;
+}
 /********End***********/
 @media (max-width: 767px){
 #chambalmainbanner{
 min-height: auto;
 }  
+.sectionFrame {
+    max-width: 100% !important;
+    min-width: auto;
+}
 .chambalcaption h1{
 font-size: 17px;
 } 
@@ -1742,8 +1793,8 @@ max-width: 100% !important;
 .addperson {
 border-radius: 0;
 padding: 6px 12px !important;
-background: green;
-border-color: green;
+background: green !important;
+border-color: green !important;
 margin-top: -7px;
 font-size: 12px;
 margin-left: 10px;
