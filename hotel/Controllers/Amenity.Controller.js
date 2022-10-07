@@ -48,7 +48,9 @@ module.exports = {
   },
 
   createNewAmenity: async (req, res, next) => {
+    if (req.file) {
     req.body.image = req.file.path;
+  }
 
     let rules = {
       amenity: 'required'
