@@ -30,7 +30,6 @@ const titleToSlug = title => {
     slug = slug.replace(/\@\-|\-\@|\@/gi, '');
     return slug;
 };
->>>>>>> 20a61762c792de878fc6e7c5e789c8148fe6fa2e
 
 module.exports = {
   getAllHotelRooms: async (req, res, next) => {
@@ -65,7 +64,6 @@ module.exports = {
     }).catch( err => console.log(err))
 
     try {
-
 
       const datas = [];
 
@@ -109,7 +107,7 @@ module.exports = {
       await hotel.populate('facilities');
 
       if (!hotel) {
-        throw createError(404, 'HotelRoom does not exist.');
+        throw createError(404, 'Hotel Room does not exist.');
       }
       res.send({
         success: true,
@@ -119,7 +117,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid HotelRoom id'));
+        next(createError(400, 'Invalid Hotel Room id'));
         return;
       }
       next(error);
@@ -131,7 +129,7 @@ module.exports = {
     try {
       const hotel = await HotelRoom.findById(id);
       if (!hotel) {
-        throw createError(404, 'HotelRoom does not exist.');
+        throw createError(404, 'Hotel Room does not exist.');
       }
       res.send({
         success: true,
@@ -141,7 +139,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid HotelRoom id'));
+        next(createError(400, 'Invalid Hotel Room id'));
         return;
       }
       next(error);
@@ -154,10 +152,6 @@ module.exports = {
       const datas = [];
 
       const fac = await HotelRoom.findById(id);
-
-
-
-
 
       if (fac.facilities.length > 1) {
 
@@ -193,7 +187,7 @@ module.exports = {
 
       const result = await HotelRoom.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'HotelRoom does not exist');
+        throw createError(404, 'Hotel Room does not exist');
       }
       res.send({
         success: true,
@@ -202,7 +196,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid HotelRoom Id'));
+        return next(createError(400, 'Invalid Hotel Room Id'));
       }
 
       next(error);
@@ -227,12 +221,12 @@ module.exports = {
 
       res.send({
         success: true,
-        message: 'HotelRoom Amenity Data updated',
+        message: 'Hotel Room Amenity Data updated',
       });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid HotelRoom Id'));
+        return next(createError(400, 'Invalid Hotel Room Id'));
       }
 
       next(error);
@@ -260,7 +254,7 @@ module.exports = {
 
       const result = await HotelRoom.findByIdAndDelete(id);
       if (!result) {
-        throw createError(404, 'HotelRoom does not exist.');
+        throw createError(404, 'Hotel Room does not exist.');
       }
       res.send({
         success: true,
@@ -269,7 +263,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid HotelRoom id'));
+        next(createError(400, 'Invalid Hotel Room id'));
         return;
       }
       next(error);
