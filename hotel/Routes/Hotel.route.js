@@ -26,6 +26,8 @@ router.post('/', uploads.any(), HotelController.createNewHotel);
 //Get a product by id
 router.get('/:id', HotelController.findHotelById);
 
+router.get('/:id/rooms', HotelController.findHotelRoomsById);
+
 router.get('/:id/amenities', HotelController.findHotelAmenitiesById);
 
 //Update a product by id

@@ -5,8 +5,9 @@ const HotelAmenitySchema = new Schema({
 	hotel_id: {
 		type: String,
 	},
-	amenity_id: {
-		type: String,
+	amenity: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "amenities"
 	},
 	status: {
 		type: Number,
