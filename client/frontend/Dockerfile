@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM node:16 as build
  
 WORKDIR /app/client/frontend
  
@@ -13,11 +13,11 @@ COPY ./.env.dev /app/client/frontend/.env
 RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx
+FROM nginx:1.17.8-alpine
 
 COPY --from=build /app/client/frontend/build /usr/share/nginx/html
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
