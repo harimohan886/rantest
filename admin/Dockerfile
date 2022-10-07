@@ -1,7 +1,8 @@
 FROM node:16
-WORKDIR /opt/docker_app/admin
-COPY ./package*.json ./
+WORKDIR /app/admin
+COPY package.json /app/admin
 RUN npm install
-COPY . .
+COPY . /app/admin
+COPY ./.env.dev /app/admin/.env
 EXPOSE 5005
 CMD [ "node", "index.js" ]

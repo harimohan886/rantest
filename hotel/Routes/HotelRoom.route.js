@@ -29,7 +29,7 @@ router.get('/:id', HotelRoomController.findHotelRoomById);
 router.get('/:id/amenities', HotelRoomController.findHotelRoomAmenitiesById);
 
 //Update a product by id
-router.patch('/:id', HotelRoomController.updateAHotelRoom);
+router.patch('/:id', uploads.any(), HotelRoomController.updateAHotelRoom);
 
 router.patch('/:id/amenities', HotelRoomController.updateHotelRoomAmenities);
 
