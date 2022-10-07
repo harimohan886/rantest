@@ -20,32 +20,32 @@ app.use(express.json());
 const server = gateway({
     routes: [
         {
-            prefix: "/hotel",
+            prefix: "/api/hotel",
             target: process.env.HOTEL_MICROSERVICE_URL,
 
         },
         {
-            prefix: "/package",
+            prefix: "/api/package",
             target: process.env.PACKAGE_MICROSERVICE_URL,
 
         },
         {
-            prefix: "/safari",
+            prefix: "/api/safari",
             target: process.env.SAFARI_MICROSERVICE_URL,
 
         },
         {
-            prefix: "/payment",
+            prefix: "/api/payment",
             target: process.env.PAYMENT_MICROSERVICE_URL,
 
         },
         {
-            prefix: "/admin",
+            prefix: "/api/admin",
             target: process.env.ADMIN_MICROSERVICE_URL,
 
         },
         {
-            prefix: "/chambal",
+            prefix: "/api/chambal",
             target: process.env.CHAMBAL_MICROSERVICE_URL,
 
         },
@@ -53,7 +53,7 @@ const server = gateway({
     ]
 });
 
-server.get('/testing', (req, res) => res.send("yes test called"));
+server.get('/api/testing', (req, res) => res.send("yes test called"));
 
 
 server.start(process.env.PORT || 5004).then(server => {
