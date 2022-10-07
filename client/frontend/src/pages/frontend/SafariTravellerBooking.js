@@ -3,11 +3,11 @@ import React from 'react'
 export default function SafariTravellerBooking() {
     
   return (
-    <div className='container'>
+    <div className='container sectionFrame'>
         <div className='passanger'>
             <form className='form-inline ng-untouched ng-pristine ng-invalid' noValidate="">
                 <div className='travellerBook box clearfix'>
-                    <h2>Booking Detail</h2>
+                    <h2>Safari booking details</h2>
                     <h3>Booking Person Details</h3>
                     <div className='bookPadding'>
                         <div className='row' style={{marginBottom: "20px"}}>
@@ -118,7 +118,7 @@ export default function SafariTravellerBooking() {
                     </div>
                 </div>
                 <div className='fillTraveller'>
-                    <h3>Please fill out the Traveller Details</h3>
+                    <h3 className='trvldetails'>Please fill out the Traveller Details</h3>
                     <div className="formsection ng-untouched ng-pristine ng-invalid" formarrayname="booked_persons">
                         <div className="form-group ng-untouched ng-pristine ng-invalid">
                             <span className="serailno">1.</span>
@@ -154,7 +154,9 @@ export default function SafariTravellerBooking() {
                             <div className="form-group mob6">
                                 <button className="addperson btn btn-primary" type="button">
                                     <i className="fa fa-plus hidden-xs"></i>
-                                    <span className="hidden-sm hidden-md hidden-lg hidden-xl">Add Traveller</span>
+                                </button>
+                                <button className="deletePerson btn btn-danger" type="button">
+                                    <i className="fa fa-minus hidden-xs"></i>
                                 </button>
                             </div>
                             <br className="hidden-xs" />
