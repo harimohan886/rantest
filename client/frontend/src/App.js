@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React, { useContext } from 'react';
-import './App.css';
-import './css/style.css';
-import './css/admin.css';
+import '../src/App.css';
+import '../src/css/style.css';
+import '../src/css/admin.css';
 import TopHead from './components/frontend/header/TopHead';
 import Header from './components/frontend/header/Header';
 import Home from './pages/frontend/Home';
