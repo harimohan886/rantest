@@ -50,7 +50,7 @@ export default function Header() {
                         <Link to="/hotels">Ranthambore Hotels</Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link to="/about-us">Ranthambore Packages</Link>
+                        <Link to="/ranthambore-packages">Ranthambore Packages</Link>
                     </li>
                     <li className="list-inline-item">
                         <Link to="/contact-us">Contact Us</Link>

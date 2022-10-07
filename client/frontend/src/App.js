@@ -18,6 +18,7 @@ import Cancellation from './pages/frontend/Cancellation';
 import SafariTravellerBooking from './pages/frontend/SafariTravellerBooking';
 import Thankyou from './pages/frontend/Thankyou';
 import Hotel from './pages/frontend/Hotel/Hotel';
+import FrontendPackages from './pages/frontend/Packages/FrontendPackages';
 import HotelDetails from './pages/frontend/Hotel/HotelDetails';
 
 // Admin import starts here
@@ -73,6 +74,7 @@ import PackageCategories from './pages/Admin/Packages/PackageCategories';
 import AddPackageCategory from './pages/Admin/Packages/AddPackageCategory';
 import EditPackageCategory from './pages/Admin/Packages/EditPackageCategory';
 import { AuthContext } from './context/admin/AuthContext';
+import PackageDetails from './pages/frontend/Packages/PackageDetails';
 
 
 
@@ -99,6 +101,8 @@ function App() {
         <Route exact path='/thankyou' element={<Thankyou />} />
         <Route exact path='/hotels' element={<Hotel />} />
         <Route exact path='/hotel-details' element={<HotelDetails />} />
+        <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
+        <Route exact path='/package-details' element={<PackageDetails />} />
 
 
         {/* Admin routing starts here */}

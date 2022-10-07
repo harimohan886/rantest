@@ -1406,12 +1406,12 @@ border-left:1px solid #5d5d5d;
     font-size: 16px;
     border: 1px solid #ccc;
 }
-.hotel-listing-page .width70 {
+.width70 {
     width: 70% !important;
     flex: unset;
     max-width: 70%;
 }
-.hotel-listing-page .width30 {
+.width30 {
     width: 30% !important;
     flex: unset;
     max-width: 30%;;
@@ -1618,6 +1618,263 @@ border-left:1px solid #5d5d5d;
     color: #98a3ae;
     border-color: #ccc;
     font-size: 14px;
+}
+.packages-detail h2{
+	font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.packages-detail p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+}
+.package-margin {
+    margin-bottom: 35px;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    box-shadow: 0px 3px 6px #00000047;
+}
+.packages-listing h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px;
+    padding-top: 10px;
+    letter-spacing: -0.8px;
+}
+.packages-listing p{
+	margin-bottom: 25px;
+}
+.rating {
+    margin-bottom: 2px;
+}
+.rating .checked {
+    color: orange;
+}
+.package-margin .package-detail {
+    width: 65%;
+    float: left;
+}
+.packages-listing .package-detail ul li{
+	margin-bottom: 15px;
+}
+.packages-listing .package-detail ul li span {
+    background-color: #ffd2d2;
+    color: #85000d;
+    border: 1px solid #eb394a;
+    padding: 4px 7px;
+    border-radius: 3px;
+	font-weight: bold;
+}
+.package-margin .price-from {
+    float: right;
+    margin-top: -20px;
+    text-align: end;
+}
+.price-from h6 {
+    font-size: 18px;
+    letter-spacing: -0.2px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #000;
+}
+.price-from .price {
+    margin-bottom: 10px;
+}
+.price i {
+    color: #851b18;
+    font-size: 28px;
+    margin-right: 5px;
+}
+.price b {
+    color: #851b18;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+}
+.price span {
+    display: block;
+    font-size: 15px;
+}
+.package-margin .price-from .findButton {
+    text-align: end;
+    margin-top: -30px;
+}
+.package-margin .price-from .findButton .btn-danger{
+	padding: 8px 14px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.destination {
+    background: #fff;
+    box-shadow: 0px 3px 9px #00000047;
+    border-radius: 9px;
+}
+.destination h5 {
+    margin-top: 0;
+    text-align: center;
+    padding-top: 10px;
+	font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+	padding-bottom: 0;
+}
+.destination .carousel-control {
+    top: 31%;
+    font-size: 70px;
+    color: #ffc419;
+    opacity: 1;
+    text-shadow: none;
+}
+.carousel .carousel-caption {
+    padding-bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 10px;
+    background: rgb(217 103 103 / 35%);
+}
+.carousel .carousel-caption h5 {
+    margin-bottom: 10px;
+    padding-top: 0;
+    color: #fff;
+    text-shadow: none;
+    font-size: 20px;
+    font-weight: 600;
+	margin-top: 0;
+	text-align: center;
+}
+.package-listing-page{
+	margin-bottom: 30px;
+}
+.packages-views h1{
+	font-size: 32px;
+    letter-spacing: -0.8px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.package-detail ul{
+	margin-top: 15px;
+    margin-bottom: 15px;
+}
+.package-detail ul li{
+	margin-bottom: 10px;
+}
+.package-detail ul li span i, .inclus ul li span i{
+	background: #eb394a;
+    color: #fff;
+    padding: 4px 5px;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+.ndes p{
+	line-height: 28px;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+.cont-detail {
+    background: #8c000d;
+    margin-top: 25px;
+}
+.tabs-nav2 ul li {
+    border-right: 1px solid #ddd;
+    padding: 6px 20px;
+}
+.tabs-nav2 ul li a {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+}
+.tabs-nav2 ul li:last-child {
+    border-right: none;
+}
+.inclusions-Exc {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.inclus h5 {
+    margin-top: 20px;
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+.inclus ul li span {
+    font-size: 14px;
+    text-align: left;
+    color: #222;
+    font-weight: 400;
+    line-height: 36px;
+}
+.packTab .nav-tabs{
+	justify-content: center;
+}
+#myTab.nav-tabs{
+	margin-bottom: 30px;
+    border-bottom: none;
+    margin-top: 30px;
+}
+#myTab.nav-tabs .nav-link{
+	padding: 8px 35px;
+    margin-left: 15px;
+    border: 2px solid #f9c446;
+}
+#myTab.nav-tabs .nav-link.active{
+	background: #ffc419;
+    color: #111;
+    border-color: #ffc419;
+}
+.packTab{
+	background: #f4f4f4;
+	padding: 10px 0;
+    margin-top: 30px;
+}
+#roomTab .nav-item{
+	margin-left: 15px;
+}
+#roomTab .nav-link.active{
+	background: #000;
+    border-color: #000;
+}
+ul#roomTab {
+    margin-bottom: 20px;
+    border-bottom: none;
+}
+#romType .carousel-caption{
+	position: absolute;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    background: unset;
+    color: #000;
+    margin-top: 52px;
+}
+#romType .carousel-caption h5{
+	color: #000;
+}
+#romType .carousel-indicators{
+	bottom: 0;
+}
+#romType .carousel-indicators .active{
+	background-color: #000;
+}
+.carousel-indicators li{
+	background-color: #ccc;
+}
+#romType h5{
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+    margin-top: 20px;
 }
 /********End***********/
 @media (max-width: 767px){
