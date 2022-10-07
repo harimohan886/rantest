@@ -127,6 +127,7 @@ services:
       - 80:80
     volumes:
       - .:/app/
+      - ./public/uploads:ranthambore/client/frontend/public/uploads
       - /app/client/frontend/node_modules
     environment:
       NODE_ENV: production
