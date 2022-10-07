@@ -10,6 +10,8 @@ COPY . /app/client/frontend
 
 COPY ./.env.dev /app/client/frontend/.env
 
+RUN npm run build:css
+
 RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
