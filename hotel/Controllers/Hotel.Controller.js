@@ -178,9 +178,6 @@ module.exports = {
       const updates = req.body;
       const options = { new: true };
 
-
-      console.log("id", id);
-      console.log("body", updates);
       const result = await Hotel.findByIdAndUpdate(id, updates, options);
       if (!result) {
         throw createError(404, 'Hotel does not exist');

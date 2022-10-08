@@ -14,6 +14,8 @@ export default function EditHotel() {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [selectedFilesObj, setSelectedFilesObj] = useState([]);
     const navigate = useNavigate();
+    const params = useParams();
+
 
     const [hotels, setHotels] = useState({
         name: '',
@@ -32,11 +34,6 @@ export default function EditHotel() {
         images: [],
 
     });
-    const params = useParams();
-
-
-
-
 
     useEffect(() => {
 
@@ -119,52 +116,37 @@ export default function EditHotel() {
             extra_images.push('images[' + key + ']', selectedFilesObj[key]);
         }
 
-        // setHotels(hotels => ({ ...hotels, images: extra_images }));
+        setHotels(hotels => ({ ...hotels, images: [] }));
+
+        try {
+
+            const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, hotels, {
+                headers: {
+                    'Authorization': `Bearer ` + localStorage.getItem('user')
+                },
+            });
+
+            if (res.data.success == true) {
+                swal("Data is created successfully", "success");
+                navigate('/admin/hotels');
 
 
-        const data = {
-            image: hotels.image,
-            //images: extra_images,
-            package_image: hotels.package_image,
-            name: hotels.name,
-            price: hotels.price,
-            rating: hotels.rating,
-            city: hotels.city,
-            state: hotels.state,
-            address: hotels.address,
-            description: hotels.description,
-            safari_distance: hotels.safari_distance,
-            status: hotels.status,
-            meta_title: hotels.meta_title,
-            meta_description: hotels.meta_description,
+            } else if (res.data.validation_errors) {
+                swal(res.data.validation_errors);
+                //   setTimeError();
+                // if(res.data.validation_errors.time)
+                //   setTimeError(res.data.validation_errors.time[0]);
+            } else if (res.data.status == 401) {
+                //  setDuplicateDate(true);
+            }
+
+
+        } catch (err) {
+
+            swal(err);
+
+
         }
-
-
-
-        const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, data, {
-            headers: {
-                'Authorization': `Bearer ` + localStorage.getItem('user')
-            },
-        });
-
-        // console.log("res", res);
-        //console.log("res data", res.data);
-        if (res.data.success == true) {
-            console.log("i amd ins")
-            swal("Data is created successfully", "success");
-            navigate('/admin/hotels');
-
-
-        } else if (res.data.validation_errors) {
-            swal(res.data.validation_errors);
-
-            //   setTimeError();
-            // if(res.data.validation_errors.time)
-            //   setTimeError(res.data.validation_errors.time[0]);
-        } else if (res.data.status == 401) {
-            //  setDuplicateDate(true);
-        }
-
     }
 
 
