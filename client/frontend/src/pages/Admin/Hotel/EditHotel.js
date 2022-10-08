@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
@@ -10,7 +10,10 @@ import MultiImageUpload from '../../../components/Admin/Uploader/MultiImageUploa
 
 
 export default function EditHotel() {
+
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [selectedFilesObj, setSelectedFilesObj] = useState([]);
+    const navigate = useNavigate();
 
     const [hotels, setHotels] = useState({
         name: '',
@@ -32,7 +35,11 @@ export default function EditHotel() {
     const params = useParams();
 
 
+
+
+
     useEffect(() => {
+
         const getHotels = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`);
             const result = res.data.data;
@@ -58,16 +65,16 @@ export default function EditHotel() {
 
         }
 
+
         getHotels();
 
     }, [params.id]);
 
-    console.log("hotels", hotels);
 
     const handleImageChange = (e) => {
         if (e.target.files) {
-            //setSelectedFilesObj(e.target.files);
-            setHotels(currentHotel => ({ ...currentHotel, images: e.target.files }))
+            setSelectedFilesObj(e.target.files);
+            // setHotels(currentHotel => ({ ...currentHotel, images: hotels.images.concat(e.target.files) }))
 
 
             const filesArray = Array.from(e.target.files).map((file) =>
@@ -90,66 +97,77 @@ export default function EditHotel() {
     };
 
     const handleChange = (e) => {
+        console.log("e name", e.target.name)
         //setImage(e.target.files[0]);
-        setHotels(currentHotel => ({ ...currentHotel, [e.target.name]: e.target.value }));
+        setHotels(hotels => ({ ...hotels, [e.target.name]: e.target.value }));
     }
 
-    console.log("check updated hoteslvalue ", hotels);
-
     const handleImage = (e) => {
-        setHotels(currentHotel => ({ ...currentHotel, image: e.target.files[0] }));
+        setHotels(hotels => ({ ...hotels, image: e.target.files[0] }));
 
     }
 
     const handlePackageImage = (e) => {
-        setHotels(currentHotel => ({ ...currentHotel, package_image: e.target.files[0] }));
+        setHotels(hotels => ({ ...hotels, package_image: e.target.files[0] }));
 
     }
 
-    const handleSaveData = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const formData = new FormData();
-        for (const key of Object.keys(hotels.images)) {
-            formData.append('images[' + key + ']', hotels.images[key])
+        const extra_images = [];
+        for (const key of Object.keys(selectedFilesObj)) {
+            extra_images.push('images[' + key + ']', selectedFilesObj[key]);
         }
-        formData.append("image", hotels.image);
-        formData.append("package_image", hotels.package_image);
-        formData.append("name", hotels.name);
-        formData.append("price", hotels.price);
-        formData.append("rating", hotels.rating);
-        formData.append("city", hotels.city);
-        formData.append("state", hotels.state);
-        formData.append("address", hotels.address);
-        formData.append("description", hotels.description);
-        formData.append("status", hotels.status);
-        formData.append("meta_title", hotels.meta_title);
-        formData.append("meta_description", hotels.meta_description);
 
-        console.log("f Data", formData);
+        // setHotels(hotels => ({ ...hotels, images: extra_images }));
 
-        axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, formData, {
+
+        const data = {
+            image: hotels.image,
+            //images: extra_images,
+            package_image: hotels.package_image,
+            name: hotels.name,
+            price: hotels.price,
+            rating: hotels.rating,
+            city: hotels.city,
+            state: hotels.state,
+            address: hotels.address,
+            description: hotels.description,
+            safari_distance: hotels.safari_distance,
+            status: hotels.status,
+            meta_title: hotels.meta_title,
+            meta_description: hotels.meta_description,
+        }
+
+
+
+        const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, data, {
             headers: {
                 'Authorization': `Bearer ` + localStorage.getItem('user')
             },
-        }).then(res => {
-            //   console.log(res);
-            //   console.log(res.data.status);
-            if (res.data.status == 200) {
-                alert.success("Data is created successfully");
-                setTimeout(() => {
-                    //window.location = '/admin/hotels';
-                }, 1000);
-
-            } else if (res.data.validation_errors) {
-                //   setTimeError();
-                // if(res.data.validation_errors.time)
-                //   setTimeError(res.data.validation_errors.time[0]);
-            } else if (res.data.status == 401) {
-                //  setDuplicateDate(true);
-            }
         });
+
+        // console.log("res", res);
+        //console.log("res data", res.data);
+        if (res.data.success == true) {
+            console.log("i amd ins")
+            swal("Data is created successfully", "success");
+            navigate('/admin/hotels');
+
+
+        } else if (res.data.validation_errors) {
+            swal(res.data.validation_errors);
+
+            //   setTimeError();
+            // if(res.data.validation_errors.time)
+            //   setTimeError(res.data.validation_errors.time[0]);
+        } else if (res.data.status == 401) {
+            //  setDuplicateDate(true);
+        }
+
     }
+
+
 
 
     return (
@@ -162,19 +180,19 @@ export default function EditHotel() {
                     <div className='mt-4'>
                         <h1 className='text-2xl text-black font-bold mb-3'>Edit Hotel</h1>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='grid grid-cols-3 gap-4 mt-2'>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Hotel name</label>
-                                <input type="text" id="hotelName" name="name" placeholder='Hotel name' value={hotels.name} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input type="text" id="hotelName" name="name" onChange={handleChange} placeholder='Hotel name' defaultValue={hotels.name} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
-                                <input type="text" id="hotelPrice" name="price" placeholder='₹' value={hotels.price} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input type="text" id="hotelPrice" onChange={handleChange} name="price" placeholder='₹' defaultValue={hotels.price} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Rating</label>
-                                <select id="hotelRating" name="rating" value={hotels.rating} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select id="hotelRating" name="rating" onChange={handleChange} defaultValue={hotels.rating} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="3">3 star</option>
                                     <option value="4">4 star</option>
@@ -183,11 +201,11 @@ export default function EditHotel() {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Location</label>
-                                <input type="text" id="location" name="city" value={hotels.city} placeholder='Location' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input type="text" id="location" name="city" onChange={handleChange} defaultValue={hotels.city} placeholder='Location' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">State</label>
-                                <select id="hotelState" name="state" value={hotels.state} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select id="hotelState" name="state" onChange={handleChange} defaultValue={hotels.state} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="UP">UP</option>
                                     <option value="Delhi">Delhi</option>
@@ -196,7 +214,7 @@ export default function EditHotel() {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Availability</label>
-                                <select id="hotelAvail" name="status" value={hotels.status} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select id="hotelAvail" name="status" onChange={handleChange} defaultValue={hotels.status} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
@@ -205,23 +223,23 @@ export default function EditHotel() {
                         </div>
                         <div className='mb-3 mt-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Address</label>
-                            <textarea id="address" name="address" rows="3" value={hotels.address} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
+                            <textarea id="address" name="address" rows="3" onChange={handleChange} defaultValue={hotels.address} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">About Hotel</label>
-                            <textarea id="aboutHotel" name="description" rows="3" value={hotels.description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About Hotel"></textarea>
+                            <textarea id="aboutHotel" name="description" rows="3" onChange={handleChange} defaultValue={hotels.description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About Hotel"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Meta title</label>
-                            <input type="text" id="hotelMeta" name="meta_title" placeholder='Meta Title' value={hotels.meta_title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            <input type="text" id="hotelMeta" name="meta_title" onChange={handleChange} placeholder='Meta Title' defaultValue={hotels.meta_title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Meta description</label>
-                            <textarea id="hotelMetaDescription" name="meta_description" rows="2" value={hotels.meta_description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Meta description"></textarea>
+                            <textarea id="hotelMetaDescription" onChange={handleChange} name="meta_description" rows="2" defaultValue={hotels.meta_description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Meta description"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Safari distance</label>
-                            <textarea id="safariDistance" name="safari_distance" value={hotels.safari_distance && hotels.safari_distance} rows="2" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Safari distance"></textarea>
+                            <textarea id="safariDistance" name="safari_distance" defaultValue={hotels.safari_distance && hotels.safari_distance} onChange={handleChange} rows="2" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Safari distance"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Thumbnail</label>
@@ -259,13 +277,13 @@ export default function EditHotel() {
 
                         </div>
                         <div className='flex'>
-                            <button type="submit" onClick={handleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
+                            <button type="submit" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
                             <Link to='/admin/hotels' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
                         </div>
                     </form>
-                </div>
-            </div>
+                </div >
+            </div >
             <FooterAdmin />
-        </div>
+        </div >
     )
 }

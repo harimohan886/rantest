@@ -8,28 +8,28 @@ const HotelAmenity = require('../Models/HotelAmenity.model');
 const HotelRoom = require('../Models/HotelRoom.model');
 
 const titleToSlug = title => {
-    let slug;
+  let slug;
 
-    // convert to lower case
-    slug = title.toLowerCase();
+  // convert to lower case
+  slug = title.toLowerCase();
 
-    // remove special characters
-    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-    // The /gi modifier is used to do a case insensitive search of all occurrences of a regular expression in a string
+  // remove special characters
+  slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+  // The /gi modifier is used to do a case insensitive search of all occurrences of a regular expression in a string
 
-    // replace spaces with dash symbols
-    slug = slug.replace(/ /gi, "-");
-    
-    // remove consecutive dash symbols 
-    slug = slug.replace(/\-\-\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-/gi, '-');
+  // replace spaces with dash symbols
+  slug = slug.replace(/ /gi, "-");
 
-    // remove the unwanted dash symbols at the beginning and the end of the slug
-    slug = '@' + slug + '@';
-    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-    return slug;
+  // remove consecutive dash symbols 
+  slug = slug.replace(/\-\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-/gi, '-');
+
+  // remove the unwanted dash symbols at the beginning and the end of the slug
+  slug = '@' + slug + '@';
+  slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+  return slug;
 };
 
 module.exports = {
@@ -48,8 +48,8 @@ module.exports = {
 
   findHotelRoomsById: async (req, res, next) => {
     try {
-      var id = req.params.id; 
-      const results = await HotelRoom.find({'hotel_id':id}, { __v: 0 }).populate('facilities');
+      var id = req.params.id;
+      const results = await HotelRoom.find({ 'hotel_id': id }, { __v: 0 }).populate('facilities');
       res.send({
         success: true,
         message: 'Data fetched',
@@ -69,18 +69,18 @@ module.exports = {
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
         res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: err
+          });
       }
-    }).catch( err => console.log(err))
+    }).catch(err => console.log(err))
 
     try {
       const slug = await titleToSlug(req.body.name);
       req.body.slug = slug;
-      
+
       if (req.files && req.files.length) {
         req.body.image = req.files[0].path;
       }
@@ -92,24 +92,23 @@ module.exports = {
 
       if (req.files && req.files.length) {
 
-      arr = req.files.filter(function(item) {
-        return item !== req.files[0]
-      })
+        arr = req.files.filter(function (item) {
+          return item !== req.files[0]
+        })
 
-      for (const image of arr) 
-      { 
-        const hotel_images = new HotelImage({
-          image:image.path,
-          hotel_id:result._id
-        });
+        for (const image of arr) {
+          const hotel_images = new HotelImage({
+            image: image.path,
+            hotel_id: result._id
+          });
 
-        const result1 = await hotel_images.save();
-        image_arr.push(result1);
+          const result1 = await hotel_images.save();
+          image_arr.push(result1);
+        }
       }
-    }
 
       const id = result._id;
-      const updates = {images:image_arr};
+      const updates = { images: image_arr };
       const options = { new: true };
 
       const result2 = await Hotel.findByIdAndUpdate(id, updates, options);
@@ -154,7 +153,7 @@ module.exports = {
   findHotelAmenitiesById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const hotel = await HotelAmenity.find({hotel_id:id}).populate('amenity');
+      const hotel = await HotelAmenity.find({ hotel_id: id }).populate('amenity');
       if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
@@ -179,6 +178,9 @@ module.exports = {
       const updates = req.body;
       const options = { new: true };
 
+
+      console.log("id", id);
+      console.log("body", updates);
       const result = await Hotel.findByIdAndUpdate(id, updates, options);
       if (!result) {
         throw createError(404, 'Hotel does not exist');
@@ -201,13 +203,12 @@ module.exports = {
     try {
       const id = req.params.id;
 
-      await HotelAmenity.find({hotel_id:id}).remove();
+      await HotelAmenity.find({ hotel_id: id }).remove();
 
-      for (const amenity of req.body.amenities) 
-      { 
-      const hotel_amenity = new HotelAmenity({
-          hotel_id:id,
-          amenity:amenity
+      for (const amenity of req.body.amenities) {
+        const hotel_amenity = new HotelAmenity({
+          hotel_id: id,
+          amenity: amenity
         });
 
         const result = await hotel_amenity.save();
@@ -230,9 +231,9 @@ module.exports = {
   deleteAHotel: async (req, res, next) => {
     const id = req.params.id;
     try {
-      await HotelAmenity.deleteMany({hotel_id:id});
-      await HotelImage.deleteMany({hotel_id:id});
-      await HotelRoom.deleteMany({hotel_id:id});
+      await HotelAmenity.deleteMany({ hotel_id: id });
+      await HotelImage.deleteMany({ hotel_id: id });
+      await HotelRoom.deleteMany({ hotel_id: id });
       const result = await Hotel.findByIdAndDelete(id);
       if (!result) {
         throw createError(404, 'Hotel does not exist.');
