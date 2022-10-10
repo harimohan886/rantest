@@ -1,4 +1,5 @@
 import React from 'react'
+import PackagePricing from './PackagePricing'
 import RoomType from './RoomType'
 
 export default function PackageRooms() {
@@ -16,6 +17,7 @@ export default function PackageRooms() {
             <div className="tab-content" id="myTabContent">
                 <div className="tab-pane active" id='tab-indian'>
                     <RoomType/>
+                    <PackagePricing/>
                 </div>
                 <div className="tab-pane fade" id='tab-foreigner'>
                     <RoomType/>

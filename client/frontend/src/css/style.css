@@ -1834,8 +1834,10 @@ border-left:1px solid #5d5d5d;
 }
 .packTab{
 	background: #f4f4f4;
-	padding: 10px 0;
+    padding: 10px 0;
     margin-top: 30px;
+    padding-bottom: 40px;
+    margin-bottom: 50px;
 }
 #roomTab .nav-item{
 	margin-left: 15px;
@@ -1875,6 +1877,126 @@ ul#roomTab {
 	font-weight: bold;
 	margin-bottom: 10px;
     margin-top: 20px;
+}
+.package-pricing{
+	background: #fff;
+    margin-top: 20px;
+}
+.package-pricing .table thead th{
+	border-color: #000;
+    font-size: 16px;
+}
+.package-pricing table tbody tr td {
+    border-color: #000!important;
+}
+.user-detail {
+    background-color: #555;
+    padding: 15px;
+    border: 1px solid #555;
+    border-top: none;
+}
+.user-detail input {
+    height: 40px;
+    border: 2px solid #555;
+    font-size: 18px;
+    color: #222;
+}
+.user-detail input:focus{
+	background: #fff;
+    box-shadow: none;
+    outline: none;
+}
+.package-Itinerary h5, .termsinfo h6 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 0;
+    font-weight: 800;
+    letter-spacing: -1.4px;
+}
+.package-Itinerary .panel-group {
+    margin-bottom: 0;
+    padding: 30px;
+}
+.package-Itinerary #accordion .panel {
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 0 15px 10px;
+}
+.package-Itinerary #accordion .panel-heading {
+    border-radius: 30px;
+    padding: 0;
+	margin-bottom: 22px;
+}
+.package-Itinerary .panel-title {
+    font-size: 20px;
+}
+.package-Itinerary #accordion .panel-title a {
+    background: #8c000d none repeat scroll 0 0;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 20px 15px 50px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
+.package-Itinerary #accordion .panel-body {
+    background: transparent none repeat scroll 0 0;
+    border-top: medium none;
+    padding: 20px 25px 10px 9px;
+    position: relative;
+}
+.package-Itinerary #accordion .panel-body p{
+	border-left: 1px dashed #8c8c8c;
+	padding-left: 25px;
+}
+.package-Itinerary #accordion .panel-title a::after, .package-Itinerary #accordion .panel-title a.collapsed::after{
+	background: #8c000d none repeat scroll 0 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 58%);
+    color: #fff;
+    content: "\f105";
+    font-family: FontAwesome;
+    font-size: 25px;
+    height: 55px;
+    left: -20px;
+    line-height: 55px;
+    position: absolute;
+    text-align: center;
+    top: -5px;
+    transition: all 0.3s ease 0s;
+    width: 55px;
+}
+.itinerary-info{
+	margin-top: 20px;
+    margin-bottom: 50px;
+}
+.itinerary-info ul li span {
+    font-size: 15px;
+    color: #222;
+    line-height: 36px;
+}
+.itinerary-info ul li span i{
+	background: #eb394a;
+    color: #fff;
+    padding: 4px 5px;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+.termsinfo p {
+    font-size: 15px;
+    text-align: left;
+    color: #222;
+    font-weight: 400;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+	margin-top: 20px;
 }
 /********End***********/
 @media (max-width: 767px){
