@@ -7,18 +7,21 @@ const {verifyUserToken} = require("../Middleware/auth");
 
 router.get('/users', [verifyUserToken], AuthController.getAllAdmins);
 
+router.get('/profile', [verifyUserToken], AuthController.profile);
+
 //Create a new product
 router.post('/login', AuthController.adminLogin);
 
 router.post('/logout', [verifyUserToken], AuthController.adminLogout);
 
 router.post('/register', AuthController.adminRegister);
+router.post('/update-password', [verifyUserToken], AuthController.resetPassword);
 
 //Get a product by id
 router.get('/:id', AuthController.findAuthById);
 
 //Update a product by id
-router.patch('/:id', AuthController.updateAAuth);
+router.patch('/profile', [verifyUserToken], AuthController.updateAAuth);
 
 //Delete a product by id
 router.delete('/:id', AuthController.deleteAAuth);

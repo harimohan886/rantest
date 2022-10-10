@@ -15,8 +15,14 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 const AuthRoute = require('./Routes/Auth.route');
+const EnquiryRoute = require('./Routes/Enquiry.route');
+const SettingRoute = require('./Routes/Setting.route');
 
 app.use('/auth', AuthRoute);
+
+app.use('/enquiries', EnquiryRoute);
+
+app.use('/settings', SettingRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

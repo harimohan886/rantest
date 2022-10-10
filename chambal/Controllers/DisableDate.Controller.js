@@ -18,6 +18,19 @@ module.exports = {
     }
   },
 
+  getDisableDates: async (req, res, next) => {
+    try {
+      const results = await DisableDate.find({}, { __v: 0 });
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: results
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   createNewDisableDate: async (req, res, next) => {
     try {
       const date = new DisableDate(req.body);

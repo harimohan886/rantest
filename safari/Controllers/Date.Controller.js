@@ -56,7 +56,6 @@ module.exports = {
   checkAvilabilityByDate: async (req, res, next) => {
     try {
       const date = await Date.find({date:req.body.date});
-      console.log(date);
       if (!date.length) {
         throw createError(404, 'Date does not exist.');
       }
@@ -66,7 +65,26 @@ module.exports = {
         data: date
       });
     } catch (error) {
-      console.log('kkk'+error.message);
+      if (error.name === 'ValidationError') {
+        next(createError(422, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
+  checkAvilability: async (req, res, next) => {
+    try {
+      const date = await Date.find({date: req.body.date ,timing: req.body.timing  , vehicle: req.body.vehicle , zone: req.body.zone});
+      if (!date.length) {
+        throw createError(404, 'Date does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'Data fateched',
+        data: date
+      });
+    } catch (error) {
       if (error.name === 'ValidationError') {
         next(createError(422, error.message));
         return;

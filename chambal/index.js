@@ -16,6 +16,9 @@ app.use('/prices', PriceRoute);
 const DisableDateRoute = require('./Routes/DisableDate.route');
 app.use('/disable-dates', DisableDateRoute);
 
+const ChambalRoute = require('./Routes/Chambal.route');
+app.use('/', ChambalRoute);
+
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

@@ -152,13 +152,68 @@ module.exports = {
     }
   },
 
+
+  resetPassword : async (req, res, next) => {
+
+    if (req.body.password !== req.body.password_confirmation) {
+
+      next(createError(400, "Pass and Confirm Password does not match!"));
+        return;
+    }
+
+    var passwordIsValid = bcrypt.compareSync(
+        req.body.current_password,
+        req.user.password
+        );
+
+    if (!passwordIsValid) {
+
+      next(createError(400, "Invalid or expired current password"));
+        return;
+    }
+    await Auth.updateOne(
+      { _id: req.user._id.toString() },
+      { $set: { password: bcrypt.hashSync(req.body.password, 8) } },
+      { new: true }
+      );
+    const user = await Auth.findById({ _id: req.user._id.toString() });
+
+    res.send({
+        success: true,
+        message: 'user fetched!',
+        data: user
+      });
+
+  },
+
+  profile: async (req, res, next) => {
+    try {
+      const auth = await Auth.findOne({ _id: req.user._id },{__v:0});
+      if (!auth) {
+        throw createError(404, 'Auth does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'user fetched!',
+        data: auth
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Auth id'));
+        return;
+      }
+      next(error);
+    }
+  },
+
   updateAAuth: async (req, res, next) => {
     try {
-      const id = req.params.id;
+      const id = req.user._id;
       const updates = req.body;
       const options = { new: true };
 
-      const result = await Auth.findByIdAndUpdate(id, updates, options);
+      const result = await Auth.findByIdAndUpdate(id.toString(), updates, options);
       if (!result) {
         throw createError(404, 'Auth does not exist');
       }
@@ -168,7 +223,6 @@ module.exports = {
       if (error instanceof mongoose.CastError) {
         return next(createError(400, 'Invalid Auth Id'));
       }
-
       next(error);
     }
   },
@@ -177,7 +231,6 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await Auth.findByIdAndDelete(id);
-      // console.log(result);
       if (!result) {
         throw createError(404, 'Auth does not exist.');
       }
