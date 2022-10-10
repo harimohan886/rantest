@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import AmenityStatus from '../../../components/Admin/Hotel/AmenityStatus';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
@@ -13,6 +13,12 @@ export default function HotelAmenities() {
     const [amenities, setAmenities] = useState([]);
     const [pageCount, setpageCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const params = useParams();
+    let hotel_id = '';
+
+    if (params.id) {
+        hotel_id = params.id;
+    }
 
 
 
@@ -94,7 +100,7 @@ export default function HotelAmenities() {
                             <Link to='/admin/add-hotel-amenity' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Amenity</Link>
                         </div>
                     </div>
-                    <AmenityStatus amenities={amenities} />
+                    {hotel_id && <AmenityStatus hotelId={hotel_id} amenities={amenities} />}
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>

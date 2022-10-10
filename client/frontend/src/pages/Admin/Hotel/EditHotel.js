@@ -227,23 +227,23 @@ export default function EditHotel() {
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Thumbnail</label>
                             <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
 
-                            {hotels.image && <img src={(`${hotels.image.substring(hotels.image.indexOf('/uploads'), hotels.image.length)}`)} width="300px" />}
+                            {hotels.image && <img src={(`${hotels.image.substring(hotels.image.indexOf('/uploads'), hotels.image.length)}`)} alte="" width="300px" />}
 
                         </div>
 
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Cover Image</label>
                             <input onChange={handlePackageImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${hotels.image.substring(hotels.package_image.indexOf('/uploads'), hotels.package_image.length)}`)} width="300px" />}
+                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${hotels.image.substring(hotels.package_image.indexOf('/uploads'), hotels.package_image.length)}`)} alt="" width="300px" />}
 
                         </div>
                         <div className='mb-3 multiImages'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
-                            {/* {hotels.images &&
+                            {hotels.images &&
                                 hotels.images?.map((im, i) => (
-                                    <img key={i} src={(`${im.image?.substring(im.image?.indexOf('/uploads'), im.image.length)}`)} width="300px" />
+                                    <img key={i} src={(`${im.image?.substring(im.image?.indexOf('/uploads'), im.image.length)}`)} alte="" width="300px" />
                                 ))
-                            } */}
+                            }
 
                             <div className='mb-3 multiImages'>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>

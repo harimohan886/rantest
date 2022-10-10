@@ -122,7 +122,7 @@ export default function HotelListing() {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+                'Authorization': `Bearer ` + localStorage.getItem('user')
             },
         }).then(result => {
             swal("Data is deleted", "success");
@@ -214,10 +214,10 @@ export default function HotelListing() {
                                             <Link to={`/admin/edit-hotel/${item._id}`} className="text-sm py-2 px-4 font-normal whitespace-no-wrap bg-transparent text-black block" style={{ borderBottom: "1px solid #ddd" }}>
                                                 Edit
                                             </Link>
-                                            <Link to="/admin/hotel-amenities" className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
+                                            <Link to={`/admin/hotel-amenities/${item._id}`} className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
                                                 Hotel Amenities
                                             </Link>
-                                            <Link to='/admin/hotel-rooms' className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
+                                            <Link to={`/admin/hotel-rooms/${item._id}`} className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
                                                 Hotel Rooms
                                             </Link>
 

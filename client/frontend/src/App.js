@@ -42,7 +42,8 @@ import ViewSafariBooking from './pages/Admin/BookingManagement/ViewSafariBooking
 import PackageBooking from './pages/Admin/BookingManagement/PackageBooking';
 import ViewPackageBooking from './pages/Admin/BookingManagement/ViewPackageBooking';
 import Hotels from './pages/Admin/Hotel/Hotels';
-import HotelAmenities from './pages/Admin/Hotel/HotelAmenities';
+import Amenities from './pages/Admin/Hotel/HotelAmenities';
+import HotelAmenitiesUpdate from './pages/Admin/Hotel/HotelAmenities';
 import AddAmenity from './pages/Admin/Hotel/AddAmenity';
 import EditAmenity from './pages/Admin/Hotel/EditAmenity';
 import AddHotel from './pages/Admin/Hotel/AddHotel';
@@ -135,15 +136,17 @@ function App() {
           <Route exact path="/admin/hotels" element={<Hotels />} />
           <Route exact path="/admin/add-hotel" element={<AddHotel />} />
           <Route exact path="/admin/edit-hotel/:id" element={<EditHotel />} />
-          <Route exact path="/admin/hotel-amenities" element={<HotelAmenities />} />
+          <Route exact path="/admin/amenities" element={<Amenities />} />
+          <Route exact path="/admin/hotel-amenities/:id" element={<HotelAmenitiesUpdate />} />
+
           <Route exact path="/admin/add-hotel-amenity" element={<AddAmenity />} />
           <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
           <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
           <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
           <Route exact path="/admin/edit-room-facility/:id" element={<EditFacility />} />
-          <Route exact path="/admin/hotel-rooms" element={<HotelRooms />} />
-          <Route exact path="/admin/add-room" element={<AddRoom />} />
-          <Route exact path="/admin/edit-room" element={<EditRoom />} />
+          <Route exact path="/admin/hotel-rooms/:id" element={<HotelRooms />} />
+          <Route exact path="/admin/add-room/:id" element={<AddRoom />} />
+          <Route exact path="/admin/edit-room/:id" element={<EditRoom />} />
           <Route exact path="/admin/packages" element={<Packages />} />
           <Route exact path="/admin/add-package" element={<AddPackage />} />
           <Route exact path="/admin/edit-package" element={<EditPackage />} />
