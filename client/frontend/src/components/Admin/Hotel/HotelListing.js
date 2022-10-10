@@ -217,7 +217,7 @@ export default function HotelListing() {
                                             <Link to={`/admin/hotel-amenities/${item._id}`} className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
                                                 Hotel Amenities
                                             </Link>
-                                            <Link to='/admin/hotel-rooms' className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
+                                            <Link to={`/admin/hotel-rooms/${item._id}`} className="text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-black" style={{ borderBottom: "1px solid #eee" }}>
                                                 Hotel Rooms
                                             </Link>
 
