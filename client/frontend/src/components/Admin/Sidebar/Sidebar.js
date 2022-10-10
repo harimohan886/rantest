@@ -165,7 +165,7 @@ export default function Sidebar() {
                             <Link to='/admin/hotels' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotels</Link>
                           </li>
                           <li className="items-center">
-                            <Link to='/admin/hotel-amenities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Amenities</Link>
+                            <Link to='/admin/amenities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Amenities</Link>
                           </li>
                           <li className="items-center">
                             <Link to='/admin/room-facilities' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Room Facilities</Link>
