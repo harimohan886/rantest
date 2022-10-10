@@ -57,11 +57,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.get('/list', (req, res) => res.send("In Chambal list"));
+app.get('/list', (req, res) => res.send("In Package list"));
 
-app.get('/', (req, res) => res.send("In chambal info page"));
+app.get('/', (req, res) => res.send("In package info page"));
 
 
 app.listen(process.env.PORT || 5001, () => {
-  console.log("Chambal server is running on port! ", process.env.PORT);
+  console.log("Package server is running on port! ", process.env.PORT);
 });
