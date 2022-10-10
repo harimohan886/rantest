@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useContext } from 'react';
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { AuthContext } from '../../../context/admin/AuthContext';
+import { loginOut } from "../../../pages/Admin/Auth/apiCalls";
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 export default function AdminNavbar() {
+  const { user, isFetching, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  const logout = (e) => {
+
+    e.preventDefault();
+    localStorage.setItem("user", "");
+
+    loginOut(user, dispatch);
+    swal("Successfully logout", "success");
+
+    navigate("/admin/login");
+
+
+  }
   return (
     <>
       {/* Navbar */}
@@ -9,7 +30,8 @@ export default function AdminNavbar() {
         <div className="w-full float-right md:px-10 px-4">
           <ul className="flex-col md:flex-row float-right hidden md:flex">
             <li className="text-lg mr-2 mt-2">Abhishek Sinha</li>
-            <li><UserDropdown/></li>
+            <li onClick={logout}>Logout</li>
+            <li><UserDropdown /></li>
           </ul>
         </div>
       </nav>

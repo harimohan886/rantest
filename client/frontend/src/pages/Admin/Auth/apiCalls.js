@@ -17,3 +17,21 @@ export const loginCall = async (userCredential, dispatch) => {
     }
 
 }
+
+export const loginOut = async (userCredential, dispatch) => {
+
+    dispatch({ type: "LOGIN_START" });
+
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/admin/auth/logout`, userCredential);
+
+        dispatch({ type: "LOGIN_OUT" });
+
+
+    } catch (err) {
+
+        // dispatch({ type: "LOGIN_FAILURE", payload: err });
+
+    }
+
+}

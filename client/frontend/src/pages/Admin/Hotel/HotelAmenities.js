@@ -111,7 +111,7 @@ export default function HotelAmenities() {
                                 <td className='border border-slate-300 text-center'>{item._id}</td>
                                 <td className='border border-slate-300 text-center'>{item.amenity}</td>
                                 <td className='border border-slate-300 text-center'>
-                                    <img style={{ margin: "0 auto" }} src={`../image/icons/${item.image}`} alt='swimming pool' />
+                                    <img style={{ margin: "0 auto" }} src={(`${item.image.substring(item.image.indexOf('/uploads'), item.image.length)}`)} alt='swimming pool' width="50" />
                                 </td>
                                 <td className='border border-slate-300 text-center'>
                                     <label htmlFor={`default-toggle-${item._id}`} className="inline-flex relative w-full cursor-pointer">

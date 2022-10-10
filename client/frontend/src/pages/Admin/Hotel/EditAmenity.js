@@ -7,8 +7,6 @@ import axios from "axios";
 import swal from 'sweetalert';
 
 
-
-
 export default function EditAmenity() {
     const navigate = useNavigate();
     const params = useParams();
@@ -16,8 +14,7 @@ export default function EditAmenity() {
     const [amenity, setAmenity] = useState('');
     const [status, setStatus] = useState(1);
     const [image, setImage] = useState('');
-    const [src, setSrc] = useState('');
-    const placeholder = '../../image/icons/swimming-pool.png';
+    const [src, setSrc] = useState('../../image/icons/swimming-pool.png');
 
 
 
@@ -41,7 +38,7 @@ export default function EditAmenity() {
         try {
             const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`, data);
 
-            navigate('/admin/amenities');
+            navigate('/admin/hotel-amenities');
 
             swal(res.data.message, "success").then(() => {
 
@@ -105,7 +102,7 @@ export default function EditAmenity() {
                         <div className='mb-6'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Amenity Logo</label>
                             <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={handleInputImageChange} />
-                            <img src={src || placeholder} alt={amenity} className="img-responsive mt-2" width="85" height="85" />
+                            <img src={(`${src.substring(src.indexOf('/uploads'), src.length)}`)} alt={amenity} className="img-responsive mt-2" width="85" height="85" />
 
 
                         </div>
