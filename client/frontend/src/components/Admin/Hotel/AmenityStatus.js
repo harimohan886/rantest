@@ -64,8 +64,6 @@ export default function AmenityStatus({ hotelId, amenities }) {
         ))
     }
 
-    console.log("data uplod", data);
-
 
     axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${hotelId}/amenities`, data, {
       headers: {

@@ -144,9 +144,9 @@ function App() {
           <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
           <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
           <Route exact path="/admin/edit-room-facility/:id" element={<EditFacility />} />
-          <Route exact path="/admin/hotel-rooms" element={<HotelRooms />} />
-          <Route exact path="/admin/add-room" element={<AddRoom />} />
-          <Route exact path="/admin/edit-room" element={<EditRoom />} />
+          <Route exact path="/admin/hotel-rooms/:id" element={<HotelRooms />} />
+          <Route exact path="/admin/add-room/:id" element={<AddRoom />} />
+          <Route exact path="/admin/edit-room/:id" element={<EditRoom />} />
           <Route exact path="/admin/packages" element={<Packages />} />
           <Route exact path="/admin/add-package" element={<AddPackage />} />
           <Route exact path="/admin/edit-package" element={<EditPackage />} />

@@ -5,7 +5,19 @@ const Price = require('../Models/Price.model');
 
 module.exports = {
   getAllPrices: async (req, res, next) => {
-    console.log(req.body);
+    try {
+      const results = await Price.find({}, { __v: 0 });
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: results
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
+  getBookingPrices: async (req, res, next) => {
     try {
       const results = await Price.find({}, { __v: 0 });
       res.send({

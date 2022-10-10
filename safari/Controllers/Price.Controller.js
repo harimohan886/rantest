@@ -18,6 +18,21 @@ module.exports = {
     }
   },
 
+
+  getBookingPrices: async (req, res, next) => {
+    var type = req.query.type || 'default';
+    try {
+      const results = await Price.find({type: type}, { __v: 0 });
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: results
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   createNewPrice: async (req, res, next) => {
     try {
       const price = new Price(req.body);
