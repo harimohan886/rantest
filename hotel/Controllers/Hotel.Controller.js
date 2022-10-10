@@ -131,7 +131,7 @@ module.exports = {
   findHotelById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const hotel = await Hotel.findById(id);
+      const hotel = await Hotel.findById(id).populate('images');;
       if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
