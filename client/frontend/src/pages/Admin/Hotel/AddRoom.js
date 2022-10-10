@@ -26,8 +26,9 @@ export default function AddRoom() {
 
     const HandleSubmit = () => {
         formValues.map(item => (
-            faci.push(item.facility)
+            faci.push({ facility: item.facility })
         ))
+
 
 
         const formData = new FormData();
@@ -39,6 +40,7 @@ export default function AddRoom() {
         formData.append("facility", faci);
 
         console.log("facilil", faci);
+
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotel-rooms/`, formData, {
             headers: {

@@ -7,28 +7,28 @@ const HotelRoomFacility = require('../Models/HotelRoomFacility.model');
 const HotelAmenity = require('../Models/HotelAmenity.model');
 
 const titleToSlug = title => {
-    let slug;
+  let slug;
 
-    // convert to lower case
-    slug = title.toLowerCase();
+  // convert to lower case
+  slug = title.toLowerCase();
 
-    // remove special characters
-    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-    // The /gi modifier is used to do a case insensitive search of all occurrences of a regular expression in a string
+  // remove special characters
+  slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+  // The /gi modifier is used to do a case insensitive search of all occurrences of a regular expression in a string
 
-    // replace spaces with dash symbols
-    slug = slug.replace(/ /gi, "-");
-    
-    // remove consecutive dash symbols 
-    slug = slug.replace(/\-\-\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-\-/gi, '-');
-    slug = slug.replace(/\-\-/gi, '-');
+  // replace spaces with dash symbols
+  slug = slug.replace(/ /gi, "-");
 
-    // remove the unwanted dash symbols at the beginning and the end of the slug
-    slug = '@' + slug + '@';
-    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-    return slug;
+  // remove consecutive dash symbols 
+  slug = slug.replace(/\-\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-/gi, '-');
+
+  // remove the unwanted dash symbols at the beginning and the end of the slug
+  slug = '@' + slug + '@';
+  slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+  return slug;
 };
 
 module.exports = {
@@ -71,22 +71,21 @@ module.exports = {
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
         res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: err
+          });
       }
-    }).catch( err => console.log(err))
+    }).catch(err => console.log(err))
 
     try {
 
       const datas = [];
 
-      for (const facility of req.body.facility) 
-      { 
+      for (const facility of req.body.facility) {
         const hotel_room_facility = new HotelRoomFacility({
-          facility:facility.facility,
+          facility: facility.facility,
         });
 
         var result1 = await hotel_room_facility.save();
@@ -94,7 +93,7 @@ module.exports = {
         datas.push(result1._id);
       }
 
-      if (req.files && req.files.length) {        
+      if (req.files && req.files.length) {
         req.body.image = req.files[0].path;
       }
       req.body.facilities = datas;
@@ -104,7 +103,7 @@ module.exports = {
       res.send({
         success: true,
         message: 'Data inserted',
-        data:result,
+        data: result,
       });
     } catch (error) {
       if (error.name === 'ValidationError') {
@@ -176,22 +175,21 @@ module.exports = {
             $in: fac.facilities
           }
         });
-      }else{
+      } else {
         await HotelRoomFacility.deleteOne({
           "_id": fac.facilities
         });
       }
 
-      for (const facility of req.body.facility) 
-      { 
+      for (const facility of req.body.facility) {
         const hotel_room_facility = new HotelRoomFacility({
-          facility:facility.facility,
+          facility: facility.facility,
         });
 
         var result1 = await hotel_room_facility.save();
 
         datas.push(result1._id);
-      }  
+      }
       if (req.files && req.files.length) {
         req.body.image = req.files[0].path;
       }
@@ -223,13 +221,12 @@ module.exports = {
     try {
       const id = req.params.id;
 
-      await HotelRoomFacility.find({hotel_id:id}).remove();
+      await HotelRoomFacility.find({ hotel_id: id }).remove();
 
-      for (const amenity of req.body.amenities) 
-      { 
-      const hotel_amenity = new HotelRoomFacility({
-          hotel_id:id,
-          amenity_id:amenity
+      for (const amenity of req.body.amenities) {
+        const hotel_amenity = new HotelRoomFacility({
+          hotel_id: id,
+          amenity_id: amenity
         });
 
         const result = await hotel_amenity.save();
@@ -254,7 +251,7 @@ module.exports = {
     try {
 
       const fac = await HotelRoom.findById(id);
-      
+
       if (fac.facilities.length > 1) {
 
         await HotelRoomFacility.deleteMany({
@@ -262,7 +259,7 @@ module.exports = {
             $in: fac.facilities
           }
         });
-      }else{
+      } else {
         await HotelRoomFacility.deleteOne({
           "_id": fac.facilities
         });

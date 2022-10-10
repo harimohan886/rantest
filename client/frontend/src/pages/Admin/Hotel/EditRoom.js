@@ -15,6 +15,8 @@ export default function EditRoom() {
 
     const [details, setDetails] = useState([]);
     const [facilities, setFacilities] = useState([]);
+    const [formValues, setFormValues] = useState([{ facility: [] }]);
+
 
     const [name, setName] = useState();
     const [hotelId, setHotelId] = useState();
@@ -46,7 +48,6 @@ export default function EditRoom() {
         GetDetails();
     }, []);
 
-    const [formValues, setFormValues] = useState([{ facility: [] }]);
     let handleChange = (i, e) => {
         let newFormValues = [...formValues];
         newFormValues[i]['facility'] = e.target.value;
@@ -69,23 +70,33 @@ export default function EditRoom() {
     }
 
 
-    var faci = [];
+    const faci = [];
 
     const HandleSubmit = () => {
         formValues.map(item => (
-            faci.push(item.facility)
+            faci.push({ facility: item.facility })
         ))
 
 
-        const formData = new FormData();
+        const formData = {
+            hotel_id: hotelId,
+            image: image,
+            room: name,
+            status: status,
+            facility: faci,
+        }
 
-        formData.append("hotel_id", hotelId);
-        formData.append("image", image);
-        formData.append("room", name);
-        formData.append("status", status);
-        formData.append("facility", faci);
+
+        // const formData = new FormData();
+
+        // formData.append("hotel_id", hotelId);
+        // formData.append("image", image);
+        // formData.append("room", name);
+        // formData.append("status", status);
+        // formData.append("facility", faci);
 
         console.log("facilil", faci);
+        console.log("formData", formData);
 
         axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotel-rooms/${params.id}`, formData, {
             headers: {
@@ -94,9 +105,9 @@ export default function EditRoom() {
         }).then(res => {
             if (res.data.success === true) {
                 swal("Data is updated successfully", "success");
-                setTimeout(() => {
-                    window.location = `/admin/hotel-rooms/${params.id}`;
-                }, 1000);
+                // setTimeout(() => {
+                //     window.location = `/admin/hotel-rooms/${params.id}`;
+                // }, 1000);
 
             } else if (res.data.validation_errors) {
                 if (res.data.validation_erros.name) {
