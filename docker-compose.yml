@@ -83,9 +83,9 @@ services:
 
     volumes:
       - .:/app/
-      - /app/payment/node_modules
+      - /app/package/node_modules
     env_file:
-      - ./payment/.env.dev
+      - ./package/.env.dev
   payment:
     build:
       dockerfile: Dockerfile
