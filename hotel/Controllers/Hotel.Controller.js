@@ -35,12 +35,28 @@ const titleToSlug = title => {
 module.exports = {
   getAllHotels: async (req, res, next) => {
     try {
-      const results = await Hotel.find({}, { __v: 0 }).populate('images');
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
+
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 15;
+      var query = {}
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var totalPosts = await Hotel.find({}).countDocuments().exec();
+
+      Hotel.find({}, {},
+        query, function (err, data) {
+          if (err) {
+            response = { "error": true, "message": "Error fetching data" + err };
+          } else {
+            response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 }).populate('images');
     } catch (error) {
       console.log(error.message);
     }
@@ -49,12 +65,30 @@ module.exports = {
   findHotelRoomsById: async (req, res, next) => {
     try {
       var id = req.params.id;
-      const results = await HotelRoom.find({ 'hotel_id': id }, { __v: 0 }).populate('facilities');
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
+
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 15;
+      var query = {}
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var totalPosts = await HotelRoom.find({ 'hotel_id': id }).countDocuments().exec();
+
+
+      HotelRoom.find({ 'hotel_id': id }, {__v:0},
+        query, function (err, data) {
+          if (err) {
+            response = { "error": true, "message": "Error fetching data" + err };
+          } else {
+            response = { "success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 }).populate('facilities');
+
     } catch (error) {
       console.log(error.message);
     }
