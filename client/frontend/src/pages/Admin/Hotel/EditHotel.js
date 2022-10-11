@@ -116,7 +116,7 @@ export default function EditHotel() {
             extra_images.push('images[' + key + ']', selectedFilesObj[key]);
         }
 
-        setHotels(hotels => ({ ...hotels, images: [] }));
+        setHotels(hotels => ({ ...hotels, images: extra_images }));
 
         try {
 
