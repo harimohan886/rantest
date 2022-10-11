@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
+
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-import RoomFacility from './RoomFacility';
 
 
 
@@ -85,15 +85,6 @@ export default function EditRoom() {
             status: status,
             facility: faci,
         }
-
-
-        // const formData = new FormData();
-
-        // formData.append("hotel_id", hotelId);
-        // formData.append("image", image);
-        // formData.append("room", name);
-        // formData.append("status", status);
-        // formData.append("facility", faci);
 
         console.log("facilil", faci);
         console.log("formData", formData);

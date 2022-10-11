@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
+
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-import RoomFacility from './RoomFacility';
-import swal from 'sweetalert';
-
 
 
 
@@ -30,16 +29,14 @@ export default function AddRoom() {
         ))
 
 
+        const formData = {
+            hotel_id: hotelId,
+            image: image,
+            room: name,
+            status: status,
+            facility: faci,
+        }
 
-        const formData = new FormData();
-
-        formData.append("hotel_id", params.id);
-        formData.append("image", image);
-        formData.append("room", name);
-        formData.append("status", status);
-        formData.append("facility", faci);
-
-        console.log("facilil", faci);
 
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotel-rooms/`, formData, {
