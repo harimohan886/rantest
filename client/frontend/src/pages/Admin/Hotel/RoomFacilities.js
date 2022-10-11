@@ -84,9 +84,9 @@ export default function RoomFacilities() {
                         </thead>
                         <tbody>
 
-                            {facilities?.map((item) => (
+                            {facilities?.map((item, index) => (
                                 <tr key={item._id}>
-                                    <td className='border border-slate-300 text-center'>{item._id}</td>
+                                    <td className='border border-slate-300 text-center'>{index + 1}</td>
                                     <td className='border border-slate-300 text-center'>{item.facility}</td>
                                     <td className='border border-slate-300 text-center'>
                                         <label htmlFor={`default-toggle-${item._id}`} className="inline-flex relative w-full cursor-pointer">
