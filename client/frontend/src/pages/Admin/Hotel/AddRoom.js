@@ -30,7 +30,7 @@ export default function AddRoom() {
 
 
         const formData = {
-            hotel_id: hotelId,
+            hotel_id: params.id,
             image: image,
             room: name,
             status: status,
