@@ -111,10 +111,10 @@ export default function HotelAmenities() {
                                 <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                             </tr>
                         </thead>
-                        <tbody>{amenities?.map((item) => (
+                        <tbody>{amenities?.map((item, index) => (
 
                             <tr key={item._id}>
-                                <td className='border border-slate-300 text-center'>{item._id}</td>
+                                <td className='border border-slate-300 text-center'>{index + 1}</td>
                                 <td className='border border-slate-300 text-center'>{item.amenity}</td>
                                 <td className='border border-slate-300 text-center'>
                                     <img style={{ margin: "0 auto" }} src={(`${item.image.substring(item.image.indexOf('/uploads'), item.image.length)}`)} alt='swimming pool' width="50" />

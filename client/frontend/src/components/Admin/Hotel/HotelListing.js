@@ -191,7 +191,7 @@ export default function HotelListing() {
                         {hotels && hotels.map((item, index) => (
 
                             <tr key={index} >
-                                <td className='border border-slate-300 text-center'>{item._id}</td>
+                                <td className='border border-slate-300 text-center'>{index + 1}</td>
                                 <td className='border border-slate-300 text-center'>{item.name}</td>
                                 <td className='border border-slate-300 text-center'>₹{item.price}</td>
                                 <td className='border border-slate-300 text-center'>{item.city}</td>
