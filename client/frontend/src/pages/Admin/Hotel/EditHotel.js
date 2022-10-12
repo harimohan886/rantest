@@ -39,7 +39,9 @@ export default function EditHotel() {
 
         const getHotels = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`);
-            const result = res.data.data.hotel;
+            const result = res.data.data;
+
+            console.log("infdo ", result);
 
             setHotels({
                 name: result.name,
@@ -141,7 +143,7 @@ export default function EditHotel() {
 
             if (res.data.success == true) {
                 swal("Data is updated successfully", "success");
-                //navigate('/admin/hotels');
+                navigate('/admin/hotels');
 
 
             } else if (res.data.validation_errors) {
