@@ -1,6 +1,6 @@
 stages:
   - deploy
-
+  - build
 before_script:
   - apt-get update -qq
   - apt-get install -qq git
@@ -18,5 +18,16 @@ deploy_staging:
     url: 38.242.196.238
   script:
     - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
+  only:
+    - main
+
+build_staging:
+  stage: build
+  environment:
+    name: staging
+    url: 38.242.196.238
+  script:
+    - ssh root@38.242.196.238 "cd ranthambore/ && docker-compose up --build -d"
+  when: manual
   only:
     - main

@@ -72,15 +72,6 @@ export default function Header() {
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {/* <div className="navbar-header">
-                <button aria-expanded="false" className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                </button>
-                
-            </div> */}
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul className="nav navbar-nav">
                     <li className='nav-item nav-link'>

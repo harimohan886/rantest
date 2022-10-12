@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function PackagePricing() {
   return (
@@ -117,7 +118,7 @@ export default function PackagePricing() {
                 </div>
             </div>
             <div className="text-center">
-                <button type="submit" href="https://jimcorbett.in/corbett-package-booking?1" form="packageBookingFormStandard" className="btn btn-warning btn-lg">Proceed</button>
+                <Link to='/book-package' type="submit" className="btn btn-warning btn-lg">Proceed</Link>
             </div>
         </div>
     </div>
