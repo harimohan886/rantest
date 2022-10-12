@@ -117,7 +117,7 @@ export default function HotelListing() {
         setHotels(commentsFormServer.hotels.data);
     };
 
-    const HandleDelete = (id) => {
+    const handleDelete = (id) => {
         axios.delete(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${id}`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -221,7 +221,7 @@ export default function HotelListing() {
                                                 Hotel Rooms
                                             </Link>
 
-                                            <button type="button" className="text-left border-b-1 border-black text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-danger">
+                                            <button type="button" onClick={(e) => handleDelete(item._id)} className="text-left border-b-1 border-black text-sm py-2 px-4 font-normal block whitespace-no-wrap bg-transparent text-danger">
                                                 Delete
                                             </button>
                                         </div>

@@ -51,7 +51,8 @@ export default function AddHotel() {
     const [meta_title, setMetaTitle] = useState();
     const [meta_description, setMetaDescription] = useState();
 
-    const HandleSaveData = () => {
+    const HandleSaveData = (e) => {
+        e.preventDefault();
 
         const formData = new FormData();
         formData.append("image", image);
