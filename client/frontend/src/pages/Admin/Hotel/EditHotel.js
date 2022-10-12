@@ -141,7 +141,7 @@ export default function EditHotel() {
 
             if (res.data.success == true) {
                 swal("Data is updated successfully", "success");
-                navigate('/admin/hotels');
+                //navigate('/admin/hotels');
 
 
             } else if (res.data.validation_errors) {
@@ -288,7 +288,7 @@ export default function EditHotel() {
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
                             {hotels.images &&
                                 hotels.images?.map((im, i) => (
-                                    <img key={i} src={(`${im.image?.substring(im.image?.indexOf('/uploads'), im.image.length)}`)} alte="" width="300px" />
+                                    <img nn="kk" key={i} src={(`/${im.image?.substring(im.image?.indexOf('uploads'), im.image.length)}`)} alte="" width="300px" />
                                 ))
                             }
 
