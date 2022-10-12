@@ -57,6 +57,7 @@ export default function EditHotel() {
                 package_image: result.package_image,
                 images: result.images,
 
+
             });
 
 
@@ -111,23 +112,35 @@ export default function EditHotel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const extra_images = [];
+        const formData = new FormData();
+        formData.append("image", hotels.image);
         for (const key of Object.keys(selectedFilesObj)) {
-            extra_images.push('images[' + key + ']', selectedFilesObj[key]);
+            formData.append('images[' + key + ']', selectedFilesObj[key])
         }
+        formData.append("package_image", hotels.package_image);
+        formData.append("name", hotels.name);
+        formData.append("price", hotels.price);
+        formData.append("rating", hotels.rating);
+        formData.append("city", hotels.city);
+        formData.append("state", hotels.state);
+        formData.append("address", hotels.address);
+        formData.append("description", hotels.description);
+        formData.append("status", hotels.status);
+        formData.append("meta_title", hotels.meta_title);
+        formData.append("meta_description", hotels.meta_description);
+        console.log("formdata", formData);
 
-        setHotels(hotels => ({ ...hotels, images: extra_images }));
 
         try {
 
-            const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, hotels, {
+            const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`, formData, {
                 headers: {
                     'Authorization': `Bearer ` + localStorage.getItem('user')
                 },
             });
 
             if (res.data.success == true) {
-                swal("Data is created successfully", "success");
+                swal("Data is updated successfully", "success");
                 navigate('/admin/hotels');
 
 
