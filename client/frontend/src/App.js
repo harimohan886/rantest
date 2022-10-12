@@ -76,6 +76,7 @@ import AddPackageCategory from './pages/Admin/Packages/AddPackageCategory';
 import EditPackageCategory from './pages/Admin/Packages/EditPackageCategory';
 import { AuthContext } from './context/admin/AuthContext';
 import PackageDetails from './pages/frontend/Packages/PackageDetails';
+import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 
 
 
@@ -104,6 +105,7 @@ function App() {
         <Route exact path='/hotel-details' element={<HotelDetails />} />
         <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
         <Route exact path='/package-details' element={<PackageDetails />} />
+        <Route exact path='/book-package' element={<FinalPackageBooking />} />
 
 
         {/* Admin routing starts here */}

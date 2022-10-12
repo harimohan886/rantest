@@ -2028,6 +2028,102 @@ ul#roomTab {
     padding-right: 30px;
 	margin-top: 20px;
 }
+.packagebannersection{
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.banner-packageinfo {
+    text-align: center;
+    padding: 120px 30px;
+}
+.banner-packageinfo h1 {
+    font-weight: 800;
+    font-size: 45px;
+    color: #fff;
+    text-shadow: 4px 5px 5px #000;
+}
+.booking-detail-online {
+    padding-top: 40px;
+}
+.traveler-D h2 {
+    color: #222;
+    font-size: 27px;
+    font-weight: 700;
+    text-align: center;
+	margin-top: 20px;
+    margin-bottom: 20px;
+	letter-spacing: -1px;
+}
+.traveler-D .table>tbody>tr>td {
+    font-size: 16px;
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
+.traveler-D .table>tbody>tr>td input {
+    height: 40px;
+    border: 2px solid #ccc;
+    font-size: 17px;
+}
+.package-D {
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    box-shadow: 0px 3px 6px #00000047;
+    padding: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.package-D h2 {
+    color: #222;
+    font-size: 27px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+	letter-spacing: -1px;
+    padding-top: 20px;
+}
+.package-D .table>tbody>tr>td {
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding-top: 2px;
+}
+.package-D .table>tbody>tr>td.payable {
+    background-color: #eb394a;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+	padding-top: 7px;
+    padding-bottom: 7px;
+}
+.paynowoption {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.paynowoption p#show-message {
+    font-size: 22px;
+    color: #222;
+}
+.paynowoption .usertype {
+    position: relative;
+}
+.paynowoption .usertype label > input + .forcustom {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    padding: 12px 20px;
+}
+.paynowoption .usertype label > input + .forcustom {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    padding: 12px 20px;
+}
+.package-booking-details{
+	padding-bottom: 30px;
+}
+
 /********End***********/
 @media (max-width: 767px){
 #chambalmainbanner{
@@ -2997,6 +3093,27 @@ line-height: 26px;
   .termsinfo p{
 	font-size: 13px;
 	padding-left: 0;
+  }
+  .banner-packageinfo{
+	padding: 75px 30px;
+  }
+  .package-D{
+	margin-top: 30px;
+  }
+  .paynowoption .usertype label > input + .forcustom{
+	font-size: 17px;
+  }
+  .paynowoption .usertype{
+	margin-bottom: 0;
+  }
+  .paynowoption .usertype .radio label{
+	margin-bottom: 40px;
+  }
+  .banner-packageinfo h1{
+	font-size: 32px;
+  }
+  .paynowoption{
+	margin-bottom: 0;
   }
 }
 
