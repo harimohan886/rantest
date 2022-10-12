@@ -20,3 +20,14 @@ deploy_staging:
     - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
   only:
     - main
+
+build_staging:
+  stage: build
+  environment:
+    name: staging
+    url: 38.242.196.238
+  script:
+    - ssh root@38.242.196.238 "cd ranthambore/ && docker -up build && exit"
+  when: manual
+  only:
+    - main
