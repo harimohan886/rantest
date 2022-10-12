@@ -39,7 +39,7 @@ export default function EditHotel() {
 
         const getHotels = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/${params.id}`);
-            const result = res.data.data;
+            const result = res.data.data.hotel;
 
             setHotels({
                 name: result.name,
