@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const HotelSchema = new Schema({
 	name: {
 		type: String,
-		unique: true,
 		required: true,
 		index: true,
 	},
@@ -50,6 +49,9 @@ const HotelSchema = new Schema({
 		type: Number
 	},
 	status: {
+		type: Number,
+	},
+	availability: {
 		type: Number,
 	},
 	createdBy: {

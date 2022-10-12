@@ -110,6 +110,95 @@ module.exports = {
     }
   },
 
+
+  getAllHotelsFront: async (req, res, next) => {
+    try {
+
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 15;
+      var query = {}
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      if (req.query.filter_name && !req.query.filter_rating && !req.query.filter_availability) {
+        var search = {
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
+        var search = {
+          rating: req.query.filter_rating
+        }
+      }else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
+        var search = {
+          availability: req.query.filter_availability
+        }
+      } else if (req.query.filter_availability && req.query.filter_rating && req.query.filter_name) {
+        var search = {
+          availability: req.query.filter_availability,
+          rating: req.query.filter_rating,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
+        var search = {
+          availability: req.query.filter_availability,
+          rating: req.query.filter_rating,
+        }
+      }else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
+        var search = {
+          rating: req.query.filter_rating,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
+        var search = {
+          availability: req.query.filter_availability,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else {
+        var search = {};
+      }
+
+      var totalPosts = await Hotel.find(search).countDocuments().exec();
+
+      const data = await Hotel.find(search, {}, query).sort({ $natural: -1 }).populate('images');
+
+      let CategoryList = [];
+
+      for (let hotel of data) {
+        CategoryList.push({
+          _id: hotel._id,
+          name: hotel.name,
+          slug: hotel.slug,
+          images: hotel.images,
+          address: hotel.address,
+          city: hotel.city,
+          state: hotel.state,
+          rating: hotel.rating,
+          price: hotel.price,
+          description: hotel.description,
+          meta_title: hotel.meta_title,
+          meta_description: hotel.meta_description,
+          availability: hotel.availability,
+          amenities : await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity'),
+          rooms : await HotelRoom.find({hotel_id:hotel._id}).populate('facilities')
+        })
+      }
+
+      if (!data) {
+        response = { "error": true, "message": "Error fetching data" + err };
+      } else {
+        response = { "error": false, "message": 'data fetched', 'data': CategoryList, 'page': page, 'total': totalPosts, perPage: size };
+      }
+      res.json(response);
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   getAllHotelsCount: async (req, res, next) => {
     try {
 
@@ -258,7 +347,7 @@ module.exports = {
       res.send({
         success: true,
         message: 'Data fetched',
-        data: data
+        data: hotel
       });
     } catch (error) {
       console.log(error.message);
@@ -328,7 +417,9 @@ module.exports = {
     try {
       const id = req.params.id;
 
-      const image_arr = [];
+      const hotel = await Hotel.findById(id);
+
+      const image_arr = hotel.images;
 
       if (req.files && req.files.length) {
         req.body.image = req.files[0].path;

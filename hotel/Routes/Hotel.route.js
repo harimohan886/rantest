@@ -18,7 +18,10 @@ var uploads = multer({storage:storage});
 const HotelController = require('../Controllers/Hotel.Controller');
 
 //Get a list of all products
+router.get('/dashboard', HotelController.getAllHotelsCount);
+
 router.get('/', HotelController.getAllHotels);
+router.get('/front', HotelController.getAllHotelsFront);
 
 //Create a new product
 router.post('/', uploads.any(), HotelController.createNewHotel);
@@ -26,12 +29,14 @@ router.post('/', uploads.any(), HotelController.createNewHotel);
 //Get a product by id
 router.get('/:id', HotelController.findHotelById);
 
+router.get('/by-slug/:slug', HotelController.findHotelBySlug);
+
 router.get('/:id/rooms', HotelController.findHotelRoomsById);
 
 router.get('/:id/amenities', HotelController.findHotelAmenitiesById);
 
 //Update a product by id
-router.patch('/:id', HotelController.updateAHotel);
+router.patch('/:id', uploads.any(), HotelController.updateAHotel);
 
 router.patch('/:id/amenities', HotelController.updateHotelAmenities);
 
