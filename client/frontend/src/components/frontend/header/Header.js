@@ -84,25 +84,28 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul className="nav navbar-nav">
                     <li className='nav-item nav-link'>
-                        <Link className="active" to="/online-ranthambore-safari-booking">Online Safari booking</Link>
+                        <a className="active" href="/online-ranthambore-safari-booking">Online Safari booking</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link to="/online-Chambal-moter-boat-safari-booking">Chambal Safari booking</Link>
+                        <a href="/online-Chambal-moter-boat-safari-booking">Chambal Safari booking</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link data-target="#myModal" data-toggle="modal" href="#!">Current Booking</Link>
+                        <a data-target="#myModal" data-toggle="modal" href="#">Current Booking</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link to="/about-us">About Ranthambore</Link>
+                        <a href="/about-us">About Ranthambore</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link to="https://dailytourandtravel.com/hotel" target="_blank">Ranthambore Hotels</Link>
+                        <a href="/hotels">Ranthambore Hotels</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link href="https://blog.ranthamboretigerreserve.in/" target="_blank">Blog</Link>
+                        <a href="/ranthambore-packages">Ranthambore Packages</a>
                     </li>
                     <li className='nav-item nav-link'>
-                        <Link to="/contact-us">Contact Us</Link>
+                        <a href="https://blog.ranthamboretigerreserve.in/" target="_blank">Blog</a>
+                    </li>
+                    <li className='nav-item nav-link'>
+                        <a href="/contact-us">Contact Us</a>
                     </li>
                 </ul>
             </div>
