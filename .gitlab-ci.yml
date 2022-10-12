@@ -1,6 +1,6 @@
 stages:
   - deploy
-
+  - build
 before_script:
   - apt-get update -qq
   - apt-get install -qq git
