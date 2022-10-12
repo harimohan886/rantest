@@ -20,7 +20,7 @@ export default function HotelListing() {
     const HandleFilter = async () => {
         try {
 
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}?filter_name=${name}&filter_rating=${rating}&filter_state=${city}&filter_availability=${status}`, {
+            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}&filter_name=${name}&filter_rating=${rating}&filter_state=${city}&filter_availability=${status}`, {
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
@@ -63,6 +63,10 @@ export default function HotelListing() {
         element.classList.add('hidden');
         element.classList.remove('block');
         setDropdownPopoverShow(false);
+    }
+
+    const HandleReset = () => {
+        window.location = '/admin/hotels';
     }
 
 
@@ -149,15 +153,15 @@ export default function HotelListing() {
                             <option value="5">5 star</option>
                         </select>
                     </div>
-                    <div className='form-group'>
+                    {/* <div className='form-group'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location</label>
                         <select id="hotelLocation" onChange={(e) => setCity(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
-                            <option>Sasan Gir</option>
-                            <option>Devalia Safari Park</option>
-                            <option>Kankai Temple</option>
+                            <option value="Sasan Gir">Sasan Gir</option>
+                            <option value="Devalia Safari Park">Devalia Safari Park</option>
+                            <option value="Kankai Temple">Kankai Temple</option>
                         </select>
-                    </div>
+                    </div> */}
                     <div className='form-group'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Availability</label>
                         <select id="hotelAvail" onChange={(e) => setStatus(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -170,6 +174,12 @@ export default function HotelListing() {
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
                         <button type='button' onClick={HandleFilter} className="min-150 text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             <i className="fas fa-filter mr-2"></i> Filter
+                        </button>
+                    </div>
+                    <div className='form-group'>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
+                        <button type='button' onClick={HandleReset} className="min-150 text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <i className="fas fa-filter mr-2"></i> Reset
                         </button>
                     </div>
                 </form>

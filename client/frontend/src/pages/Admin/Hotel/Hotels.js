@@ -4,7 +4,6 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 //import Pagination from '../../../components/Admin/Footer/Pagination';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
-import FilterHotel from '../../../components/Admin/Hotel/FilterHotel';
 import HotelListing from '../../../components/Admin/Hotel/HotelListing';
 
 export default function Hotels() {
@@ -22,9 +21,7 @@ export default function Hotels() {
               <Link to='/admin/add-hotel' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Hotel</Link>
             </div>
           </div>
-          <FilterHotel />
           <HotelListing />
-          {/* <Pagination /> */}
         </div>
       </div>
       <FooterAdmin />
