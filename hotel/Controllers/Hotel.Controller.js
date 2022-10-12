@@ -32,6 +32,17 @@ const titleToSlug = title => {
   return slug;
 };
 
+
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Hotel.find({name:name}).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  }else{
+    return false;
+  }
+};
+
 module.exports = {
   getAllHotels: async (req, res, next) => {
     try {
@@ -46,9 +57,46 @@ module.exports = {
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var totalPosts = await Hotel.find({}).countDocuments().exec();
+      if (req.query.filter_name && !req.query.filter_rating && !req.query.filter_availability) {
+        var search = {
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
+        var search = {
+          rating: req.query.filter_rating
+        }
+      }else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
+        var search = {
+          availability: req.query.filter_availability
+        }
+      } else if (req.query.filter_availability && req.query.filter_rating && req.query.filter_name) {
+        var search = {
+          availability: req.query.filter_availability,
+          rating: req.query.filter_rating,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
+        var search = {
+          availability: req.query.filter_availability,
+          rating: req.query.filter_rating,
+        }
+      }else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
+        var search = {
+          rating: req.query.filter_rating,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
+        var search = {
+          availability: req.query.filter_availability,
+          name: new RegExp(req.query.filter_name, 'i')
+        }
+      }else {
+        var search = {};
+      }
 
-      Hotel.find({}, {},
+      var totalPosts = await Hotel.find(search).countDocuments().exec();
+
+      Hotel.find(search, {},
         query, function (err, data) {
           if (err) {
             response = { "error": true, "message": "Error fetching data" + err };
@@ -57,6 +105,23 @@ module.exports = {
           }
           res.json(response);
         }).sort({ $natural: -1 }).populate('images');
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
+  getAllHotelsCount: async (req, res, next) => {
+    try {
+
+      var totalPosts = await Hotel.find({}).countDocuments().exec();
+
+      return res.status(412)
+      .send({
+        success: true,
+        message: 'Data fetched!',
+        hotel_count: totalPosts
+      });
+
     } catch (error) {
       console.log(error.message);
     }
@@ -102,7 +167,7 @@ module.exports = {
 
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
-        res.status(412)
+        return res.status(412)
           .send({
             success: false,
             message: 'Validation failed',
@@ -110,6 +175,17 @@ module.exports = {
           });
       }
     }).catch(err => console.log(err))
+
+    var checkCount = await checkNameIsUnique(req.body.name);
+
+    if (checkCount) {
+      return res.status(412)
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: 'duplicate name'
+          });
+    }
 
     try {
       const slug = await titleToSlug(req.body.name);
@@ -169,10 +245,52 @@ module.exports = {
       if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
+
+      const HotelAmenities = await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity');
+      const HotelRooms = await HotelRoom.find({hotel_id:hotel._id}).populate('facilities');
+      
+      const data = {};
+
+      data.hotel= hotel;
+      data.hotel_amenities= HotelAmenities;
+      data.hotel_rooms= HotelRooms;
+      
       res.send({
         success: true,
         message: 'Data fetched',
-        data: hotel
+        data: data
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Hotel id'));
+        return;
+      }
+      next(error);
+    }
+  },
+
+  findHotelBySlug: async (req, res, next) => {
+    const slug = req.params.slug;
+    try {
+      const hotel = await Hotel.findOne({slug:slug}).populate('images');
+      if (!hotel) {
+        throw createError(404, 'Hotel does not exist.');
+      }
+
+      const HotelAmenities = await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity');
+      const HotelRooms = await HotelRoom.find({hotel_id:hotel._id}).populate('facilities');
+      
+      const data = {};
+
+      data.hotel= hotel;
+      data.hotel_amenities= HotelAmenities;
+      data.hotel_rooms= HotelRooms;
+
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: data,
       });
     } catch (error) {
       console.log(error.message);
@@ -209,10 +327,35 @@ module.exports = {
   updateAHotel: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const updates = req.body;
+
+      const image_arr = [];
+
+      if (req.files && req.files.length) {
+        req.body.image = req.files[0].path;
+      }
+
+      if (req.files && req.files.length) {
+
+        const arr = req.files.filter(function (item) {
+          return item !== req.files[0]
+        })
+
+        for (const image of arr) {
+          const hotel_images = new HotelImage({
+            image: image.path,
+            hotel_id: id
+          });
+
+          const result1 = await hotel_images.save();
+          image_arr.push(result1);
+        }
+      }
+
+      req.body.images = image_arr;
+
       const options = { new: true };
 
-      const result = await Hotel.findByIdAndUpdate(id, updates, options);
+      const result = await Hotel.findByIdAndUpdate(id, req.body, options);
       if (!result) {
         throw createError(404, 'Hotel does not exist');
       }
