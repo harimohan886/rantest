@@ -27,7 +27,7 @@ build_staging:
     name: staging
     url: 38.242.196.238
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/ && docker -up build && exit"
+    - ssh root@38.242.196.238 "cd ranthambore/ && docker-compose up --build && exit"
   when: manual
   only:
     - main
