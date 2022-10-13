@@ -82,7 +82,9 @@ import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 
 function App() {
 
-  const { user } = useContext(AuthContext);
+  const { user, accessToken } = useContext(AuthContext);
+
+  console.log("uinofo", user);
 
   return (
     <Router>
@@ -112,10 +114,10 @@ function App() {
 
 
 
-        (<Route path='/admin/login' element={user ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+        (<Route path='/admin/login' element={accessToken ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+    
 
-
-        {user && <>
+        {accessToken && <>
 
           <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
           <Route exact path="/admin/gir-events" element={<GirEvents />} />

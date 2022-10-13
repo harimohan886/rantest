@@ -137,7 +137,8 @@ export default function EditRoom() {
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Image</label>
                             <input onChange={HandleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                            {image && <img src={(`${image.substring(image.indexOf('/uploads'), image.length)}`)} alt={name} width="300px" />}
+                            {(typeof image === 'string') &&  image && <img src={(`${image.substring(image.indexOf('/uploads'), image.length)}`)} alt={name} width="300px" />}
+
                         </div>
                         <div className='mb-3'>
                             <h2 className='text-black text-2xl mb-2 mt-8'>Room facilities</h2>
