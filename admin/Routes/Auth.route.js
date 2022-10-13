@@ -12,7 +12,7 @@ router.get('/profile', [verifyUserToken], AuthController.profile);
 //Create a new product
 router.post('/login', AuthController.adminLogin);
 
-router.post('/logout', [verifyUserToken], AuthController.adminLogout);
+router.get('/logout', [verifyUserToken], AuthController.adminLogout);
 
 router.post('/register', AuthController.adminRegister);
 router.post('/update-password', [verifyUserToken], AuthController.resetPassword);
