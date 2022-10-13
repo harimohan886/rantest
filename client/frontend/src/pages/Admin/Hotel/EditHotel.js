@@ -42,33 +42,12 @@ export default function EditHotel() {
             const result = res.data.data;
 
             console.log("infdo ", result);
-
-            setHotels({
-                name: result.name,
-                price: result.price,
-                rating: result.rating,
-                city: result.city,
-                state: result.state,
-                safari_distance: result.safari_distance,
-                address: result.address,
-                description: result.description,
-                meta_title: result.meta_title,
-                meta_description: result.meta_description,
-                status: result.status,
-                image: result.image,
-                package_image: result.package_image,
-                images: result.images,
-
-
-            });
-
-
+            setHotels(result);
         }
-
 
         getHotels();
 
-    }, [params.id]);
+    }, []);
 
 
     const handleImageChange = (e) => {
@@ -146,19 +125,12 @@ export default function EditHotel() {
                 navigate('/admin/hotels');
 
 
-            } else if (res.data.validation_errors) {
-                swal(res.data.validation_errors);
-                //   setTimeError();
-                // if(res.data.validation_errors.time)
-                //   setTimeError(res.data.validation_errors.time[0]);
-            } else if (res.data.status == 401) {
-                //  setDuplicateDate(true);
             }
 
 
         } catch (err) {
 
-            swal(err);
+            swal(err.response.data.message, "error");
 
 
         }
@@ -276,14 +248,15 @@ export default function EditHotel() {
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Thumbnail</label>
                             <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
 
-                            {hotels.image && <img src={(`${hotels.image.substring(hotels.image.indexOf('/uploads'), hotels.image.length)}`)} alte="" width="300px" />}
+                            {(typeof hotels.image === 'string') && hotels.image && <img src={(`${hotels.image.substring(hotels.image.indexOf('/uploads'), hotels.image.length)}`)} alt="" width="300px" />}
+
 
                         </div>
 
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Cover Image</label>
                             <input onChange={handlePackageImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${hotels.image.substring(hotels.package_image.indexOf('/uploads'), hotels.package_image.length)}`)} alt="" width="300px" />}
+                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${hotels.package_image.substring(hotels.package_image.indexOf('/uploads'), hotels.package_image.length)}`)} alt="" width="300px" />}
 
                         </div>
                         <div className='mb-3 multiImages'>

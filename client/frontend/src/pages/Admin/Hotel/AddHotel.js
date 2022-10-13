@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
@@ -11,6 +11,8 @@ import axios from 'axios';
 export default function AddHotel() {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [selectedFilesObj, setSelectedFilesObj] = useState([]);
+    const navigate = useNavigate();
+
     const handleImageChange = (e) => {
         if (e.target.files) {
             setSelectedFilesObj(e.target.files);
@@ -51,7 +53,7 @@ export default function AddHotel() {
     const [meta_title, setMetaTitle] = useState();
     const [meta_description, setMetaDescription] = useState();
 
-    const HandleSaveData = (e) => {
+    const HandleSaveData = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -72,24 +74,41 @@ export default function AddHotel() {
         formData.append("meta_description", meta_description);
 
 
+        console.log(formData);
 
-        axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData).then(res => {
-            console.log(res);
-            console.log(res.data.status);
-            if (res.data.status == 200) {
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData);
+
+            if (res.data.success == true) {
                 swal("Hotel is added successfully", "success");
-                setTimeout(() => {
-                    window.location = '/admin/hotels';
-                }, 1000);
+                navigate('/admin/hotels');
 
-            } else if (res.data.validation_errors) {
-                // setTimeError();
-                // if (res.data.validation_errors.time)
-                //setTimeError(res.data.validation_errors.time[0]);
-            } else if (res.data.status == 401) {
-                //  setDuplicateDate(true);
+
+            } else {
+                swal("Something went wrong", "error");
+
             }
-        });
+
+        } catch (err) {
+            swal(err.response.data.message, "error");
+
+        }
+
+        // axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData).then(res => {
+
+        //     if (res.data.status == 200) {
+        //         swal("Hotel is added successfully", "success");
+        //         navigate('/admin/hotels');
+
+
+        //     } else if (res.data.validation_errors) {
+        //         // setTimeError();
+        //         // if (res.data.validation_errors.time)
+        //         //setTimeError(res.data.validation_errors.time[0]);
+        //     } else if (res.data.status == 401) {
+        //         //  setDuplicateDate(true);
+        //     }
+        // });
     }
 
 
