@@ -36,10 +36,10 @@ const titleToSlug = title => {
 
 async function checkNameIsUnique(name) {
 
-  totalPosts = await Hotel.find({name:name}).countDocuments().exec();
+  totalPosts = await Hotel.find({ name: name }).countDocuments().exec();
   if (totalPosts > 0) {
     return true;
-  }else{
+  } else {
     return false;
   }
 };
@@ -62,11 +62,11 @@ module.exports = {
         var search = {
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
+      } else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
         var search = {
           rating: req.query.filter_rating
         }
-      }else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
+      } else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
         var search = {
           availability: req.query.filter_availability
         }
@@ -76,22 +76,22 @@ module.exports = {
           rating: req.query.filter_rating,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
+      } else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
         var search = {
           availability: req.query.filter_availability,
           rating: req.query.filter_rating,
         }
-      }else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
+      } else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
         var search = {
           rating: req.query.filter_rating,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
+      } else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
         var search = {
           availability: req.query.filter_availability,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else {
+      } else {
         var search = {};
       }
 
@@ -129,11 +129,11 @@ module.exports = {
         var search = {
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
+      } else if (!req.query.filter_name && req.query.filter_rating && !req.query.filter_availability) {
         var search = {
           rating: req.query.filter_rating
         }
-      }else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
+      } else if (!req.query.filter_name && !req.query.filter_rating && req.query.filter_availability) {
         var search = {
           availability: req.query.filter_availability
         }
@@ -143,22 +143,22 @@ module.exports = {
           rating: req.query.filter_rating,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
+      } else if (req.query.filter_availability && req.query.filter_rating && !req.query.filter_name) {
         var search = {
           availability: req.query.filter_availability,
           rating: req.query.filter_rating,
         }
-      }else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
+      } else if (req.query.filter_rating && req.query.filter_name && !req.query.filter_availability) {
         var search = {
           rating: req.query.filter_rating,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
+      } else if (req.query.filter_availability && req.query.filter_name && !req.query.filter_rating) {
         var search = {
           availability: req.query.filter_availability,
           name: new RegExp(req.query.filter_name, 'i')
         }
-      }else {
+      } else {
         var search = {};
       }
 
@@ -172,6 +172,7 @@ module.exports = {
         CategoryList.push({
           _id: hotel._id,
           name: hotel.name,
+          image: hotel.image,
           slug: hotel.slug,
           images: hotel.images,
           address: hotel.address,
@@ -183,8 +184,8 @@ module.exports = {
           meta_title: hotel.meta_title,
           meta_description: hotel.meta_description,
           availability: hotel.availability,
-          amenities : await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity'),
-          rooms : await HotelRoom.find({hotel_id:hotel._id}).populate('facilities')
+          amenities: await HotelAmenity.find({ hotel_id: hotel._id }).populate('amenity'),
+          rooms: await HotelRoom.find({ hotel_id: hotel._id }).populate('facilities')
         })
       }
 
@@ -206,11 +207,11 @@ module.exports = {
       var totalPosts = await Hotel.find({}).countDocuments().exec();
 
       return res.status(412)
-      .send({
-        success: true,
-        message: 'Data fetched!',
-        hotel_count: totalPosts
-      });
+        .send({
+          success: true,
+          message: 'Data fetched!',
+          hotel_count: totalPosts
+        });
 
     } catch (error) {
       console.log(error.message);
@@ -234,7 +235,7 @@ module.exports = {
       var totalPosts = await HotelRoom.find({ 'hotel_id': id }).countDocuments().exec();
 
 
-      HotelRoom.find({ 'hotel_id': id }, {__v:0},
+      HotelRoom.find({ 'hotel_id': id }, { __v: 0 },
         query, function (err, data) {
           if (err) {
             response = { "error": true, "message": "Error fetching data" + err };
@@ -270,11 +271,11 @@ module.exports = {
 
     if (checkCount) {
       return res.status(412)
-          .send({
-            success: false,
-            message: 'Validation failed',
-            data: 'duplicate name'
-          });
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: 'duplicate name'
+        });
     }
 
     const package_image = req.files.filter(function (item) {
@@ -350,15 +351,15 @@ module.exports = {
         throw createError(404, 'Hotel does not exist.');
       }
 
-      const HotelAmenities = await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity');
-      const HotelRooms = await HotelRoom.find({hotel_id:hotel._id}).populate('facilities');
-      
+      const HotelAmenities = await HotelAmenity.find({ hotel_id: hotel._id }).populate('amenity');
+      const HotelRooms = await HotelRoom.find({ hotel_id: hotel._id }).populate('facilities');
+
       const data = {};
 
-      data.hotel= hotel;
-      data.hotel_amenities= HotelAmenities;
-      data.hotel_rooms= HotelRooms;
-      
+      data.hotel = hotel;
+      data.hotel_amenities = HotelAmenities;
+      data.hotel_rooms = HotelRooms;
+
       res.send({
         success: true,
         message: 'Data fetched',
@@ -377,19 +378,19 @@ module.exports = {
   findHotelBySlug: async (req, res, next) => {
     const slug = req.params.slug;
     try {
-      const hotel = await Hotel.findOne({slug:slug}).populate('images');
+      const hotel = await Hotel.findOne({ slug: slug }).populate('images');
       if (!hotel) {
         throw createError(404, 'Hotel does not exist.');
       }
 
-      const HotelAmenities = await HotelAmenity.find({hotel_id:hotel._id}).populate('amenity');
-      const HotelRooms = await HotelRoom.find({hotel_id:hotel._id}).populate('facilities');
-      
+      const HotelAmenities = await HotelAmenity.find({ hotel_id: hotel._id }).populate('amenity');
+      const HotelRooms = await HotelRoom.find({ hotel_id: hotel._id }).populate('facilities');
+
       const data = {};
 
-      data.hotel= hotel;
-      data.hotel_amenities= HotelAmenities;
-      data.hotel_rooms= HotelRooms;
+      data.hotel = hotel;
+      data.hotel_amenities = HotelAmenities;
+      data.hotel_rooms = HotelRooms;
 
       res.send({
         success: true,

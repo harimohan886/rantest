@@ -4,7 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-export default function HotelGallery() {
+export default function HotelGallery({ hotel }) {
+  console.log("gallery", hotel);
+
+  const detail = hotel.hotel;
+
   return (
     <Swiper
       modules={[Navigation, A11y]}
@@ -14,18 +18,13 @@ export default function HotelGallery() {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
-      <SwiperSlide>
-        <img src="../image/hotel1.jpeg" className="img-responsive" alt='Hotel'/>
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="../image/hotel2.jpeg" className="img-responsive" alt='Hotel'/>
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="../image/hotel3.jpeg" className="img-responsive" alt='Hotel'/>
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src="../image/hotel4.jpeg" className="img-responsive" alt='Hotel'/>
-      </SwiperSlide>
+
+      {detail && detail?.images.map((item, index) => (
+        <SwiperSlide>
+          <img src={(`${item.image.substring(item.image.indexOf('/uploads'), item.length)}`)} className="img-responsive" alt='' />
+        </SwiperSlide>
+
+      ))}
     </Swiper>
   )
 }
