@@ -1,4 +1,8 @@
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
+
 
 export const loginCall = async (userCredential, dispatch) => {
 
@@ -33,8 +37,20 @@ export const loginOut = async (accessToken, dispatch) => {
 
         dispatch({ type: "LOGIN_OUT" });
 
+        localStorage.setItem("accessToken", "");
+        localStorage.setItem("user", "");
+
+        swal("Successfully logout", "success");
+
+        return true;
+
+       // navigate("/admin/login");
+
 
     } catch (err) {
+        swal("something went wrong, Please trt again", "error");
+
+        return false;
 
         // dispatch({ type: "LOGIN_FAILURE", payload: err });
 

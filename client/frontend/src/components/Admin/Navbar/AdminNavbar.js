@@ -14,13 +14,13 @@ export default function AdminNavbar() {
   const logout = (e) => {
 
     e.preventDefault();
-    localStorage.setItem("accessToken", "");
-    localStorage.setItem("user", "");
+    const res = loginOut(accessToken,  dispatch);
 
-    loginOut(accessToken,  dispatch);
-    swal("Successfully logout", "success");
+    if(res) {
+      navigate("/admin/login");
 
-    navigate("/admin/login");
+
+    }
 
 
   }

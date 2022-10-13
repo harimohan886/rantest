@@ -1,10 +1,16 @@
 import { createContext, useReducer, useEffect } from "react";
 import AuthReducer from "./AuthReducer";
+let isUser = localStorage.getItem('user');
 
+if(localStorage.getItem('user')){
+    isUser = JSON.parse(localStorage.getItem('user'));
+} else {
+    isUser = null;
 
+}
 
 const INITIAL_STATE = {
-    user:   JSON.parse(localStorage.getItem('user')) || null,
+    user:   isUser,
     accessToken: localStorage.getItem('accessToken') || null,
     isFetching: false,
     error: false,
