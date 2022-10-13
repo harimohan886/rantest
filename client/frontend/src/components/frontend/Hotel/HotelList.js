@@ -68,9 +68,6 @@ export default function HotelList() {
         setHotels(commentsFormServer.hotels.data);
     };
 
-    console.log("h info", hotels);
-
-
 
 
     return (
@@ -79,7 +76,7 @@ export default function HotelList() {
             <>
                 {hotels && hotels.map((item, index) => (
 
-                    <div className="row H-listrow">
+                    <div key={index} className="row H-listrow">
                         <div className="col-sm-5 col-xs-12 padding-left">
                             <div className="image img-wrapper">
                                 <Link to="/hotel-details">
@@ -101,9 +98,9 @@ export default function HotelList() {
                                         <div className="Resort">
                                             <ul className="list-inline">
 
-                                                {item.amenities && item.amenities.map((list) => (
+                                                {item.amenities && item.amenities.map((list, lindex) => (
 
-                                                    <li className='list-inline-item'>
+                                                    <li key={lindex} className='list-inline-item'>
                                                         <span> {list.amenity.amenity}</span>
                                                     </li>
 

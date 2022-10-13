@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 export default function HotelGallery({ hotel }) {
-  console.log("gallery", hotel);
 
   const detail = hotel.hotel;
 
@@ -15,12 +14,12 @@ export default function HotelGallery({ hotel }) {
       spaceBetween={50}
       navigation
       loop={true}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => ''}
+      onSlideChange={() => ''}
     >
 
       {detail && detail?.images.map((item, index) => (
-        <SwiperSlide>
+        <SwiperSlide key={index}>
           <img src={(`${item.image.substring(item.image.indexOf('/uploads'), item.length)}`)} className="img-responsive" alt='' />
         </SwiperSlide>
 

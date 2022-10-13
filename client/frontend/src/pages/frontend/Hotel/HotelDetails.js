@@ -20,9 +20,6 @@ export default function HotelDetails() {
         const getHotel = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/by-slug/${params.id}`);
 
-
-            console.log("hotesl indo", res.data.data);
-
             setHotel(res.data.data);
 
         }
@@ -31,7 +28,6 @@ export default function HotelDetails() {
 
     }, [params.id]);
 
-    console.log("hotesl indo", hotel);
 
     return (
         <div className='hotel-detail-page'>
