@@ -43,4 +43,6 @@ router.patch('/:id/amenities', HotelController.updateHotelAmenities);
 //Delete a product by id
 router.delete('/:id', HotelController.deleteAHotel);
 
+router.delete('/image/:id', HotelController.deleteHotelImage);
+
 module.exports = router;

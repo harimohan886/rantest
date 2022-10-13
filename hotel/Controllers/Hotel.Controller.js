@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
+fs = require('fs')
 
 const Hotel = require('../Models/Hotel.model');
 const HotelImage = require('../Models/HotelImage.model');
@@ -276,33 +277,48 @@ module.exports = {
           });
     }
 
+    const package_image = req.files.filter(function (item) {
+      return item.fieldname == 'package_image'
+    });
+    if (req.files && package_image && package_image[0]) {
+      req.body.package_image = package_image[0].path;
+    }else{
+      req.body.package_image = '';
+    }
+
+
+    const image = req.files.filter(function (item) {
+      return item.fieldname == 'image'
+    });
+    if (req.files && image && image[0]) {
+      req.body.image = image[0].path;
+    }else{
+      req.body.image = '';
+    }
+
+    const imagesArr = req.files.filter(function (item) {
+      return (item.fieldname !== 'image' && item.fieldname !== 'package_image')
+    });
+
     try {
       const slug = await titleToSlug(req.body.name);
       req.body.slug = slug;
-
-      if (req.files && req.files.length) {
-        req.body.image = req.files[0].path;
-      }
 
       const hotel = new Hotel(req.body);
       const result = await hotel.save();
 
       const image_arr = [];
 
-      if (req.files && req.files.length) {
+      if (req.files && req.files.length && imagesArr) {
 
-        arr = req.files.filter(function (item) {
-          return item !== req.files[0]
-        })
-
-        for (const image of arr) {
+        for (const image of imagesArr) {
           const hotel_images = new HotelImage({
             image: image.path,
             hotel_id: result._id
           });
 
           const result1 = await hotel_images.save();
-          image_arr.push(result1);
+          image_arr.push(result1._id);
         }
       }
 
@@ -311,7 +327,6 @@ module.exports = {
       const options = { new: true };
 
       const result2 = await Hotel.findByIdAndUpdate(id, updates, options);
-
 
       res.send({
         success: true,
@@ -421,24 +436,40 @@ module.exports = {
 
       const image_arr = hotel.images;
 
-      if (req.files && req.files.length) {
-        req.body.image = req.files[0].path;
+      const package_image = req.files.filter(function (item) {
+        return item.fieldname == 'package_image'
+      });
+
+      if (req.files && package_image && package_image[0]) {
+        req.body.package_image = package_image[0].path;
+      }else{
+        req.body.package_image = '';
       }
 
-      if (req.files && req.files.length) {
+      const image = req.files.filter(function (item) {
+        return item.fieldname == 'image'
+      });
 
-        const arr = req.files.filter(function (item) {
-          return item !== req.files[0]
-        })
+      if (req.files && image && image[0]) {
+        req.body.image = image[0].path;
+      }else{
+        req.body.image = '';
+      }
 
-        for (const image of arr) {
+      const imagesArr = req.files.filter(function (item) {
+        return (item.fieldname !== 'image' && item.fieldname !== 'package_image')
+      });
+
+      if (req.files && req.files.length && imagesArr) {
+
+        for (const image of imagesArr) {
           const hotel_images = new HotelImage({
             image: image.path,
             hotel_id: id
           });
 
           const result1 = await hotel_images.save();
-          image_arr.push(result1);
+          image_arr.push(result1._id);
         }
       }
 
@@ -500,6 +531,34 @@ module.exports = {
       await HotelImage.deleteMany({ hotel_id: id });
       await HotelRoom.deleteMany({ hotel_id: id });
       const result = await Hotel.findByIdAndDelete(id);
+      if (!result) {
+        throw createError(404, 'Hotel does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'Data deleted',
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Hotel id'));
+        return;
+      }
+      next(error);
+    }
+  },
+
+  deleteHotelImage: async (req, res, next) => {
+    const id = req.params.id;
+    try {
+
+      const hotel_image = await HotelImage.findById(id);
+
+      if (fs.existsSync(hotel_image.image)) {
+        fs.unlinkSync(hotel_image.image);
+      }
+
+      const result = await HotelImage.findByIdAndDelete(id);
       if (!result) {
         throw createError(404, 'Hotel does not exist.');
       }

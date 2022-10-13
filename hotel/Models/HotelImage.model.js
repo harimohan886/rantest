@@ -25,5 +25,5 @@ const HotelImageSchema = new Schema({
 	},
 });
 
-const HotelImage = mongoose.model('HotelImage', HotelImageSchema,'hotel_images');
+const HotelImage = mongoose.model('hotel_images', HotelImageSchema);
 module.exports = HotelImage;

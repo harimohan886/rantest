@@ -16,7 +16,7 @@ const HotelSchema = new Schema({
 		type: String,
 	},
 	images: [
-	{ type: mongoose.Schema.Types.ObjectId, ref: 'HotelImage' }
+	{ type: mongoose.Schema.Types.ObjectId, ref: 'hotel_images' }
 	],
 	package_image: {
 		type: String,
