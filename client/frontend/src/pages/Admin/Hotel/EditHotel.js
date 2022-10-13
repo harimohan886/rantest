@@ -68,6 +68,39 @@ export default function EditHotel() {
         }
     };
 
+    const handleImageDelete = async (id) => {
+
+       
+
+        try {
+
+            const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/image/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ` + localStorage.getItem('user')
+                },
+            });
+
+            if (res.data.success === true) {
+
+                setHotels(current => ({
+                    ...current,
+                    images: current.images.filter(gimage => {
+                        return gimage._id !== id;
+                    })
+        
+                })
+                );
+
+                swal("Image has been successfully deleted", "success");
+            }
+
+        } catch (err) {
+
+            swal(err.response.data.message, "error");
+
+        }
+    }
+
 
     const renderPhotos = (source) => {
         return source.map((photo) => {
@@ -261,11 +294,17 @@ export default function EditHotel() {
                         </div>
                         <div className='mb-3 multiImages'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
-                            {hotels.images &&
-                                hotels.images?.map((im, i) => (
-                                    <img nn="kk" key={i} src={(`/${im.image?.substring(im.image?.indexOf('uploads'), im.image.length)}`)} alte="" width="300px" />
-                                ))
-                            }
+                            <div className="result">
+                                {hotels.images &&
+                                    hotels.images?.map((im, i) => (
+                                        <div>
+                                            <img key={i} src={(`/${im.image?.substring(im.image?.indexOf('uploads'), im.image.length)}`)} alt={i} width="300px" />
+                                            <span><button onClick={(e) => handleImageDelete(im._id)} type="button" className="text-white bg-hotel-maroon rounded  sm:w-auto px-1.5 py-0.5 text-center">x</button>
+                                            </span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
 
                             <div className='mb-3 multiImages'>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
