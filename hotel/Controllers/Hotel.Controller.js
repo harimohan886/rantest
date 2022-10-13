@@ -449,7 +449,7 @@ module.exports = {
 
         req.body.package_image = package_image[0].path;
       }else{
-        req.body.package_image = '';
+        req.body.package_image = hotel.package_image;
       }
 
       const image = req.files.filter(function (item) {
@@ -462,7 +462,7 @@ module.exports = {
         }
         req.body.image = image[0].path;
       }else{
-        req.body.image = '';
+        req.body.image = hotel.image;
       }
 
       const imagesArr = req.files.filter(function (item) {
