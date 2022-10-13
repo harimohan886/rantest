@@ -442,6 +442,11 @@ module.exports = {
       });
 
       if (req.files && package_image && package_image[0]) {
+
+        if (fs.existsSync(hotel.package_image)) {
+          fs.unlinkSync(hotel.package_image);
+        }
+
         req.body.package_image = package_image[0].path;
       }else{
         req.body.package_image = '';
@@ -452,6 +457,9 @@ module.exports = {
       });
 
       if (req.files && image && image[0]) {
+        if (fs.existsSync(hotel.image)) {
+          fs.unlinkSync(hotel.image);
+        }
         req.body.image = image[0].path;
       }else{
         req.body.image = '';
@@ -528,9 +536,33 @@ module.exports = {
   deleteAHotel: async (req, res, next) => {
     const id = req.params.id;
     try {
+
+      const hotel = await Hotel.findById(id);
+
+      const hotel_images = await HotelImage.find({hotel_id:id});
+
+      for (const images of hotel_images) 
+      {
+        if (fs.existsSync(images.image)) 
+        {
+          fs.unlinkSync(images.image);
+        }
+      }      
+
+      if (fs.existsSync(hotel.package_image)) 
+      {
+        fs.unlinkSync(hotel.package_image);
+      }
+
+      if (fs.existsSync(hotel.image)) 
+      {
+        fs.unlinkSync(hotel.image);
+      }
+
       await HotelAmenity.deleteMany({ hotel_id: id });
       await HotelImage.deleteMany({ hotel_id: id });
       await HotelRoom.deleteMany({ hotel_id: id });
+      
       const result = await Hotel.findByIdAndDelete(id);
       if (!result) {
         throw createError(404, 'Hotel does not exist.');
