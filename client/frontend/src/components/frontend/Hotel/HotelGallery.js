@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 export default function HotelGallery({ hotel }) {
 
   const detail = hotel.hotel;
+  const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
 
   return (
     <Swiper
@@ -20,7 +22,7 @@ export default function HotelGallery({ hotel }) {
 
       {detail && detail?.images.map((item, index) => (
         <SwiperSlide key={index}>
-          <img src={(`${item.image.substring(item.image.indexOf('/uploads'), item.length)}`)} className="img-responsive" alt='' />
+          <img src={(`${HSURL}/${item.image}`)} className="img-responsive" alt='' />
         </SwiperSlide>
 
       ))}

@@ -14,6 +14,8 @@ export default function HotelList() {
 
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
+    const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
     //let limit = 10;
 
 
@@ -80,7 +82,7 @@ export default function HotelList() {
                         <div className="col-sm-5 col-xs-12 padding-left">
                             <div className="image img-wrapper">
                                 <Link to="/hotel-details">
-                                    <img src={(`${item.image.substring(item.image.indexOf('/uploads'), item.image.length)}`)} className="img-responsive inner-img" alt='{item.name}' />
+                                    <img src={(`${HSURL}/${item.image}`)} className="img-responsive inner-img" alt='{item.name}' />
                                 </Link>
                             </div>
                         </div>

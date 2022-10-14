@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function AmenitiesHotel({ amenities, index }) {
     const detail = amenities.hotel_amenities;
+    const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
 
 
     return (
@@ -12,7 +14,7 @@ export default function AmenitiesHotel({ amenities, index }) {
                 {detail && detail?.map((item, lindex) => (
                     <li key={lindex} className='list-inline-item'>
                         <div className="amenities">
-                            <img src={(`${item.amenity.image.substring(item.amenity.image.indexOf('/uploads'), item.amenity.image.length)}`)} alt={item.amenity.amenity} />
+                            <img src={(`${HSURL}/${item.amenity.image}`)} alt={item.amenity.amenity} />
                             <span>{item.amenity.amenity}</span>
                         </div>
                     </li>

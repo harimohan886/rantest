@@ -15,6 +15,8 @@ export default function EditHotel() {
     const [selectedFilesObj, setSelectedFilesObj] = useState([]);
     const navigate = useNavigate();
     const params = useParams();
+    const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
 
 
     const [hotels, setHotels] = useState({
@@ -70,7 +72,7 @@ export default function EditHotel() {
 
     const handleImageDelete = async (id) => {
 
-       
+
 
         try {
 
@@ -87,7 +89,7 @@ export default function EditHotel() {
                     images: current.images.filter(gimage => {
                         return gimage._id !== id;
                     })
-        
+
                 })
                 );
 
@@ -281,7 +283,7 @@ export default function EditHotel() {
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Thumbnail</label>
                             <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
 
-                            {(typeof hotels.image === 'string') && hotels.image && <img src={(`${hotels.image.substring(hotels.image.indexOf('/uploads'), hotels.image.length)}`)} alt="" width="300px" />}
+                            {(typeof hotels.image === 'string') && hotels.image && <img src={(`${HSURL}/${hotels.image}`)} alt="" width="300px" />}
 
 
                         </div>
@@ -289,7 +291,7 @@ export default function EditHotel() {
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Cover Image</label>
                             <input onChange={handlePackageImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${hotels.package_image.substring(hotels.package_image.indexOf('/uploads'), hotels.package_image.length)}`)} alt="" width="300px" />}
+                            {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${HSURL}/${hotels.package_image}`)} alt="" width="300px" />}
 
                         </div>
                         <div className='mb-3 multiImages'>
@@ -298,7 +300,7 @@ export default function EditHotel() {
                                 {hotels.images &&
                                     hotels.images?.map((im, i) => (
                                         <div>
-                                            <img key={i} src={(`/${im.image?.substring(im.image?.indexOf('uploads'), im.image.length)}`)} alt={i} width="300px" />
+                                            <img key={i} src={(`${HSURL}/${im.image}`)} alt={i} width="300px" />
                                             <span><button onClick={(e) => handleImageDelete(im._id)} type="button" className="text-white bg-hotel-maroon rounded  sm:w-auto px-1.5 py-0.5 text-center">x</button>
                                             </span>
                                         </div>

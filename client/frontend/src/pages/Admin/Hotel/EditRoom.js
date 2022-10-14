@@ -12,13 +12,9 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 
 
 export default function EditRoom() {
-
     const params = useParams();
 
     const [details, setDetails] = useState([]);
-    const [facilities, setFacilities] = useState([]);
-    const [formValues, setFormValues] = useState([{ facility: [] }]);
-    const [loading, setLoading] = useState(false);
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [formatFacilities, setFormatFacilities] = useState([]);
 
@@ -27,9 +23,15 @@ export default function EditRoom() {
     const [hotelId, setHotelId] = useState();
     const [status, setStatus] = useState();
     const [image, setImage] = useState();
+    const [src, setSrc] = useState('');
+
+
 
     const HandleImage = (e) => {
         setImage(e.target.files[0]);
+        if (e.target.files[0]) {
+            setSrc(URL.createObjectURL(e.target.files[0]));
+        }
     }
 
 
@@ -38,7 +40,7 @@ export default function EditRoom() {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
         }).then(result => {
             console.log("Room Info", result.data);
@@ -60,12 +62,9 @@ export default function EditRoom() {
 
     const getFacilities = async () => {
 
-        setLoading(true);
-
         try {
             const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/facilities/`);
 
-            setFacilities(result.data.data);
             const allFacilities = result.data.data;
 
             const fa = await allFacilities.map((item) => {
@@ -74,11 +73,9 @@ export default function EditRoom() {
             });
 
             setFormatFacilities(fa);
-            setLoading(false);
 
         } catch (err) {
             swal(err, "error");
-            setLoading(false);
         }
     };
 
@@ -122,18 +119,13 @@ export default function EditRoom() {
         }).then(res => {
             if (res.data.success === true) {
                 swal("Data is updated successfully", "success");
-                // setTimeout(() => {
-                //     window.location = `/admin/hotel-rooms/${params.id}`;
-                // }, 1000);
+                setTimeout(() => {
+                    window.location = `/admin/hotel-rooms/${params.id}`;
+                }, 1000);
 
-            } else if (res.data.validation_errors) {
-                if (res.data.validation_erros.name) {
-                    swal(res.data.validation_errors.name[0], "error");
-                }
-                if (res.data.validation_erros.email) {
-                    swal(res.data.validation_errors.email[0], "error");
+            } else if (res.data.error) {
+                swal(res.data.error.message, "error");
 
-                }
             }
         });
 
@@ -163,7 +155,7 @@ export default function EditRoom() {
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Image</label>
                             <input onChange={HandleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                            {(typeof image === 'string') && image && <img src={(`${image.substring(image.indexOf('/uploads'), image.length)}`)} alt={name} width="300px" />}
+                            {(typeof image === 'string') ? <img src={`${process.env.REACT_APP_HOTEL_SERVER_URL}/${image}`} alt={name} width="300px" /> : <img src={`${src}`} alt={name} width="300px" />}
 
                         </div>
                         <div className='mb-3'>

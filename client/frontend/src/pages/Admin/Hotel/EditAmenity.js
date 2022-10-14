@@ -14,7 +14,9 @@ export default function EditAmenity() {
     const [amenity, setAmenity] = useState('');
     const [status, setStatus] = useState(1);
     const [image, setImage] = useState('');
-    const [src, setSrc] = useState('../../image/icons/swimming-pool.png');
+    const [src, setSrc] = useState('');
+    const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
 
 
 
@@ -63,7 +65,7 @@ export default function EditAmenity() {
 
                 setAmenity(res.data.data.amenity);
                 setStatus(res.data.data.status);
-                setSrc(`../../image/icons/${res.data.data.image}`);
+                setSrc(`${res.data.data.image}`);
 
 
             } catch (err) {
@@ -102,8 +104,7 @@ export default function EditAmenity() {
                         <div className='mb-6'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Amenity Logo</label>
                             <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={handleInputImageChange} />
-                            <img src={(`${src.substring(src.indexOf('/uploads'), src.length)}`)} alt={amenity} className="img-responsive mt-2" width="85" height="85" />
-
+                            {(typeof src === 'string') && src && <img src={(`${HSURL}/${src}`)} alt={amenity} className="img-responsive mt-2" width="85" height="85" />}
 
                         </div>
                         <div className='flex'>
