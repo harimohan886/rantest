@@ -15,7 +15,7 @@ export default function AmenityStatus({ hotelId, amenities }) {
         headers: {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ` + localStorage.getItem('user')
+          'Authorization': `Bearer ` + localStorage.getItem('accessToken')
         },
       });
 
