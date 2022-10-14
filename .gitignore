@@ -17,9 +17,11 @@ package-lock.json
 
 
 client/frontend/public/uploads/
+hotel/uploads/
 package/Controllers
 package/Models
 package/Routes
+payment
 # production
 /build
 /client/frontend/build
