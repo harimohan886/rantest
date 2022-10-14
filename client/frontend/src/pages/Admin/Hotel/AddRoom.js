@@ -20,27 +20,20 @@ export default function AddRoom() {
     const [status, setStatus] = useState();
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [formatFacilities, setFormatFacilities] = useState([]);
-
+    const [formatFacilitiesD, setFormatFacilitiesD] = useState([]);
 
     const HandleImage = (e) => {
         setImage(e.target.files[0]);
     }
 
-    var faci = [];
 
     const HandleSubmit = () => {
+        var faci = [];
+        
 
-
-
-        selectedFacilities.map(item => (
-            faci.push({ facility: item.label })
-        ));
-
-        console.log("facilities", selectedFacilities);
-        console.log("push", faci);
-
-
-
+        selectedFacilities.forEach((el)=>{
+            faci.push(el.label);
+        });
 
         const formData = new FormData();
         formData.append("image", image);
