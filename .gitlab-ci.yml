@@ -4,7 +4,7 @@ stages:
   - build
 
 include:
-  - project: "arsh/ranthambore/admin"
+  - project: "arsh/ranthambore"
     file: 'admin/.gitlab-ci.yml'
 
 before_script:
