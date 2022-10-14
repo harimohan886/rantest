@@ -3,6 +3,10 @@ import React, { useContext } from 'react';
 import '../src/App.css';
 import '../src/css/style.css';
 import '../src/css/admin.css';
+
+import NotFound from './pages/404';
+
+
 import TopHead from './components/frontend/header/TopHead';
 import Header from './components/frontend/header/Header';
 import Home from './pages/frontend/Home';
@@ -77,6 +81,7 @@ import EditPackageCategory from './pages/Admin/Packages/EditPackageCategory';
 import { AuthContext } from './context/admin/AuthContext';
 import PackageDetails from './pages/frontend/Packages/PackageDetails';
 import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
+import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
 
 
 
@@ -118,7 +123,11 @@ function App() {
         (<Route path='/admin/login' element={user ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
 
 
-        {user && <>
+
+
+        <Route element={<PrivateAdminRoutes />}>
+
+
 
           <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
           <Route exact path="/admin/gir-events" element={<GirEvents />} />
@@ -172,12 +181,18 @@ function App() {
           <Route exact path="/admin/package-categories" element={<PackageCategories />} />
           <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
           <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
-        </>
-        }
+
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+
+
+
+
 
       </Routes>
       <Footer />
-    </Router>
+    </Router >
   );
 }
 
