@@ -4,16 +4,8 @@ stages:
   - build
 
 include:
-  - project: "arsh/ranthambore"
+  - project: "arsh/ranthambore/admin"
     file: 'admin/.gitlab-ci.yml'
-  - project: "arsh/ranthambore"
-    file: 'chambal/.gitlab-ci.yml'
-  - project: "arsh/ranthambore"
-    file: 'hotel/.gitlab-ci.yml'
-  - project: "arsh/ranthambore"
-    file: 'package/.gitlab-ci.yml'
-  - project: "arsh/ranthambore"
-    file: 'safari/.gitlab-ci.yml'
 
 before_script:
   - apt-get update -qq
