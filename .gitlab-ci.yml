@@ -4,7 +4,8 @@ stages:
   - build
 
 include:
-   - local: 'admin/.gitlab-ci.yml'
+  - project: 'arsh/ranthambore'
+    file: '/admin/.gitlab-ci.yml'
 
 before_script:
   - apt-get update -qq
