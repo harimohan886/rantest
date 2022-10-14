@@ -4,7 +4,7 @@ stages:
   - build
 
 include:
-  - 'admin/.gitlab-ci.yml'
+   - local: 'admin/.gitlab-ci.yml'
 
 before_script:
   - apt-get update -qq
