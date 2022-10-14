@@ -1,7 +1,22 @@
 stages:
+  - test
   - deploy
   - build
-  
+
+include:
+  - project: "admin"
+    file: 'admin/.gitlab-ci.yml'
+  - project: "chambal"
+    file: 'chambal/.gitlab-ci.yml'
+  - project: "hotel"
+    file: 'hotel/.gitlab-ci.yml'
+  - project: "package"
+    file: 'package/.gitlab-ci.yml'
+  - project: "payment"
+    file: 'payment/.gitlab-ci.yml'
+  - project: "safari"
+    file: 'safari/.gitlab-ci.yml'
+
 before_script:
   - apt-get update -qq
   - apt-get install -qq git

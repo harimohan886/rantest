@@ -1,6 +1,3 @@
-stages:
-  - test
-  
 safari:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/safari
   stage: test

@@ -1,6 +1,3 @@
-stages:
-  - test
-
 chambal:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/chambal
   stage: test

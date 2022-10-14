@@ -1,6 +1,3 @@
-stages:
-  - test
-
 hotel:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/hotel
   stage: test

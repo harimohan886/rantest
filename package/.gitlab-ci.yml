@@ -1,6 +1,3 @@
-stages:
-  - test
-
 package:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/package
   stage: test
