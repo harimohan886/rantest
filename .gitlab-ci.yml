@@ -3,8 +3,13 @@ stages:
   - deploy
   - build
 
-include:
-   - local: 'admin/.gitlab-ci.yml'
+admin:
+  stage: test
+  admin:
+    include: admin/.gitlab-ci.yml
+  rules:
+    - changes:
+        - admin/*
 
 before_script:
   - apt-get update -qq
