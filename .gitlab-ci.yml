@@ -2,18 +2,7 @@ stages:
   - test
   - deploy
   - build
-admin:
-  image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/admin
-  stage: test
-  services:
-    - mongo:latest
-  script:
-    - npm i npm@latest -g
-    - npm i
-    - npm test
-  coverage:
-    '/Statements.*?(\d+(?:\.\d+)?)%/'
-
+  
 chambal:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/chambal
   stage: test
@@ -22,7 +11,7 @@ chambal:
   script:
     - npm i npm@latest -g
     - npm i
-    - npm test
+    - npm run test
   coverage:
     '/Statements.*?(\d+(?:\.\d+)?)%/'
 
