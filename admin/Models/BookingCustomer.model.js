@@ -1,0 +1,35 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const BookingCustomerSchema = new Schema({
+	name: {
+		type: String,
+		required: [true, "fullname required!"],
+		index: true,
+	},
+	gender: {
+		type: String,
+		required: [true, "gender required!"],
+	},
+	nationality: {
+		type: String,
+		required: [true, "nationality required!"],
+	},
+	id_proof: {
+		type: String,
+	},
+	idnumber: {
+		type: String,
+	},
+	createdBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: false,
+	},
+	updatedBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: false,
+	},
+});
+
+const BookingCustomer = mongoose.model('booking_customers', BookingCustomerSchema);
+module.exports = BookingCustomer;

@@ -34,6 +34,27 @@ module.exports = {
     }
   },
 
+  getAllEnquiesDashboard: async (req, res, next) => {
+    try {
+
+      var  totalEnq = await Enquiry.find({}).countDocuments().exec();
+
+      const general_enqs = await Enquiry.find({type : 'general'}).sort({ $natural: -1 }).limit(5);
+
+      const hotel_enqs = await Enquiry.find({type : 'hotel'}).sort({ $natural: -1 }).limit(5);
+
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        total_enquiries: totalEnq,
+        hotel_enquiries: hotel_enqs,
+        general_enquiries: general_enqs,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   createNewEnquiry: async (req, res, next) => {
     try {
       const date = new Enquiry(req.body);
