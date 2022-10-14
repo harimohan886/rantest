@@ -13,8 +13,6 @@ include:
   - project: "arsh/ranthambore"
     file: 'package/.gitlab-ci.yml'
   - project: "arsh/ranthambore"
-    file: 'payment/.gitlab-ci.yml'
-  - project: "arsh/ranthambore"
     file: 'safari/.gitlab-ci.yml'
 
 before_script:
