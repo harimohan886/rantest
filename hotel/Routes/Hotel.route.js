@@ -6,7 +6,8 @@ var multer = require('multer');
 
 var storage = multer.diskStorage({  
   destination:(req,file,cb)=>{  
-    cb(null,__dirname.split('hotel')[0]+'client/frontend/public/uploads/hotels/');  
+    console.log(__dirname);
+    cb(null,'uploads/hotels/');  
   },  
   filename:(req,file,cb)=>{  
     cb(null,file.originalname);  
@@ -20,6 +21,8 @@ const HotelController = require('../Controllers/Hotel.Controller');
 //Get a list of all products
 router.get('/dashboard', HotelController.getAllHotelsCount);
 
+router.get('/by-ids', HotelController.findHotelByIds);
+
 router.get('/', HotelController.getAllHotels);
 router.get('/front', HotelController.getAllHotelsFront);
 
@@ -28,6 +31,7 @@ router.post('/', uploads.any(), HotelController.createNewHotel);
 
 //Get a product by id
 router.get('/:id', HotelController.findHotelById);
+
 
 router.get('/by-slug/:slug', HotelController.findHotelBySlug);
 
