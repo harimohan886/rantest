@@ -1,0 +1,14 @@
+stages:
+  - test
+  
+admin:
+  image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/admin
+  stage: test
+  services:
+    - mongo:latest
+  script:
+    - npm i npm@latest -g
+    - npm i
+    - npm test
+  coverage:
+    '/Statements.*?(\d+(?:\.\d+)?)%/'
