@@ -28,8 +28,7 @@ export default function AddRoom() {
 
 
     const HandleSubmit = () => {
-        var faci = [];
-        
+        var faci = [];        
 
         selectedFacilities.forEach((el)=>{
             faci.push(el.label);
