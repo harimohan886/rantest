@@ -4,17 +4,17 @@ stages:
   - build
 
 include:
-  - project: "admin"
+  - project: "ranthambore"
     file: 'admin/.gitlab-ci.yml'
-  - project: "chambal"
+  - project: "ranthambore"
     file: 'chambal/.gitlab-ci.yml'
-  - project: "hotel"
+  - project: "ranthambore"
     file: 'hotel/.gitlab-ci.yml'
-  - project: "package"
+  - project: "ranthambore"
     file: 'package/.gitlab-ci.yml'
-  - project: "payment"
+  - project: "ranthambore"
     file: 'payment/.gitlab-ci.yml'
-  - project: "safari"
+  - project: "ranthambore"
     file: 'safari/.gitlab-ci.yml'
 
 before_script:
