@@ -11,15 +11,14 @@ export default function AdminNavbar() {
   const navigate = useNavigate();
 
 
-  const logout = (e) => {
+  const logout = async (e) => {
 
     e.preventDefault();
-    const res = loginOut(accessToken,  dispatch);
+    const res = await loginOut(accessToken,  dispatch);
+    console.log("logi if", res);
 
-    if(res) {
+    if(res === true ) {
       navigate("/admin/login");
-
-
     }
 
 

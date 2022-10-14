@@ -9,6 +9,9 @@ import FooterAdmin from "../../../components/Admin/Footer/FooterAdmin";
 
 export default function AdminDashboard() {
 
+  console.log("user if", localStorage.getItem('user'));
+  console.log("acceess  kd", localStorage.getItem('accessToken'));
+
 
   return (
     <div className="relative md:ml-64 bg-default-skin">
