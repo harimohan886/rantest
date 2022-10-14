@@ -6,7 +6,7 @@ var multer = require('multer');
 
 var storage = multer.diskStorage({  
   destination:(req,file,cb)=>{  
-    cb(null,__dirname.split('hotel')[0]+'client/frontend/public/uploads/hotels/rooms/');  
+    cb(null, 'uploads/hotels/rooms/');  
   },  
   filename:(req,file,cb)=>{  
     cb(null,file.originalname);  

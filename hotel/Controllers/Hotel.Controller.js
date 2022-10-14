@@ -375,6 +375,29 @@ module.exports = {
     }
   },
 
+  findHotelByIds: async (req, res, next) => {
+    const ids = req.query.ids;
+    try {
+      const hotel = await Hotel.find({"_id" : { $in : ids.split(",")  } }).populate('images');;
+      if (!hotel) {
+        throw createError(404, 'Hotel does not exist.');
+      }
+
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: hotel
+      });
+    } catch (error) {
+      console.log(error);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Hotel id'));
+        return;
+      }
+      next(error);
+    }
+  },
+
   findHotelBySlug: async (req, res, next) => {
     const slug = req.params.slug;
     try {
