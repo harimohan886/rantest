@@ -1,3 +1,9 @@
+variables:
+  ROOT: ${CI_PROJECT_DIR}/
+cache:
+  key: example-production
+  paths:
+    - ${ROOT}/admin
 admin:
   image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/admin
   stage: test
