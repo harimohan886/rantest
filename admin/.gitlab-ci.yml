@@ -8,7 +8,6 @@ admin:
        cd "$CI_PROJECT_DIR/admin"
     - npm i npm@latest -g
     - npm i
-    - npm start
     - npm test
   coverage:
     '/Statements.*?(\d+(?:\.\d+)?)%/'
