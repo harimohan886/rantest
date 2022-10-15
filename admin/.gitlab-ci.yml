@@ -1,4 +1,13 @@
 admin:
+  image: gitlab.n2rtechnologies.com:5050/arsh/ranthambore/admin
   stage: test
+  services:
+    - mongo:latest
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/admin && npm run i && npm run test"
+    - |
+       cd "$CI_PROJECT_DIR/admin"
+    - npm i npm@latest -g
+    - npm i
+    - npm test
+  coverage:
+    '/Statements.*?(\d+(?:\.\d+)?)%/'
