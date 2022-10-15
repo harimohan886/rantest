@@ -9,22 +9,18 @@ import FooterAdmin from "../../../components/Admin/Footer/FooterAdmin";
 
 export default function AdminDashboard() {
 
-  console.log("user if", localStorage.getItem('user'));
-  console.log("acceess  kd", localStorage.getItem('accessToken'));
-
-
   return (
     <div className="relative md:ml-64 bg-default-skin">
-      <Sidebar/>
-      <AdminNavbar/>
-      <HeaderStats/>
+      <Sidebar />
+      <AdminNavbar />
+      <HeaderStats />
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 xl:mb-0 px-4">
-          <GeneralEnquiry/>
-          <HotelEnquiry/>
+          <GeneralEnquiry />
+          <HotelEnquiry />
         </div>
       </div>
-      <FooterAdmin/>
-   </div>
+      <FooterAdmin />
+    </div>
   )
 }

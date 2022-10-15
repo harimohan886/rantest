@@ -10,8 +10,18 @@ export default function PrivateAdminRoute() {
     const { accessToken, user } = useContext(AuthContext);
 
 
+    if (accessToken && accessToken !== 'null') {
 
-    return user ? <Outlet /> : <Navigate replace to="/admin/login" />
+        return <Outlet />
+
+    } else {
+        return <Navigate replace to="/admin/login" />
+
+
+    }
+
+
+
 
 
 }

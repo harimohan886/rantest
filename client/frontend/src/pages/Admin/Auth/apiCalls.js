@@ -24,15 +24,13 @@ export const loginCall = async (userCredential, dispatch) => {
 
 export const loginOut = async (accessToken, dispatch) => {
 
-    dispatch({ type: "LOGIN_START" });
-
     try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/logout`, 
-        {
-            headers: {
-                "Authorization" : `Bearer ` + accessToken,
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/logout`,
+            {
+                headers: {
+                    "Authorization": `Bearer ` + accessToken,
+                }
             }
-        }
         );
 
         dispatch({ type: "LOGIN_OUT" });
@@ -44,7 +42,7 @@ export const loginOut = async (accessToken, dispatch) => {
 
         return true;
 
-       // navigate("/admin/login");
+        // navigate("/admin/login");
 
 
     } catch (err) {

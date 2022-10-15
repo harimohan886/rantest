@@ -89,8 +89,6 @@ function App() {
 
   const { user, accessToken } = useContext(AuthContext);
 
-  console.log("uinofo", user);
-  console.log("acceess", user);
 
   return (
     <Router>
@@ -120,7 +118,7 @@ function App() {
 
 
 
-        (<Route path='/admin/login' element={user ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+        (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
 
 
 
