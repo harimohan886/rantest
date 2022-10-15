@@ -1,4 +1,4 @@
 admin:
   stage: test
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/admin && npm i && npm test"
+    - ssh root@38.242.196.238 "cd ranthambore/admin && npm run i && npm run test"
