@@ -1,11 +1,7 @@
 stages:
-  - test
   - deploy
+  - test
   - build
-
-include:
- - project: 'arsh/ranthambore'
-   file: '/admin/.gitlab-ci.yml'
 
 before_script:
   - apt-get update -qq
@@ -26,6 +22,10 @@ deploy_staging:
     - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
   only:
     - main
+    
+include:
+ - project: 'arsh/ranthambore'
+   file: '/admin/.gitlab-ci.yml'
 
 build_staging:
   stage: build
