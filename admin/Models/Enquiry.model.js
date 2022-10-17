@@ -12,27 +12,22 @@ const EnquirySchema = new Schema({
 	traveller_name: {
 		type: String
 	},
-	mobile_no: {
+	phone: {
 		type: String
 	},
-	email_id:{
-		type:String
+	email_id: {
+		type: String
 	},
-	message:{
-		type:String
+	message: {
+		type: String
 	},
-	hotel_id:{
-		type:String
+	hotel_id: {
+		type: String
 	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-});
+
+},
+
+	{ timestamps: true });
 
 const Enquiry = mongoose.model('enquiries', EnquirySchema);
 module.exports = Enquiry;
