@@ -8,6 +8,39 @@ module.exports = {
   getAllDates: async (req, res, next) => {
     try {
 
+      const filter_date = req.query.filter_date
+      ? {
+        date: {
+          $regex: req.query.filter_date
+        },
+      }
+      : {};
+
+      const filter_zone = req.query.filter_zone
+      ? {
+        zone: req.query.filter_zone
+      }
+      : {};
+
+      const filter_vehicle = req.query.filter_vehicle
+      ? {
+        vehicle: req.query.filter_vehicle
+      }
+      : {};
+
+      const filter_timing = req.query.filter_timing
+      ? {
+        timing: req.query.filter_timing
+      }
+      : {};
+
+      const filter_availability = req.query.filter_availability
+      ? {
+        availability: req.query.filter_availability
+      }
+      : {};
+
+
       var page = parseInt(req.query.page)||1;
       var size = parseInt(req.query.size)||15;
       var query = {}
@@ -18,9 +51,9 @@ module.exports = {
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var  totalPosts = await Date.find({}).countDocuments().exec();
+      var  totalPosts = await Date.find({...filter_date, ...filter_zone, ...filter_vehicle, ...filter_timing, ...filter_availability}).countDocuments().exec();
 
-      Date.find({},{},
+      Date.find({...filter_date, ...filter_zone, ...filter_vehicle, ...filter_timing, ...filter_availability},{},
         query,function(err,data) {
           if(err) {
             response = {"error": true, "message": "Error fetching data"+err};
