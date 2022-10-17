@@ -3,11 +3,10 @@ import UserDropdown from "../Dropdowns/UserDropdown";
 import { AuthContext } from '../../../context/admin/AuthContext';
 import { loginOut } from "../../../pages/Admin/Auth/apiCalls";
 import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
 
 
 export default function AdminNavbar() {
-  const { user, accessToken, isFetching, dispatch } = useContext(AuthContext);
+  const { user, accessToken, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
 

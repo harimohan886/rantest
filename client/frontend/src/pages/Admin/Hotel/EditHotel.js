@@ -5,7 +5,6 @@ import swal from 'sweetalert';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-import MultiImageUpload from '../../../components/Admin/Uploader/MultiImageUpload';
 
 
 
@@ -155,7 +154,7 @@ export default function EditHotel() {
                 },
             });
 
-            if (res.data.success == true) {
+            if (res.data.success === true) {
                 swal("Data is updated successfully", "success");
                 navigate('/admin/hotels');
 
@@ -299,8 +298,8 @@ export default function EditHotel() {
                             <div className="result">
                                 {hotels.images &&
                                     hotels.images?.map((im, i) => (
-                                        <div>
-                                            <img key={i} src={(`${HSURL}/${im.image}`)} alt={i} width="300px" />
+                                        <div key={i}>
+                                            <img src={(`${HSURL}/${im.image}`)} alt={i} width="300px" />
                                             <span><button onClick={(e) => handleImageDelete(im._id)} type="button" className="text-white bg-hotel-maroon rounded  sm:w-auto px-1.5 py-0.5 text-center">x</button>
                                             </span>
                                         </div>

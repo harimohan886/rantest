@@ -27,6 +27,17 @@ module.exports = {
     }
   },
 
+  verifyAToken: async (req, res, next) => {
+    try {
+      const results = await Auth.find({}, { __v: 0 });
+      // const results = await Auth.find({}, { name: 1, price: 1, _id: 0 });
+      // const results = await Auth.find({ price: 699 }, {});
+      res.send(results);
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   adminLogout: async (req, res, next) => {
     try {
       req.user.tokens = req.user.tokens.filter((token) => {

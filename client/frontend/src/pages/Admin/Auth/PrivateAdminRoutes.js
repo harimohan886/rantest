@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 export default function PrivateAdminRoute() {
 
 
-    const { accessToken, user } = useContext(AuthContext);
+    const { accessToken } = useContext(AuthContext);
 
 
     if (accessToken && accessToken !== 'null') {

@@ -14,7 +14,6 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 export default function EditRoom() {
     const params = useParams();
 
-    const [details, setDetails] = useState([]);
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [formatFacilities, setFormatFacilities] = useState([]);
 

@@ -5,9 +5,14 @@ const AuthController = require('../Controllers/Auth.Controller');
 
 const { verifyUserToken } = require("../Middleware/auth");
 
+router.get('/info', [verifyUserToken], AuthController.verifyAToken);
+
+
 router.get('/users', [verifyUserToken], AuthController.getAllAdmins);
 
 router.get('/profile', [verifyUserToken], AuthController.profile);
+
+
 
 //Create a new product
 router.post('/login', AuthController.adminLogin);
@@ -25,5 +30,7 @@ router.patch('/profile', [verifyUserToken], AuthController.updateAAuth);
 
 //Delete a product by id
 router.delete('/:id', AuthController.deleteAAuth);
+
+
 
 module.exports = router;

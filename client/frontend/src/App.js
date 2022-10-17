@@ -88,11 +88,11 @@ import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 
 function App() {
 
-  const { user, accessToken, dispatch } = useContext(AuthContext);
+  const { accessToken, dispatch } = useContext(AuthContext);
 
   useEffect(() => {
 
-    //localStorage.getItem("accessToken") && localStorage.getItem("accessToken") !== 'null' && localStorage.getItem("accessToken") !== '' && verifyToken(localStorage.getItem("accessToken"));
+    localStorage.getItem("accessToken") && localStorage.getItem("accessToken") !== 'null' && localStorage.getItem("accessToken") !== '' && verifyToken(localStorage.getItem("accessToken"), dispatch);
 
 
   }, []);

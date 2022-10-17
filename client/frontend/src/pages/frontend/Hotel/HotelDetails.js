@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import EnquiryForm from '../../../components/frontend/Common/EnquiryForm'
 import AmenitiesHotel from '../../../components/frontend/Hotel/AmenitiesHotel'
 import HotelGallery from '../../../components/frontend/Hotel/HotelGallery'
@@ -10,8 +10,6 @@ import HotelRooms from '../../../components/frontend/Hotel/HotelRooms'
 export default function HotelDetails() {
 
     const [hotel, setHotel] = useState({});
-
-    const navigate = useNavigate();
     const params = useParams();
 
 

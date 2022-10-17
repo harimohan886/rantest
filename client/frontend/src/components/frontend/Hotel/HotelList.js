@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
-import swal from 'sweetalert';
 import axios from 'axios';
 
 export default function HotelList() {
 
     const [hotels, setHotels] = useState([]);
-    const [name, setName] = useState('');
-    const [rating, setRating] = useState('');
-    const [city, setCity] = useState('');
-    const [status, setStatus] = useState('');
+
 
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);

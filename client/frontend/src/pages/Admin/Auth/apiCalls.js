@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 
 
@@ -22,13 +21,10 @@ export const loginCall = async (userCredential, dispatch) => {
 
 }
 
-export const verifyToken = async (accessToken) => {
-
-    console.log("cl", accessToken);
-
+export const verifyToken = async (accessToken, dispatch) => {
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/isValidToken`,
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/info`,
             {
                 headers: {
                     "Authorization": `Bearer ` + accessToken,
@@ -38,27 +34,24 @@ export const verifyToken = async (accessToken) => {
 
         console.log("token is verified");
 
-        swal("Successfully logout", "success");
+        // swal("Successfully logout", "success");
 
-        return false;
-
-        // navigate("/admin/login");
-
+        return true;
 
     } catch (err) {
 
-        console.log("token is error", err);
-        swal("You are ertr!", "error");
+        // swal("Not authtorized to access admin", "error");
 
-        // dispatch({ type: "LOGIN_OUT" });
 
-        // localStorage.removeItem("accessToken");
-        // localStorage.removeItem("user");
+        console.log("token is not verified", err);
+
+        dispatch({ type: "LOGIN_OUT" });
+
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
 
 
         return false;
-
-        // dispatch({ type: "LOGIN_FAILURE", payload: err });
 
     }
 }
@@ -66,7 +59,7 @@ export const verifyToken = async (accessToken) => {
 export const loginOut = async (accessToken, dispatch) => {
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/logout`,
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/logout`,
             {
                 headers: {
                     "Authorization": `Bearer ` + accessToken,
