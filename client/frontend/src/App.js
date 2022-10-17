@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../src/App.css';
 import '../src/css/style.css';
 import '../src/css/admin.css';
@@ -82,12 +82,25 @@ import { AuthContext } from './context/admin/AuthContext';
 import PackageDetails from './pages/frontend/Packages/PackageDetails';
 import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
+import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 
 
 
 function App() {
 
-  const { user, accessToken } = useContext(AuthContext);
+  const { user, accessToken, dispatch } = useContext(AuthContext);
+
+  useEffect(() => {
+
+    //localStorage.getItem("accessToken") && localStorage.getItem("accessToken") !== 'null' && localStorage.getItem("accessToken") !== '' && verifyToken(localStorage.getItem("accessToken"));
+
+
+  }, []);
+
+
+
+
+
 
 
   return (

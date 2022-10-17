@@ -29,8 +29,8 @@ module.exports = {
 
   adminLogout: async (req, res, next) => {
     try {
-      req.user.tokens = req.user.tokens.filter((token) =>{
-        return token.token !== req.token 
+      req.user.tokens = req.user.tokens.filter((token) => {
+        return token.token !== req.token
       })
       await req.user.save()
       res.send('user Logout')
@@ -59,15 +59,15 @@ module.exports = {
       user1.save((err, user) => {
         if (err) {
           res.status(500)
-          .send({
-            message: err
-          });
+            .send({
+              message: err
+            });
           return;
         } else {
           res.status(200)
-          .send({
-            message: "User Registered successfully"
-          })
+            .send({
+              message: "User Registered successfully"
+            })
         }
       });
       /*const auth = new Auth(user);
@@ -88,22 +88,22 @@ module.exports = {
 
     const { email, password } = req.body;
 
-    const user = await Auth.find({email:email}).count();
+    const user = await Auth.find({ email: email }).count();
 
     if (user) {
 
-      const user = await Auth.findOne({email:email});
+      const user = await Auth.findOne({ email: email });
 
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
-        );
+      );
       if (!passwordIsValid) {
         return res.status(401)
-        .send({
-          accessToken: null,
-          message: "Invalid Password!"
-        });
+          .send({
+            accessToken: null,
+            message: "Invalid Password!"
+          });
       }
 
       var token = jwt.sign({
@@ -153,42 +153,42 @@ module.exports = {
   },
 
 
-  resetPassword : async (req, res, next) => {
+  resetPassword: async (req, res, next) => {
 
     if (req.body.password !== req.body.password_confirmation) {
 
       next(createError(400, "Pass and Confirm Password does not match!"));
-        return;
+      return;
     }
 
     var passwordIsValid = bcrypt.compareSync(
-        req.body.current_password,
-        req.user.password
-        );
+      req.body.current_password,
+      req.user.password
+    );
 
     if (!passwordIsValid) {
 
       next(createError(400, "Invalid or expired current password"));
-        return;
+      return;
     }
     await Auth.updateOne(
       { _id: req.user._id.toString() },
       { $set: { password: bcrypt.hashSync(req.body.password, 8) } },
       { new: true }
-      );
+    );
     const user = await Auth.findById({ _id: req.user._id.toString() });
 
     res.send({
-        success: true,
-        message: 'user fetched!',
-        data: user
-      });
+      success: true,
+      message: 'user fetched!',
+      data: user
+    });
 
   },
 
   profile: async (req, res, next) => {
     try {
-      const auth = await Auth.findOne({ _id: req.user._id },{__v:0});
+      const auth = await Auth.findOne({ _id: req.user._id }, { __v: 0 });
       if (!auth) {
         throw createError(404, 'Auth does not exist.');
       }

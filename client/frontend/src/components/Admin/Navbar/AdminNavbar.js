@@ -14,10 +14,18 @@ export default function AdminNavbar() {
   const logout = async (e) => {
 
     e.preventDefault();
-    const res = await loginOut(accessToken,  dispatch);
-    console.log("logi if", res);
 
-    if(res === true ) {
+
+    if (!localStorage.getItem("accessToken") || localStorage.getItem("accessToken") === 'null' || localStorage.getItem("accessToken") === '') {
+      dispatch({ type: "LOGIN_OUT" });
+
+      return false;
+
+    }
+
+    const res = await loginOut(accessToken, dispatch);
+
+    if (res === true) {
       navigate("/admin/login");
     }
 

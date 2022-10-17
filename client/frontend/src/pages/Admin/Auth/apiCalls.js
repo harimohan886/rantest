@@ -22,6 +22,47 @@ export const loginCall = async (userCredential, dispatch) => {
 
 }
 
+export const verifyToken = async (accessToken) => {
+
+    console.log("cl", accessToken);
+
+
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/auth/isValidToken`,
+            {
+                headers: {
+                    "Authorization": `Bearer ` + accessToken,
+                }
+            }
+        );
+
+        console.log("token is verified");
+
+        swal("Successfully logout", "success");
+
+        return false;
+
+        // navigate("/admin/login");
+
+
+    } catch (err) {
+
+        console.log("token is error", err);
+        swal("You are ertr!", "error");
+
+        // dispatch({ type: "LOGIN_OUT" });
+
+        // localStorage.removeItem("accessToken");
+        // localStorage.removeItem("user");
+
+
+        return false;
+
+        // dispatch({ type: "LOGIN_FAILURE", payload: err });
+
+    }
+}
+
 export const loginOut = async (accessToken, dispatch) => {
 
     try {
@@ -35,8 +76,8 @@ export const loginOut = async (accessToken, dispatch) => {
 
         dispatch({ type: "LOGIN_OUT" });
 
-        localStorage.setItem("accessToken", "");
-        localStorage.setItem("user", "");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
 
         swal("Successfully logout", "success");
 
@@ -46,7 +87,7 @@ export const loginOut = async (accessToken, dispatch) => {
 
 
     } catch (err) {
-        swal("something went wrong, Please trt again", "error");
+        swal("You are not authorized to logout!", "error");
 
         return false;
 
