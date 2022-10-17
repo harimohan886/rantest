@@ -17,6 +17,8 @@ const PriceSchema = new Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,
 	},
+},{
+	timestamps:true
 });
 
 const Price = mongoose.model('price', PriceSchema);

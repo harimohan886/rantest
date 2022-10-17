@@ -7,12 +7,38 @@ const DisableDate = require('../Models/DisableDate.model');
 module.exports = {
   getAllDisableDates: async (req, res, next) => {
     try {
-      const results = await DisableDate.find({}, { __v: 0 });
-      res.send({
-        success: true,
-        message: 'Data fetched',
-        data: results
-      });
+
+      const filter_date = req.query.filter_date
+      ? {
+        date: {
+          $regex: req.query.filter_date
+        },
+      }
+      : {};
+      
+      var page = parseInt(req.query.page)||1;
+      var size = parseInt(req.query.size)||15;
+      var query = {}
+
+      if(page < 0 || page === 0) {
+        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+        return res.json(response);
+      }
+      
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var  totalPosts = await DisableDate.find({...filter_date}).countDocuments().exec();
+
+      DisableDate.find({...filter_date},{__v: 0},
+        query,function(err,data) {
+          if(err) {
+            response = {"error": true, "message": "Error fetching data"+err};
+          } else {
+            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 });
     } catch (error) {
       console.log(error.message);
     }
@@ -20,7 +46,7 @@ module.exports = {
 
   getDisableDates: async (req, res, next) => {
     try {
-      const results = await DisableDate.find({}, { __v: 0 });
+      const results = await DisableDate.find({}, { _id: 0, __v: 0 });
       res.send({
         success: true,
         message: 'Data fetched',
@@ -100,7 +126,6 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await DisableDate.findByIdAndDelete(id);
-      // console.log(result);
       if (!result) {
         throw createError(404, 'DisableDate does not exist.');
       }
@@ -109,7 +134,6 @@ module.exports = {
         message: 'Data deleted',
       });
     } catch (error) {
-      console.log(error.message);
       if (error instanceof mongoose.CastError) {
         next(createError(400, 'Invalid DisableDate id'));
         return;
