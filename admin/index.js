@@ -19,6 +19,7 @@ const SeedDataRoute = require('./Routes/SeedData.route');
 const EnquiryRoute = require('./Routes/Enquiry.route');
 const SettingRoute = require('./Routes/Setting.route');
 const CustomerRoute = require('./Routes/Customer.route');
+const SeoManagerRoute = require('./Routes/SeoManager.route');
 
 app.use('/auth', AuthRoute);
 
@@ -29,6 +30,8 @@ app.use('/settings', SettingRoute);
 app.use('/customers', CustomerRoute);
 
 app.use('/seed-data', SeedDataRoute);
+
+app.use('/seo-managers', SeoManagerRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

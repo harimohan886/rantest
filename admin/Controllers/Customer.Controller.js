@@ -2,6 +2,9 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const validator = require('../helpers/validate');
+const ApiFeatures = require("../utils/apifeatures");
+
+const asyncHandler = require('../Middleware/asyncHandler')
 
 const accessTokenSecret = 'youraccesstokensecret';
 var bcrypt = require("bcrypt");
@@ -23,45 +26,66 @@ async function checkNameIsUnique(email) {
 };
 
 module.exports = {
-  getAllCustomers: async (req, res, next) => {
-    try {
+  getAllCustomers: asyncHandler(async (req, res, next) => {
 
-      var page = parseInt(req.query.page)||1;
-      var size = parseInt(req.query.size)||15;
+    const resultPerPage = req.query.size||15;
 
-      if (req.query.type) {
-        var condition = {
-          type: req.query.type
-        }
-      }else{
-        var condition = {
+    const apiFeature1 = new ApiFeatures(Customer.find(), req.query)
+    .search()
+    .filter();
 
-        }
+    var productsCount = await apiFeature1.query;
+
+    productsCount = productsCount.length;
+
+    const apiFeature = new ApiFeatures(Customer.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+
+    let products = await apiFeature.query;
+
+    return res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      page:Number(req.query.page||1),
+    });
+
+    var page = parseInt(req.query.page)||1;
+    var size = parseInt(req.query.size)||15;
+
+    if (req.query.type) {
+      var condition = {
+        type: req.query.type
       }
+    }else{
+      var condition = {
 
-      var query = {}
-      if(page < 0 || page === 0) {
-        response = {"error" : true,"message" : "invalid page number, should start with 1"};
-        return res.json(response);
       }
-      query.skip = size * (page - 1);
-      query.limit = size;
-
-      var  totalPosts = await Customer.find(condition).countDocuments().exec();
-
-      Customer.find(condition,{},
-        query,function(err,data) {
-          if(err) {
-            response = {"error": true, "message": "Error fetching data"+err};
-          } else {
-            response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
-          }
-          res.json(response);
-        }).sort({ $natural: -1 }).populate(['booking_customers','safari_booking','chambal_booking']);
-    } catch (error) {
-      console.log(error.message);
     }
-  },
+
+    var query = {}
+    if(page < 0 || page === 0) {
+      response = {"error" : true,"message" : "invalid page number, should start with 1"};
+      return res.json(response);
+    }
+    query.skip = size * (page - 1);
+    query.limit = size;
+
+    var  totalPosts = await Customer.find(condition).countDocuments().exec();
+
+    Customer.find(condition,{},
+      query,function(err,data) {
+        if(err) {
+          response = {"error": true, "message": "Error fetching data"+err};
+        } else {
+          response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+        }
+        res.json(response);
+      }).sort({ $natural: -1 }).populate(['booking_customers','safari_booking','chambal_booking']);
+  }),
 
   countAllCustomers: async (req, res, next) => {
     try {

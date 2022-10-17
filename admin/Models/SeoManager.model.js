@@ -6,10 +6,12 @@ const SeoManagerSchema = new Schema({
 		type: String,
 		required: [true, "name required!"],
 		index: true,
+		immutable: true 
 	},
 	page_url: {
 		type: String,
 		required: [true, "url required!"],
+		immutable: true 
 	},
 	seo_title: {
 		type: String,
