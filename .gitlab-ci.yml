@@ -1,11 +1,11 @@
 stages:
-  - test
+#  - test
   - deploy
   - build
 
-include:
- - project: 'arsh/ranthambore'
-   file: '/admin/.gitlab-ci.yml'
+#include:
+# - project: 'arsh/ranthambore'
+#   file: '/admin/.gitlab-ci.yml'
 
 before_script:
   - apt-get update -qq
