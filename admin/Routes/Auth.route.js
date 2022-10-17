@@ -3,7 +3,7 @@ const router = express.Router();
 
 const AuthController = require('../Controllers/Auth.Controller');
 
-const {verifyUserToken} = require("../Middleware/auth");
+const { verifyUserToken } = require("../Middleware/auth");
 
 router.get('/users', [verifyUserToken], AuthController.getAllAdmins);
 
