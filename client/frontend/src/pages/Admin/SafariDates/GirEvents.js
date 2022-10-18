@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactPaginate from "react-paginate";
+import { useAlert } from "react-alert";
 import axios from 'axios';
 
 export default function GirEvents() {
 
+    const alert = useAlert();
     const [startDate, setStartDate] = useState();
     const [details, setDetails] = useState([]);
     const [pageCount, setpageCount] = useState(0);
@@ -56,6 +58,21 @@ export default function GirEvents() {
         setDetails(commentsFormServer.data);
     };
     // kill -9 `sudo lsof -t -i:5003`
+
+    const HandleDelete = (id) => {
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/safari/dates/${id}`, {
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+          },
+        }).then(result => {
+            alert.success("Data is deleted");
+            setTimeout(() => {
+              window.location = '/admin/gir-events';
+             }, 1000);
+        })
+    }
 
   return (
     <div className="relative md:ml-64 bg-default-skin">
@@ -109,7 +126,7 @@ export default function GirEvents() {
                          <Link to={`/admin/edit-gir-events/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                              <i className="fas fa-pencil"></i>
                          </Link>
-                         <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                         <Link onClick = {() => HandleDelete(item._id)} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                              <i className="fas fa-trash"></i>
                          </Link>
                          </td>
