@@ -7,8 +7,12 @@ router.get('/', CustomerController.getAllCustomers);
 
 router.get('/dashboard', CustomerController.countAllCustomers);
 
+router.post('/', CustomerController.createNewCustomer);
+
 router.post('/safari', CustomerController.createNewCustomerSafari);
+
 router.post('/chambal', CustomerController.createNewCustomerChambal);
+
 router.post('/package', CustomerController.createNewCustomerPackage);
 
 module.exports = router;

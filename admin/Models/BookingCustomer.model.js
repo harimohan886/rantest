@@ -20,15 +20,9 @@ const BookingCustomerSchema = new Schema({
 	},
 	idnumber: {
 		type: String,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const BookingCustomer = mongoose.model('booking_customers', BookingCustomerSchema);

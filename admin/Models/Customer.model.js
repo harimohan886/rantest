@@ -6,7 +6,13 @@ const CustomerSchema = new Schema({
 		type: String,
 		required: [true, "fullname required!"],
 	},
-	email : { type: String, require: true, index:true, unique:true,sparse:true},
+	email : { 
+		type: String, 
+		require: true, 
+		index:true, 
+		// unique:true,
+		sparse:true
+	},
 	booking_customers:[{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "booking_customers"
@@ -34,15 +40,9 @@ const CustomerSchema = new Schema({
 	},
 	state: {
 		type: String,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const Customer = mongoose.model('customers', CustomerSchema);

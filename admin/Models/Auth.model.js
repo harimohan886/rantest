@@ -34,15 +34,9 @@ const AuthSchema = new Schema({
             type:String,
             required: true
         }
-    }],
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+    }]
+},{
+	timestamps:true
 });
 
 const Auth = mongoose.model('admins', AuthSchema);

@@ -14,7 +14,7 @@ router.get('/profile', [verifyUserToken], AuthController.profile);
 
 
 
-//Create a new product
+//Create a new user admin
 router.post('/login', AuthController.adminLogin);
 
 router.get('/logout', [verifyUserToken], AuthController.adminLogout);
@@ -22,13 +22,13 @@ router.get('/logout', [verifyUserToken], AuthController.adminLogout);
 router.post('/register', AuthController.adminRegister);
 router.post('/update-password', [verifyUserToken], AuthController.resetPassword);
 
-//Get a product by id
+//Get a user admin by id
 router.get('/:id', AuthController.findAuthById);
 
-//Update a product by id
+//Update a user admin by id
 router.patch('/profile', [verifyUserToken], AuthController.updateAAuth);
 
-//Delete a product by id
+//Delete a user admin by id
 router.delete('/:id', AuthController.deleteAAuth);
 
 

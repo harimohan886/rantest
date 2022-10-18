@@ -8,10 +8,10 @@ router.get('/:slug', SettingController.getAllSettings);
 
 router.post('/:slug', SettingController.createNewSetting);
 
-//Get a enquery by id
+//Get a setting by id
 router.get('/:id', SettingController.findSettingById);
 
-//Delete a enquery by id
+//Delete a setting by id
 router.delete('/:id', SettingController.deleteASetting);
 
 module.exports = router;
