@@ -17,7 +17,7 @@ export default function GeneralEnquiries() {
 
 
   function getEnquiries() {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?type=package&page=` + page, {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?page=` + page, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
@@ -46,23 +46,18 @@ export default function GeneralEnquiries() {
 
 
 
-  const getFilterData = ({ phone, type, customer, bookingDate, createdDate }) => {
-    console.log('fut data', phone, type, customer, bookingDate, createdDate);
+  const getFilterData = ({ phone, type, customer, booking_date, created_date }) => {
 
-    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?type=${type}&page=${page}&customer=${customer}&phone=${phone}&bookingDate=${bookingDate}&createDate=${createdDate}`, {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?filter_type=${type}&page=${page}&filter_name=${customer}&filter_phone=${phone}&filter_date=${booking_date}&filter_created_at=${created_date}`, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
-
-      console.log('filter enq', result)
-      if (result.data.data.length > 0) {
-        setEnquiries(result.data.data);
-        setpageCount(Math.ceil(result.data.total / result.data.perPage));
-        setPage(result.data.page);
-      }
+      setEnquiries(result.data.data);
+      setpageCount(Math.ceil(result.data.total / result.data.perPage));
+      setPage(result.data.page);
     })
 
 
