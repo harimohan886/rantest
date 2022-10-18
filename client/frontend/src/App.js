@@ -30,12 +30,17 @@ import HotelDetails from './pages/frontend/Hotel/HotelDetails';
 // Admin import starts here
 import Login from './pages/Admin/Auth/Login';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
+
+
 import RanthamboreDates from './pages/Admin/SafariDates/RanthamboreDates';
 import CreateRanthamboreDates from './pages/Admin/SafariDates/CreateRanthamboreDates';
 import EditRanthamboreDates from './pages/Admin/SafariDates/EditRanthamboreDates';
-import DevaliaEvents from './pages/Admin/SafariDates/DevaliaEvents';
-import CreateDevaliaEvent from './pages/Admin/SafariDates/CreateDevaliaEvent';
-import EditDevaliaEvents from './pages/Admin/SafariDates/EditDevaliaEvents';
+
+import ChambalDates from './pages/Admin/SafariDates/ChambalDates';
+import CreateChambalDates from './pages/Admin/SafariDates/CreateChambalDates';
+import EditChambalDates from './pages/Admin/SafariDates/EditChambalDates';
+
+
 import KankaiEvents from './pages/Admin/SafariDates/KankaiEvents';
 import CreateKankaiEvent from './pages/Admin/SafariDates/CreateKankaiEvent';
 import EditKankaiEvents from './pages/Admin/SafariDates/EditKankaiEvents';
@@ -150,9 +155,9 @@ function App() {
           <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
           <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
           <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
-          <Route exact path="/admin/devalia-events" element={<DevaliaEvents />} />
-          <Route exact path="/admin/add-devalia-event" element={<CreateDevaliaEvent />} />
-          <Route exact path="/admin/edit-devalia-events/" element={<EditDevaliaEvents />} />
+          <Route exact path="/admin/chambal-dates" element={<ChambalDates />} />
+          <Route exact path="/admin/add-chambal-dates" element={<CreateChambalDates />} />
+          <Route exact path="/admin/edit-chambal-dates/" element={<EditChambalDates />} />
           <Route exact path="/admin/kankai-events" element={<KankaiEvents />} />
           <Route exact path="/admin/add-kankai-event" element={<CreateKankaiEvent />} />
           <Route exact path="/admin/edit-kankai-events/" element={<EditKankaiEvents />} />

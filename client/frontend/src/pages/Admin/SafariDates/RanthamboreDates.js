@@ -97,22 +97,34 @@ export default function RanthamboreDates() {
 
     const ImportCsv = (e) => {
 
-        // console.log(e.target.files[0]);
+        const file = e.target.files[0];
+        const reader = new FileReader();
 
-        // const data = {
-        //     "csv": e.target.files[0]
-        // }
-        
+        reader.onload = function(e) {
+            const text = e.target.result;
+            const headers = text.slice(0,text.indexOf('\n')).split(';');
 
-        // axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/import-csv   ` , data , {
-        //     headers: {
-        //       'Accept': 'application/json, text/plain, */*',
-        //       'Content-Type': 'application/json',
-        //       'Authorization': `Bearer `+localStorage.getItem('accessToken')
-        //     },
-        //   }).then(result => { 
-        //         console.log("Result", result);
-        //   })
+        }
+        reader.readAsText(file);
+
+        const formData = new FormData(); 
+        formData.append( 
+            "csv", 
+            file, 
+        );
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/import-csv   ` , formData , {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+          }).then(result => { 
+                alert.success(result.data.message);
+                setTimeout(() => {
+                    window.location = '/admin/ranthambore-dates';
+                   }, 1000);
+          })
     }
 
   return (
