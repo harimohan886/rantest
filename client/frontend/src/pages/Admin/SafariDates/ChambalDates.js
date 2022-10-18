@@ -8,8 +8,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-export default function DevaliaEvents() {
+export default function ChambalDates() {
+
     const [startDate, setStartDate] = useState(new Date());
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -18,7 +20,7 @@ export default function DevaliaEvents() {
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
             <div className="grid grid-cols-3 gap-4">
                 <div>
-                    <h1 className='text-2xl text-black font-bold mb-3'>Devalia Safari Park</h1>
+                    <h1 className='text-2xl text-black font-bold mb-3'>Chambal Dates</h1>
                     <div className='mt-2'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="file_input">Import CSV file</label>
                         <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function CreateDevaliaEvent() {
+export default function EditChambalDates() {
   const [startDate, setStartDate] = useState(new Date());
   const [EndDate, setEndDate] = useState(new Date());
   return (
@@ -15,7 +15,7 @@ export default function CreateDevaliaEvent() {
       <AdminNavbar/> 
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-        <h1 className='text-2xl text-black font-bold mb-3'>Create Devalia event</h1>
+        <h1 className='text-2xl text-black font-bold mb-3'>Edit Devalia event date</h1>
         <form className='mt-4 shadow-md p-4 rounded bg-white'>
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
@@ -31,7 +31,7 @@ export default function CreateDevaliaEvent() {
             <option>Please select</option>
             <option value="Available">Available</option>
             <option value="Not available">Not available</option>
-        </select>
+          </select>
         </div>
         <div className='flex'>
           <button type="submit" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Submit</button>
