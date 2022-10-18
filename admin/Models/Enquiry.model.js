@@ -24,7 +24,9 @@ const EnquirySchema = new Schema({
 	hotel_id: {
 		type: String
 	},
-
+	addedAt: {
+		type: String
+	}
 },
 
 	{ timestamps: true });

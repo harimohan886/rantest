@@ -7,6 +7,46 @@ module.exports = {
   getAllEnquirys: async (req, res, next) => {
     try {
 
+      const filter_date = req.query.filter_date
+      ? {
+        booking_date: {
+          $regex: req.query.filter_date
+        },
+      }
+      : {};
+
+      const filter_created_at = req.query.filter_created_at
+      ? {
+        addedAt: {
+        $regex: req.query.filter_created_at
+        }
+      }
+      : {};
+
+      const filter_name = req.query.filter_name
+      ? {
+        traveller_name: {
+          $regex: req.query.filter_name,
+          $options: "i",
+        },
+      }
+      : {};
+
+      const filter_type = req.query.filter_type
+      ? {
+        type: req.query.filter_type
+      }
+      : {};
+
+      const filter_phone = req.query.filter_phone
+      ? {
+        phone: {
+          $regex: req.query.filter_phone,
+          $options: "i",
+        }
+      }
+      : {};
+
       var page = parseInt(req.query.page)||1;
       var size = parseInt(req.query.size)||15;
       var type = req.query.type||'general';
@@ -18,9 +58,9 @@ module.exports = {
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var  totalPosts = await Enquiry.find({type:type}).countDocuments().exec();
+      var  totalPosts = await Enquiry.find({...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type}).countDocuments().exec();
 
-      Enquiry.find({type:type},{},
+      Enquiry.find({...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type},{},
         query,function(err,data) {
           if(err) {
             response = {"error": true, "message": "Error fetching data"+err};
@@ -57,7 +97,17 @@ module.exports = {
 
   createNewEnquiry: async (req, res, next) => {
     try {
+
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var yyyy = today.getFullYear();
+      today = yyyy+'-'+mm+'-'+dd;
+
+      req.body.addedAt = today;
+
       const date = new Enquiry(req.body);
+
       const result = await date.save();
       res.send({
         success: true,
@@ -116,6 +166,4 @@ module.exports = {
       next(error);
     }
   },
-
-
 };
