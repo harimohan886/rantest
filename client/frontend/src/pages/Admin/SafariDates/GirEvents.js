@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReactPaginate from "react-paginate";
 import { useAlert } from "react-alert";
 import axios from 'axios';
+import * as moment from 'moment';
 
 export default function GirEvents() {
 
@@ -74,6 +75,20 @@ export default function GirEvents() {
         })
     }
 
+    const HandleFilter = () => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/dates?page=`+page+'&filter_date='+moment(startDate).format("YYYY-MM-DD"), {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+          }).then(result => { 
+                setDetails(result.data.data);
+                setpageCount(Math.ceil(result.data.total / result.data.perPage));
+                setPage(result.data.page);
+          })
+    }
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -92,7 +107,7 @@ export default function GirEvents() {
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Filter by date</label>
                     <div className='flex'>
                         <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                        <button type="button" className="min-150 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ml-2">
+                        <button type="button" onClick = {HandleFilter} className="min-150 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ml-2">
                             Filter
                         </button>
                     </div>
