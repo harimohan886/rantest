@@ -21,7 +21,7 @@ const SafariRoute = require('./Routes/Safari.route');
 app.use('/', SafariRoute);
 
 
-//404 handler and pass to error handler
+// 404 handler and pass to error handler
 app.use((req, res, next) => {
   next(createError(404, 'Not found'));
 });
@@ -37,9 +37,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.get('/list', (req, res) => res.send("In hotel list"));
 
-app.get('/', (req, res) => res.send("In hotel info page"));
 
 
 app.listen(process.env.PORT || 5003, () => {

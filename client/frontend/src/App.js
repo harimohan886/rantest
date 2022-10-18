@@ -6,6 +6,8 @@ import '../src/css/admin.css';
 
 import NotFound from './pages/404';
 
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import TopHead from './components/frontend/header/TopHead';
 import Header from './components/frontend/header/Header';
@@ -28,9 +30,9 @@ import HotelDetails from './pages/frontend/Hotel/HotelDetails';
 // Admin import starts here
 import Login from './pages/Admin/Auth/Login';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
-import GirEvents from './pages/Admin/SafariDates/GirEvents';
-import CreateGirEvent from './pages/Admin/SafariDates/CreateGirEvent';
-import EditGirEvents from './pages/Admin/SafariDates/EditGirEvents';
+import RanthamboreDates from './pages/Admin/SafariDates/RanthamboreDates';
+import CreateRanthamboreDates from './pages/Admin/SafariDates/CreateRanthamboreDates';
+import EditRanthamboreDates from './pages/Admin/SafariDates/EditRanthamboreDates';
 import DevaliaEvents from './pages/Admin/SafariDates/DevaliaEvents';
 import CreateDevaliaEvent from './pages/Admin/SafariDates/CreateDevaliaEvent';
 import EditDevaliaEvents from './pages/Admin/SafariDates/EditDevaliaEvents';
@@ -84,7 +86,10 @@ import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
 import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 
-
+const options = {
+  timeout: 2000,
+  position: positions.TOP_LEFT
+};
 
 function App() {
 
@@ -107,6 +112,7 @@ function App() {
     <Router>
       <TopHead />
       <Header />
+      <Provider template={AlertTemplate} {...options}>
       <Routes>
 
         <Route exact path='/' element={<Home />} />
@@ -141,9 +147,9 @@ function App() {
 
 
           <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
-          <Route exact path="/admin/gir-events" element={<GirEvents />} />
-          <Route exact path="/admin/add-gir-event" element={<CreateGirEvent />} />
-          <Route exact path="/admin/edit-gir-events/" element={<EditGirEvents />} />
+          <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
+          <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
+          <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
           <Route exact path="/admin/devalia-events" element={<DevaliaEvents />} />
           <Route exact path="/admin/add-devalia-event" element={<CreateDevaliaEvent />} />
           <Route exact path="/admin/edit-devalia-events/" element={<EditDevaliaEvents />} />
@@ -202,6 +208,7 @@ function App() {
 
 
       </Routes>
+      </Provider>
       <Footer />
     </Router >
   );

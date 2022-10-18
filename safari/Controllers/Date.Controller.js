@@ -79,7 +79,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
+        next(createError(201, error.message));
         return;
       }
       next(error);

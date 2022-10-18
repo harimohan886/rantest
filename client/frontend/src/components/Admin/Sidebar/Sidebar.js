@@ -82,14 +82,11 @@ export default function Sidebar() {
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
-                            <Link to="/admin/gir-events" className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block">
-                              <i className="fas fa-dot-circle mr-2"></i> Gir Jungle Trial </Link>
+                            <Link to="/admin/ranthambore-dates" className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block">
+                              <i className="fas fa-dot-circle mr-2"></i> Ranthambore Dates </Link>
                           </li>
                           <li className="items-center">
-                            <Link to='/admin/devalia-events' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Devalia Safari</Link>
-                          </li>
-                          <li className="items-center">
-                            <Link to='/admin/kankai-events' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Kankai Temple Safari</Link>
+                            <Link to='/admin/devalia-events' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i>Chambal Disable Dates </Link>
                           </li>
                         </ul>
                       </div>
