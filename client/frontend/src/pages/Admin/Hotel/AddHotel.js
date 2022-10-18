@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-// import MultiImageUpload from '../../../components/Admin/Uploader/MultiImageUpload';
 import swal from 'sweetalert';
 import axios from 'axios';
 
@@ -79,7 +78,7 @@ export default function AddHotel() {
         try {
             const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData);
 
-            if (res.data.success == true) {
+            if (res.data.success === true) {
                 swal("Hotel is added successfully", "success");
                 navigate('/admin/hotels');
 

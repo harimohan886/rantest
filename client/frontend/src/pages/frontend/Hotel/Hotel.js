@@ -1,7 +1,6 @@
 import React from 'react'
 import HotelBanner from '../../../components/frontend/Hotel/HotelBanner'
 import HotelList from '../../../components/frontend/Hotel/HotelList'
-import Pagination from '../../../components/frontend/Common/Pagination'
 import EnquiryForm from '../../../components/frontend/Common/EnquiryForm'
 
 export default function Hotel() {
