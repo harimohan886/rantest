@@ -44,6 +44,12 @@ useEffect(() => {
 
 },[GetDetails]);
 
+const changeDate = (e) => {
+  setSelectedStartDate(e);
+  setStartDate(e);
+}
+
+
   const HandleSaveData = (e) => {
     e.preventDefault();
 
@@ -82,7 +88,7 @@ useEffect(() => {
         <form className='mt-4 shadow-md p-4 rounded bg-white'>
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
-          <DatePicker selected = {selectedDate}  value = {startDate} onChange={(date) => setSelectedStartDate(date)} minDate={moment().toDate()} />
+          <DatePicker selected = {selectedDate}  value = {startDate} onChange={(dates) => changeDate(dates)} minDate={moment().toDate()} />
         </div>
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle</label>

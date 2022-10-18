@@ -157,7 +157,7 @@ function App() {
           <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
           <Route exact path="/admin/chambal-dates" element={<ChambalDates />} />
           <Route exact path="/admin/add-chambal-dates" element={<CreateChambalDates />} />
-          <Route exact path="/admin/edit-chambal-dates/" element={<EditChambalDates />} />
+          <Route exact path="/admin/edit-chambal-dates/:id" element={<EditChambalDates />} />
           <Route exact path="/admin/kankai-events" element={<KankaiEvents />} />
           <Route exact path="/admin/add-kankai-event" element={<CreateKankaiEvent />} />
           <Route exact path="/admin/edit-kankai-events/" element={<EditKankaiEvents />} />
