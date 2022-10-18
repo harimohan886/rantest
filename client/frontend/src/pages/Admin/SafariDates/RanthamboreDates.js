@@ -9,6 +9,7 @@ import ReactPaginate from "react-paginate";
 import { useAlert } from "react-alert";
 import axios from 'axios';
 import * as moment from 'moment';
+const FormData = require('form-data');
 
 
 export default function RanthamboreDates() {
@@ -97,23 +98,20 @@ export default function RanthamboreDates() {
 
     const ImportCsv = (e) => {
 
-        // console.log(e.target.files[0]);
-
-        // const data = {
-        //     "csv": e.target.files[0]
-        // }
+        const data = {
+            "csv": e.target.files[0]
+        }
         
 
-        // axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/import-csv   ` , data , {
-        //     headers: {
-        //       'Accept': 'application/json, text/plain, */*',
-        //       'Content-Type': 'application/json',
-        //       'Authorization': `Bearer `+localStorage.getItem('accessToken')
-        //     },
-        //   }).then(result => { 
-        //         console.log("Result", result);
-        //   })
-    }
+        const form = new FormData();
+        form.append('productName', 'Node.js Stickers');
+        form.append('csv', e.target.files[0]);
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/import-csv` , form 
+            ).then(result => { 
+                console.log("Result", result);
+            })
+        }
 
   return (
     <div className="relative md:ml-64 bg-default-skin">
