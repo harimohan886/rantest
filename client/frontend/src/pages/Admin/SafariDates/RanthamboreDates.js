@@ -10,6 +10,7 @@ import { useAlert } from "react-alert";
 import axios from 'axios';
 import * as moment from 'moment';
 
+
 export default function RanthamboreDates() {
 
     const alert = useAlert();
@@ -94,6 +95,26 @@ export default function RanthamboreDates() {
         GetDetails();
     }
 
+    const ImportCsv = (e) => {
+
+        // console.log(e.target.files[0]);
+
+        // const data = {
+        //     "csv": e.target.files[0]
+        // }
+        
+
+        // axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/import-csv   ` , data , {
+        //     headers: {
+        //       'Accept': 'application/json, text/plain, */*',
+        //       'Content-Type': 'application/json',
+        //       'Authorization': `Bearer `+localStorage.getItem('accessToken')
+        //     },
+        //   }).then(result => { 
+        //         console.log("Result", result);
+        //   })
+    }
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -104,8 +125,9 @@ export default function RanthamboreDates() {
                 <div>
                     <h1 className='text-2xl text-black font-bold mb-3'>Gir Jungle Trial</h1>
                     <div className='mt-2'>
+                 
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="file_input">Import CSV file</label>
-                        <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                        <input onChange = {ImportCsv} name ="file" className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                     </div>
                 </div>
                 <div className='mt-50'>
