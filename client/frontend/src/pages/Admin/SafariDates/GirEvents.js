@@ -89,6 +89,11 @@ export default function GirEvents() {
           })
     }
 
+    const HandleReset = () => {
+        setStartDate();
+        GetDetails();
+    }
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -110,6 +115,11 @@ export default function GirEvents() {
                         <button type="button" onClick = {HandleFilter} className="min-150 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ml-2">
                             Filter
                         </button>
+                        { startDate &&  
+                          <button type="button" onClick = {HandleReset} className="min-150 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ml-2">
+                             Reset Filter
+                         </button>
+                        }
                     </div>
                     
                 </div>
