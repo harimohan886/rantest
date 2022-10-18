@@ -1,15 +1,62 @@
-import { React, useState } from 'react';
+import { React, useState , useEffect  , useCallback} from 'react';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import { Link } from 'react-router-dom';
-import Pagination from '../../../components/Admin/Footer/Pagination';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import ReactPaginate from "react-paginate";
+import axios from 'axios';
 
 export default function GirEvents() {
-    const [startDate, setStartDate] = useState(new Date());
+
+    const [startDate, setStartDate] = useState();
+    const [details, setDetails] = useState([]);
+    const [pageCount, setpageCount] = useState(0);
+    const [page, setPage] = useState(1);
+
+    const GetDetails = useCallback( () =>  {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/dates?page=`+page, {
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+          },
+        }).then(result => { 
+            setDetails(result.data.data);
+            setpageCount(Math.ceil(result.data.total / result.data.perPage));
+            setPage(result.data.page);
+        })
+    },[page]);
+    
+    useEffect(() => {
+    
+        GetDetails();
+
+    },[GetDetails]);
+
+
+    const fetchComments = async (currentPage) => {
+        const res = await fetch(
+            `${process.env.REACT_APP_BASE_URL}/safari/dates?page=`+currentPage , {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer `+localStorage.getItem('accessToken')
+                },
+            }
+        );
+        const data = await res.json();
+  
+        return data
+      };
+
+    const handlePageClick = async (data) => {
+        let currentPage = data.selected + 1;
+        const commentsFormServer = await fetchComments(currentPage);
+        setDetails(commentsFormServer.data);
+    };
+    // kill -9 `sudo lsof -t -i:5003`
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -42,76 +89,53 @@ export default function GirEvents() {
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Start Time</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>End Time</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Vehicle Type</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Zone</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Availability</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>19-09-2022</td>
-                        <td className='border border-slate-300 text-center'>19-09-2022, <span className='font-bold'>08:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>30-09-2022, <span className='font-bold'>11:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>
-                        <label htmlFor="default-toggle-1" className="inline-flex relative items-center w-full cursor-pointer">
-                            <input type="checkbox" value="" id="default-toggle-1" className="sr-only peer" />
-                            <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable</span>
-                        </label>
-                        </td>
-                        <td className='border border-slate-300 text-center'>
-                        <Link to='/admin/edit-gir-events' className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <i className="fas fa-pencil"></i>
-                        </Link>
-                        <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            <i className="fas fa-trash"></i>
-                        </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>19-09-2022</td>
-                        <td className='border border-slate-300 text-center'>19-09-2022, <span className='font-bold'>08:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>30-09-2022, <span className='font-bold'>11:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>
-                        <label htmlFor="default-toggle-2" className="inline-flex relative items-center w-full cursor-pointer">
-                            <input type="checkbox" value="" id="default-toggle-2" className="sr-only peer" />
-                            <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable</span>
-                        </label>
-                        </td>
-                        <td className='border border-slate-300 text-center'>
-                        <Link to='/admin/edit-gir-events' className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <i className="fas fa-pencil"></i>
-                        </Link>
-                        <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            <i className="fas fa-trash"></i>
-                        </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>19-09-2022</td>
-                        <td className='border border-slate-300 text-center'>19-09-2022, <span className='font-bold'>08:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>30-09-2022, <span className='font-bold'>11:30:00</span></td>
-                        <td className='border border-slate-300 text-center'>
-                        <label htmlFor="default-toggle-3" className="inline-flex relative items-center w-full cursor-pointer">
-                            <input type="checkbox" value="" id="default-toggle-3" className="sr-only peer" />
-                            <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable</span>
-                        </label>
-                        </td>
-                        <td className='border border-slate-300 text-center'>
-                        <Link to='/admin/edit-gir-events' className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <i className="fas fa-pencil"></i>
-                        </Link>
-                        <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            <i className="fas fa-trash"></i>
-                        </Link>
-                        </td>
-                    </tr>
+                    { details && details.map((item,index) => (
+                         <tr key={index}>
+                         <td className='border border-slate-300 text-center'>{item.date}</td>
+                         <td className='border border-slate-300 text-center'>{item.vehicle}</td>
+                         <td className='border border-slate-300 text-center'>{item.timing}</td>
+                         <td className='border border-slate-300 text-center'>{item.zone}</td>
+                         <td className='border border-slate-300 text-center'>{item.availability}
+                         </td>
+                         <td className='border border-slate-300 text-center'>
+                         <Link to={`/admin/edit-gir-events/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                             <i className="fas fa-pencil"></i>
+                         </Link>
+                         <Link className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                             <i className="fas fa-trash"></i>
+                         </Link>
+                         </td>
+                     </tr>
+                    )) }
                 </tbody>
             </table>
-            <Pagination/>
+                    <ReactPaginate
+                        previousLabel={"previous"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
         </div>
       </div>
       <FooterAdmin/>

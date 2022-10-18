@@ -6,6 +6,8 @@ import '../src/css/admin.css';
 
 import NotFound from './pages/404';
 
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import TopHead from './components/frontend/header/TopHead';
 import Header from './components/frontend/header/Header';
@@ -84,7 +86,10 @@ import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
 import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 
-
+const options = {
+  timeout: 2000,
+  position: positions.TOP_LEFT
+};
 
 function App() {
 
@@ -107,6 +112,7 @@ function App() {
     <Router>
       <TopHead />
       <Header />
+      <Provider template={AlertTemplate} {...options}>
       <Routes>
 
         <Route exact path='/' element={<Home />} />
@@ -143,7 +149,7 @@ function App() {
           <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
           <Route exact path="/admin/gir-events" element={<GirEvents />} />
           <Route exact path="/admin/add-gir-event" element={<CreateGirEvent />} />
-          <Route exact path="/admin/edit-gir-events/" element={<EditGirEvents />} />
+          <Route exact path="/admin/edit-gir-events/:id" element={<EditGirEvents />} />
           <Route exact path="/admin/devalia-events" element={<DevaliaEvents />} />
           <Route exact path="/admin/add-devalia-event" element={<CreateDevaliaEvent />} />
           <Route exact path="/admin/edit-devalia-events/" element={<EditDevaliaEvents />} />
@@ -202,6 +208,7 @@ function App() {
 
 
       </Routes>
+      </Provider>
       <Footer />
     </Router >
   );

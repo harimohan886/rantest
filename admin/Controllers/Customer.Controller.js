@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const validator = require('../helpers/validate');
-const ApiFeatures = require("../Utils/apifeatures");
+const ApiFeatures = require("../Utils/ApiFeatures");
 
 const asyncHandler = require('../Middleware/asyncHandler')
 
