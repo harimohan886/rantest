@@ -30,9 +30,9 @@ import HotelDetails from './pages/frontend/Hotel/HotelDetails';
 // Admin import starts here
 import Login from './pages/Admin/Auth/Login';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
-import GirEvents from './pages/Admin/SafariDates/GirEvents';
-import CreateGirEvent from './pages/Admin/SafariDates/CreateGirEvent';
-import EditGirEvents from './pages/Admin/SafariDates/EditGirEvents';
+import RanthamboreDates from './pages/Admin/SafariDates/RanthamboreDates';
+import CreateRanthamboreDates from './pages/Admin/SafariDates/CreateRanthamboreDates';
+import EditRanthamboreDates from './pages/Admin/SafariDates/EditRanthamboreDates';
 import DevaliaEvents from './pages/Admin/SafariDates/DevaliaEvents';
 import CreateDevaliaEvent from './pages/Admin/SafariDates/CreateDevaliaEvent';
 import EditDevaliaEvents from './pages/Admin/SafariDates/EditDevaliaEvents';
@@ -147,9 +147,9 @@ function App() {
 
 
           <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
-          <Route exact path="/admin/gir-events" element={<GirEvents />} />
-          <Route exact path="/admin/add-gir-event" element={<CreateGirEvent />} />
-          <Route exact path="/admin/edit-gir-events/:id" element={<EditGirEvents />} />
+          <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
+          <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
+          <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
           <Route exact path="/admin/devalia-events" element={<DevaliaEvents />} />
           <Route exact path="/admin/add-devalia-event" element={<CreateDevaliaEvent />} />
           <Route exact path="/admin/edit-devalia-events/" element={<EditDevaliaEvents />} />

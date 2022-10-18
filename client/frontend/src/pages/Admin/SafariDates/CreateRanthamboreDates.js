@@ -9,7 +9,7 @@ import axios from 'axios';
 import * as moment from 'moment';
 import { useAlert } from "react-alert";
 
-export default function CreateGirEvent() {
+export default function CreateRanthamboreDates() {
 
   const [startDate, setStartDate] = useState(new Date());
   const [availability, setAvailability] = useState('');
@@ -40,7 +40,7 @@ export default function CreateGirEvent() {
         if(res.status === 200) {
             alert.success("Data is created successfully");
             setTimeout(() => {
-                window.location = '/admin/gir-events';
+                window.location = '/admin/ranthambore-dates';
             }, 1000);
 
         } else {

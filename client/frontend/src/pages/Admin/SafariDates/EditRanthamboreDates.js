@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 
-export default function EditGirEvents() {
+export default function EditRanthamboreDates() {
 
   const alert = useAlert();
   const params = useParams();
@@ -63,7 +63,7 @@ useEffect(() => {
         if(res.data.success === true) {
             alert.success("Data is updated successfully");
             setTimeout(() => {
-                window.location = '/admin/gir-events';
+                window.location = '/admin/ranthambore-dates';
             }, 1000);
 
         } else if(res.data.validation_errors) {

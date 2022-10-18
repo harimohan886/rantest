@@ -10,7 +10,7 @@ import { useAlert } from "react-alert";
 import axios from 'axios';
 import * as moment from 'moment';
 
-export default function GirEvents() {
+export default function RanthamboreDates() {
 
     const alert = useAlert();
     const [startDate, setStartDate] = useState();
@@ -70,7 +70,7 @@ export default function GirEvents() {
         }).then(result => {
             alert.success("Data is deleted");
             setTimeout(() => {
-              window.location = '/admin/gir-events';
+              window.location = '/admin/ranthambore-dates';
              }, 1000);
         })
     }
@@ -124,7 +124,7 @@ export default function GirEvents() {
                     
                 </div>
                 <div className='mt-77'>
-                    <Link to='/admin/add-gir-event' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Create Event</Link>
+                    <Link to='/admin/add-ranthambore-dates' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Create Event</Link>
                 </div>
             </div>
             <table className='table bg-white border border-slate-300 mt-4'>
@@ -148,7 +148,7 @@ export default function GirEvents() {
                          <td className='border border-slate-300 text-center'>{item.availability}
                          </td>
                          <td className='border border-slate-300 text-center'>
-                         <Link to={`/admin/edit-gir-events/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                         <Link to={`/admin/edit-ranthamboreDates/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                              <i className="fas fa-pencil"></i>
                          </Link>
                          <Link onClick = {() => HandleDelete(item._id)} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
