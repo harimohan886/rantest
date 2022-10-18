@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
-import Pagination from '../../../components/Admin/Footer/Pagination';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import FilterEnquiry from '../../../components/Admin/Enquiry/FilterEnquiry';
 import EnquiryList from '../../../components/Admin/Enquiry/EnquiryList';
@@ -15,6 +14,8 @@ export default function GeneralEnquiries() {
   const [pageCount, setpageCount] = useState(0);
   const [page, setPage] = useState(1);
   let limit = 10;
+
+
   function getEnquiries() {
     axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?type=package&page=` + page, {
       headers: {
@@ -27,8 +28,8 @@ export default function GeneralEnquiries() {
       console.log('result enq', result)
       if (result.data.data.length > 0) {
         setEnquiries(result.data.data);
-        setpageCount(Math.ceil(result.data.data.total / result.data.data.per_page));
-        setPage(result.data.data.current_page);
+        setpageCount(Math.ceil(result.data.total / result.data.perPage));
+        setPage(result.data.page);
       }
     })
   }
@@ -41,29 +42,31 @@ export default function GeneralEnquiries() {
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
-
-    // setEnquiries(commentsFormServer.enquiries.data);
   };
 
-  const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
-    item => ({ label: item, value: item })
-  );
-  const [bookingDate, setbookingDate] = useState(new Date());
-  const [createdDate, setcreatedDate] = useState(new Date());
 
-  const HandleDelete = (id) => {
-    axios.delete(`/api/admin/enquiries/${id}`, {
+
+  const getFilterData = ({ phone, type, customer, bookingDate, createdDate }) => {
+    console.log('fut data', phone, type, customer, bookingDate, createdDate);
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?type=${type}&page=${page}&customer=${customer}&phone=${phone}&bookingDate=${bookingDate}&createDate=${createdDate}`, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
-      alert.success("Data is deleted");
-      setTimeout(() => {
-        window.location = 'admin/hotel-enquiries';
-      }, 1000);
+
+      console.log('filter enq', result)
+      if (result.data.data.length > 0) {
+        setEnquiries(result.data.data);
+        setpageCount(Math.ceil(result.data.total / result.data.perPage));
+        setPage(result.data.page);
+      }
     })
+
+
+
   }
 
 
@@ -77,7 +80,7 @@ export default function GeneralEnquiries() {
           <div className='mt-4'>
             <h1 className='text-2xl text-black font-bold mb-3'>General Enquiries</h1>
           </div>
-          <FilterEnquiry />
+          <FilterEnquiry onSubmit={getFilterData} />
           <EnquiryList enquiries={enquiries} />
 
           <ReactPaginate

@@ -6,6 +6,8 @@ const EnquiryController = require('../Controllers/Enquiry.Controller');
 
 router.get('/dashboard', EnquiryController.getAllEnquiesDashboard);
 
+router.get('/customer', EnquiryController.getAllEnquiriesCustomer);
+
 router.get('/', EnquiryController.getAllEnquirys);
 
 router.post('/', EnquiryController.createNewEnquiry);
