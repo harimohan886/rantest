@@ -1,13 +1,9 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/apifeatures");
 
 const asyncHandler = require('../Middleware/asyncHandler')
-
-const accessTokenSecret = 'youraccesstokensecret';
-var bcrypt = require("bcrypt");
 
 const Customer = require('../Models/Customer.model');
 const SafariBooking = require('../Models/SafariBooking.model');
@@ -15,9 +11,19 @@ const PackageBooking = require('../Models/PackageBooking.model');
 const ChambalBooking = require('../Models/ChambalBooking.model');
 const BookingCustomer = require('../Models/BookingCustomer.model');
 
-async function checkNameIsUnique(email) {
+async function checkNameIsUnique(email,type) {
 
-  totalPosts = await Customer.find({email:email}).countDocuments().exec();
+  totalPosts = await Customer.find({email: email, type: type}).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  }else{
+    return false;
+  }
+};
+
+async function checkCustomerIsUnique(email, type, mobile) {
+
+  totalPosts = await Customer.find({email: email, type: type, mobile: mobile}).countDocuments().exec();
   if (totalPosts > 0) {
     return true;
   }else{
@@ -100,30 +106,51 @@ module.exports = {
     }
   },
 
-  getAllAdmins: async (req, res, next) => {
+  createNewCustomer: async (req, res, next) => {
+
+    var checkCount = await checkCustomerIsUnique(req.body.email, req.body.type, req.body.mobile);
+
+    if (checkCount) {
+      return res.status(412)
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: 'duplicate email'
+          });
+    }
+
     try {
-      const results = await Customer.find({}, { __v: 0 });
-      res.send(results);
+
+      const customer_data = new Customer({
+        name : req.body.name,
+        mobile : req.body.mobile,
+        email : req.body.email,
+        type : req.body.type,
+        address : req.body.address,
+        state : req.body.state,
+      });
+
+      const customer_data_result = await customer_data.save();
+
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: customer_data_result
+      });
+
     } catch (error) {
       console.log(error.message);
-    }
-  },
-
-  adminLogout: async (req, res, next) => {
-    try {
-      req.user.tokens = req.user.tokens.filter((token) =>{
-        return token.token !== req.token 
-      })
-      await req.user.save()
-      res.send('user Logout')
-    } catch (error) {
-      res.status(500).send(error)
+      if (error.name === 'ValidationError') {
+        next(createError(422, error.message));
+        return;
+      }
+      next(error);
     }
   },
 
   createNewCustomerSafari: async (req, res, next) => {
 
-    var checkCount = await checkNameIsUnique(req.body.email);
+    var checkCount = await checkNameIsUnique(req.body.email, 'safari');
 
     if (checkCount) {
       return res.status(412)
@@ -196,7 +223,7 @@ module.exports = {
 
   createNewCustomerChambal: async (req, res, next) => {
 
-    var checkCount = await checkNameIsUnique(req.body.email);
+    var checkCount = await checkNameIsUnique(req.body.email, 'chambal');
 
     if (checkCount) {
       return res.status(412)
@@ -209,9 +236,31 @@ module.exports = {
 
     try {
 
+
+     switch (Number(req.body.zone)) {
+      case 1:
+      var booking_name = 'Chambal safari booking';
+      var booking_option = 'Cambal Safari Option 1';
+      break;
+      case 2:
+      var booking_name = 'Chambal Safari Booking with Pickup and Drop from Resort';
+      var booking_option = 'Cambal Safari Option 2';
+      break;
+      case 3:
+      var booking_name = 'Chambal Safari Booking with Lunch';
+      var booking_option = 'Cambal Safari Option 3';
+      break;
+      case 4:
+      var booking_name = 'Chambal Safari Booking with Luch including Pickup and Drop from Resort';
+      var booking_option = 'Cambal Safari Option 4';
+      break;
+    }  
+
       const safari_booking_data = new ChambalBooking({
         date : req.body.date,
         zone : req.body.zone,
+        booking_name : booking_name,
+        booking_option : booking_option,
         vehicle : req.body.vehicle,
         time : req.body.time,
         transaction_id : req.body.transaction_id,
@@ -254,7 +303,7 @@ module.exports = {
 
 createNewCustomerPackage: async (req, res, next) => {
 
-  var checkCount = await checkNameIsUnique(req.body.email);
+  var checkCount = await checkNameIsUnique(req.body.email, 'package');
 
     if (checkCount) {
       return res.status(412)
@@ -310,120 +359,14 @@ createNewCustomerPackage: async (req, res, next) => {
     }
   },
 
-
-  adminLogin: async (req, res, next) => {
-
-    const { email, password } = req.body;
-
-    const user = await Customer.find({email:email}).count();
-
-    if (user) {
-
-      const user = await Customer.findOne({email:email});
-
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-        );
-      if (!passwordIsValid) {
-        return res.status(401)
-        .send({
-          accessToken: null,
-          message: "Invalid Password!"
-        });
-      }
-
-      var token = jwt.sign({
-        id: user.id
-      }, process.env.JWT_SEC, {
-        expiresIn: 86400
-      });
-
-      user.tokens = user.tokens.concat({ token })
-      await user.save();
-
-      res.status(200)
-        .send({
-          user: {
-            id: user._id,
-            email: user.email,
-            username: user.username,
-            name: user.name,
-          },
-          message: "Login successfull",
-          accessToken: token,
-        });
-
-    } else {
-      next(createError(422, 'Username or password incorrect'));
-    }
-
-  },
-
   findCustomerById: async (req, res, next) => {
     const id = req.params.id;
     try {
       const auth = await Customer.findById(id);
-      // const auth = await Customer.findOne({ _id: id });
       if (!auth) {
         throw createError(404, 'Customer does not exist.');
       }
       res.send(auth);
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Customer id'));
-        return;
-      }
-      next(error);
-    }
-  },
-
-
-  resetPassword : async (req, res, next) => {
-
-    if (req.body.password !== req.body.password_confirmation) {
-
-      next(createError(400, "Pass and Confirm Password does not match!"));
-        return;
-    }
-
-    var passwordIsValid = bcrypt.compareSync(
-        req.body.current_password,
-        req.user.password
-        );
-
-    if (!passwordIsValid) {
-
-      next(createError(400, "Invalid or expired current password"));
-        return;
-    }
-    await Customer.updateOne(
-      { _id: req.user._id.toString() },
-      { $set: { password: bcrypt.hashSync(req.body.password, 8) } },
-      { new: true }
-      );
-    const user = await Customer.findById({ _id: req.user._id.toString() });
-
-    res.send({
-        success: true,
-        message: 'user fetched!',
-        data: user
-      });
-
-  },
-
-  profile: async (req, res, next) => {
-    try {
-      const auth = await Customer.findOne({ _id: req.user._id },{__v:0});
-      if (!auth) {
-        throw createError(404, 'Customer does not exist.');
-      }
-      res.send({
-        success: true,
-        message: 'user fetched!',
-        data: auth
-      });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
