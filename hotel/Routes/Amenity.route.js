@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 var multer = require('multer');
+const fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/amenities/');
+    const dir = 'uploads/amenities';
+    !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });
+    return cb(null, dir)
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
