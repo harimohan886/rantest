@@ -1,6 +1,9 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
+ fetch(...args));
+
 const Enquiry = require('../Models/Enquiry.model');
 
 module.exports = {
@@ -8,44 +11,44 @@ module.exports = {
     try {
 
       const filter_date = req.query.filter_date
-        ? {
-          booking_date: {
-            $regex: req.query.filter_date
-          },
-        }
-        : {};
+      ? {
+        booking_date: {
+          $regex: req.query.filter_date
+        },
+      }
+      : {};
 
       const filter_created_at = req.query.filter_created_at
-        ? {
-          addedAt: {
-            $regex: req.query.filter_created_at
-          }
+      ? {
+        addedAt: {
+          $regex: req.query.filter_created_at
         }
-        : {};
+      }
+      : {};
 
       const filter_name = req.query.filter_name
-        ? {
-          traveller_name: {
-            $regex: req.query.filter_name,
-            $options: "i",
-          },
-        }
-        : {};
+      ? {
+        traveller_name: {
+          $regex: req.query.filter_name,
+          $options: "i",
+        },
+      }
+      : {};
 
       const filter_type = req.query.filter_type
-        ? {
-          type: req.query.filter_type
-        }
-        : {};
+      ? {
+        type: req.query.filter_type
+      }
+      : {};
 
       const filter_phone = req.query.filter_phone
-        ? {
-          phone: {
-            $regex: req.query.filter_phone,
-            $options: "i",
-          }
+      ? {
+        phone: {
+          $regex: req.query.filter_phone,
+          $options: "i",
         }
-        : {};
+      }
+      : {};
 
       var page = parseInt(req.query.page) || 1;
       var size = parseInt(req.query.size) || 15;
@@ -60,15 +63,45 @@ module.exports = {
 
       var totalPosts = await Enquiry.find({ ...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type }).countDocuments().exec();
 
-      Enquiry.find({ ...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type }, {},
-        query, function (err, data) {
-          if (err) {
-            response = { "error": true, "message": "Error fetching data" + err };
-          } else {
-            response = { "success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
+      const data = await Enquiry.find({ ...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type }, {},
+        query).sort({ $natural: -1 });
+
+      if (!data) {
+        response = { "error": true, "message": "Error fetching data" + err };
+      } else {
+
+        let enqueryList = [];
+
+        for (let resData of data) {
+
+          const apiResponse = await fetch(`${process.env.HOTEL_MiCROSERVICE_URL}/hotels/${resData.hotel_id}`);
+
+          const apiResponseJson = await apiResponse.json();
+
+          if (apiResponseJson.success) {
+            var hotel = apiResponseJson.data.name;
+          }else{
+            var hotel = '';
           }
-          res.json(response);
-        }).sort({ $natural: -1 });
+
+          enqueryList.push({
+            _id:resData._id,
+            type: resData.type,
+            booking_date: resData.booking_date,
+            traveller_name: resData.traveller_name,
+            phone: resData.phone,
+            message: resData.message,
+            hotel_id: resData.hotel_id,
+            hotel: hotel,
+          });   
+
+        }
+
+        response = { "success": true, "message": 'data fetched', 'data': enqueryList, 'page': page, 'total': totalPosts, perPage: size };
+      }
+
+      return res.json(response);
+
     } catch (error) {
       console.log(error.message);
     }
