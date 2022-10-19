@@ -45,6 +45,8 @@ import KankaiEvents from './pages/Admin/SafariDates/KankaiEvents';
 import CreateKankaiEvent from './pages/Admin/SafariDates/CreateKankaiEvent';
 import EditKankaiEvents from './pages/Admin/SafariDates/EditKankaiEvents';
 import PriceList from './pages/Admin/PriceManagement/Price'
+import SafariList from './pages/Admin/PriceManagement/SafariPrice'
+
 import EditPrice from './pages/Admin/PriceManagement/EditPrice';
 import Listing from './pages/Admin/PriceManagement/PriceListing'
 import Customers from './pages/Admin/Customers/Customers';
@@ -164,6 +166,9 @@ function App() {
           <Route exact path="/admin/price-list/:type" element={<PriceList />} />
           <Route exact path="/admin/edit-price/:id/:type" element={<EditPrice />} />
           <Route exact path="/admin/add-price/:id/:type" element={<EditPrice />} />
+
+          <Route exact path="/admin/safari-prices" element={<SafariList />} />
+
           <Route exact path="/admin/listing" element={<Listing />} />
           <Route exact path="/admin/customers" element={<Customers />} />
           <Route exact path="/admin/safari-booking" element={<SafariManagement />} />

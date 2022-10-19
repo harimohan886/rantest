@@ -105,7 +105,13 @@ export default function Sidebar() {
                     <div id="collapse-prices" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
+                        <li className="items-center">
+                            <a href='/admin/safari-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Safari Price</a>
+                          </li>
                           <li className="items-center">
+                            <a href='/admin/chambal-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Chambal Price</a>
+                          </li>
+                          {/* <li className="items-center">
                             <a href='/admin/price-list/default' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</a>
                           </li>
                           <li className="items-center">
@@ -113,7 +119,7 @@ export default function Sidebar() {
                           </li>
                           <li className="items-center">
                             <a href='/admin/price-list/festival' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</a>
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
                     </div>
