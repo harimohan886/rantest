@@ -2,10 +2,9 @@ import React , { useState , useEffect } from 'react'
 import DateRange from './DatePicker'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 import * as moment from 'moment'
-
 import { useAlert } from "react-alert"
 
 export default function PriceType({ id , type , action }) {
@@ -17,8 +16,9 @@ export default function PriceType({ id , type , action }) {
   const alert = useAlert();
 
   function getDetails(type) {
-    
-    axios.get(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}?type=${type}`, {
+    const typeData = type == 'chambal' ? 'chambal' : 'safari';
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}?type=${type}`, {
         headers: {
           'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
@@ -35,15 +35,25 @@ export default function PriceType({ id , type , action }) {
   },[]);
 
   const HandleUpdate = () => {
-    const data  = {
+   
+    const Safaridata  = {
         "name" : name,
         "price" : price,
         "type" : type
     }
 
+    const chambalData = {
+      "name" : name,
+      "price" : price
+    }
+
+    const data = type == 'chambal' ? chambalData : Safaridata;
+
+    const typeData = type == 'chambal' ? 'chambal' : 'safari';
+
     id == 'add'   ?
 
-    axios.post(`${process.env.REACT_APP_BASE_URL}/safari/prices`, data , {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices`, data , {
         headers: {
           'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
@@ -60,7 +70,7 @@ export default function PriceType({ id , type , action }) {
              }
         }) 
     : 
-    axios.patch(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}`, data , {
+    axios.patch(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}`, data , {
         headers: {
           'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
@@ -125,13 +135,10 @@ export default function PriceType({ id , type , action }) {
             }) 
         } 
 
-
-
   return (
     <>
     { 
-    
-    type == 'festival' ?
+      type == 'festival' ?
         <>
             <div className="mb-6">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
@@ -166,6 +173,7 @@ export default function PriceType({ id , type , action }) {
         :
          <div className="tab-pane fade show active" id="tabs-indian" role="tabpanel" aria-labelledby="tabs-indian-tab">
             <div className="grid grid-cols-6 gap-4">
+
             <div className="mb-6">
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
                 <input type="text" id="name"  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
@@ -183,9 +191,7 @@ export default function PriceType({ id , type , action }) {
 
             </div>
         </div>
-    }
-            
+    }     
     </>
-    
   )
 }

@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 import { useAlert } from "react-alert";
 import axios from 'axios'
 
-export default function PriceList( { type } ) {
+export default function ChambalPriceList( { type } ) {
 
     const [details , setDetails] = useState([]);
     const alert = useAlert();
     function getDetails(type) {
-
-      const typeData = type == 'chambal' ? 'chambal' : 'safari';
-
-      axios.get(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices?type=${type}`, {
+      axios.get(`${process.env.REACT_APP_BASE_URL}/safari/prices?type=${type}`, {
           headers: {
             'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
@@ -27,8 +24,7 @@ export default function PriceList( { type } ) {
     },[]);
 
     const HandleDelete = (id) => {
-      const typeData = type == 'chambal' ? 'chambal' : 'safari';
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}?type=${type}`, {
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}?type=${type}`, {
             headers: {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
