@@ -131,7 +131,9 @@ module.exports = {
 
   updateAAmenity: async (req, res, next) => {
     try {
-      req.body.image = req.file.path;
+      if (req.file && req.file.size > 0) {
+        req.body.image = req.file.path;
+      }
       const id = req.params.id;
       const updates = req.body;
       const options = { new: true };

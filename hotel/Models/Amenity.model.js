@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const AmenitySchema = new Schema({
 	amenity: {
 		type: String,
-		unique: true,
 		required: true,
 		index: true,
 	},
