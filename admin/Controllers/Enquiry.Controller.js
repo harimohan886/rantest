@@ -11,44 +11,44 @@ module.exports = {
     try {
 
       const filter_date = req.query.filter_date
-      ? {
-        booking_date: {
-          $regex: req.query.filter_date
-        },
-      }
-      : {};
+        ? {
+          booking_date: {
+            $regex: req.query.filter_date
+          },
+        }
+        : {};
 
       const filter_created_at = req.query.filter_created_at
-      ? {
-        addedAt: {
-          $regex: req.query.filter_created_at
+        ? {
+          addedAt: {
+            $regex: req.query.filter_created_at
+          }
         }
-      }
-      : {};
+        : {};
 
       const filter_name = req.query.filter_name
-      ? {
-        traveller_name: {
-          $regex: req.query.filter_name,
-          $options: "i",
-        },
-      }
-      : {};
+        ? {
+          traveller_name: {
+            $regex: req.query.filter_name,
+            $options: "i",
+          },
+        }
+        : {};
 
       const filter_type = req.query.filter_type
-      ? {
-        type: req.query.filter_type
-      }
-      : {};
+        ? {
+          type: req.query.filter_type
+        }
+        : {};
 
       const filter_phone = req.query.filter_phone
-      ? {
-        phone: {
-          $regex: req.query.filter_phone,
-          $options: "i",
+        ? {
+          phone: {
+            $regex: req.query.filter_phone,
+            $options: "i",
+          }
         }
-      }
-      : {};
+        : {};
 
       var page = parseInt(req.query.page) || 1;
       var size = parseInt(req.query.size) || 15;
@@ -70,7 +70,7 @@ module.exports = {
         response = { "error": true, "message": "Error fetching data" + err };
       } else {
 
-        let enqueryList = [];
+        /*let enqueryList = [];
 
         for (let resData of data) {
 
@@ -95,9 +95,9 @@ module.exports = {
             hotel: hotel,
           });   
 
-        }
+        }*/
 
-        response = { "success": true, "message": 'data fetched', 'data': enqueryList, 'page': page, 'total': totalPosts, perPage: size };
+        response = { "success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
       }
 
       return res.json(response);
