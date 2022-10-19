@@ -17,7 +17,7 @@ export default function GeneralEnquiries() {
 
 
   function getEnquiries() {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?page=` + page, {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?filter_type=package&page=` + page, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
