@@ -15,7 +15,7 @@ export default function Price() {
         <div className="w-full mb-12 xl:mb-0 px-4 pt-12">
           <div className="grid grid-cols-2 gap-4">
             <div className='mt-50'>
-              <h1 className='text-2xl text-black font-bold mb-3'>Safari Price </h1>
+              <h1 className='text-2xl text-black font-bold mb-3'>{params.type} Price </h1>
             </div>
           </div>
           <PriceList type = {params.type} />

@@ -17,7 +17,7 @@ export default function EditPrice() {
       <AdminNavbar/> 
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-          <h1 className='text-2xl text-black font-bold mb-3'>Edit {params.type} Prices</h1>
+          <h1 className='text-2xl text-black font-bold mb-3'>{action} {params.type} Prices</h1>
             <PriceType id = {params.id} type = {params.type}  action = {action} />
         </div>
       </div>
