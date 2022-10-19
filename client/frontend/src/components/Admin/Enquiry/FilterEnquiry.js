@@ -3,6 +3,8 @@ import { React, useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import { SelectPicker } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css'; // or 'rsuite/dist/rsuite.min.css'
+import moment from 'moment'
+
 
 
 
@@ -12,8 +14,8 @@ export default function FilterEnquiry(props) {
     const [type, setType] = useState('');
     const [customer, setCustomer] = useState('');
     const [customerData, setCustomerData] = useState('');
-    const [bookingDate, setBookingDate] = useState(new Date());
-    const [createdDate, setCreatedDate] = useState(new Date());
+    const [bookingDate, setBookingDate] = useState('');
+    const [createdDate, setCreatedDate] = useState('');
 
     function getAllCustomer() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries/customer?type=package`, {
@@ -24,7 +26,6 @@ export default function FilterEnquiry(props) {
             },
         }).then(result => {
 
-            console.log('result enq', result)
             if (result.data.data.length > 0) {
                 //setEnquiries(result.data.data);
 
@@ -46,8 +47,22 @@ export default function FilterEnquiry(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let booking_date = '';
+        let created_date = '';
 
-        props.onSubmit({ phone, type, customer, bookingDate, createdDate })
+        if (bookingDate && bookingDate !== 'null') {
+            booking_date = moment(bookingDate).format('YYYY-MM-DD')
+
+
+        }
+
+        if (createdDate && createdDate !== 'null') {
+            created_date = moment(createdDate).format('YYYY-MM-DD')
+
+
+        }
+
+        props.onSubmit({ phone, type, customer, booking_date, created_date })
     }
 
 
@@ -71,7 +86,7 @@ export default function FilterEnquiry(props) {
             </div>
             <div className='controlEnquiryDate'>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Date</label>
-                <DatePicker selected={bookingDate} onChange={date => setBookingDate(date)} />
+                <DatePicker selected={bookingDate} dateFormat="yyyy-MM-dd" onChange={date => setBookingDate(date)} />
             </div>
             <div className='form-group'>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Name</label>
@@ -84,7 +99,7 @@ export default function FilterEnquiry(props) {
             </div>
             <div className='form-group controlEnquiryDate'>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Created</label>
-                <DatePicker selected={createdDate} onChange={date => setCreatedDate(date)} />
+                <DatePicker selected={createdDate} dateFormat="yyyy-MM-dd" onChange={date => setCreatedDate(date)} />
             </div>
             <div className='form-group'>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>

@@ -57,6 +57,14 @@ export default function EnquiryList({ enquiries }) {
                         </tr>
 
                     ))}
+                    {(!enquiries || enquiries.length === 0) &&
+                        <tr>
+                            <td className='border border-slate-300 text-center' colSpan="7">No data Found</td>
+
+
+                        </tr>
+
+                    }
                 </tbody>
             </table>
 
