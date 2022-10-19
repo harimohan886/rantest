@@ -3,9 +3,10 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 import PriceList from '../../../components/Admin/PriceManagement/PriceList';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
+import { useParams } from "react-router-dom";
 
 export default function Price() {
-
+  const params = useParams();
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -17,7 +18,7 @@ export default function Price() {
               <h1 className='text-2xl text-black font-bold mb-3'>Safari Price </h1>
             </div>
           </div>
-          <PriceList/>
+          <PriceList type = {params.type} />
         </div>
       </div>
       <FooterAdmin/>

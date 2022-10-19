@@ -161,8 +161,9 @@ function App() {
           <Route exact path="/admin/kankai-events" element={<KankaiEvents />} />
           <Route exact path="/admin/add-kankai-event" element={<CreateKankaiEvent />} />
           <Route exact path="/admin/edit-kankai-events/" element={<EditKankaiEvents />} />
-          <Route exact path="/admin/price-list" element={<PriceList />} />
-          <Route exact path="/admin/edit-price" element={<EditPrice />} />
+          <Route exact path="/admin/price-list/:type" element={<PriceList />} />
+          <Route exact path="/admin/edit-price/:id/:type" element={<EditPrice />} />
+          <Route exact path="/admin/add-price/:id/:type" element={<EditPrice />} />
           <Route exact path="/admin/listing" element={<Listing />} />
           <Route exact path="/admin/customers" element={<Customers />} />
           <Route exact path="/admin/safari-booking" element={<SafariManagement />} />

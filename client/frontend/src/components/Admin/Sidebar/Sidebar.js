@@ -106,13 +106,13 @@ export default function Sidebar() {
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
-                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</Link>
+                            <a href='/admin/price-list/default' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</a>
                           </li>
                           <li className="items-center">
-                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Weekend Price</Link>
+                            <a href='/admin/price-list/weekend' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Weekend Price</a>
                           </li>
                           <li className="items-center">
-                            <Link to='/admin/price-list' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</Link>
+                            <a href='/admin/price-list/festival' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</a>
                           </li>
                         </ul>
                       </div>
