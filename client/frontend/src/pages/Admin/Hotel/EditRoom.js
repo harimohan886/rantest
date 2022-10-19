@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import Select from 'react-select';
 
@@ -13,6 +13,7 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 
 export default function EditRoom() {
     const params = useParams();
+    const navigate = useNavigate();
 
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [formatFacilities, setFormatFacilities] = useState([]);
@@ -26,7 +27,7 @@ export default function EditRoom() {
 
 
 
-    const HandleImage = (e) => {
+    const handleImage = (e) => {
         setImage(e.target.files[0]);
         if (e.target.files[0]) {
             setSrc(URL.createObjectURL(e.target.files[0]));
@@ -34,7 +35,7 @@ export default function EditRoom() {
     }
 
 
-    function GetDetails() {
+    function getDetails() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotel-rooms/${params.id}`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -80,7 +81,7 @@ export default function EditRoom() {
 
     useEffect(() => {
 
-        GetDetails();
+        getDetails();
         getFacilities();
     }, []);
 
@@ -94,22 +95,23 @@ export default function EditRoom() {
 
     const faci = [];
 
-    const HandleSubmit = () => {
-        selectedFacilities.map(item => (
-            faci.push({ facility: item.label })
-        ))
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
 
 
-        const formData = {
-            hotel_id: hotelId,
-            image: image,
-            room: name,
-            status: status,
-            facility: faci,
-        }
+        selectedFacilities.forEach((item) => {
+            faci.push(item.label)
 
-        console.log("facilil", faci);
-        console.log("formData", formData);
+        });
+
+        const formData = new FormData()
+        formData.append('hotel_id', hotelId);
+        formData.append('room', name);
+        formData.append('image', image);
+        formData.append('status', status);
+        formData.append('facility', faci);
+
 
         axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/hotel-rooms/${params.id}`, formData, {
             headers: {
@@ -118,9 +120,7 @@ export default function EditRoom() {
         }).then(res => {
             if (res.data.success === true) {
                 swal("Data is updated successfully", "success");
-                setTimeout(() => {
-                    window.location = `/admin/hotel-rooms/${params.id}`;
-                }, 1000);
+                navigate(`/admin/hotel-rooms/${hotelId}`);
 
             } else if (res.data.error) {
                 swal(res.data.error.message, "error");
@@ -138,7 +138,7 @@ export default function EditRoom() {
                     <div className='mt-4'>
                         <h1 className='text-2xl text-black font-bold mb-3'>Edit Room</h1>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Room name</label>
                             <input type="text" id="roomName" value={name} onChange={(e) => setName(e.target.value)} placeholder='Room Name' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
@@ -153,7 +153,7 @@ export default function EditRoom() {
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Image</label>
-                            <input onChange={HandleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                            <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                             {(typeof image === 'string') ? <img src={`${process.env.REACT_APP_HOTEL_SERVER_URL}/${image}`} alt={name} width="300px" /> : <img src={`${src}`} alt={name} width="300px" />}
 
                         </div>
@@ -173,7 +173,7 @@ export default function EditRoom() {
                             </div>
                         </div>
                         <div className="button-section">
-                            <button className="text-white bg-success font-medium rounded px-5 py-2.5 text-center add" type="button" onClick={HandleSubmit}>Save</button>
+                            <button className="text-white bg-success font-medium rounded px-5 py-2.5 text-center add" type="submit" >Save</button>
                         </div>
                     </form>
                 </div>

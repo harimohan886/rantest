@@ -68,7 +68,7 @@ export default function HotelRooms() {
                         </thead>
                         <tbody>
                             {details && details.map((item, index) => (
-                                <tr>
+                                <tr key={index}>
                                     <td className='border border-slate-300 text-center'>{index + 1}</td>
                                     <td className='border border-slate-300 text-center'>{item.room}</td>
                                     <td className='border border-slate-300 text-center'>
