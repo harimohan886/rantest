@@ -62,10 +62,10 @@ export default function EditAmenity() {
         const getAmenity = async () => {
             try {
                 const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`);
-
                 setAmenity(res.data.data.amenity);
                 setStatus(res.data.data.status);
-                setSrc(`${res.data.data.image}`);
+                setSrc(res.data.data.image);
+                setImage(res.data.data.image);
 
 
             } catch (err) {
