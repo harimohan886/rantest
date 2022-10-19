@@ -75,7 +75,7 @@ export default function GeneralEnquiries() {
           <div className='mt-4'>
             <h1 className='text-2xl text-black font-bold mb-3'>General Enquiries</h1>
           </div>
-          <FilterEnquiry onSubmit={getFilterData} />
+          <FilterEnquiry onSubmit={getFilterData} type='package' />
           <EnquiryList enquiries={enquiries} />
 
           <ReactPaginate

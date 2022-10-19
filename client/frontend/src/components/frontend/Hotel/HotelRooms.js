@@ -4,6 +4,13 @@ export default function HotelRooms({ rooms }) {
   const details = rooms.hotel_rooms;
   const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 150,
+      behavior: "smooth",
+    });
+  };
+
 
   return (
     <>
@@ -30,7 +37,7 @@ export default function HotelRooms({ rooms }) {
 
               </ul>
               <div className="findButton">
-                <a href="#!" className="btn btn-danger btn-lg">Book Now</a>
+                <button onClick={scrollToTop} className="btn btn-danger btn-lg">Book Now</button>
               </div>
             </div>
           </div>

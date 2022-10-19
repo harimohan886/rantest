@@ -43,7 +43,7 @@ export default function EnquiryList({ enquiries, type }) {
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index + 1}</td>
                             <td className='border border-slate-300 text-center'>{item.booking_date}</td>
-                            {type === 'hotel' && <td className='border border-slate-300 text-center'>Corbett Paradiso Resort</td>}
+                            {type === 'hotel' && <td className='border border-slate-300 text-center'>{item.hotel}</td>}
                             <td className='border border-slate-300 text-center'>{item.traveller_name}</td>
                             <td className='border border-slate-300 text-center'>{item.phone}</td>
                             <td className='border border-slate-300 text-center'>{item.message}</td>

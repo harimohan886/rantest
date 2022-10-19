@@ -72,7 +72,7 @@ export default function HotelEnquiries() {
           <div className='mt-4'>
             <h1 className='text-2xl text-black font-bold mb-3'>Hotel Enquiries</h1>
           </div>
-          <FilterEnquiry onSubmit={getFilterData} />
+          <FilterEnquiry onSubmit={getFilterData} type='hotel' />
           <EnquiryList enquiries={enquiries} type='hotel' />
           <ReactPaginate
             previousLabel={"previous"}

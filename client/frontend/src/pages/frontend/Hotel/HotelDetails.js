@@ -11,6 +11,7 @@ export default function HotelDetails() {
 
     const [hotel, setHotel] = useState({});
     const [hotelId, setHotelId] = useState('');
+    const [hotelName, setHotelName] = useState('');
     const params = useParams();
 
 
@@ -21,6 +22,7 @@ export default function HotelDetails() {
 
             setHotel(res.data.data);
             setHotelId(res.data.data.hotel._id);
+            setHotelName(res.data.data.hotel.name);
 
         }
 
@@ -39,7 +41,7 @@ export default function HotelDetails() {
                         <AmenitiesHotel amenities={hotel} />
                     </div>
                     <div className='col-sm-4'>
-                        <EnquiryForm hotel_id={hotelId} type="hotel" />
+                        <EnquiryForm hotel_id={hotelId} type="hotel" hotel_name={hotelName} />
                     </div>
                 </div>
                 <div className='hotel-rooms'>

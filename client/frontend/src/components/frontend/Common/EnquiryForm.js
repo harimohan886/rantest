@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import swal from 'sweetalert';
 
 
-export default function EnquiryForm({ hotel_id, type }) {
+export default function EnquiryForm({ hotel_id, type, hotel_name }) {
 
   const [error_list, setErrorList] = useState([]);
   const [success_msg, setSuccessMsg] = useState("");
@@ -17,6 +17,7 @@ export default function EnquiryForm({ hotel_id, type }) {
     booking_date: '',
     type: type,
     hotel_id: '',
+    hotel: '',
   });
 
 
@@ -36,7 +37,7 @@ export default function EnquiryForm({ hotel_id, type }) {
     }
 
     if (enquiry.booking_date === '') {
-      setErrorList(errorlist => ({ ...errorlist, booking_date: 'Please choose booking date!' }));
+      setErrorList(errorlist => ({ ...errorlist, booking_date: 'Please choose a booking date!' }));
     }
 
     if (enquiry.traveller_name === '' || enquiry.phone === null || enquiry.booking_date === null) {
@@ -47,6 +48,8 @@ export default function EnquiryForm({ hotel_id, type }) {
     let data = { ...enquiry };
 
     data.hotel_id = hotel_id;
+    data.hotel = hotel_name;
+
 
 
     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/enquiries`, data).then(res => {
