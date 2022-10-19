@@ -135,9 +135,9 @@ module.exports = {
 
       var totalEnq = await Enquiry.find({}).countDocuments().exec();
 
-      const general_enqs = await Enquiry.find({ type: 'general' }).sort({ $natural: -1 }).limit(5);
+      const general_enqs = await Enquiry.find({type: {$ne: "hotel"}}).sort({ $natural: -1 }).limit(5);
 
-      const hotel_enqs = await Enquiry.find({ type: 'hotel' }).sort({ $natural: -1 }).limit(5);
+      const hotel_enqs = await Enquiry.find({type: 'hotel' }).sort({ $natural: -1 }).limit(5);
 
       res.send({
         success: true,
