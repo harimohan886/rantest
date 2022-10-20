@@ -3,6 +3,20 @@ const mongoose = require('mongoose');
 
 const Price = require('../Models/Price.model');
 
+
+
+async function isWeekend(dateObj) {
+
+   var dt = new Date(dateObj);
+
+  if(dt.getDay() == 6 || dt.getDay() == 0)
+  {
+    return true;
+  } else{
+    return false;
+  }
+};
+
 module.exports = {
   getAllPrices: async (req, res, next) => {
     var type = req.query.type || 'default';
@@ -28,6 +42,48 @@ module.exports = {
         message: 'Data fetched',
         data: results
       });
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
+  getBookingPricesByDate: async (req, res, next) => {
+
+    var type = req.body.date;    
+
+    try {
+      var checkCount = await isWeekend(req.body.date);
+      var date_to =  req.body.date ;
+
+      const festivalData =  await Price.find({type: 'festival', date_from: { '$gte': date_to }, date_to: { '$lte': date_to }});
+
+      if (festivalData && festivalData.length > 0) {
+        return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: festivalData
+        });
+      }else if (checkCount) {
+
+        const weekendData =  await Price.findOne({ type: 'weekend', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
+        return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: weekendData
+        });
+      }else{
+
+        const weekendData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
+        return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: weekendData
+        });
+      }
+
     } catch (error) {
       console.log(error.message);
     }
@@ -118,3 +174,17 @@ module.exports = {
     }
   }
 };
+
+/*var date_to =  req.body.date ;
+          
+           const ddd =  await Price.find({  $or: [
+              {
+                  $and: [
+                      {date_from: { '$gte': date_to }}, {date_to: { '$lte': date_to }}
+                  ]
+              },
+              {
+                  date_to: {$regex: date_to}
+              }
+          ]
+      });*/
