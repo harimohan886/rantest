@@ -40,7 +40,7 @@ export default function EditAmenity() {
         try {
             const res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`, data);
 
-            navigate('/admin/hotel-amenities');
+            navigate('/admin/amenities');
 
             swal(res.data.message, "success").then(() => {
 
@@ -62,10 +62,10 @@ export default function EditAmenity() {
         const getAmenity = async () => {
             try {
                 const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/amenities/${params.id}`);
-
                 setAmenity(res.data.data.amenity);
                 setStatus(res.data.data.status);
-                setSrc(`${res.data.data.image}`);
+                setSrc(res.data.data.image);
+                setImage(res.data.data.image);
 
 
             } catch (err) {
@@ -104,12 +104,15 @@ export default function EditAmenity() {
                         <div className='mb-6'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Amenity Logo</label>
                             <input className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={handleInputImageChange} />
-                            {(typeof src === 'string') && src && <img src={(`${HSURL}/${src}`)} alt={amenity} className="img-responsive mt-2" width="85" height="85" />}
+
+                            {((typeof src === 'string') && src.indexOf('blob') === -1)
+                                ? <img src={(`${HSURL}/${src}`)} alt={amenity} className="img-responsive mt-2" width="85" height="85" />
+                                : <img src={src} alt={amenity} className="img-responsive mt-2" width="85" height="85" />}
 
                         </div>
                         <div className='flex'>
                             <button type="submit" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
-                            <Link to='/admin/hotel-amenities' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
+                            <Link to='/admin/amenities' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
                         </div>
                     </form>
                 </div>

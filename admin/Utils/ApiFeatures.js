@@ -49,8 +49,6 @@ class ApiFeatures {
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
 
-    console.log(queryStr);
-
     this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -63,7 +61,7 @@ class ApiFeatures {
 
     this.query.totalCount = this.query.length;
 
-    this.query = this.query.limit(resultPerPage).skip(skip);
+    this.query = this.query.limit(resultPerPage).skip(skip).sort({$natural:-1}).populate(['booking_customers', 'chambal_booking', 'safari_booking', 'package_booking']);
 
     return this;
   }

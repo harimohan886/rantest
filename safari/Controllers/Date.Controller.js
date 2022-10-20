@@ -221,12 +221,16 @@ module.exports = {
   },
 
   uploadCsv: async (req, res, next) => {
-    var file_path = req.file.path;
+
+    if (req.file && (req.file.size > 0)) {
+      var file_path = req.file.path;
+    }
     csv()
     .fromFile(file_path)
     .then( async(jsonObj) =>{
       await Date.deleteMany({});
       const result = await  Date.insertMany(jsonObj);
+      console.log(result);
       res.send({
         success: true,
         message: 'Csv data uploaded',

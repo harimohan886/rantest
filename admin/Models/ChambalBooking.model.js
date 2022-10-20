@@ -11,6 +11,12 @@ const ChambalBookingSchema = new Schema({
 		type: String,
 		required: [true, "zone required!"],
 	},
+	booking_name: {
+		type: String
+	},
+	booking_option: {
+		type: String
+	},
 	vehicle: {
 		type: String,
 		required: [true, "vehicle required!"],
@@ -37,15 +43,9 @@ const ChambalBookingSchema = new Schema({
 	},
 	status: {
 		type: String,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const ChambalBooking = mongoose.model('chambal_bookings', ChambalBookingSchema);

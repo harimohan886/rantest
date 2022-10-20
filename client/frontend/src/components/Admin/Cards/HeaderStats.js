@@ -1,10 +1,33 @@
-import React from "react";
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 // components
 
 import CardStats from "./CardStats";
 
 export default function HeaderStats() {
+
+  const [hotelCount, setHotelCount] = useState(0);
+
+
+  function getEnquiries() {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/dashboard`, {
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+      },
+    }).then(result => {
+      console.log('count result', result)
+      setHotelCount(result.data);
+
+    })
+  }
+
+  useEffect(() => {
+    getEnquiries();
+  }, []);
+
+
   return (
     <>
       {/* Header */}
@@ -17,7 +40,7 @@ export default function HeaderStats() {
                 <CardStats
                   statBgColor="bg-hotel-maroon"
                   statSubtitle="Hotels"
-                  statTitle="27"
+                  statTitle={hotelCount}
                   statDescripiron="Total hotels available"
                   statIconName="fas fa-hotel"
                   statIconColor="text-white"

@@ -23,6 +23,8 @@ async function checkNameIsUnique(email,type) {
 
 async function checkCustomerIsUnique(email, type, mobile) {
 
+  console.log({email: email, type: type, mobile: mobile});
+
   totalPosts = await Customer.find({email: email, type: type, mobile: mobile}).countDocuments().exec();
   if (totalPosts > 0) {
     return true;
@@ -115,7 +117,7 @@ module.exports = {
           .send({
             success: false,
             message: 'Validation failed',
-            data: 'duplicate email'
+            data: 'duplicate customer'
           });
     }
 
@@ -235,7 +237,6 @@ module.exports = {
     }
 
     try {
-
 
      switch (Number(req.body.zone)) {
       case 1:

@@ -28,15 +28,9 @@ const SafariBookingSchema = new Schema({
 	},
 	status: {
 		type: String,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const SafariBooking = mongoose.model('safari_bookings', SafariBookingSchema);

@@ -14,6 +14,8 @@ export default function HotelAmenities() {
     const [pageCount, setpageCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [mHotelAmenities, setMHotelAmenities] = useState([]);
+    const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
+
 
     const params = useParams();
     let hotel_id = '';
@@ -103,7 +105,7 @@ export default function HotelAmenities() {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
         }).then(result => {
             alert.success("Amenity is deleted");
@@ -148,7 +150,10 @@ export default function HotelAmenities() {
                                     <td className='border border-slate-300 text-center'>{index + 1}</td>
                                     <td className='border border-slate-300 text-center'>{item.amenity.amenity}</td>
                                     <td className='border border-slate-300 text-center'>
-                                        <img style={{ margin: "0 auto" }} src={(`${item.amenity.image.substring(item.amenity.image.indexOf('/uploads'), item.amenity.image.length)}`)} alt='swimming pool' width="50" />
+
+                                        {/* <img style={{ margin: "0 auto" }} src={(`${item.amenity.image.substring(item.amenity.image.indexOf('/uploads'), item.amenity.image.length)}`)} alt='swimming pool' width="50" /> */}
+
+                                        <img style={{ margin: "0 auto" }} src={(`${HSURL}/${item.amenity.image}`)} alt={item.amenity} width="50" />
 
                                     </td>
                                     <td className='border border-slate-300 text-center'>
@@ -171,7 +176,7 @@ export default function HotelAmenities() {
                                     <td className='border border-slate-300 text-center'>{index + 1}</td>
                                     <td className='border border-slate-300 text-center'>{item.amenity}</td>
                                     <td className='border border-slate-300 text-center'>
-                                        <img style={{ margin: "0 auto" }} src={(`${item.image.substring(item.image.indexOf('/uploads'), item.image.length)}`)} alt='swimming pool' width="50" />
+                                        <img style={{ margin: "0 auto" }} src={(`${HSURL}/${item.image}`)} alt={item.amenity} width="50" />
                                     </td>
                                     <td className='border border-slate-300 text-center'>
                                         <label htmlFor={`default-toggle-${item._id}`} className="inline-flex relative w-full cursor-pointer">

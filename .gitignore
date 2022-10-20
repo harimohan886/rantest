@@ -14,10 +14,9 @@ package-lock.json
 # testing
 /coverage
 /db
-
-
+#hotel image  
+hotel/uploads
 client/frontend/public/uploads/
-hotel/uploads/
 package/Controllers
 package/Models
 package/Routes

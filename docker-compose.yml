@@ -67,6 +67,7 @@ services:
 
     volumes:
       - .:/app/
+      - ./hotel/uploads:/root/ranthambore/hotel/uploads
       - /app/hotel/node_modules
     env_file:
       - ./hotel/.env.dev

@@ -3,7 +3,7 @@ import React from 'react'
 import swal from 'sweetalert';
 
 
-export default function EnquiryList({ enquiries }) {
+export default function EnquiryList({ enquiries, type }) {
 
     const handleDelete = (id) => {
         console.log("id", id);
@@ -28,7 +28,7 @@ export default function EnquiryList({ enquiries }) {
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>ID</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Date</th>
-                        {/* <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Hotel</th> */}
+                        {type === 'hotel' && <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Hotel</th>}
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Phone</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Message</th>
@@ -43,7 +43,7 @@ export default function EnquiryList({ enquiries }) {
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index + 1}</td>
                             <td className='border border-slate-300 text-center'>{item.booking_date}</td>
-                            {/* <td className='border border-slate-300 text-center'>Corbett Paradiso Resort</td> */}
+                            {type === 'hotel' && <td className='border border-slate-300 text-center'>{item.hotel}</td>}
                             <td className='border border-slate-300 text-center'>{item.traveller_name}</td>
                             <td className='border border-slate-300 text-center'>{item.phone}</td>
                             <td className='border border-slate-300 text-center'>{item.message}</td>
@@ -57,6 +57,14 @@ export default function EnquiryList({ enquiries }) {
                         </tr>
 
                     ))}
+                    {(!enquiries || enquiries.length === 0) &&
+                        <tr>
+                            <td className='border border-slate-300 text-center' colSpan="7">No data Found</td>
+
+
+                        </tr>
+
+                    }
                 </tbody>
             </table>
 

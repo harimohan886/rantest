@@ -1,127 +1,197 @@
-import React from 'react'
+import React , { useState , useEffect } from 'react'
 import DateRange from './DatePicker'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import * as moment from 'moment'
+import { useAlert } from "react-alert"
 
-export default function PriceType() {
+export default function PriceType({ id , type , action }) {
+
+  const [name , setName] = useState();
+  const [price , setPrice] = useState();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const alert = useAlert();
+
+  function getDetails(type) {
+    const typeData = type == 'chambal' ? 'chambal' : 'safari';
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}?type=${type}`, {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+          },
+        }).then(result => { 
+            setName(result.data.data.name);
+            setPrice(result.data.data.price);
+        })   
+  }
+
+  useEffect(() => {
+    id  != 'add' && getDetails(type);
+  },[]);
+
+  const HandleUpdate = () => {
+   
+    const Safaridata  = {
+        "name" : name,
+        "price" : price,
+        "type" : type
+    }
+
+    const chambalData = {
+      "name" : name,
+      "price" : price
+    }
+
+    const data = type == 'chambal' ? chambalData : Safaridata;
+
+    const typeData = type == 'chambal' ? 'chambal' : 'safari';
+
+    id == 'add'   ?
+
+    axios.post(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices`, data , {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+          },
+        }).then(result => { 
+             if(result.data.success === true) {
+                 alert.success(result.data.message);
+                 setTimeout(() => {
+                        window.location.href = `/admin/price-list/${type}`
+                 }, 1000);
+             } else {
+                alert.error("Api Error"); 
+             }
+        }) 
+    : 
+    axios.patch(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}`, data , {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+          },
+        }).then(result => { 
+             if(result.data.success === true) {
+                 alert.success(result.data.message);
+                 setTimeout(() => {
+                        window.location.href = `/admin/price-list/${type}`
+                 }, 1000);
+             } else {
+                alert.error("Api Error"); 
+             }
+        }) 
+    } 
+
+    const HandleWeekendUpdate = () => {
+
+        const data  = {
+            "name" : name,
+            "price" : price,
+            "type" : type,
+            "date_from": moment(startDate).format("YYYY-MM-DD"),
+            "date_to" :  moment(endDate).format("YYYY-MM-DD")   
+       }
+    
+        id == 'add'   ?
+    
+        axios.post(`${process.env.REACT_APP_BASE_URL}/safari/prices`, data , {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+              },
+            }).then(result => { 
+                 if(result.data.success === true) {
+                     alert.success(result.data.message);
+                     setTimeout(() => {
+                            window.location.href = `/admin/price-list/${type}`
+                     }, 1000);
+                 } else {
+                    alert.error("Api Error"); 
+                 }
+            }) 
+        : 
+        axios.patch(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}`, data , {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+              },
+            }).then(result => { 
+                 if(result.data.success === true) {
+                     alert.success(result.data.message);
+                     setTimeout(() => {
+                            window.location.href = `/admin/price-list/${type}`
+                     }, 1000);
+                 } else {
+                    alert.error("Api Error"); 
+                 }
+            }) 
+        } 
+
   return (
     <>
-    <DateRange/>
-    <div className="tab-content" id="tabs-tabContent">
-        <div className="tab-pane fade show active" id="tabs-indian" role="tabpanel" aria-labelledby="tabs-indian-tab">
-            <div className="grid grid-cols-6 gap-4">
+    { 
+      type == 'festival' ?
+        <>
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 1</label>
-                <input type="number" id="adult1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="4000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 2</label>
-                <input type="number" id="adult2" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="8000"/>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()}/>
             </div>
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 3</label>
-                <input type="number" id="adult3" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="12000"/>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
+            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} minDate={moment().toDate()}/>
             </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 4</label>
-                <input type="number" id="adult4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="16000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 5</label>
-                <input type="number" id="adult5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="20000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 6</label>
-                <input type="number" id="adult6" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="24000"/>
-            </div>
-            </div>
-            <div className="grid grid-cols-6 gap-4 mt-2">
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 1</label>
-                <input type="number" id="child1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="400"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 2</label>
-                <input type="number" id="child2" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="800"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 3</label>
-                <input type="number" id="child3" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1600"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 4</label>
-                <input type="number" id="child4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1600"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 5</label>
-                <input type="number" id="child5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="2000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 6</label>
-                <input type="number" id="child6" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1200"/>
-            </div>
-            </div>
-            <div className="mt-2">
-            <button type="button" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Update</button>
-            </div>
-        </div>
+            <div className="tab-content" id="tabs-tabContent">
+                <div className="tab-pane fade show active" id="tabs-indian" role="tabpanel" aria-labelledby="tabs-indian-tab">
+                    <div className="grid grid-cols-6 gap-4">
+                    <div className="mb-6">
+                        <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
+                        <input type="text" id="name"  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
 
-        <div className="tab-pane fade" id="tabs-foreigner" role="tabpanel" aria-labelledby="tabs-foreigner-tab">
+                    <div className="mb-6">
+                        <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
+                        <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+
+                        <div className='flex'>
+                            <button ype="button" onClick = {HandleWeekendUpdate} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 ml-2 text-center">Submit</button>
+                            <Link to='/admin/chambal-dates' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
+                        </div>
+
+                    </div>
+                </div>
+              </div>  
+        </>
+        :
+         <div className="tab-pane fade show active" id="tabs-indian" role="tabpanel" aria-labelledby="tabs-indian-tab">
             <div className="grid grid-cols-6 gap-4">
+
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 1</label>
-                <input type="number" id="adult1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="4000"/>
+                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
+                <input type="text" id="name"  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
             </div>
+
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 2</label>
-                <input type="number" id="adult2" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="8000"/>
+                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
+                <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
             </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 3</label>
-                <input type="number" id="adult3" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="12000"/>
+
+            <div className='flex'>
+                <button ype="button" onClick = {HandleUpdate} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 ml-2 text-center">Submit</button>
+                <Link to='/admin/chambal-dates' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
             </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 4</label>
-                <input type="number" id="adult4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="16000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 5</label>
-                <input type="number" id="adult5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="20000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Adult 6</label>
-                <input type="number" id="adult6" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="24000"/>
-            </div>
-            </div>
-            <div className="grid grid-cols-6 gap-4 mt-2">
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 1</label>
-                <input type="number" id="child1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="400"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 2</label>
-                <input type="number" id="child2" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="800"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 3</label>
-                <input type="number" id="child3" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1600"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 4</label>
-                <input type="number" id="child4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1600"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 5</label>
-                <input type="number" id="child5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="2000"/>
-            </div>
-            <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Child 6</label>
-                <input type="number" id="child6" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" defaultValue="1200"/>
-            </div>
-            </div>
-            <div className="mt-2">
-            <button type="button" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Update</button>
+
             </div>
         </div>
-    </div>
+    }     
     </>
   )
 }

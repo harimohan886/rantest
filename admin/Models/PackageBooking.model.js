@@ -36,15 +36,9 @@ const PackageBookingSchema = new Schema({
 	},
 	status: {
 		type: String,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const PackageBooking = mongoose.model('package_bookings', PackageBookingSchema);

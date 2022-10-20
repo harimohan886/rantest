@@ -181,9 +181,9 @@ module.exports = {
         });
       }
 
-      for (const facility of req.body.facility) {
+      for (const facility of req.body.facility.split(',')) {
         const hotel_room_facility = new HotelRoomFacility({
-          facility: facility.facility,
+          facility: facility,
         });
 
         var result1 = await hotel_room_facility.save();

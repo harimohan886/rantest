@@ -15,7 +15,7 @@ export default function Hotel() {
             <HotelList />
           </div>
           <div className='col-sm-3 width30'>
-            <EnquiryForm />
+            <EnquiryForm hotel_id='' type="hotel" />
           </div>
         </div>
 

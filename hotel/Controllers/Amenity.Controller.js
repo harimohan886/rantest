@@ -4,6 +4,17 @@ const validator = require('../helpers/validate');
 
 const Amenity = require('../Models/Amenity.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Amenity.find({ amenity: name }).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+
 module.exports = {
   getAllAmenities: async (req, res, next) => {
     try {
@@ -65,7 +76,18 @@ module.exports = {
             data: err
           });
       }
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err));
+
+    var checkCount = await checkNameIsUnique(req.body.amenity);
+
+    if (checkCount) {
+      return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: 'duplicate amenity'
+        });
+    }
 
     try {
       const amenity = new Amenity(req.body);
@@ -109,7 +131,9 @@ module.exports = {
 
   updateAAmenity: async (req, res, next) => {
     try {
-      req.body.image = req.file.path;
+      if (req.file && req.file.size > 0) {
+        req.body.image = req.file.path;
+      }
       const id = req.params.id;
       const updates = req.body;
       const options = { new: true };

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const AmenitySchema = new Schema({
 	amenity: {
 		type: String,
-		unique: true,
 		required: true,
 		index: true,
 	},
@@ -13,15 +12,10 @@ const AmenitySchema = new Schema({
 	},
 	status: {
 		type: Number,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+		default: 1
+	}
+},{
+	timestamps: true
 });
 
 const Amenity = mongoose.model('amenities', AmenitySchema);

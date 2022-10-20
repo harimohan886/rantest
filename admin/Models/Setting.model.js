@@ -7,15 +7,9 @@ const SettingSchema = new Schema({
 	},
 	value:{
 		type:Object
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+	}
+},{
+	timestamps:true
 });
 
 const Setting = mongoose.model('settings', SettingSchema);
