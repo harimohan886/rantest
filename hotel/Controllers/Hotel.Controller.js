@@ -206,7 +206,7 @@ module.exports = {
 
       var totalPosts = await Hotel.find({}).countDocuments().exec();
 
-      return res.status(412)
+      return res
         .send({
           success: true,
           message: 'Data fetched!',
