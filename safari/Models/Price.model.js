@@ -15,17 +15,18 @@ const PriceSchema = new Schema({
 	type: {
 		type: String,
 	},
+	person_type: {
+		type: String,
+	},
+	vehicle_type: {
+		type: String,
+	},
 	price: {
 		type: Number,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
+		default: 0
+	}
+},{
+	timestamps: true
 });
 
 const Price = mongoose.model('price', PriceSchema);

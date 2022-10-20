@@ -7,7 +7,7 @@ module.exports = {
   getAllPrices: async (req, res, next) => {
     var type = req.query.type || 'default';
     try {
-      const results = await Price.find({type: type}, { __v: 0 });
+      const results = await Price.find({type: type}, { __v: 0 }).sort({$natural:-1});
       res.send({
         success: true,
         message: 'Data fetched',
@@ -35,6 +35,8 @@ module.exports = {
 
   createNewPrice: async (req, res, next) => {
     try {
+
+      console.log(req.body);
       const price = new Price(req.body);
       const result = await price.save();
       res.send({
