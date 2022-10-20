@@ -108,8 +108,8 @@ module.exports = {
 
   checkAvilability: async (req, res, next) => {
     try {
-      const date = await Date.find({date: req.body.date ,timing: req.body.timing  , vehicle: req.body.vehicle , zone: req.body.zone});
-      if (!date.length) {
+      const date = await Date.findOne({date: req.body.date ,timing: req.body.timing  , vehicle: req.body.vehicle , zone: req.body.zone});
+      if (!date) {
         throw createError(404, 'Date does not exist.');
       }
       res.send({
