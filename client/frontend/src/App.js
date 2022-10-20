@@ -72,6 +72,12 @@ import Packages from './pages/Admin/Packages/Packages';
 import PackageFeatures from './pages/Admin/Packages/PackageFeatures';
 import CreatePackageAssets from './pages/Admin/Packages/CreatePackageAssets';
 import EditPackageAssets from './pages/Admin/Packages/EditPackageAssets';
+
+import CreatePackageInclusion from './pages/Admin/Packages/CreatePackageInclusion';
+import EditPackageInclusion from './pages/Admin/Packages/EditPackageInclusion';
+
+
+
 import PackageInclusion from './pages/Admin/Packages/PackageInclusion';
 import PackageExclusion from './pages/Admin/Packages/PackageExclusion';
 import PackageTerms from './pages/Admin/Packages/PackageTerms';
@@ -195,8 +201,10 @@ function App() {
             <Route exact path="/admin/add-package" element={<AddPackage />} />
             <Route exact path="/admin/edit-package/:id" element={<EditPackage />} />
             <Route exact path="/admin/package-features" element={<PackageFeatures />} />
+            <Route exact path="/admin/add-package-inclusion" element={<CreatePackageInclusion />} />
             <Route exact path="/admin/add-package-assets" element={<CreatePackageAssets />} />
-            <Route exact path="/admin/edit-package-assets" element={<EditPackageAssets />} />
+            <Route exact path="/admin/edit-package-feature/:id" element={<EditPackageAssets />} />
+            <Route exact path="/admin/edit-package-inclusion/:id" element={<EditPackageInclusion />} />
             <Route exact path="/admin/package-inclusion" element={<PackageInclusion />} />
             <Route exact path="/admin/package-exclusion" element={<PackageExclusion />} />
             <Route exact path="/admin/package-terms" element={<PackageTerms />} />
