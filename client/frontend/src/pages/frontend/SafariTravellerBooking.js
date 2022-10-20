@@ -1,59 +1,56 @@
-
-
-
-
-import React, { Component } from 'react'
+import React, { useState , useEffect } from 'react'
 import TravellerInputs from '../../components/frontend/Safari/TravellerInputs';
 
+export default function SafariTravellerBooking() {
 
-export default class SafariTravellerBooking extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          users: [
-            {
-              key: Date.now(),
-              fullName: "",
-              gender: "",
-              nationality: "",
-              idProof: "",
-              idNumber: ""
-            }
-          ]
-        };
+      const [ Name , setName ] = useState(localStorage.getItem('selName'));
+      const [ Phone , setPhone ] = useState(localStorage.getItem('selPhone'));
+      const [ Email , setEmail ] = useState('');
+      const [ State , setState ] = useState('');
+      const [ Address , setAddress ] = useState('');
+
+      const [users , setUsers ] = useState([{
+        key: Date.now(),
+        fullName: "",
+        gender: "",
+        nationality: "",
+        idProof: "",
+        idNumber: ""
+      }]);
+
+      const onChange = (i,e) => {
+        let newUsers = [...users];
+        newUsers[i]['fullName'] = e.fullName || 0;
+        newUsers[i]['gender'] = e.gender || 0;
+        newUsers[i]['nationality'] = e.nationality || 0;
+        newUsers[i]['idProof'] = e.idProof || 0;
+        newUsers[i]['idNumber'] = e.idNumber || '';
+        setUsers(newUsers);
+        localStorage.setItem('NewUsers' , JSON.stringify(newUsers));
+      };
+
+      let addElement = () => {
+        setUsers([...users, { 
+            key: Date.now(),
+            fullName: "",
+            gender: "",
+            nationality: "",
+            idProof: "",
+            idNumber: "" 
+        }])
+      };
+
+      let removeElement = (i) => {
+        let newFormValues = [...users];
+        newFormValues.splice(i, 1);
+        setUsers(newFormValues)
+        localStorage.setItem('NewUsers' , JSON.stringify(newFormValues));
+      };
+
+      const handleSaveData = () => {
+            window.location.href = '/thankyou';
       }
 
-      onChange = (inputUser) => {
-        this.setState((prevState) => {
-          const newUsers = prevState.users.map((element) => {
-            if (element.key === inputUser.key) return inputUser;
-            return element;
-          });
-          return { users: newUsers };
-        });
-      };
-
-      addElement = () => {
-        const { fullName, gender, nationality, idProof, idNumber } = this.state;
-        this.setState((prevState) => ({
-          users: prevState.users.concat({
-            key: Date.now(),
-            fullName,
-            gender,
-            nationality,
-            idProof,
-            idNumber
-          })
-        }));
-      };
-
-      removeElement = (id) => {
-        this.setState((prevState) => ({
-          users: prevState.users.filter((user) => user.key !== id)
-        }));
-      };
-  render() {
-    const { users } = this.state;
     return (
         <div className='container sectionFrame'>
             <div className='passanger'>
@@ -64,16 +61,16 @@ export default class SafariTravellerBooking extends Component {
                         <div className='bookPadding'>
                             <div className='row' style={{marginBottom: "20px"}}>
                                 <div className='col-sm-3 col-xs-6'>
-                                    <p><strong>Booking Date : </strong>2022-09-30</p>
+                                    <p><strong>Booking Date : </strong>{localStorage.getItem('selDate')}</p>
                                 </div>
                                 <div className='col-sm-3 col-xs-6'>
-                                    <p><strong>Booking Zone : </strong>Zone 1/2/3/4/5/6/7</p>
+                                    <p><strong>Booking Zone : </strong>{localStorage.getItem('selZone')}</p>
                                 </div>
                                 <div className='col-sm-3 col-xs-6'>
-                                    <p><strong>Booking Timing : </strong>Morning</p>
+                                    <p><strong>Booking Timing : </strong>{localStorage.getItem('selTiming')}</p>
                                 </div>
                                 <div className='col-sm-3 col-xs-6'>
-                                    <p><strong>Booking Vehicle : </strong>Gypsy</p>
+                                    <p><strong>Booking Vehicle : </strong>{localStorage.getItem('selVehicle')}</p>
                                 </div>  
                             </div>
                             <div className='row'>
@@ -83,7 +80,7 @@ export default class SafariTravellerBooking extends Component {
                                                 <label className='control-label'>Name</label>
                                             </div>
                                             <div className='col-sm-8'>
-                                                <input type="text" className='form-control' placeholder='Name' />
+                                                <input type="text" value = {Name} onChange = {(e) => setName(e.target.value)} className='form-control' placeholder='Name' />
                                             </div>
                                         </div>
                                 </div>
@@ -93,7 +90,7 @@ export default class SafariTravellerBooking extends Component {
                                             <label className='control-label'>Mobile No</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text" className='form-control' placeholder='Mobile Number' />
+                                            <input type="text" value = {Phone}  onChange = {(e) => setPhone(e.target.value)} className='form-control' placeholder='Mobile Number' />
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +100,7 @@ export default class SafariTravellerBooking extends Component {
                                             <label className='control-label'>Email ID</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text" className='form-control' placeholder='Email ID' />
+                                            <input type="text"  value = {Email} onChange = {(e) => setEmail(e.target.value)} className='form-control' placeholder='Email ID' />
                                         </div>
                                     </div>
                                 </div>
@@ -113,23 +110,23 @@ export default class SafariTravellerBooking extends Component {
                                             <label className='control-label'>State</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <select className="form-control ng-pristine ng-invalid ng-touched" formcontrolname="state" id="state">
-                                                <option disabled="" selected="" value="">Please Select State</option>
-                                                <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
+                                            <select className="form-control ng-pristine ng-invalid ng-touched" value = {State} onChange = {(e) => setState(e.target.value)} formcontrolname="state" id="state">
+                                                <option>Please Select State</option>
+                                                <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                                 <option value="Assam">Assam</option>
                                                 <option value="Bihar">Bihar</option>
                                                 <option value="Chandigarh">Chandigarh</option>
                                                 <option value="Chattisgarh">Chattisgarh</option>
-                                                <option value="Dadra &amp; Nagar Haveli">Dadra &amp; Nagar Haveli</option>
-                                                <option value="Daman &amp; Diu">Daman &amp; Diu</option>
+                                                <option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
+                                                <option value="Daman & Diu">Daman & Diu</option>
                                                 <option value="Delhi">Delhi</option>
                                                 <option value="Goa">Goa</option>
                                                 <option value="Gujarat">Gujarat</option>
                                                 <option value="Haryana">Haryana</option>
                                                 <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
+                                                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
                                                 <option value="Jharkhand">Jharkhand</option>
                                                 <option value="Karnataka">Karnataka</option>
                                                 <option value="Kerala">Kerala</option>
@@ -162,7 +159,7 @@ export default class SafariTravellerBooking extends Component {
                                             <label className='control-label'>Full address</label>
                                         </div>
                                         <div className='col-sm-10'>
-                                            <textarea class="form-control ng-untouched ng-pristine ng-invalid" cols="60" formcontrolname="address" id="address" placeholder="Full Address.."  rows="4" tabindex="4"></textarea>
+                                            <textarea onChange = {(e) => setAddress(e.target.value)} className="form-control ng-untouched ng-pristine ng-invalid" cols="60" formcontrolname="address" id="address" placeholder="Full Address.."  rows="4" tabIndex="4"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -184,16 +181,16 @@ export default class SafariTravellerBooking extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user) => (
+                                {users.map((user, index) => (
                                     <tr key={user.key}>
                                         <TravellerInputs
                                             key={user.key}
                                             value={user}
-                                            onChange={(inputUser) => this.onChange(inputUser)}
+                                            onChange={e => onChange(index, user)}
                                         />
                                         <td className='border border-slate-300 text-center plusMinusInputs'>
-                                            <button type="button" onClick={this.addElement} className='btn btn-success'>Add</button>
-                                            <button type="button" onClick={() => this.removeElement(user.key)} disabled={users.length <= 1} className='btn btn-danger'>
+                                            <button type="button" onClick={addElement} className='btn btn-success'>Add</button>
+                                            <button type="button" onClick={() => removeElement(index)} disabled={users.length <= 1} className='btn btn-danger'>
                                                 Delete
                                             </button>
                                         </td>
@@ -201,11 +198,13 @@ export default class SafariTravellerBooking extends Component {
                                 ))}
                             </tbody>
                         </table>
+                        <div className='border border-slate-300 text-center plusMinusInputs'>
+                            <button type="button" onClick={handleSaveData} className='btn btn-success'>Pay Now</button>        
+                        </div>
+                        
                     </div>
                 </form>
             </div>
-        </div>
-        
+        </div>    
     )
-  }
 }
