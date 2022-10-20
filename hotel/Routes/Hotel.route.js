@@ -4,16 +4,16 @@ const path = require('path');
 
 var multer = require('multer');
 
-var storage = multer.diskStorage({  
-  destination:(req,file,cb)=>{  
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
     console.log(__dirname);
-    cb(null,'uploads/hotels/');  
-  },  
-  filename:(req,file,cb)=>{  
-    cb(null,file.originalname);  
-  }  
-});  
-var uploads = multer({storage:storage});
+    cb(null, 'uploads/hotels/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+var uploads = multer({ storage: storage });
 
 
 const HotelController = require('../Controllers/Hotel.Controller');
