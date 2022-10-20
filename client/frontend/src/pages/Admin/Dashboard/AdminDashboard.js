@@ -12,6 +12,7 @@ export default function AdminDashboard() {
 
   const [gEnquiries, setGEnquiries] = useState([]);
   const [hEnquiries, setHEnquiries] = useState([]);
+  const [totalEnquiries, setTotalEnquiries] = useState(0);
 
 
   function getEnquiries() {
@@ -24,6 +25,7 @@ export default function AdminDashboard() {
     }).then(result => {
       setGEnquiries(result.data.general_enquiries);
       setHEnquiries(result.data.hotel_enquiries);
+      setTotalEnquiries(result.data.total_enquiries);
 
     })
   }
@@ -37,7 +39,7 @@ export default function AdminDashboard() {
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar />
       <AdminNavbar />
-      <HeaderStats />
+      <HeaderStats total_enquiries={totalEnquiries} />
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 xl:mb-0 px-4">
           <GeneralEnquiry enquiries={gEnquiries} />

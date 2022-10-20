@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import CardStats from "./CardStats";
 
-export default function HeaderStats() {
+export default function HeaderStats({ total_enquiries }) {
 
   const [hotelCount, setHotelCount] = useState('0');
 
@@ -59,7 +59,7 @@ export default function HeaderStats() {
                 <CardStats
                   statBgColor="bg-customer-brown"
                   statSubtitle="Enquiries"
-                  statTitle="93"
+                  statTitle={total_enquiries.toString()}
                   statDescripiron="Since 2022"
                   statIconName="fas fa-users"
                   statIconColor="text-white"
