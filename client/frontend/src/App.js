@@ -121,106 +121,106 @@ function App() {
       <TopHead />
       <Header />
       <Provider template={AlertTemplate} {...options}>
-      <Routes>
+        <Routes>
 
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/online-ranthambore-safari-booking' element={<OnlineSafariBooking />} />
-        <Route exact path='/safari-booking-details' element={<SafariTravellerBooking />} />
-        <Route exact path='/online-chambal-moter-boat-safari-booking' element={<Chambal />} />
-        <Route exact path='/chambal-safari-booking' element={<ChambalBooking />} />
-        <Route exact path='/about-us' element={<About />} />
-        <Route exact path='/contact-us' element={<Contact />} />
-        <Route exact path='/terms-and-conditions' element={<Terms />} />
-        <Route exact path='/privacy-policy' element={<Privacy />} />
-        <Route exact path='/cancellation-policy' element={<Cancellation />} />
-        <Route exact path='/thankyou' element={<Thankyou />} />
-        <Route exact path='/hotels' element={<Hotel />} />
-        <Route exact path='/hotel-details/:id' element={<HotelDetails />} />
-        <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
-        <Route exact path='/package-details' element={<PackageDetails />} />
-        <Route exact path='/book-package' element={<FinalPackageBooking />} />
-
-
-        {/* Admin routing starts here */}
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/online-ranthambore-safari-booking' element={<OnlineSafariBooking />} />
+          <Route exact path='/safari-booking-details' element={<SafariTravellerBooking />} />
+          <Route exact path='/online-chambal-moter-boat-safari-booking' element={<Chambal />} />
+          <Route exact path='/chambal-safari-booking' element={<ChambalBooking />} />
+          <Route exact path='/about-us' element={<About />} />
+          <Route exact path='/contact-us' element={<Contact />} />
+          <Route exact path='/terms-and-conditions' element={<Terms />} />
+          <Route exact path='/privacy-policy' element={<Privacy />} />
+          <Route exact path='/cancellation-policy' element={<Cancellation />} />
+          <Route exact path='/thankyou' element={<Thankyou />} />
+          <Route exact path='/hotels' element={<Hotel />} />
+          <Route exact path='/hotel-details/:id' element={<HotelDetails />} />
+          <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
+          <Route exact path='/package-details' element={<PackageDetails />} />
+          <Route exact path='/book-package' element={<FinalPackageBooking />} />
 
 
-
-        (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+          {/* Admin routing starts here */}
 
 
 
-
-        <Route element={<PrivateAdminRoutes />}>
-
-
-
-          <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
-          <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
-          <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
-          <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
-          <Route exact path="/admin/chambal-dates" element={<ChambalDates />} />
-          <Route exact path="/admin/add-chambal-dates" element={<CreateChambalDates />} />
-          <Route exact path="/admin/edit-chambal-dates/:id" element={<EditChambalDates />} />
-          <Route exact path="/admin/kankai-events" element={<KankaiEvents />} />
-          <Route exact path="/admin/add-kankai-event" element={<CreateKankaiEvent />} />
-          <Route exact path="/admin/edit-kankai-events/" element={<EditKankaiEvents />} />
-          <Route exact path="/admin/price-list/:type" element={<PriceList />} />
-          <Route exact path="/admin/edit-price/:id/:type" element={<EditPrice />} />
-          <Route exact path="/admin/add-price/:id/:type" element={<EditPrice />} />
-
-          <Route exact path="/admin/safari-prices" element={<SafariList />} />
-          <Route exact path="/admin/chambal-prices" element={<ChambalList />} />
-
-          <Route exact path="/admin/listing" element={<Listing />} />
-          <Route exact path="/admin/customers" element={<Customers />} />
-          <Route exact path="/admin/safari-booking" element={<SafariManagement />} />
-          <Route exact path="/admin/view-safari-booking" element={<ViewSafariBooking />} />
-          <Route exact path="/admin/package-booking" element={<PackageBooking />} />
-          <Route exact path="/admin/view-package-booking" element={<ViewPackageBooking />} />
-          <Route exact path="/admin/hotels" element={<Hotels />} />
-          <Route exact path="/admin/add-hotel" element={<AddHotel />} />
-          <Route exact path="/admin/edit-hotel/:id" element={<EditHotel />} />
-          <Route exact path="/admin/amenities" element={<Amenities />} />
-          <Route exact path="/admin/hotel-amenities/:id" element={<HotelAmenitiesUpdate />} />
-
-          <Route exact path="/admin/add-hotel-amenity" element={<AddAmenity />} />
-          <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
-          <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
-          <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
-          <Route exact path="/admin/edit-room-facility/:id" element={<EditFacility />} />
-          <Route exact path="/admin/hotel-rooms/:id" element={<HotelRooms />} />
-          <Route exact path="/admin/add-room/:id" element={<AddRoom />} />
-          <Route exact path="/admin/edit-room/:id" element={<EditRoom />} />
-          <Route exact path="/admin/packages" element={<Packages />} />
-          <Route exact path="/admin/add-package" element={<AddPackage />} />
-          <Route exact path="/admin/edit-package" element={<EditPackage />} />
-          <Route exact path="/admin/package-features" element={<PackageFeatures />} />
-          <Route exact path="/admin/add-package-assets" element={<CreatePackageAssets />} />
-          <Route exact path="/admin/edit-package-assets" element={<EditPackageAssets />} />
-          <Route exact path="/admin/package-inclusion" element={<PackageInclusion />} />
-          <Route exact path="/admin/package-exclusion" element={<PackageExclusion />} />
-          <Route exact path="/admin/package-terms" element={<PackageTerms />} />
-          <Route exact path="/admin/package-cancellation-policy" element={<PackageCanPolicy />} />
-          <Route exact path="/admin/package-payment-policy" element={<PackagePaymentPolicy />} />
-          <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
-          <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
-          <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />
-          <Route exact path="/admin/contact-details" element={<ContactDetails />} />
-          <Route exact path="/admin/my-account" element={<MyAccount />} />
-          <Route exact path="/admin/change-password" element={<ChangePassword />} />
-          <Route exact path="/admin/package-categories" element={<PackageCategories />} />
-          <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
-          <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
-
-        </Route>
-
-        <Route path="*" element={<NotFound />} />
+          (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
 
 
 
 
+          <Route element={<PrivateAdminRoutes />}>
 
-      </Routes>
+
+
+            <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
+            <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
+            <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
+            <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
+            <Route exact path="/admin/chambal-dates" element={<ChambalDates />} />
+            <Route exact path="/admin/add-chambal-dates" element={<CreateChambalDates />} />
+            <Route exact path="/admin/edit-chambal-dates/:id" element={<EditChambalDates />} />
+            <Route exact path="/admin/kankai-events" element={<KankaiEvents />} />
+            <Route exact path="/admin/add-kankai-event" element={<CreateKankaiEvent />} />
+            <Route exact path="/admin/edit-kankai-events/" element={<EditKankaiEvents />} />
+            <Route exact path="/admin/price-list/:type" element={<PriceList />} />
+            <Route exact path="/admin/edit-price/:id/:type" element={<EditPrice />} />
+            <Route exact path="/admin/add-price/:id/:type" element={<EditPrice />} />
+
+            <Route exact path="/admin/safari-prices" element={<SafariList />} />
+            <Route exact path="/admin/chambal-prices" element={<ChambalList />} />
+
+            <Route exact path="/admin/listing" element={<Listing />} />
+            <Route exact path="/admin/customers" element={<Customers />} />
+            <Route exact path="/admin/safari-booking" element={<SafariManagement />} />
+            <Route exact path="/admin/view-safari-booking" element={<ViewSafariBooking />} />
+            <Route exact path="/admin/package-booking" element={<PackageBooking />} />
+            <Route exact path="/admin/view-package-booking" element={<ViewPackageBooking />} />
+            <Route exact path="/admin/hotels" element={<Hotels />} />
+            <Route exact path="/admin/add-hotel" element={<AddHotel />} />
+            <Route exact path="/admin/edit-hotel/:id" element={<EditHotel />} />
+            <Route exact path="/admin/amenities" element={<Amenities />} />
+            <Route exact path="/admin/hotel-amenities/:id" element={<HotelAmenitiesUpdate />} />
+
+            <Route exact path="/admin/add-hotel-amenity" element={<AddAmenity />} />
+            <Route exact path="/admin/edit-hotel-amenity/:id" element={<EditAmenity />} />
+            <Route exact path="/admin/room-facilities" element={<RoomFacilities />} />
+            <Route exact path="/admin/add-room-facility" element={<AddFacility />} />
+            <Route exact path="/admin/edit-room-facility/:id" element={<EditFacility />} />
+            <Route exact path="/admin/hotel-rooms/:id" element={<HotelRooms />} />
+            <Route exact path="/admin/add-room/:id" element={<AddRoom />} />
+            <Route exact path="/admin/edit-room/:id" element={<EditRoom />} />
+            <Route exact path="/admin/packages" element={<Packages />} />
+            <Route exact path="/admin/add-package" element={<AddPackage />} />
+            <Route exact path="/admin/edit-package/:id" element={<EditPackage />} />
+            <Route exact path="/admin/package-features" element={<PackageFeatures />} />
+            <Route exact path="/admin/add-package-assets" element={<CreatePackageAssets />} />
+            <Route exact path="/admin/edit-package-assets" element={<EditPackageAssets />} />
+            <Route exact path="/admin/package-inclusion" element={<PackageInclusion />} />
+            <Route exact path="/admin/package-exclusion" element={<PackageExclusion />} />
+            <Route exact path="/admin/package-terms" element={<PackageTerms />} />
+            <Route exact path="/admin/package-cancellation-policy" element={<PackageCanPolicy />} />
+            <Route exact path="/admin/package-payment-policy" element={<PackagePaymentPolicy />} />
+            <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
+            <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
+            <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />
+            <Route exact path="/admin/contact-details" element={<ContactDetails />} />
+            <Route exact path="/admin/my-account" element={<MyAccount />} />
+            <Route exact path="/admin/change-password" element={<ChangePassword />} />
+            <Route exact path="/admin/package-categories" element={<PackageCategories />} />
+            <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
+            <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
+
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
+
+
+
+
+
+        </Routes>
       </Provider>
       <Footer />
     </Router >
