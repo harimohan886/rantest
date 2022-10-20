@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const asyncHandler = require('../Middleware/asyncHandler')
-const ResponseHandler = require('../Middleware/ResponseHandler')
+const ResponseHandler = require('../Middleware/responseHandler')
 
 let responseHandler = new ResponseHandler();
 
