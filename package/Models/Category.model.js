@@ -5,15 +5,9 @@ const CategorySchema = new Schema({
 	category: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const Category = mongoose.model('categories', CategorySchema);

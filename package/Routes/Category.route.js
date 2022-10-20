@@ -3,22 +3,19 @@ const router = express.Router();
 
 const CategoryController = require('../Controllers/Category.Controller');
 
-//Get a list of all products
+//Get a list of all categorys
 router.get('/', CategoryController.getAllCategorys);
 
-//Create a new product
+//Create a new category
 router.post('/', CategoryController.createNewCategory);
 
-//Get a product by id
+//Get a category by id
 router.get('/:id', CategoryController.findCategoryById);
 
-//Update a product by id
+//Update a category by id
 router.patch('/:id', CategoryController.updateACategory);
 
-//Update a product by id
-router.put('/avilability/:id', CategoryController.updateAvilability);
-
-//Delete a product by id
+//Delete a category by id
 router.delete('/:id', CategoryController.deleteACategory);
 
 module.exports = router;

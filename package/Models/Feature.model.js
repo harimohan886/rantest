@@ -5,15 +5,9 @@ const FeatureSchema = new Schema({
 	feature: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const Feature = mongoose.model('features', FeatureSchema);

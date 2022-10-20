@@ -99,31 +99,6 @@ module.exports = {
     }
   },
 
-  updateAvilability: async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      const updates = req.body;
-      const options = { new: true };
-
-      const result = await Category.findByIdAndUpdate(id, updates, options);
-      if (!result) {
-        throw createError(404, 'Category does not exist');
-      }
-      res.send({
-        success: true,
-        message: 'Data updated',
-        data: result
-      });
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Category Id'));
-      }
-
-      next(error);
-    }
-  },
-
   deleteACategory: async (req, res, next) => {
     const id = req.params.id;
     try {

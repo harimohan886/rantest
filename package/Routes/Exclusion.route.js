@@ -3,22 +3,19 @@ const router = express.Router();
 
 const ExclusionController = require('../Controllers/Exclusion.Controller');
 
-//Get a list of all products
+//Get a list of all exclusions
 router.get('/', ExclusionController.getAllExclusions);
 
-//Create a new product
+//Create a new exclusion
 router.post('/', ExclusionController.createNewExclusion);
 
-//Get a product by id
+//Get a exclusion by id
 router.get('/:id', ExclusionController.findExclusionById);
 
-//Update a product by id
+//Update a exclusion by id
 router.patch('/:id', ExclusionController.updateAExclusion);
 
-//Update a product by id
-router.put('/avilability/:id', ExclusionController.updateAvilability);
-
-//Delete a product by id
+//Delete a exclusion by id
 router.delete('/:id', ExclusionController.deleteAExclusion);
 
 module.exports = router;

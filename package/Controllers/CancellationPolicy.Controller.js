@@ -1,5 +1,8 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const Validator = require('validatorjs');
+
+const asyncHandler = require('../Middleware/asyncHandler')
 
 const CancellationPolicy = require('../Models/CancellationPolicy.model');
 
@@ -33,24 +36,30 @@ module.exports = {
     }
   },
 
-  createNewCancellationPolicy: async (req, res, next) => {
-    try {
-      const cpolicy = new CancellationPolicy(req.body);
-      const result = await cpolicy.save();
-      res.send({
-        success: true,
-        message: 'Data inserted',
-        data: result
+  createNewCancellationPolicy: asyncHandler(async (req, res, next) => {
+
+    let rules = {
+      policy: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
       });
-    } catch (error) {
-      console.log(error.message);
-      if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
-        return;
-      }
-      next(error);
     }
-  },
+
+    const cpolicy = new CancellationPolicy(req.body);
+    const result = await cpolicy.save();
+    res.send({
+      success: true,
+      message: 'Data inserted',
+      data: result
+    });
+  }),
 
   findCancellationPolicyById: async (req, res, next) => {
     const id = req.params.id;
@@ -75,31 +84,21 @@ module.exports = {
   },
 
   updateACancellationPolicy: async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      const updates = req.body;
-      const options = { new: true };
 
-      const result = await CancellationPolicy.findByIdAndUpdate(id, updates, options);
-      if (!result) {
-        throw createError(404, 'CancellationPolicy does not exist');
-      }
-      res.send({
-        success: true,
-        message: 'Data updated',
-        data: result
+    let rules = {
+      policy: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
       });
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid CancellationPolicy Id'));
-      }
-
-      next(error);
     }
-  },
 
-  updateAvilability: async (req, res, next) => {
     try {
       const id = req.params.id;
       const updates = req.body;

@@ -1,6 +1,8 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const Validator = require('validatorjs');
+
 const Term = require('../Models/Term.model');
 
 module.exports = {
@@ -34,6 +36,21 @@ module.exports = {
   },
 
   createNewTerm: async (req, res, next) => {
+
+    let rules = {
+      term: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
     try {
       const terms = new Term(req.body);
       const result = await terms.save();
@@ -75,6 +92,21 @@ module.exports = {
   },
 
   updateATerm: async (req, res, next) => {
+
+    let rules = {
+      term: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
     try {
       const id = req.params.id;
       const updates = req.body;

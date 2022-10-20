@@ -16,15 +16,9 @@ const PackageIternarySchema = new Schema({
 	package_id: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageIternary = mongoose.model('package_iternaries', PackageIternarySchema);

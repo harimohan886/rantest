@@ -11,6 +11,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) =>
 fs = require('fs')
 
 const validator = require('../helpers/validate');
+const Validator = require('validatorjs');
 
 const Package = require('../Models/Package.model');
 const PackageCategory = require('../Models/PackageCategory.model');
@@ -256,16 +257,15 @@ module.exports = {
       rating: 'required',
     };
 
-    await validator(req.body, rules, {}, (err, status) => {
-      if (!status) {
-        res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
-      }
-    }).catch( err => console.log(err));
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
 
     var checkCount = await checkNameIsUnique(req.body.name);
 
@@ -382,16 +382,14 @@ module.exports = {
       rating: 'required',
     };
 
-    await validator(req.body, rules, {}, (err, status) => {
-      if (!status) {
-        res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
-      }
-    }).catch( err => console.log(err));
+    const validation = new Validator(req.body, rules);
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
 
     var checkCount = await checkNameIsUnique(req.body.name);
 

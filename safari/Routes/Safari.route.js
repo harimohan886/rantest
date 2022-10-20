@@ -11,4 +11,6 @@ router.post('/checkAvilability', DateController.checkAvilability);
 
 router.get('/getBookingPrices', PriceController.getBookingPrices);
 
+router.post('/getBookingPricesByDate', PriceController.getBookingPricesByDate);
+
 module.exports = router;

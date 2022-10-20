@@ -3,22 +3,19 @@ const router = express.Router();
 
 const TermController = require('../Controllers/Term.Controller');
 
-//Get a list of all products
+//Get a list of all dtermss
 router.get('/', TermController.getAllTerms);
 
-//Create a new product
+//Create a new dterms
 router.post('/', TermController.createNewTerm);
 
-//Get a product by id
+//Get a dterms by id
 router.get('/:id', TermController.findTermById);
 
-//Update a product by id
+//Update a dterms by id
 router.patch('/:id', TermController.updateATerm);
 
-//Update a product by id
-router.put('/avilability/:id', TermController.updateAvilability);
-
-//Delete a product by id
+//Delete a dterms by id
 router.delete('/:id', TermController.deleteATerm);
 
 module.exports = router;

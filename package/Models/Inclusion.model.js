@@ -5,15 +5,9 @@ const InclusionSchema = new Schema({
 	inclusion: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const Inclusion = mongoose.model('inclusions', InclusionSchema);

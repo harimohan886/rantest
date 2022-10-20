@@ -13,13 +13,13 @@ const HotelRoomSchema = new Schema({
 	},
 	status: {
 		type: Number,
+		default: 1
 	},
 	facilities: [
 	{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "hotel_room_facilities"
-	}
-	],
+	}],
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,

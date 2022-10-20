@@ -40,15 +40,9 @@ const PackageIndianOptionSchema = new Schema({
 	festival_kid: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageIndianOption = mongoose.model('package_indian_options', PackageIndianOptionSchema);

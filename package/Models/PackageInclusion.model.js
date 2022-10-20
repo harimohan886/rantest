@@ -9,15 +9,9 @@ const PackageInclusionSchema = new Schema({
 	package_id: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageInclusion = mongoose.model('package_inclusions', PackageInclusionSchema);

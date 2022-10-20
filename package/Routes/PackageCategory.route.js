@@ -3,22 +3,19 @@ const router = express.Router();
 
 const PackageCategoryController = require('../Controllers/PackageCategory.Controller');
 
-//Get a list of all products
+//Get a list of all packagecategorys
 router.get('/', PackageCategoryController.getAllPackageCategorys);
 
-//Create a new product
+//Create a new packagecategory
 router.post('/', PackageCategoryController.createNewPackageCategory);
 
-//Get a product by id
+//Get a packagecategory by id
 router.get('/:id', PackageCategoryController.findPackageCategoryById);
 
-//Update a product by id
+//Update a packagecategory by id
 router.patch('/:id', PackageCategoryController.updateAPackageCategory);
 
-//Update a product by id
-router.put('/avilability/:id', PackageCategoryController.updateAvilability);
-
-//Delete a product by id
+//Delete a packagecategory by id
 router.delete('/:id', PackageCategoryController.deleteAPackageCategory);
 
 module.exports = router;

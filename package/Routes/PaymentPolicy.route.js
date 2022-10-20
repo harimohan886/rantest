@@ -3,22 +3,19 @@ const router = express.Router();
 
 const PaymentPolicyController = require('../Controllers/PaymentPolicy.Controller');
 
-//Get a list of all products
+//Get a list of all paymentpolicys
 router.get('/', PaymentPolicyController.getAllPaymentPolicys);
 
-//Create a new product
+//Create a new paymentpolicy
 router.post('/', PaymentPolicyController.createNewPaymentPolicy);
 
-//Get a product by id
+//Get a paymentpolicy by id
 router.get('/:id', PaymentPolicyController.findPaymentPolicyById);
 
-//Update a product by id
+//Update a paymentpolicy by id
 router.patch('/:id', PaymentPolicyController.updateAPaymentPolicy);
 
-//Update a product by id
-router.put('/avilability/:id', PaymentPolicyController.updateAvilability);
-
-//Delete a product by id
+//Delete a paymentpolicy by id
 router.delete('/:id', PaymentPolicyController.deleteAPaymentPolicy);
 
 module.exports = router;

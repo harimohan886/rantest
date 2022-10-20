@@ -55,7 +55,25 @@ module.exports = {
       var checkCount = await isWeekend(req.body.date);
       var date_to =  req.body.date ;
 
-      const festivalData =  await Price.find({type: 'festival', date_from: { '$gte': date_to }, date_to: { '$lte': date_to }});
+      const festivalData =  await Price.find({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type,  date_from: { '$gte': date_to }, date_to: { '$lte': date_to }});
+      /*const festivalData =  await Price.find(
+        {
+    '$or': [
+        {
+            '$and': [
+                {"date_from": { '$gte': '2022-09-29' } },
+                {"date_to": { '$lt': '2022-09-29' } }
+            ]
+        },
+        {
+            "date_to": { '$eq': '2022-09-29' }
+        },
+        {
+            "date_from": { '$eq': '2022-09-29' }
+        }
+    ]
+}
+        );*/
 
       if (festivalData && festivalData.length > 0) {
         return res.status(412)

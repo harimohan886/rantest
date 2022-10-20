@@ -3,22 +3,19 @@ const router = express.Router();
 
 const FeatureController = require('../Controllers/Feature.Controller');
 
-//Get a list of all products
+//Get a list of all features
 router.get('/', FeatureController.getAllFeatures);
 
-//Create a new product
+//Create a new feature
 router.post('/', FeatureController.createNewFeature);
 
-//Get a product by id
+//Get a feature by id
 router.get('/:id', FeatureController.findFeatureById);
 
-//Update a product by id
+//Update a feature by id
 router.patch('/:id', FeatureController.updateAFeature);
 
-//Update a product by id
-router.put('/avilability/:id', FeatureController.updateAvilability);
-
-//Delete a product by id
+//Delete a feature by id
 router.delete('/:id', FeatureController.deleteAFeature);
 
 module.exports = router;

@@ -3,22 +3,19 @@ const router = express.Router();
 
 const InclusionController = require('../Controllers/Inclusion.Controller');
 
-//Get a list of all products
+//Get a list of all inclusions
 router.get('/', InclusionController.getAllInclusions);
 
-//Create a new product
+//Create a new inclusion
 router.post('/', InclusionController.createNewInclusion);
 
-//Get a product by id
+//Get a inclusion by id
 router.get('/:id', InclusionController.findInclusionById);
 
-//Update a product by id
+//Update a inclusion by id
 router.patch('/:id', InclusionController.updateAInclusion);
 
-//Update a product by id
-router.put('/avilability/:id', InclusionController.updateAvilability);
-
-//Delete a product by id
+//Delete a inclusion by id
 router.delete('/:id', InclusionController.deleteAInclusion);
 
 module.exports = router;

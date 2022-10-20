@@ -1,6 +1,8 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const Validator = require('validatorjs');
+
 const Iternary = require('../Models/Iternary.model');
 
 module.exports = {
@@ -34,6 +36,21 @@ module.exports = {
   },
 
   createNewIternary: async (req, res, next) => {
+
+    let rules = {
+      title: 'required',
+    };
+
+   const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
     try {
       const feature = new Iternary(req.body);
       const result = await feature.save();
@@ -75,31 +92,21 @@ module.exports = {
   },
 
   updateAIternary: async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      const updates = req.body;
-      const options = { new: true };
 
-      const result = await Iternary.findByIdAndUpdate(id, updates, options);
-      if (!result) {
-        throw createError(404, 'Iternary does not exist');
-      }
-      res.send({
-        success: true,
-        message: 'Data updated',
-        data: result
+    let rules = {
+      title: 'required',
+    };
+
+   const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
       });
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Iternary Id'));
-      }
-
-      next(error);
     }
-  },
 
-  updateAvilability: async (req, res, next) => {
     try {
       const id = req.params.id;
       const updates = req.body;

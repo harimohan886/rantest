@@ -12,15 +12,9 @@ const PackageCategoryHotelSchema = new Schema({
 	hotel_id: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageCategoryHotel = mongoose.model('package_category_hotels', PackageCategoryHotelSchema);

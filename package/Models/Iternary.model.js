@@ -12,15 +12,9 @@ const IternarySchema = new Schema({
 	status: {
 		type: String,
 		default: 0,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const Iternary = mongoose.model('iternaries', IternarySchema);

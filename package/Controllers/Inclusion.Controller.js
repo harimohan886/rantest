@@ -1,6 +1,8 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const Validator = require('validatorjs');
+
 const Inclusion = require('../Models/Inclusion.model');
 
 module.exports = {
@@ -34,6 +36,22 @@ module.exports = {
   },
 
   createNewInclusion: async (req, res, next) => {
+
+    let rules = {
+      inclusion: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
+
     try {
       const package = new Inclusion(req.body);
       const result = await package.save();
@@ -75,31 +93,21 @@ module.exports = {
   },
 
   updateAInclusion: async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      const updates = req.body;
-      const options = { new: true };
 
-      const result = await Inclusion.findByIdAndUpdate(id, updates, options);
-      if (!result) {
-        throw createError(404, 'Inclusion does not exist');
-      }
-      res.send({
-        success: true,
-        message: 'Data updated',
-        data: result
+    let rules = {
+      inclusion: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
       });
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Inclusion Id'));
-      }
-
-      next(error);
     }
-  },
 
-  updateAvilability: async (req, res, next) => {
     try {
       const id = req.params.id;
       const updates = req.body;

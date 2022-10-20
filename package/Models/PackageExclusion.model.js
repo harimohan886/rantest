@@ -9,15 +9,9 @@ const PackageExclusionSchema = new Schema({
 	package_id: {
 		type: String,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageExclusion = mongoose.model('package_exclusions', PackageExclusionSchema);

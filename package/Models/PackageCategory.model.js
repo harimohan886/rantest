@@ -25,15 +25,9 @@ const PackageCategorySchema = new Schema({
 	status: {
 		type: Number,
 		required: true,
-	},
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
-	},
-	updatedBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: false,
 	}
+},{
+	timestamps: true
 });
 
 const PackageCategory = mongoose.model('package_categories', PackageCategorySchema);

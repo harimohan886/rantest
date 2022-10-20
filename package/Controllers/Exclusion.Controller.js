@@ -1,7 +1,9 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const Validator = require('validatorjs');
 
 const Exclusion = require('../Models/Exclusion.model');
+
 
 module.exports = {
   getAllExclusions: async (req, res, next) => {
@@ -34,6 +36,21 @@ module.exports = {
   },
 
   createNewExclusion: async (req, res, next) => {
+
+    let rules = {
+      exclusion: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
     try {
       const exclusion = new Exclusion(req.body);
       const result = await exclusion.save();
@@ -75,31 +92,21 @@ module.exports = {
   },
 
   updateAExclusion: async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      const updates = req.body;
-      const options = { new: true };
 
-      const result = await Exclusion.findByIdAndUpdate(id, updates, options);
-      if (!result) {
-        throw createError(404, 'Exclusion does not exist');
-      }
-      res.send({
-        success: true,
-        message: 'Data updated',
-        data: result
+    let rules = {
+      exclusion: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
       });
-    } catch (error) {
-      console.log(error.message);
-      if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Exclusion Id'));
-      }
-
-      next(error);
     }
-  },
 
-  updateAvilability: async (req, res, next) => {
     try {
       const id = req.params.id;
       const updates = req.body;
