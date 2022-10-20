@@ -5,6 +5,10 @@ const dotenv = require("dotenv").config();
 require('./initDB')();
 const cors = require("cors");
 
+const path = require('path')
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());

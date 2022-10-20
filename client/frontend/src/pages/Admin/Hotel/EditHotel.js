@@ -110,8 +110,6 @@ export default function EditHotel() {
     };
 
     const handleChange = (e) => {
-        console.log("e name", e.target.name)
-        //setImage(e.target.files[0]);
         setHotels(hotels => ({ ...hotels, [e.target.name]: e.target.value }));
     }
 

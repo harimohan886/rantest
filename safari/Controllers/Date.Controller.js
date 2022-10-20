@@ -90,7 +90,7 @@ module.exports = {
     try {
       const date = await Date.find({date:req.body.date});
       if (!date.length) {
-        throw createError(404, 'Date does not exist.');
+        throw createError(201, 'Date does not exist.');
       }
       res.send({
         success: true,
@@ -99,7 +99,7 @@ module.exports = {
       });
     } catch (error) {
       if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
+        next(createError(201, error.message));
         return;
       }
       next(error);
@@ -110,7 +110,7 @@ module.exports = {
     try {
       const date = await Date.findOne({date: req.body.date ,timing: req.body.timing  , vehicle: req.body.vehicle , zone: req.body.zone});
       if (!date) {
-        throw createError(404, 'Date does not exist.');
+        throw createError(201, 'Date does not exist.');
       }
       res.send({
         success: true,
@@ -119,7 +119,7 @@ module.exports = {
       });
     } catch (error) {
       if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
+        next(createError(201, error.message));
         return;
       }
       next(error);
@@ -131,7 +131,7 @@ module.exports = {
     try {
       const date = await Date.findById(id);
       if (!date) {
-        throw createError(404, 'Date does not exist.');
+        throw createError(201, 'Date does not exist.');
       }
       res.send({
         success: true,
@@ -141,7 +141,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Date id'));
+        next(createError(201, 'Invalid Date id'));
         return;
       }
       next(error);
@@ -156,7 +156,7 @@ module.exports = {
 
       const result = await Date.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Date does not exist');
+        throw createError(201, 'Date does not exist');
       }
       res.send({
         success: true,
@@ -166,7 +166,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Date Id'));
+        return next(createError(201, 'Invalid Date Id'));
       }
 
       next(error);
@@ -182,7 +182,7 @@ module.exports = {
 
       const result = await Date.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Date does not exist');
+        throw createError(201, 'Date does not exist');
       }
       res.send({
         success: true,
@@ -192,7 +192,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Date Id'));
+        return next(createError(201, 'Invalid Date Id'));
       }
 
       next(error);
@@ -237,6 +237,7 @@ module.exports = {
       });      
     });
 
-  }
+  },
+
 
 };

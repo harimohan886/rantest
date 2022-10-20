@@ -2,6 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Thankyou() {
+
+  localStorage.removeItem('NewUsers');
+  localStorage.removeItem('selPhone');
+  localStorage.removeItem('selName');
+  localStorage.removeItem('selZone');
+  localStorage.removeItem('selVehicle');
+
   return (
     <div className="container" style={{minHeight: "600px"}}>
         <div className="thankyoupage">
