@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/*const ExclusionRoute = require('./Routes/Exclusion.route');
+const ExclusionRoute = require('./Routes/Exclusion.route');
 app.use('/exclusions', ExclusionRoute);
 
 const InclusionRoute = require('./Routes/Inclusion.route');
@@ -31,14 +31,20 @@ app.use('/packages', PackageRoute);
 const CategoryRoute = require('./Routes/Category.route');
 app.use('/categories', CategoryRoute);
 
+const PackageCategoryRoute = require('./Routes/PackageCategory.route');
+app.use('/package-categories', PackageCategoryRoute);
+
 const TermRoute = require('./Routes/Term.route');
 app.use('/terms', TermRoute);
+
+const IternaryRoute = require('./Routes/Iternary.route');
+app.use('/iternaries', IternaryRoute);
 
 const CancellationPolicyRoute = require('./Routes/CancellationPolicy.route');
 app.use('/cancellation-policies', CancellationPolicyRoute);
 
 const PaymentPolicyRoute = require('./Routes/PaymentPolicy.route');
-app.use('/payment-policies', PaymentPolicyRoute);*/
+app.use('/payment-policies', PaymentPolicyRoute);
 
 
 //404 handler and pass to error handler
