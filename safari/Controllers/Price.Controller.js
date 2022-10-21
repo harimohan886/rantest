@@ -18,6 +18,25 @@ async function isWeekend(dateObj) {
   }
 };
 
+async function checkDataIsUnique(name, type, person_type, vehicle_type, id=0) {
+console.log(id);
+  if (id !== 0) {
+    totalPosts = await Price.countDocuments({ name: name, type: type, person_type: person_type, vehicle_type: vehicle_type, _id: {$nin : [id.toString()]} });
+    if (totalPosts > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  totalPosts = await Price.countDocuments({ name: name, type: type, person_type: person_type, vehicle_type: vehicle_type });
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = {
   getAllPrices: async (req, res, next) => {
     var type = req.query.type || 'default';
@@ -111,6 +130,20 @@ module.exports = {
   },
 
   createNewPrice: async (req, res, next) => {
+
+    const {name, type, person_type, vehicle_type} = req.body;
+
+    const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type);
+
+    if (isDataExist) {
+      return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: 'price already exists'
+        });
+    }
+
     try {
       const price = new Price(req.body);
       const result = await price.save();
@@ -150,8 +183,23 @@ module.exports = {
   },
 
   updateAPrice: async (req, res, next) => {
+
+    const id = req.params.id;
+
+    const {name, type, person_type, vehicle_type} = req.body;
+
+    // const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type, id);
+
+    /*if (isDataExist) {
+      return res.status(412)
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: 'price already exists'
+        });
+    }*/
+
     try {
-      const id = req.params.id;
       const updates = req.body;
       const options = { new: true };
 
