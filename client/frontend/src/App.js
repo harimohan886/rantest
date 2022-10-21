@@ -75,6 +75,16 @@ import EditPackageAssets from './pages/Admin/Packages/EditPackageAssets';
 
 import CreatePackageInclusion from './pages/Admin/Packages/CreatePackageInclusion';
 import EditPackageInclusion from './pages/Admin/Packages/EditPackageInclusion';
+import CreatePackageExclusion from './pages/Admin/Packages/CreatePackageExclusion';
+import EditPackageExclusion from './pages/Admin/Packages/EditPackageExclusion';
+import CreatePackageTerm from './pages/Admin/Packages/CreatePackageTerm';
+import EditPackageTerm from './pages/Admin/Packages/EditPackageTerm';
+
+import CreatePackagePaymentPolicy from './pages/Admin/Packages/CreatePackagePaymentPolicy';
+import EditPackagePaymentPolicy from './pages/Admin/Packages/EditPackagePaymentPolicy';
+
+import CreatePackageCancellationPolicy from './pages/Admin/Packages/CreatePackageCancellationPolicy';
+import EditPackageCancellationPolicy from './pages/Admin/Packages/EditPackageCancellationPolicy';
 
 
 
@@ -207,9 +217,22 @@ function App() {
             <Route exact path="/admin/edit-package-inclusion/:id" element={<EditPackageInclusion />} />
             <Route exact path="/admin/package-inclusion" element={<PackageInclusion />} />
             <Route exact path="/admin/package-exclusion" element={<PackageExclusion />} />
+            <Route exact path="/admin/add-package-exclusion" element={<CreatePackageExclusion />} />
+            <Route exact path="/admin/edit-package-exclusion/:id" element={<EditPackageExclusion />} />
+
+
             <Route exact path="/admin/package-terms" element={<PackageTerms />} />
+            <Route exact path="/admin/add-package-term" element={<CreatePackageTerm />} />
+            <Route exact path="/admin/edit-package-term/:id" element={<EditPackageTerm />} />
+
+
             <Route exact path="/admin/package-cancellation-policy" element={<PackageCanPolicy />} />
             <Route exact path="/admin/package-payment-policy" element={<PackagePaymentPolicy />} />
+            <Route exact path="/admin/add-package-payment-policy" element={<CreatePackagePaymentPolicy />} />
+            <Route exact path="/admin/edit-package-payment-policy/:id" element={<EditPackagePaymentPolicy />} />
+            <Route exact path="/admin/add-package-cancellation-policy" element={<CreatePackageCancellationPolicy />} />
+            <Route exact path="/admin/edit-package-cancellation-policy/:id" element={<EditPackageCancellationPolicy />} />
+
             <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
             <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
             <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />

@@ -45,9 +45,9 @@ export default function PackageInclusion() {
         'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
-      swal("Feature is deleted");
+      swal("Inclusion data is deleted successfully");
       setTimeout(() => {
-        window.location = '/admin/package-inclusions';
+        window.location = '/admin/package-inclusion';
       }, 1000);
     })
   }
