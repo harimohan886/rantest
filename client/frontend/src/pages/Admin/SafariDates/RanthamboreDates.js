@@ -135,7 +135,7 @@ export default function RanthamboreDates() {
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
             <div className="grid grid-cols-3 gap-4">
                 <div>
-                    <h1 className='text-2xl text-black font-bold mb-3'>Gir Jungle Trial</h1>
+                    <h1 className='text-2xl text-black font-bold mb-3'>Ranthambore Dates</h1>
                     <div className='mt-2'>
                  
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="file_input">Import CSV file</label>

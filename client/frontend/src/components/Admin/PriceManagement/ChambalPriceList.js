@@ -41,11 +41,14 @@ export default function ChambalPriceList( { type } ) {
 
   return (
     <>
+    <div className='float-right'>
+      <Link to={`/admin/add-price/add/${type}`} className="text-white bg-success font-medium rounded px-5 py-2.5 text-center">
+        Add price
+      </Link>
+    </div>
+    <div className='clear-right'></div>
         <table className='table bg-white border border-slate-300 mt-4'>
              <thead>
-                     <Link to={`/admin/add-price/add/${type}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Add
-                     </Link>
                  <tr>
                      <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>#</th>
                      { type == 'festival' ? 

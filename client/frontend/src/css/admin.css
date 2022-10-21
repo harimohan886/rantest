@@ -11,6 +11,12 @@ a:hover{
 .sideNav ul li #accordionMenu ul li:last-child{
   border-bottom: none;
 }
+.accordion-item .collapse.show{
+  visibility: visible;
+}
+.accordion-item a:focus{
+  text-decoration: none;
+}
 .nav-tabs .nav-link{
   background: #fff;
   color: #111;
