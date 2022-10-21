@@ -69,7 +69,7 @@ module.exports = {
       if (festivalData) {
         return res.status(200)
         .send({
-          success: false,
+          success: true,
           message: 'data fetched!',
           data: festivalData
         });
@@ -81,7 +81,7 @@ module.exports = {
           const defaultData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
           return res.status(200)
           .send({
-            success: false,
+            success: true,
             message: 'data fetched!',
             data: defaultData
           });
@@ -89,7 +89,7 @@ module.exports = {
         }else{
           return res.status(200)
           .send({
-            success: false,
+            success: true,
             message: 'data fetched!',
             data: weekendData
           });
@@ -99,7 +99,7 @@ module.exports = {
         const weekendData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
         return res.status(200)
         .send({
-          success: false,
+          success: true,
           message: 'data fetched!',
           data: weekendData
         });
