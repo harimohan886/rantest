@@ -391,17 +391,6 @@ module.exports = {
       });
     }
 
-    var checkCount = await checkNameIsUnique(req.body.name);
-
-    if (checkCount) {
-      return res.status(412)
-      .send({
-        success: false,
-        message: 'Validation failed',
-        data: 'duplicate name'
-      });
-    }
-
     try {
       const id = req.params.id;
 

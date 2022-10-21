@@ -13,6 +13,8 @@ export default function PriceType({ id , type , action }) {
   const [price , setPrice] = useState();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [personType , setPersonType] = useState();
+  const [vehicleType , setVehicleType] = useState();
   const alert = useAlert();
 
   function getDetails(type) {
@@ -27,6 +29,8 @@ export default function PriceType({ id , type , action }) {
         }).then(result => { 
             setName(result.data.data.name);
             setPrice(result.data.data.price);
+            setPersonType(result.data.data.person_type);
+            setVehicleType(result.data.data.vehicle_type);
         })   
   }
 
@@ -39,12 +43,16 @@ export default function PriceType({ id , type , action }) {
     const Safaridata  = {
         "name" : name,
         "price" : price,
-        "type" : type
+        "type" : type,
+        "person_type": personType,
+        "vehicle_type": vehicleType
     }
 
     const chambalData = {
       "name" : name,
-      "price" : price
+      "price" : price,
+      "person_type": personType,
+      "vehicle_type": vehicleType
     }
 
     const data = type == 'chambal' ? chambalData : Safaridata;
@@ -95,7 +103,9 @@ export default function PriceType({ id , type , action }) {
             "price" : price,
             "type" : type,
             "date_from": moment(startDate).format("YYYY-MM-DD"),
-            "date_to" :  moment(endDate).format("YYYY-MM-DD")   
+            "date_to" :  moment(endDate).format("YYYY-MM-DD"),
+            "person_type": personType,
+            "vehicle_type": vehicleType   
        }
     
         id == 'add'   ?
@@ -161,6 +171,24 @@ export default function PriceType({ id , type , action }) {
                         <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
 
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
+                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Please select</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Foreigner">Foreigner</option>
+                    </select>
+                    </div>
+
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
+                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Please select</option>
+                        <option value="Gypsy">Gypsy</option>
+                        <option value="Canter">Canter</option>
+                    </select>
+                    </div>
+
                         <div className='flex'>
                             <button ype="button" onClick = {HandleWeekendUpdate} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 ml-2 text-center">Submit</button>
                             <Link to='/admin/chambal-dates' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
@@ -183,6 +211,24 @@ export default function PriceType({ id , type , action }) {
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
                 <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
             </div>
+
+                  <div className="mb-6">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
+                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Please select</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Foreigner">Foreigner</option>
+                    </select>
+                    </div>
+
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
+                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Please select</option>
+                        <option value="Gypsy">Gypsy</option>
+                        <option value="Canter">Canter</option>
+                    </select>
+                    </div>
 
             <div className='flex'>
                 <button ype="button" onClick = {HandleUpdate} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 ml-2 text-center">Submit</button>

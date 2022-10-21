@@ -6,6 +6,16 @@ const asyncHandler = require('../Middleware/asyncHandler')
 
 const CancellationPolicy = require('../Models/CancellationPolicy.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await CancellationPolicy.find({ policy: name }).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = {
   getAllCancellationPolicys: async (req, res, next) => {
     try {
@@ -52,6 +62,17 @@ module.exports = {
       });
     }
 
+    var checkCount = await checkNameIsUnique(req.body.policy);
+
+    if (checkCount) {
+      return res.status(412)
+      .send({
+        success: false,
+        message: 'Validation failed',
+        data: 'duplicate policy'
+      });
+    }
+
     const cpolicy = new CancellationPolicy(req.body);
     const result = await cpolicy.save();
     res.send({
@@ -66,7 +87,7 @@ module.exports = {
     try {
       const cpolicy = await CancellationPolicy.findById(id);
       if (!cpolicy) {
-        throw createError(404, 'CancellationPolicy does not exist.');
+        throw createError(404, 'Cancellation Policy does not exist.');
       }
       res.send({
         success: true,
@@ -76,7 +97,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid CancellationPolicy id'));
+        next(createError(400, 'Invalid Cancellation Policy id'));
         return;
       }
       next(error);
@@ -106,7 +127,7 @@ module.exports = {
 
       const result = await CancellationPolicy.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'CancellationPolicy does not exist');
+        throw createError(404, 'Cancellation Policy does not exist');
       }
       res.send({
         success: true,
@@ -116,7 +137,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid CancellationPolicy Id'));
+        return next(createError(400, 'Invalid Cancellation Policy Id'));
       }
 
       next(error);
@@ -128,7 +149,7 @@ module.exports = {
     try {
       const result = await CancellationPolicy.findByIdAndDelete(id);
       if (!result) {
-        throw createError(404, 'CancellationPolicy does not exist.');
+        throw createError(404, 'Cancellation Policy does not exist.');
       }
       res.send({
         success: true,
@@ -137,7 +158,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid CancellationPolicy id'));
+        next(createError(400, 'Invalid Cancellation Policy id'));
         return;
       }
       next(error);
