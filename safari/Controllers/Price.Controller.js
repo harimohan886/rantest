@@ -79,7 +79,7 @@ module.exports = {
         return res.status(200)
         .send({
           success: false,
-          message: 'Validation failed',
+          message: 'data fetched!',
           data: festivalData
         });
       }else if (checkCount) {
@@ -88,7 +88,7 @@ module.exports = {
         return res.status(200)
         .send({
           success: false,
-          message: 'Validation failed',
+          message: 'data fetched!',
           data: weekendData
         });
       }else{
@@ -97,7 +97,7 @@ module.exports = {
         return res.status(200)
         .send({
           success: false,
-          message: 'Validation failed',
+          message: 'data fetched!',
           data: weekendData
         });
       }
