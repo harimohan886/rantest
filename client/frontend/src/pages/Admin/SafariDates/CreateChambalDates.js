@@ -43,7 +43,7 @@ export default function CreateChambalDates() {
       <AdminNavbar/> 
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-        <h1 className='text-2xl text-black font-bold mb-3'>Create Devalia event</h1>
+        <h1 className='text-2xl text-black font-bold mb-3'>Add event date</h1>
         <form className='mt-4 shadow-md p-4 rounded bg-white'>
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>

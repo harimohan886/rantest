@@ -31,7 +31,7 @@ export default function HotelEnquiry({ enquiries }) {
 
     return (
         <div className='latestUsers'>
-            <h2 className="text-3xl font-bold mt-8 mb-3">Recent Hotel Enquiries</h2>
+            <h2 className="text-2xl text-black font-bold mt-8 mb-3">Recent Hotel Enquiries</h2>
             <table className="table bg-white">
                 <thead>
                     <tr>
