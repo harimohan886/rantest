@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 
 const Price = require('../Models/Price.model');
+var moment = require('moment');
 
 
 
@@ -49,33 +50,23 @@ module.exports = {
 
   getBookingPricesByDate: async (req, res, next) => {
 
-    var type = req.body.date;    
+    const date = req.body.date;   
+
+    var result = new Date(date);
+    var result1 = new Date(date);
+    result.setDate(result.getDate() + 1);
+    result1.setDate(result1.getDate() - 1);
+
+    var nextDate = result.getFullYear()+'-'+`${(result.getMonth()+1)}`.padStart(2, "0")+'-'+`${(result.getDate())}`.padStart(2, "0");
+    var prevDate = result1.getFullYear()+'-'+`${(result1.getMonth()+1)}`.padStart(2, "0")+'-'+`${(result1.getDate())}`.padStart(2, "0");
 
     try {
       var checkCount = await isWeekend(req.body.date);
       var date_to =  req.body.date ;
 
-      const festivalData =  await Price.find({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type,  date_from: { '$gte': date_to }, date_to: { '$lte': date_to }});
-      /*const festivalData =  await Price.find(
-        {
-    '$or': [
-        {
-            '$and': [
-                {"date_from": { '$gte': '2022-09-29' } },
-                {"date_to": { '$lt': '2022-09-29' } }
-            ]
-        },
-        {
-            "date_to": { '$eq': '2022-09-29' }
-        },
-        {
-            "date_from": { '$eq': '2022-09-29' }
-        }
-    ]
-}
-        );*/
+      const festivalData =  await Price.findOne({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type,  date_from: { '$gte': prevDate }, date_to: { '$lte': nextDate }});
 
-      if (festivalData && festivalData.length > 0) {
+      if (festivalData) {
         return res.status(200)
         .send({
           success: false,
@@ -85,12 +76,24 @@ module.exports = {
       }else if (checkCount) {
 
         const weekendData =  await Price.findOne({ type: 'weekend', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
-        return res.status(200)
-        .send({
-          success: false,
-          message: 'data fetched!',
-          data: weekendData
-        });
+        if (!weekendData) {
+
+          const defaultData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
+          return res.status(200)
+          .send({
+            success: false,
+            message: 'data fetched!',
+            data: defaultData
+          });
+
+        }else{
+          return res.status(200)
+          .send({
+            success: false,
+            message: 'data fetched!',
+            data: weekendData
+          });
+        }
       }else{
 
         const weekendData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
@@ -109,8 +112,6 @@ module.exports = {
 
   createNewPrice: async (req, res, next) => {
     try {
-
-      console.log(req.body);
       const price = new Price(req.body);
       const result = await price.save();
       res.send({
@@ -206,3 +207,22 @@ module.exports = {
               }
           ]
       });*/
+
+        /*const festivalData =  await Price.find(
+        {
+    '$or': [
+        {
+            '$and': [
+                {"date_from": { '$gte': '2022-09-29' } },
+                {"date_to": { '$lt': '2022-09-29' } }
+            ]
+        },
+        {
+            "date_to": { '$eq': '2022-09-29' }
+        },
+        {
+            "date_from": { '$eq': '2022-09-29' }
+        }
+    ]
+}
+        );*/
