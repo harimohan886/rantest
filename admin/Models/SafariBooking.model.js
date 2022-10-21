@@ -7,10 +7,21 @@ const SafariBookingSchema = new Schema({
 		required: [true, "date required!"],
 		index: true,
 	},
+	customer_id : {
+		type : String,
+	},
+	customer : {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "customers"
+	},
 	zone: {
 		type: String,
 		required: [true, "zone required!"],
 	},
+	booking_customers:[{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "booking_customers"
+	}],
 	vehicle: {
 		type: String,
 		required: [true, "vehicle required!"],
@@ -27,6 +38,9 @@ const SafariBookingSchema = new Schema({
 		type: String,
 	},
 	status: {
+		type: String,
+	},
+	addedAt: {
 		type: String,
 	}
 },{

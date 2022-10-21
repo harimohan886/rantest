@@ -61,7 +61,7 @@ class ApiFeatures {
 
     this.query.totalCount = this.query.length;
 
-    this.query = this.query.limit(resultPerPage).skip(skip).sort({$natural:-1}).populate(['booking_customers', 'chambal_booking', 'safari_booking', 'package_booking']);
+    // this.query = this.query.limit(resultPerPage).skip(skip).sort({$natural:-1}).populate(['booking_customers', 'chambal_booking', 'safari_booking', 'package_booking']);
 
     return this;
   }

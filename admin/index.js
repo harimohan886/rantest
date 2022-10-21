@@ -19,6 +19,7 @@ const SeedDataRoute = require('./Routes/SeedData.route');
 const EnquiryRoute = require('./Routes/Enquiry.route');
 const SettingRoute = require('./Routes/Setting.route');
 const CustomerRoute = require('./Routes/Customer.route');
+const BookingRoute = require('./Routes/Booking.route');
 const SeoManagerRoute = require('./Routes/SeoManager.route');
 
 app.use('/auth', AuthRoute);
@@ -28,6 +29,8 @@ app.use('/enquiries', EnquiryRoute);
 app.use('/settings', SettingRoute);
 
 app.use('/customers', CustomerRoute);
+
+app.use('/bookings', BookingRoute);
 
 app.use('/seed-data', SeedDataRoute);
 

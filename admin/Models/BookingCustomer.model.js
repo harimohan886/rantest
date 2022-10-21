@@ -11,6 +11,9 @@ const BookingCustomerSchema = new Schema({
 		type: String,
 		required: [true, "gender required!"],
 	},
+	customer_id: {
+		type: String,
+	},
 	nationality: {
 		type: String,
 		required: [true, "nationality required!"],

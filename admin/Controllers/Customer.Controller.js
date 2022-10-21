@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/ApiFeatures");
 
+const Validator = require('validatorjs');
+
 const asyncHandler = require('../Middleware/asyncHandler')
 
 const Customer = require('../Models/Customer.model');
@@ -22,8 +24,6 @@ async function checkNameIsUnique(email,type) {
 };
 
 async function checkCustomerIsUnique(email, type, mobile) {
-
-  console.log({email: email, type: type, mobile: mobile});
 
   totalPosts = await Customer.find({email: email, type: type, mobile: mobile}).countDocuments().exec();
   if (totalPosts > 0) {
@@ -152,89 +152,124 @@ module.exports = {
 
   createNewCustomerSafari: async (req, res, next) => {
 
-    var checkCount = await checkNameIsUnique(req.body.email, 'safari');
+    let rules = {
+      name: 'required',
+      mobile: 'required',
+      email: 'required',
+      address: 'required',
+      state: 'required',
+      date: 'required',
+      zone: 'required',
+      amount: 'required',
+      vehicle: 'required',
+      timing: 'required',
+    };
 
-    if (checkCount) {
-      return res.status(412)
-          .send({
-            success: false,
-            message: 'Validation failed',
-            data: 'duplicate email'
-          });
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
     }
 
-    try {
+    const customer_data = new Customer({
+      name : req.body.name,
+      mobile : req.body.mobile,
+      email : req.body.email,
+      type : 'safari',
+      address : req.body.address,
+      state : req.body.state,
+    });
 
-      const booking_customer_array = [];
+    const customer_data_result = await customer_data.save();
 
-      const safari_booking_data = new SafariBooking({
-        date : req.body.date,
-        zone : req.body.zone,
-        vehicle : req.body.vehicle,
-        timing : req.body.timing,
-        transaction_id : req.body.transaction_id,
-        amount : req.body.amount
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    const safari_booking_data = new SafariBooking({
+      date : req.body.date,
+      zone : req.body.zone,
+      customer_id : customer_data_result._id,
+      customer : customer_data_result._id,
+      vehicle : req.body.vehicle,
+      timing : req.body.timing,
+      transaction_id : req.body.transaction_id,
+      amount : req.body.amount,
+      addedAt : today,
+      status : 'unpaid'
+    });
+
+    const safari_booking_result = await safari_booking_data.save();
+
+    customer_data_result.safari_booking = safari_booking_result._id;
+    await customer_data_result.save();
+
+    for (const persons of req.body.booked_persons) 
+    { 
+
+      const booking_customer_data = new BookingCustomer({
+        name : persons.name,
+        customer_id : customer_data_result._id,
+        gender : persons.gender,
+        nationality : persons.nationality,
+        id_proof : persons.id_proof,
+        idnumber : persons.idnumber
       });
 
-      const safari_booking_result = await safari_booking_data.save();
+      const booking_customer_result = await booking_customer_data.save();
 
-      for (const persons of req.body.booked_persons) 
-      { 
+      safari_booking_result.booking_customers.push(booking_customer_result._id);
 
-        const booking_customer_data = new BookingCustomer({
-          name : persons.name,
-          gender : persons.gender,
-          nationality : persons.nationality,
-          id_proof : persons.id_proof,
-          idnumber : persons.idnumber
-        });
-
-        const booking_customer_result = await booking_customer_data.save();
-
-        booking_customer_array.push(booking_customer_result._id);
-      }
-
-      const customer_data = new Customer({
-        name : req.body.name,
-        booking_customers : booking_customer_array,
-        safari_booking : safari_booking_result._id,
-        mobile : req.body.mobile,
-        email : req.body.email,
-        type : 'safari',
-        address : req.body.address,
-        state : req.body.state,
-      });
-
-      const customer_data_result = await customer_data.save();
-
-      res.send({
-        success: true,
-        message: 'Data inserted',
-        data: customer_data_result
-      });
-
-    } catch (error) {
-      console.log(error.message);
-      if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
-        return;
-      }
-      next(error);
+      customer_data_result.booking_customers.push(booking_customer_result._id);
     }
+
+    await safari_booking_result.save();
+    await customer_data_result.save();
+
+    res.send({
+      success: true,
+      message: 'Data inserted',
+      data: customer_data_result
+    });
+
   },
 
   createNewCustomerChambal: async (req, res, next) => {
 
-    var checkCount = await checkNameIsUnique(req.body.email, 'chambal');
 
-    if (checkCount) {
-      return res.status(412)
-          .send({
-            success: false,
-            message: 'Validation failed',
-            data: 'duplicate email'
-          });
+    let rules = {
+      name: 'required',
+      mobile: 'required',
+      email: 'required',
+      address: 'required',
+      state: 'required',
+      date: 'required',
+      zone: 'required',
+      amount: 'required',
+      vehicle: 'required',
+      time: 'required',
+      id_proof_no: 'required',
+      transaction_id: 'required',
+      no_of_persons_indian: 'required',
+      no_of_persons_foreigner: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
     }
+
 
     try {
 
@@ -257,9 +292,28 @@ module.exports = {
       break;
     }  
 
+    const customer_data = new Customer({
+        name : req.body.name,
+        mobile : req.body.mobile,
+        type : 'chambal',
+        email : req.body.email,
+        address : req.body.address,
+        state : req.body.state
+      });
+
+      const customer_data_result = await customer_data.save();
+
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var yyyy = today.getFullYear();
+      today = yyyy + '-' + mm + '-' + dd;
+
       const safari_booking_data = new ChambalBooking({
         date : req.body.date,
         zone : req.body.zone,
+        customer_id : customer_data_result._id,
+        customer : customer_data_result._id,
         booking_name : booking_name,
         booking_option : booking_option,
         vehicle : req.body.vehicle,
@@ -269,21 +323,15 @@ module.exports = {
         id_proof_no : req.body.id_proof_no,
         no_of_persons_indian : req.body.no_of_persons_indian,
         no_of_persons_foreigner : req.body.no_of_persons_foreigner,
+        addedAt : today,
+        status : 'unpaid'
       });
 
       const safari_booking_result = await safari_booking_data.save();
 
-      const customer_data = new Customer({
-        name : req.body.name,
-        chambal_booking : safari_booking_result._id,
-        mobile : req.body.mobile,
-        type : 'chambal',
-        email : req.body.email,
-        address : req.body.address,
-        state : req.body.state
-      });
+      customer_data_result.chambal_booking = safari_booking_result._id;
 
-      const customer_data_result = await customer_data.save();
+      await customer_data_result.save();
 
       res.send({
         success: true,
@@ -304,37 +352,36 @@ module.exports = {
 
 createNewCustomerPackage: async (req, res, next) => {
 
-  var checkCount = await checkNameIsUnique(req.body.email, 'package');
+  let rules = {
+    date:'required',
+    type:'required',
+    timing:'required',
+    name:'required',
+    email:'required',
+    mobile:'required',
+    nationality_type:'required',
+    package_option_id:'required',
+    package_id:'required',
+    no_of_kids:'required',
+    amount:'required',
+    category_id:'required',
+    address:'required',
+  };
 
-    if (checkCount) {
-      return res.status(412)
-          .send({
-            success: false,
-            message: 'Validation failed',
-            data: 'duplicate email'
-          });
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
     }
 
     try {
 
-      const booking_customer_array = [];
-
-      const safari_booking_data = new PackageBooking({
-        date : req.body.date,
-        timing : req.body.timing,
-        transaction_id : req.body.transaction_id,
-        amount : req.body.amount,
-        package_option_nationality : req.body.nationality_type,
-        package_option_id : req.body.package_option_id,
-        package_id : req.body.package_id,
-        no_of_kids : req.body.no_of_kids,
-      });
-
-      const safari_booking_result = await safari_booking_data.save();
-
       const customer_data = new Customer({
         name : req.body.name,
-        package_booking : safari_booking_result._id,
         mobile : req.body.mobile,
         type : 'package',
         email : req.body.email,
@@ -343,6 +390,33 @@ createNewCustomerPackage: async (req, res, next) => {
       });
 
       const customer_data_result = await customer_data.save();
+
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var yyyy = today.getFullYear();
+      today = yyyy + '-' + mm + '-' + dd;
+
+      const safari_booking_data = new PackageBooking({
+        date : req.body.date,
+        customer_id : customer_data_result._id,
+        customer : customer_data_result._id,
+        timing : req.body.timing,
+        transaction_id : req.body.transaction_id,
+        amount : req.body.amount,
+        package_option_nationality : req.body.nationality_type,
+        package_option_id : req.body.package_option_id,
+        package_id : req.body.package_id,
+        no_of_kids : req.body.no_of_kids,
+        addedAt : today,
+        status : 'unpaid'
+      });
+
+      const safari_booking_result = await safari_booking_data.save();
+
+      customer_data_result.safari_booking = safari_booking_result._id;
+
+      customer_data_result.save();
 
       res.send({
         success: true,
@@ -363,11 +437,15 @@ createNewCustomerPackage: async (req, res, next) => {
   findCustomerById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const auth = await Customer.findById(id);
-      if (!auth) {
+      const result = await Customer.findById(id);
+      if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
-      res.send(auth);
+      res.send({
+          success: true,
+          message: "data fetched",
+          data: result
+        });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -388,7 +466,11 @@ createNewCustomerPackage: async (req, res, next) => {
       if (!result) {
         throw createError(404, 'Customer does not exist');
       }
-      res.send(result);
+      res.send({
+          success: true,
+          message: "data updated",
+          data: result
+        });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -405,7 +487,10 @@ createNewCustomerPackage: async (req, res, next) => {
       if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
-      res.send(result);
+      res.send({
+          success: true,
+          message: "data deleted",
+        });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {

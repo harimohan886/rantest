@@ -11,6 +11,13 @@ const PackageBookingSchema = new Schema({
 		type: String,
 		required: [true, "Package Id required!"],
 	},
+	customer_id: {
+		type: String,
+	},
+	customer:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "customers"
+	},
 	timing: {
 		type: String,
 		required: [true, "timing required!"],
@@ -35,6 +42,9 @@ const PackageBookingSchema = new Schema({
 		type: String,
 	},
 	status: {
+		type: String,
+	},
+	addedAt: {
 		type: String,
 	}
 },{

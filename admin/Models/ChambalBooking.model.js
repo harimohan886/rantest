@@ -11,6 +11,13 @@ const ChambalBookingSchema = new Schema({
 		type: String,
 		required: [true, "zone required!"],
 	},
+	customer_id: {
+		type: String,
+	},
+	customer:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "customers"
+	},
 	booking_name: {
 		type: String
 	},
@@ -42,6 +49,9 @@ const ChambalBookingSchema = new Schema({
 		type: String,
 	},
 	status: {
+		type: String,
+	},
+	addedAt: {
 		type: String,
 	}
 },{
