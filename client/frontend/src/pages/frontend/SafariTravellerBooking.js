@@ -1,5 +1,7 @@
 import React, { useState , useEffect } from 'react'
 import TravellerInputs from '../../components/frontend/Safari/TravellerInputs';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 export default function SafariTravellerBooking() {
 
@@ -8,6 +10,7 @@ export default function SafariTravellerBooking() {
       const [ Email , setEmail ] = useState('');
       const [ State , setState ] = useState('');
       const [ Address , setAddress ] = useState('');
+      const [ payable_Amount, setPayableAmount ] = useState(parseInt(0));
 
       const [users , setUsers ] = useState([{
         key: Date.now(),
@@ -15,19 +18,57 @@ export default function SafariTravellerBooking() {
         gender: "",
         nationality: "",
         idProof: "",
-        idNumber: ""
+        idNumber: "",
+        price: 0
       }]);
 
       const onChange = (i,e) => {
+        
         let newUsers = [...users];
-        newUsers[i]['fullName'] = e.fullName || 0;
-        newUsers[i]['gender'] = e.gender || 0;
-        newUsers[i]['nationality'] = e.nationality || 0;
-        newUsers[i]['idProof'] = e.idProof || 0;
-        newUsers[i]['idNumber'] = e.idNumber || '';
-        setUsers(newUsers);
-        localStorage.setItem('NewUsers' , JSON.stringify(newUsers));
+        newUsers[i]['fullName'] = e.fullName ;
+        newUsers[i]['gender'] = e.gender ;
+        newUsers[i]['nationality'] = e.nationality ;
+        newUsers[i]['idProof'] = e.idProof ;
+        newUsers[i]['idNumber'] = e.idNumber ;
+        newUsers[i]['price'] = 0;
+
+            const data = {
+                "date": localStorage.getItem('selDate'),
+                "person_type" : newUsers[i].nationality,
+                "vehicle_type": localStorage.getItem('selVehicle')
+            }
+
+            var amt = parseInt(0);
+
+            users.map((itm,ix) => (
+                axios.post(`${process.env.REACT_APP_BASE_URL}/safari/getBookingPricesByDate`, data).then(res => {
+                    if (res.status === 200) {
+                        newUsers[i]['price'] = res.data.data.price
+                    } 
+                    console.log(itm.price);
+                    amt = parseInt(amt) + parseInt(itm.price);
+                    setPayableAmount(amt);
+                })  
+                
+            ));
+            
+            setUsers(newUsers);
+            localStorage.setItem('NewUsers' , JSON.stringify(newUsers));
       };
+
+      var FinalAmount = 0;
+
+      function PayableAmount(result) {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/safari/getBookingPricesByDate`, result).then(res => {
+            if (res.status === 200) {
+                setPayableAmount(res.data.data.price);
+            } else {
+                setPayableAmount(0);
+            }
+        });
+        return payable_Amount;
+      }
+
 
       let addElement = () => {
         setUsers([...users, { 
@@ -36,7 +77,8 @@ export default function SafariTravellerBooking() {
             gender: "",
             nationality: "",
             idProof: "",
-            idNumber: "" 
+            idNumber: "",
+            price: 0 
         }])
       };
 
@@ -48,7 +90,8 @@ export default function SafariTravellerBooking() {
       };
 
       const handleSaveData = () => {
-            window.location.href = '/thankyou';
+        console.log(FinalAmount);
+        window.location.href = '/thankyou';
       }
 
     return (
@@ -186,7 +229,7 @@ export default function SafariTravellerBooking() {
                                         <TravellerInputs
                                             key={user.key}
                                             value={user}
-                                            onChange={e => onChange(index, user)}
+                                            onChange={e => onChange(index, e)}
                                         />
                                         <td className='border border-slate-300 text-center plusMinusInputs'>
                                             <button type="button" onClick={addElement} className='btn btn-success'>Add</button>
@@ -199,7 +242,9 @@ export default function SafariTravellerBooking() {
                             </tbody>
                         </table>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
-                            <button type="button" onClick={handleSaveData} className='btn btn-success'>Pay Now</button>        
+                            <button className='btn btn-success'>Payable amount : { payable_Amount }</button> &nbsp;
+                            <button type="button" onClick={handleSaveData} className='btn btn-success'>Pay Now</button> &nbsp; 
+                            <button className='btn btn-success'>Go Back</button>       
                         </div>
                         
                     </div>
