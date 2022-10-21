@@ -6,7 +6,7 @@ a:hover{
   text-decoration: none !important;
 }
 .sideNav ul li{
-  border-bottom: 1px solid #c19100;
+  border-bottom: 1px solid #677a8d;
 }
 .sideNav ul li #accordionMenu ul li:last-child{
   border-bottom: none;
@@ -66,7 +66,7 @@ a:hover{
   color: #444;
 }
 .bg-hotel-maroon{
-  background: #801a1f;
+  background: #6083b6;
 }
 .usertype{
   margin-left: -15px;
@@ -156,12 +156,15 @@ table tbody tr td{
   font-size: 13px;
 }
 .footerAdmin{
-  background: #fffdf5;
-  border-top: 1px solid #fffdf5;
+  background: #f6f6f6;
+  border-top: 1px solid #f6f6f6;
 }
 .md\:ml-64{
   margin-left: 15rem !important;
 }
 .indianCategory input::placeholder{
   font-size: 12px;
+}
+.bg-green-700{
+  background: #1f5fbc !important;
 }
