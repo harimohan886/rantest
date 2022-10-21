@@ -5,6 +5,16 @@ const Validator = require('validatorjs');
 
 const Term = require('../Models/Term.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Term.find({ term: name }).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = {
   getAllTerms: async (req, res, next) => {
     try {
@@ -48,6 +58,17 @@ module.exports = {
         success: false,
         message: 'Validation failed',
         data: validation.errors
+      });
+    }
+
+    var checkCount = await checkNameIsUnique(req.body.term);
+
+    if (checkCount) {
+      return res.status(412)
+      .send({
+        success: false,
+        message: 'Validation failed',
+        data: 'duplicate term'
       });
     }
 

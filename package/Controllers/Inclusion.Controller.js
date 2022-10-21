@@ -5,6 +5,16 @@ const Validator = require('validatorjs');
 
 const Inclusion = require('../Models/Inclusion.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Inclusion.find({ inclusion: name }).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = {
   getAllInclusions: async (req, res, next) => {
     try {
@@ -51,6 +61,16 @@ module.exports = {
       });
     }
 
+    var checkCount = await checkNameIsUnique(req.body.inclusion);
+
+    if (checkCount) {
+      return res.status(412)
+      .send({
+        success: false,
+        message: 'Validation failed',
+        data: 'duplicate inclusion'
+      });
+    }
 
     try {
       const package = new Inclusion(req.body);

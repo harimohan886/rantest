@@ -4,6 +4,15 @@ const Validator = require('validatorjs');
 
 const Exclusion = require('../Models/Exclusion.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Exclusion.countDocuments({ exclusion: name });
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 module.exports = {
   getAllExclusions: async (req, res, next) => {
@@ -48,6 +57,17 @@ module.exports = {
         success: false,
         message: 'Validation failed',
         data: validation.errors
+      });
+    }
+
+    var checkCount = await checkNameIsUnique(req.body.exclusion);
+
+    if (checkCount) {
+      return res.status(412)
+      .send({
+        success: false,
+        message: 'Validation failed',
+        data: 'duplicate exclusion'
       });
     }
 
