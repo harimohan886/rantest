@@ -76,7 +76,7 @@ module.exports = {
         );*/
 
       if (festivalData && festivalData.length > 0) {
-        return res.status(412)
+        return res.status(200)
         .send({
           success: false,
           message: 'Validation failed',
@@ -85,7 +85,7 @@ module.exports = {
       }else if (checkCount) {
 
         const weekendData =  await Price.findOne({ type: 'weekend', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
-        return res.status(412)
+        return res.status(200)
         .send({
           success: false,
           message: 'Validation failed',
@@ -94,7 +94,7 @@ module.exports = {
       }else{
 
         const weekendData =  await Price.findOne({ type: 'default', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
-        return res.status(412)
+        return res.status(200)
         .send({
           success: false,
           message: 'Validation failed',
