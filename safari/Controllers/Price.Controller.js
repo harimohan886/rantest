@@ -2,9 +2,6 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 
 const Price = require('../Models/Price.model');
-var moment = require('moment');
-
-
 
 async function isWeekend(dateObj) {
 
@@ -19,9 +16,8 @@ async function isWeekend(dateObj) {
 };
 
 async function checkDataIsUnique(name, type, person_type, vehicle_type, id=0) {
-console.log(id);
   if (id !== 0) {
-    totalPosts = await Price.countDocuments({ name: name, type: type, person_type: person_type, vehicle_type: vehicle_type, _id: {$nin : [id.toString()]} });
+    totalPosts = await Price.countDocuments({ name: name, type: type, person_type: person_type, vehicle_type: vehicle_type, _id: {$nin : [id]} });
     if (totalPosts > 0) {
       return true;
     } else {
@@ -133,7 +129,7 @@ module.exports = {
 
     const {name, type, person_type, vehicle_type} = req.body;
 
-    const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type);
+    /*const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type);
 
     if (isDataExist) {
       return res.status(412)
@@ -142,7 +138,7 @@ module.exports = {
           message: 'Validation failed',
           data: 'price already exists'
         });
-    }
+    }*/
 
     try {
       const price = new Price(req.body);
@@ -188,16 +184,16 @@ module.exports = {
 
     const {name, type, person_type, vehicle_type} = req.body;
 
-    // const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type, id);
+    const isDataExist = await checkDataIsUnique(name, type, person_type, vehicle_type, id);
 
-    /*if (isDataExist) {
+    if (isDataExist) {
       return res.status(412)
         .send({
           success: false,
           message: 'Validation failed',
           data: 'price already exists'
         });
-    }*/
+    }
 
     try {
       const updates = req.body;
