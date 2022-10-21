@@ -45,7 +45,6 @@ export default function SafariTravellerBooking() {
                     if (res.status === 200) {
                         newUsers[i]['price'] = res.data.data.price
                     } 
-                    console.log(itm.price);
                     amt = parseInt(amt) + parseInt(itm.price);
                     setPayableAmount(amt);
                 })  
@@ -85,7 +84,20 @@ export default function SafariTravellerBooking() {
       let removeElement = (i) => {
         let newFormValues = [...users];
         newFormValues.splice(i, 1);
-        setUsers(newFormValues)
+
+
+        var amt = parseInt(0);
+
+        newFormValues.map((itm,ix) => {
+           
+                amt = parseInt(amt) + parseInt(itm.price);
+                setPayableAmount(amt);
+            
+        })
+
+        setUsers(newFormValues);
+
+
         localStorage.setItem('NewUsers' , JSON.stringify(newFormValues));
       };
 
