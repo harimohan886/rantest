@@ -55,20 +55,6 @@ export default function SafariTravellerBooking() {
             localStorage.setItem('NewUsers' , JSON.stringify(newUsers));
       };
 
-      var FinalAmount = 0;
-
-      function PayableAmount(result) {
-        axios.post(`${process.env.REACT_APP_BASE_URL}/safari/getBookingPricesByDate`, result).then(res => {
-            if (res.status === 200) {
-                setPayableAmount(res.data.data.price);
-            } else {
-                setPayableAmount(0);
-            }
-        });
-        return payable_Amount;
-      }
-
-
       let addElement = () => {
         setUsers([...users, { 
             key: Date.now(),
@@ -102,7 +88,6 @@ export default function SafariTravellerBooking() {
       };
 
       const handleSaveData = () => {
-        console.log(FinalAmount);
         window.location.href = '/thankyou';
       }
 
@@ -253,14 +238,15 @@ export default function SafariTravellerBooking() {
                                 ))}
                             </tbody>
                         </table>
+                       
+                        
+                    </div>
+                </form>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
                             <button className='btn btn-success'>Payable amount : { payable_Amount }</button> &nbsp;
                             <button type="button" onClick={handleSaveData} className='btn btn-success'>Pay Now</button> &nbsp; 
                             <button className='btn btn-success'>Go Back</button>       
                         </div>
-                        
-                    </div>
-                </form>
             </div>
         </div>    
     )
