@@ -111,7 +111,7 @@ export default function EditPackageCategory() {
         'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
       },
     }).then(result => {
-      if (result.data.status == 200) {
+      if (result.data.success === true) {
         alert.success("Category has been updated");
         localStorage.removeItem('IndianValues');
         localStorage.removeItem('ForeignerValues');

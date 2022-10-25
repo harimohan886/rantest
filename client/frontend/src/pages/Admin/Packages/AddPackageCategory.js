@@ -101,7 +101,7 @@ export default function AddPackageCategory() {
         },
       }).then(result => {
         console.log('result', result);
-        if (result.data.status == 200) {
+        if (result.data.success === true) {
           alert.success("Category has been created");
           localStorage.removeItem('IndianValues');
           localStorage.removeItem('ForeignerValues');
