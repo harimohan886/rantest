@@ -88,7 +88,9 @@ import EditPackagePaymentPolicy from './pages/Admin/Packages/EditPackagePaymentP
 import CreatePackageCancellationPolicy from './pages/Admin/Packages/CreatePackageCancellationPolicy';
 import EditPackageCancellationPolicy from './pages/Admin/Packages/EditPackageCancellationPolicy';
 
-
+import CreatePackageItinerary from './pages/Admin/Packages/CreatePackageItinerary';
+import EditPackageItinerary from './pages/Admin/Packages/EditPackageItinerary';
+import PackageItineraries from './pages/Admin/Packages/PackageItineraries';
 
 import PackageInclusion from './pages/Admin/Packages/PackageInclusion';
 import PackageExclusion from './pages/Admin/Packages/PackageExclusion';
@@ -227,6 +229,10 @@ function App() {
             <Route exact path="/admin/package-terms" element={<PackageTerms />} />
             <Route exact path="/admin/add-package-term" element={<CreatePackageTerm />} />
             <Route exact path="/admin/edit-package-term/:id" element={<EditPackageTerm />} />
+
+            <Route exact path="/admin/package-itineraries" element={<PackageItineraries />} />
+            <Route exact path="/admin/add-package-itinerary" element={<CreatePackageItinerary />} />
+            <Route exact path="/admin/edit-package-itinerary/:id" element={<EditPackageItinerary />} />
 
 
             <Route exact path="/admin/package-cancellation-policy" element={<PackageCanPolicy />} />
