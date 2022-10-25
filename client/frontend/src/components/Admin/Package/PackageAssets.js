@@ -15,6 +15,10 @@ export default function PackageAssets({ data, handleDelete, type, editType = '' 
                 </tr>
             </thead>
             <tbody>
+                <tr key="01" style={{ display: 'none' }}>
+                    <td className='border border-slate-300 text-center'>1</td>
+                    <td className='border border-slate-300 text-left'>Loading..</td>
+                </tr>
                 {data && data.map((item, index) => (
                     <tr key={item._id}>
                         <td className='border border-slate-300 text-center'>{index + 1}</td>
@@ -34,9 +38,8 @@ export default function PackageAssets({ data, handleDelete, type, editType = '' 
                                 <i className="fas fa-trash"></i>
                             </button>
                         </td>
-                    </tr>
-                ))}
+                    </tr>))}
             </tbody>
-        </table>
+        </table >
     )
 }

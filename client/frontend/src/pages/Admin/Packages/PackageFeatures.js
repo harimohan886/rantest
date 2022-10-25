@@ -4,12 +4,15 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import PackageAssets from '../../../components/Admin/Package/PackageAssets';
+import ReactPaginate from "react-paginate";
 import axios from "axios";
 import swal from 'sweetalert';
 
 export default function PackageFeatures() {
 
   const [features, setFeatures] = useState('');
+  const [pageCount, setpageCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -17,7 +20,6 @@ export default function PackageFeatures() {
 
     try {
       const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/features/`);
-      console.log('result', result);
 
       setFeatures(result.data.data);
       //setLoading(false);
@@ -53,6 +55,27 @@ export default function PackageFeatures() {
     })
   }
 
+
+  const handlePageClick = async (data) => {
+    setLoading(true);
+
+    try {
+
+      let currentPage = data.selected + 1;
+      const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/features/?page=${currentPage}`);
+      setFeatures(result.data.data);
+
+      setpageCount(Math.ceil(result.data.total / result.data.perPage));
+      // setPage(result.data.page);
+      setLoading(false);
+
+    } catch (err) {
+
+      setLoading(false);
+
+    }
+  };
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar />
@@ -68,7 +91,25 @@ export default function PackageFeatures() {
             </div>
           </div>
           <PackageAssets data={features} handleDelete={deleteFeature} type='feature' />
-
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination justify-content-center"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+            breakClassName={"page-item"}
+            breakLinkClassName={"page-link"}
+            activeClassName={"active"}
+          />
 
         </div>
       </div>

@@ -1,21 +1,29 @@
 const express = require('express');
 const router = express.Router();
-var multer      = require('multer');
+var multer = require('multer');
 
-var storage = multer.diskStorage({  
-  destination:(req,file,cb)=>{  
-    cb(null, 'uploads/packages/');  
-  },  
-  filename:(req,file,cb)=>{  
-    cb(null,file.originalname);  
-  }  
-});  
-var uploads = multer({storage:storage});
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/packages/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+var uploads = multer({ storage: storage });
 
 const PackageController = require('../Controllers/Package.Controller');
 
 //Get a list of all packages
 router.get('/', PackageController.getAllPackages);
+
+
+//Get a list of packages features
+router.get('/:id/features', PackageController.getAllPackageFeatures);
+
+//Update a package features 
+router.patch('/:id/features', uploads.single('image'), PackageController.updateAPackageFeatures);
+
 
 router.get('/dashboard', PackageController.countAllPackages);
 

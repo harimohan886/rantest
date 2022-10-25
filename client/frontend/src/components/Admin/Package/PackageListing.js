@@ -66,7 +66,7 @@ export default function PackageListing({ packages }) {
                                     <Link to={`/admin/edit-package/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Edit
                                     </Link>
-                                    <Link to="/admin/package-features" style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
+                                    <Link to={`/admin/package-to-features/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Features
                                     </Link>
                                     <Link to='/admin/package-features' style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
