@@ -242,9 +242,9 @@ function App() {
             <Route exact path="/admin/contact-details" element={<ContactDetails />} />
             <Route exact path="/admin/my-account" element={<MyAccount />} />
             <Route exact path="/admin/change-password" element={<ChangePassword />} />
-            <Route exact path="/admin/package-categories" element={<PackageCategories />} />
-            <Route exact path="/admin/add-package-category" element={<AddPackageCategory />} />
-            <Route exact path="/admin/edit-package-category" element={<EditPackageCategory />} />
+            <Route exact path="/admin/package-categories/:id" element={<PackageCategories />} />
+            <Route exact path="/admin/add-package-category/:id" element={<AddPackageCategory />} />
+            <Route exact path="/admin/edit-package-category/:id" element={<EditPackageCategory />} />
 
           </Route>
 

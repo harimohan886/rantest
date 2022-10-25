@@ -81,7 +81,7 @@ export default function PackageFeatures({ packageId, features }) {
       if (result.data.success === true) {
         swal(result.data.message, "success");
         setTimeout(() => {
-          window.location.href = `/admin/package-features/${packageId}`
+          window.location.href = `/admin/package-to-features/${packageId}`
         }, 1000);
       } else {
         swal("Error in Api", "error");
@@ -89,8 +89,6 @@ export default function PackageFeatures({ packageId, features }) {
     })
 
   }
-
-  console.log("format fe", formatFeatures);
 
 
 

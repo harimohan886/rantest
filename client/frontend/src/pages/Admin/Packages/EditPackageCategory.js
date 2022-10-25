@@ -1,48 +1,164 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Select from 'react-select';
 import IndianCategory from '../../../components/Admin/Package/IndianCategory';
+import ForeignCategory from '../../../components/Admin/Package/ForeignCategory';
+import { useParams } from "react-router-dom";
+import { useAlert } from "react-alert";
+import axios from 'axios';
 
-const getHotels = [
-    { value: 'Corbett Iris Resort', label: 'Corbett Iris Resort' },
-    { value: 'Maya Resort', label: 'Maya Resort' },
-    { value: 'Hotel Trident', label: 'Hotel Trident' },
-    { value: 'City Palace', label: 'City Palace' },
-]
 
 export default function EditPackageCategory() {
 
-const [setSelectedHotels] = useState(null);
+  const params = useParams();
+  const alert = useAlert();
+
+  const [selected, setSelectedHotels] = useState(null);
+  const [details, setDetails] = useState([]);
+  const [cat_name, setCatName] = useState('');
+  const [packageId, setPackageId] = useState();
+
+  const GetDetails = () => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, {
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+      },
+    }).then(result => {
+      const fhotel = result.data.data.map(item => ({ value: item._id, label: item.name }));
+      setDetails(fhotel);
+    })
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/package/package-categories/${params.id}`, {
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+      },
+    }).then(result => {
+      setSelectedHotels(result.data.data.hotels);
+      setCatName(result.data.data.category);
+      setPackageId(result.data.data.package_id);
+    })
+
+  }
+
+  useEffect(() => {
+    GetDetails();
+  }, []);
+
+  const handleChange = (e) => {
+    setSelectedHotels(e);
+  }
+
+  const HandleSubmit = () => {
+
+    let indian = [];
+    let foreigner = [];
+    let hotels = [];
+
+    const data1 = {
+      indian:
+        JSON.parse(localStorage.getItem('IndianValues')).map((item, index) => (
+          indian.push({
+            "adults": parseInt([item.adults]),
+            "rooms": parseInt([item.rooms]),
+            "extra_beds": parseInt([item.extra_beds]),
+            "no_of_kids": parseInt([item.no_of_kids]),
+            "kid": parseInt([item.kid]),
+            "price": parseInt([item.price]),
+            "festival_kid": parseInt([item.festival_kid]),
+            "festival_price": parseInt([item.festival_price])
+          })
+        ))
+    }
+
+    const data2 = {
+      foreigner:
+        JSON.parse(localStorage.getItem('ForeignerValues')).map((item, index) => (
+          foreigner.push({
+            "adults": parseInt([item.adults]),
+            "rooms": parseInt([item.rooms]),
+            "extra_beds": parseInt([item.extra_beds]),
+            "no_of_kids": parseInt([item.no_of_kids]),
+            "kid": parseInt([item.kid]),
+            "price": parseInt([item.price]),
+            "festival_kid": parseInt([item.festival_kid]),
+            "festival_price": parseInt([item.festival_price])
+          })
+        ))
+    }
+
+    selected.map(item => (
+      hotels.push(parseInt([item.value]))
+    ))
+
+    const sendData = {
+      "package_id": packageId,
+      "category": cat_name,
+      "hotels": hotels,
+      "indian": indian,
+      "foreigner": foreigner
+    }
+
+    axios.patch(`${process.env.REACT_APP_BASE_URL}/package/package-categories/${params.id}`, sendData, {
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+      },
+    }).then(result => {
+      if (result.data.status == 200) {
+        alert.success("Category has been updated");
+        localStorage.removeItem('IndianValues');
+        localStorage.removeItem('ForeignerValues');
+        setTimeout(() => {
+          window.location.href = `/admin/package-categories/${packageId}`
+        }, 1000);
+      }
+    })
+
+  }
+
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
-      <Sidebar/>
-      <Navbar/>
+      <Sidebar />
+      <Navbar />
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-            <h1 className='text-2xl text-black font-bold mb-3'>Edit Package Category</h1>
-            <form>
-                <div className='form-group'>
-                    <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Category name</label>
-                    <input type='text' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Category name'/>
-                </div>
-                <div className='form-group'>
-                    <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Select Hotels</label>
-                    <Select
-                    defaultValue={[getHotels[2], getHotels[3]]}
-                    onChange={setSelectedHotels}
-                    options={getHotels}
-                    isMulti
-                    className='setReactSelect'
-                    />
-                </div>
-                <IndianCategory/>
-                <hr />
-            </form>
+          <h1 className='text-2xl text-black font-bold mb-3'>Edit Package Category</h1>
+          <form>
+            <div className='form-group'>
+              <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Category name</label>
+              <input type='text' value={cat_name} onChange={(e) => setCatName(e.target.value)} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Category name' />
+            </div>
+            <div className='form-group'>
+              <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Select Hotels</label>
+              {selected &&
+                <Select
+                  onChange={setSelectedHotels}
+                  options={details}
+                  isMulti
+                  className='setReactSelect'
+                  defaultValue={selected}
+                />
+              }
+
+            </div>
+            <IndianCategory action={'edit'} package_id={packageId} />
+            <ForeignCategory action={'edit'} package_id={packageId} />
+            <hr />
+            <button type="button" onClick={HandleSubmit} className='text-white bg-success hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
+              Update Details
+            </button>
+          </form>
         </div>
       </div>
-      <FooterAdmin/>
+      <FooterAdmin />
     </div>
   )
 }
