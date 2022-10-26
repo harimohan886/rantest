@@ -233,7 +233,7 @@ module.exports = {
           response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
         }
         res.json(response);
-      }).sort({ $natural: -1 }).populate(['booking_customers','safari_booking','chambal_booking']);
+      }).sort({ $natural: -1 }).populate(['customer']);
   }),
 
   findChambalBookingById: async (req, res, next) => {

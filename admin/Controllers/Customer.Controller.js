@@ -242,7 +242,6 @@ module.exports = {
 
   createNewCustomerChambal: async (req, res, next) => {
 
-
     let rules = {
       name: 'required',
       mobile: 'required',
@@ -269,7 +268,6 @@ module.exports = {
         data: validation.errors
       });
     }
-
 
     try {
 
@@ -414,7 +412,7 @@ createNewCustomerPackage: async (req, res, next) => {
 
       const safari_booking_result = await safari_booking_data.save();
 
-      customer_data_result.safari_booking = safari_booking_result._id;
+      customer_data_result.package_booking = safari_booking_result._id;
 
       customer_data_result.save();
 
