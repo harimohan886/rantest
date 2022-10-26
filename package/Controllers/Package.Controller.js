@@ -5,8 +5,8 @@ const ResponseHandler = require('../Middleware/responseHandler')
 
 let responseHandler = new ResponseHandler();
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
- fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) =>
+  fetch(...args));
 
 fs = require('fs')
 
@@ -43,8 +43,8 @@ module.exports = {
   getAllPackages: async (req, res, next) => {
     try {
 
-      var page = parseInt(req.query.page)||1;
-      var size = parseInt(req.query.size)||2;
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 10;
 
       if (req.query.filter_name && !req.query.filter_rating && !req.query.filter_availability) {
         var search = {
@@ -83,8 +83,8 @@ module.exports = {
         var search = {};
       }
 
-      if(page < 0 || page === 0) {
-        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
         return res.json(response);
       }
 
@@ -93,25 +93,25 @@ module.exports = {
       const sort = ({ $natural: -1 });
 
       Package.paginate(search,
-      { 
-        select: '_id name slug rating price description meta_title meta_description availability image createdAt', 
-        offset, 
-        limit, 
-        sort
-      }).then((data) => {
+        {
+          select: '_id name slug rating price description meta_title meta_description availability image createdAt',
+          offset,
+          limit,
+          sort
+        }).then((data) => {
 
-        const response ={
-          totalItems: data.totalDocs,
-          data: data.docs,
-          totalPages: data.totalPages,
-          currentPage: data.page
-        }
+          const response = {
+            totalItems: data.totalDocs,
+            data: data.docs,
+            totalPages: data.totalPages,
+            currentPage: data.page
+          }
 
-        return responseHandler.successWithProperty(res, 'data fetched', response);
-      }).catch((err) => {
-        next(createError(400, 'Error in inserting data.'));
-        return;
-      });
+          return responseHandler.successWithProperty(res, 'data fetched', response);
+        }).catch((err) => {
+          next(createError(400, 'Error in inserting data.'));
+          return;
+        });
     } catch (error) {
       console.log(error.message);
     }
@@ -120,25 +120,25 @@ module.exports = {
   getAllPackagesFront: async (req, res, next) => {
     try {
 
-      var page = parseInt(req.query.page)||1;
-      var size = parseInt(req.query.size)||15;
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 15;
 
       var query = {}
-      if(page < 0 || page === 0) {
-        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
         return res.json(response);
       }
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var  totalPosts = await Package.find({availability:1}).countDocuments().exec();
+      var totalPosts = await Package.find({ availability: 1 }).countDocuments().exec();
 
-      Package.find({availability:1},{},
-        query,function(err,data) {
-          if(err) {
-            response = {"error": true, "message": "Error fetching data"+err};
+      Package.find({ availability: 1 }, {},
+        query, function (err, data) {
+          if (err) {
+            response = { "error": true, "message": "Error fetching data" + err };
           } else {
-            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+            response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
           }
           res.json(response);
         }).sort({ $natural: -1 }).populate(['inclusions', 'exclusions', 'features', 'iternaries']);
@@ -150,7 +150,7 @@ module.exports = {
   countAllPackages: async (req, res, next) => {
     try {
 
-      var  totalPackage = await Package.estimatedDocumentCount();
+      var totalPackage = await Package.estimatedDocumentCount();
 
       res.send({
         success: true,
@@ -165,25 +165,25 @@ module.exports = {
   getAllPackageCategories: async (req, res, next) => {
     try {
 
-      var page = parseInt(req.query.page)||1;
-      var size = parseInt(req.query.size)||15;
+      var page = parseInt(req.query.page) || 1;
+      var size = parseInt(req.query.size) || 15;
       var query = {}
-      if(page < 0 || page === 0) {
-        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+      if (page < 0 || page === 0) {
+        response = { "error": true, "message": "invalid page number, should start with 1" };
         return res.json(response);
       }
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var  totalPosts = await PackageCategory.find({package_id:req.params.id}).countDocuments().exec();
+      var totalPosts = await PackageCategory.find({ package_id: req.params.id }).countDocuments().exec();
 
-      PackageCategory.find({package_id:req.params.id},{__v: 0},
-        query,function(err,data) {
-          if(err) {
-            response = {"error": true, "message": "Error fetching data"+err};
+      PackageCategory.find({ package_id: req.params.id }, { __v: 0 },
+        query, function (err, data) {
+          if (err) {
+            response = { "error": true, "message": "Error fetching data" + err };
           } else {
-            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
-          }          
+            response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
+          }
           res.json(response);
         }).sort({ $natural: -1 }).populate(['hotels', 'foreignerOptions', 'indianOptions']);
     } catch (error) {
@@ -271,30 +271,30 @@ module.exports = {
 
     if (checkCount) {
       return res.status(412)
-      .send({
-        success: false,
-        message: 'Validation failed',
-        data: 'duplicate name'
-      });
+        .send({
+          success: false,
+          message: 'Validation failed',
+          data: 'duplicate name'
+        });
     }
 
-      if (req.file) {
-        req.body.image = req.file.path;
-      }
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
 
-      const package = new Package(req.body);
-      const result = await package.save();
-      res.send({
-        success: true,
-        message: 'Data inserted',
-        data: result
-      });
+    const package = new Package(req.body);
+    const result = await package.save();
+    res.send({
+      success: true,
+      message: 'Data inserted',
+      data: result
+    });
   }),
 
   findPackageById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const package = await Package.findById(id).select({__v: 0}).populate(['inclusions', 'exclusions', 'features', 'iternaries']);;
+      const package = await Package.findById(id).select({ __v: 0 }).populate(['inclusions', 'exclusions', 'features', 'iternaries']);;
       if (!package) {
         throw createError(404, 'Package does not exist.');
       }
@@ -316,11 +316,11 @@ module.exports = {
   findPackageBySlug: async (req, res, next) => {
     const slug = req.params.slug;
     try {
-      const package = await Package.findOne({slug : slug}).populate(['inclusions', 'exclusions', 'features', 'iternaries']);
+      const package = await Package.findOne({ slug: slug }).populate(['inclusions', 'exclusions', 'features', 'iternaries']);
       if (!package) {
         throw createError(404, 'Package does not exist.');
       }
-      const package_category = await PackageCategory.find({package_id:package._id.toString()}).populate(['hotels', 'indianOptions', 'foreignerOptions']);
+      const package_category = await PackageCategory.find({ package_id: package._id.toString() }).populate(['hotels', 'indianOptions', 'foreignerOptions']);
 
 
       let CategoryList = [];
@@ -333,7 +333,7 @@ module.exports = {
           hotel_ids.push(hotel.hotel_id);
         }
 
-        const apiResponse = await fetch('http://localhost:5000/hotels/by-ids?ids='+hotel_ids.toString());
+        const apiResponse = await fetch('http://localhost:5000/hotels/by-ids?ids=' + hotel_ids.toString());
 
         const apiResponseJson = await apiResponse.json();
 
@@ -346,7 +346,7 @@ module.exports = {
           status: category.status,
           hotels: apiResponseJson.data
         })
-      }      
+      }
 
       const paymentpolicy = await PaymentPolicy.find({});
       const term = await Term.find({});
@@ -433,13 +433,12 @@ module.exports = {
       const id = req.params.id;
       const features = [];
 
-      await PackageFeature.deleteMany({package_id:req.params.id});
+      await PackageFeature.deleteMany({ package_id: req.params.id });
 
-      for (const feature of req.body.features) 
-      { 
+      for (const feature of req.body.features) {
         const package = new PackageFeature({
-          package_id : req.params.id,
-          feature : feature.feature
+          package_id: req.params.id,
+          feature: feature.feature
         });
 
         const result = await package.save();
@@ -476,16 +475,15 @@ module.exports = {
 
       const package = await Package.findById(id);
 
-      await PackageFeature.deleteMany({package_id:req.params.id});
+      await PackageFeature.deleteMany({ package_id: req.params.id });
 
       package.features = [];
       await package.save();
 
-      for (const feature of req.body.features) 
-      { 
+      for (const feature of req.body.features) {
         const package_fet = new PackageFeature({
-          package_id : req.params.id,
-          feature : feature.feature
+          package_id: req.params.id,
+          feature: feature.feature
         });
 
         const result = await package_fet.save();
@@ -494,8 +492,8 @@ module.exports = {
 
       await package.save();
 
-      return responseHandler.successWithProperty(res, 'data updated', {data: package});
-      
+      return responseHandler.successWithProperty(res, 'data updated', { data: package });
+
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -511,13 +509,12 @@ module.exports = {
       const id = req.params.id;
       const exclusions = [];
 
-      await PackageExclusion.deleteMany({package_id:req.params.id});
+      await PackageExclusion.deleteMany({ package_id: req.params.id });
 
-      for (const exclusion of req.body.exclusions) 
-      { 
+      for (const exclusion of req.body.exclusions) {
         const package = new PackageExclusion({
-          package_id : req.params.id,
-          exclusion : exclusion.exclusion
+          package_id: req.params.id,
+          exclusion: exclusion.exclusion
         });
 
         const result = await package.save();
@@ -555,13 +552,12 @@ module.exports = {
       const id = req.params.id;
       const inclusions = [];
 
-      await PackageInclusion.deleteMany({package_id:req.params.id});
+      await PackageInclusion.deleteMany({ package_id: req.params.id });
 
-      for (const inclusion of req.body.inclusions) 
-      { 
+      for (const inclusion of req.body.inclusions) {
         const package = new PackageInclusion({
-          package_id : req.params.id,
-          inclusion : inclusion.inclusion
+          package_id: req.params.id,
+          inclusion: inclusion.inclusion
         });
 
         const result = await package.save();
@@ -599,15 +595,14 @@ module.exports = {
       const id = req.params.id;
       const iternariesArr = [];
 
-      await PackageIternary.deleteMany({package_id:req.params.id});
+      await PackageIternary.deleteMany({ package_id: req.params.id });
 
-      for (const iternary of req.body.iternaries) 
-      { 
+      for (const iternary of req.body.iternaries) {
         const package = new PackageIternary({
-          package_id : req.params.id,
-          title : iternary.title,
-          description : iternary.description,
-          status : iternary.status,
+          package_id: req.params.id,
+          title: iternary.title,
+          description: iternary.description,
+          status: iternary.status,
         });
 
         const result = await package.save();
@@ -677,14 +672,14 @@ module.exports = {
         fs.unlinkSync(package.image);
       }
 
-      await PackageInclusion.deleteMany({package_id:id});
-      await PackageExclusion.deleteMany({package_id:id});
-      await PackageFeature.deleteMany({package_id:id});
-      await PackageCategory.deleteMany({package_id:id});
-      await PackageCategoryHotel.deleteMany({package_id:id});
-      await PackageIndianOption.deleteMany({package_id:id});
-      await PackageForeignerOption.deleteMany({package_id:id});
-      
+      await PackageInclusion.deleteMany({ package_id: id });
+      await PackageExclusion.deleteMany({ package_id: id });
+      await PackageFeature.deleteMany({ package_id: id });
+      await PackageCategory.deleteMany({ package_id: id });
+      await PackageCategoryHotel.deleteMany({ package_id: id });
+      await PackageIndianOption.deleteMany({ package_id: id });
+      await PackageForeignerOption.deleteMany({ package_id: id });
+
       const result = await Package.findByIdAndDelete(id);
       if (!result) {
         throw createError(404, 'Package does not exist.');
