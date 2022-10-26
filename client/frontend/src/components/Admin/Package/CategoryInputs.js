@@ -74,12 +74,12 @@ class CategoryInputs extends Component {
             name="price"
             value={user.price}
             onChange={this.handleChange}
-            placeholder="Normal Price"
+            placeholder="Price"
             type="number"
           />
         </td>
 
-        <td className='border border-slate-300 text-center'>
+        {/* <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             name="festival_kid"
@@ -99,7 +99,7 @@ class CategoryInputs extends Component {
             placeholder="Festival Price"
             type="number"
           />
-        </td>
+        </td> */}
 
       </>
     );

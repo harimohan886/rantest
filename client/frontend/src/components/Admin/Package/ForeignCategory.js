@@ -86,9 +86,9 @@ export default function ForeignCategory({ action, package_id }) {
             <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Bed</th>
             <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>No of Kids</th>
             <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Per Kid Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Normal Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Per Kid Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Price</th>
+            {/* <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Per Kid Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Price</th> */}
             <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
           </tr>
         </thead>
