@@ -104,6 +104,47 @@ module.exports = {
 
   getAllPackageBookings: asyncHandler(async (req, res, next) => {
 
+
+    const filter_date = req.query.filter_date
+        ? {
+          date: {
+            $regex: req.query.filter_date
+          },
+        }
+        : {};
+
+    const filter_created_at = req.query.filter_created_at
+      ? {
+        addedAt: {
+          $regex: req.query.filter_created_at
+        }
+      }
+      : {};
+
+    const filter_zone = req.query.filter_zone
+      ? {
+          zone : req.query.filter_zone
+      }
+      : {};
+
+    const filter_status = req.query.filter_status
+      ? {
+        status: req.query.filter_status
+      }
+      : {};
+
+    const filter_vehicle = req.query.filter_vehicle
+      ? {
+        vehicle: req.query.filter_vehicle
+      }
+      : {};
+
+    const filter_timing = req.query.filter_timing
+      ? {
+        timing: req.query.filter_timing
+      }
+      : {};
+
     var page = parseInt(req.query.page)||1;
     var size = parseInt(req.query.size)||15;
 
@@ -115,9 +156,9 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await PackageBooking.find({}).countDocuments().exec();
+    var  totalPosts = await PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
 
-    PackageBooking.find({},{},
+    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -130,6 +171,47 @@ module.exports = {
 
   getAllChambalBookings: asyncHandler(async (req, res, next) => {
 
+
+    const filter_date = req.query.filter_date
+        ? {
+          date: {
+            $regex: req.query.filter_date
+          },
+        }
+        : {};
+
+    const filter_created_at = req.query.filter_created_at
+      ? {
+        addedAt: {
+          $regex: req.query.filter_created_at
+        }
+      }
+      : {};
+
+    const filter_zone = req.query.filter_zone
+      ? {
+          zone : req.query.filter_zone
+      }
+      : {};
+
+    const filter_status = req.query.filter_status
+      ? {
+        status: req.query.filter_status
+      }
+      : {};
+
+    const filter_vehicle = req.query.filter_vehicle
+      ? {
+        vehicle: req.query.filter_vehicle
+      }
+      : {};
+
+    const filter_timing = req.query.filter_timing
+      ? {
+        timing: req.query.filter_timing
+      }
+      : {};
+
     var page = parseInt(req.query.page)||1;
     var size = parseInt(req.query.size)||15;
 
@@ -141,9 +223,9 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await ChambalBooking.find({}).countDocuments().exec();
+    var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
 
-    ChambalBooking.find({},{},
+    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
