@@ -1,10 +1,23 @@
 import React, { useState , useEffect } from 'react'
 import TravellerInputs from '../../components/frontend/Safari/TravellerInputs';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { useAlert } from "react-alert";
 
 export default function SafariTravellerBooking() {
 
+    useEffect(() => {
+
+        const res = loadScript(
+            "https://checkout.razorpay.com/v1/checkout.js"
+        );
+
+        if (!res) {
+            alert.error("Razorpay SDK failed to load. Are you online?");
+            return;
+        }
+    },[]);
+
+      const alert = useAlert();
       const [ Name , setName ] = useState(localStorage.getItem('selName'));
       const [ Phone , setPhone ] = useState(localStorage.getItem('selPhone'));
       const [ Email , setEmail ] = useState('');
@@ -14,7 +27,7 @@ export default function SafariTravellerBooking() {
 
       const [users , setUsers ] = useState([{
         key: Date.now(),
-        fullName: "",
+        name: "",
         gender: "",
         nationality: "",
         idProof: "",
@@ -25,7 +38,7 @@ export default function SafariTravellerBooking() {
       const onChange = (i,e) => {
         
         let newUsers = [...users];
-        newUsers[i]['fullName'] = e.fullName ;
+        newUsers[i]['name'] = e.name ;
         newUsers[i]['gender'] = e.gender ;
         newUsers[i]['nationality'] = e.nationality ;
         newUsers[i]['idProof'] = e.idProof ;
@@ -52,13 +65,12 @@ export default function SafariTravellerBooking() {
             ));
             
             setUsers(newUsers);
-            localStorage.setItem('NewUsers' , JSON.stringify(newUsers));
       };
 
       let addElement = () => {
         setUsers([...users, { 
             key: Date.now(),
-            fullName: "",
+            name: "",
             gender: "",
             nationality: "",
             idProof: "",
@@ -82,14 +94,89 @@ export default function SafariTravellerBooking() {
         })
 
         setUsers(newFormValues);
-
-
-        localStorage.setItem('NewUsers' , JSON.stringify(newFormValues));
       };
 
       const handleSaveData = () => {
-        window.location.href = '/thankyou';
-      }
+
+        if(Email === '' && State === '' && Address === '') {
+            alert.error("Please do not leave any fields blank.");
+            return true;
+        } else {
+            const options = {
+
+                // key: credentials.razorpay_key,
+                key: 'rzp_test_FvMwf7j3FOOnh8',
+                amount: payable_Amount+('00').toString(),
+                currency: "INR",
+                name: "Gir national park",
+                description: "Test Transaction",
+                image: "/image/logo.png",
+              
+                handler: async function (response) {
+                                
+                const data = {
+                    "booked_persons" : users,
+                    "name" : Name,
+                    "mobile" : Phone,
+                    "email" : Email,
+                    "address" : Address,
+                    "state" : State,
+                    "date": localStorage.getItem('selDate'),
+                    "zone": localStorage.getItem('selZone'),
+                    "vehicle" : localStorage.getItem('selVehicle'),
+                    "amount":  payable_Amount,
+                    "timing": localStorage.getItem('selTiming'),
+                    "transaction_id": response.razorpay_payment_id
+                }
+
+                    // axios.post(`/api/front/safari_booking/proof_attach/${localStorage.getItem('bid')}`, fileData,{
+                    //     headers: {
+                    //         'Accept': 'application/json, text/plain, */*',
+                    //         'Content-Type': 'application/json'
+                    //    },
+                    // }).then((response)=>{});
+                    
+                    //successPay
+                    axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
+                            if(result.status === 200 ) {
+                            alert.success("Booked");
+                            localStorage.clear();
+                            window.location.href = '/thankyou';
+                        }
+                    })
+                    
+                },
+                prefill: {
+                    name: Name,
+                    email: Email,
+                    contact: Phone,
+                },
+                notes: {
+                    address: "Gir national park",
+                },
+                theme: {
+                    color: "#61dafb",
+                },
+            };
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+        }
+
+     }
+
+      const loadScript=(src) =>{
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    }
 
     return (
         <div className='container sectionFrame'>
@@ -223,9 +310,12 @@ export default function SafariTravellerBooking() {
                             <tbody>
                                 {users.map((user, index) => (
                                     <tr key={user.key}>
-                                        <TravellerInputs
+                                    { localStorage.getItem('selAvailable') >= index+1 ?  
+                                    <>
+                                         <TravellerInputs
                                             key={user.key}
                                             value={user}
+                                            counter={index}
                                             onChange={e => onChange(index, e)}
                                         />
                                         <td className='border border-slate-300 text-center plusMinusInputs'>
@@ -233,7 +323,11 @@ export default function SafariTravellerBooking() {
                                             <button type="button" onClick={() => removeElement(index)} disabled={users.length <= 1} className='btn btn-danger'>
                                                 Delete
                                             </button>
-                                        </td>
+                                        </td> 
+                                    </> 
+                                    :
+                                     "Bookings seats are not available now!!!"                            
+                                    }
                                     </tr>
                                 ))}
                             </tbody>

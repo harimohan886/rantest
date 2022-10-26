@@ -20,7 +20,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             className="no-underline md:block text-left text-white md:pb-2 mr-0 inline-block whitespace-nowrap text-lg uppercase font-medium p-2 pb-0 px-0"
-            to="/"
+            to="/admin/dashboard"
           >
             <img alt='Logo' src={Logo} />
           </Link>

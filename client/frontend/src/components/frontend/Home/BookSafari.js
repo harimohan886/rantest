@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
 
+
 export default function BookSafari({ bookingDate  , date }) {
 
     const [ name , setName ] =  useState('');
@@ -28,6 +29,7 @@ export default function BookSafari({ bookingDate  , date }) {
                 localStorage.setItem('selTiming', timing);
                 localStorage.setItem('selVehicle', vehicle);
                 localStorage.setItem('selZone', zone);
+                localStorage.setItem('selAvailable', res.data.data.availability);
                 window.location.href = '/safari-booking-details';
           } else {
               localStorage.removeItem('userData');
