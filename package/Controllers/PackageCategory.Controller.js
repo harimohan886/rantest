@@ -109,7 +109,8 @@ module.exports = {
       const packageArr = {
         foreignerOptions:for_options,
         indianOptions:ind_options,
-        hotels:hotels
+        hotels:hotels,
+        package:req.body.package_id
       };
 
       const id = result._id;
@@ -135,7 +136,7 @@ module.exports = {
   findPackageCategoryById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const package = await PackageCategory.findById(id).populate(['hotels', 'indianOptions', 'foreignerOptions']);
+      const package = await PackageCategory.findById(id).populate('package',{_id: 0, name:1}).populate(['hotels', 'indianOptions', 'foreignerOptions']);
       if (!package) {
         throw createError(404, 'PackageCategory does not exist.');
       }
@@ -225,7 +226,8 @@ module.exports = {
         status : req.body.status,
         foreignerOptions:for_options,
         indianOptions:ind_options,
-        hotels:hotels
+        hotels:hotels,
+        package:req.body.package_id
       };
 
       const id = req.params.id;

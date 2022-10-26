@@ -10,6 +10,10 @@ const PackageCategorySchema = new Schema({
 		type: String,
 		required: true,
 	},
+	package: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "packages"
+	},
 	hotels:[{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "package_category_hotels"

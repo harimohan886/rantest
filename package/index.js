@@ -41,15 +41,11 @@ app.use('/package-categories', PackageCategoryRoute);
 const TermRoute = require('./Routes/Term.route');
 app.use('/terms', TermRoute);
 
-const IternaryRoute = require('./Routes/Iternary.route');
-app.use('/iternaries', IternaryRoute);
-
 const CancellationPolicyRoute = require('./Routes/CancellationPolicy.route');
 app.use('/cancellation-policies', CancellationPolicyRoute);
 
 const PaymentPolicyRoute = require('./Routes/PaymentPolicy.route');
 app.use('/payment-policies', PaymentPolicyRoute);
-
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {
