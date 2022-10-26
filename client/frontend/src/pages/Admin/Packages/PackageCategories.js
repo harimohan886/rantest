@@ -76,7 +76,7 @@ export default function PackageCategories() {
                         </thead>
                         <tbody>
                             {categories && categories.map((item, index) => (
-                                <tr>
+                                <tr key={index}>
                                     <td className='border border-slate-300 text-center'>{index + 1}</td>
                                     <td className='border border-slate-300 text-center'>{item.category}</td>
                                     <td className='border border-slate-300 text-center'>{item.status == 1 ? 'Available' : 'NA'}</td>
