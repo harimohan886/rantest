@@ -15,6 +15,7 @@ export default function PriceType({ id , type , action }) {
   const [endDate, setEndDate] = useState(new Date());
   const [personType , setPersonType] = useState();
   const [vehicleType , setVehicleType] = useState();
+  const [selectType , setSelectType] = useState(type);
   const alert = useAlert();
 
   function getDetails(type) {
@@ -170,8 +171,7 @@ export default function PriceType({ id , type , action }) {
                         <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
                         <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
-
-                    <div className="mb-6">
+                    <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
                       <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option>Please select</option>
@@ -180,7 +180,7 @@ export default function PriceType({ id , type , action }) {
                     </select>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
                       <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option>Please select</option>
@@ -212,7 +212,7 @@ export default function PriceType({ id , type , action }) {
                 <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
             </div>
 
-                  <div className="mb-6">
+                  <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
                       <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option>Please select</option>
@@ -221,7 +221,7 @@ export default function PriceType({ id , type , action }) {
                     </select>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
                       <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option>Please select</option>

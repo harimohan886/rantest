@@ -19,6 +19,8 @@ app.use('/disable-dates', DisableDateRoute);
 const ChambalRoute = require('./Routes/Chambal.route');
 app.use('/', ChambalRoute);
 
+const SeedDataRoute = require('./Routes/SeedData.route');
+app.use('/seed-data', SeedDataRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

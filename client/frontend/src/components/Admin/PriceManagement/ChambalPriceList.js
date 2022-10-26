@@ -8,7 +8,7 @@ export default function ChambalPriceList( { type } ) {
     const [details , setDetails] = useState([]);
     const alert = useAlert();
     function getDetails(type) {
-      axios.get(`${process.env.REACT_APP_BASE_URL}/safari/prices?type=${type}`, {
+      axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/prices`, {
           headers: {
             'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export default function ChambalPriceList( { type } ) {
     },[]);
 
     const HandleDelete = (id) => {
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}?type=${type}`, {
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/safari/prices/${id}`, {
             headers: {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
@@ -42,9 +42,7 @@ export default function ChambalPriceList( { type } ) {
   return (
     <>
     <div className='float-right'>
-      <Link to={`/admin/add-price/add/${type}`} className="text-white bg-success font-medium rounded px-5 py-2.5 text-center">
-        Add price
-      </Link>
+      
     </div>
     <div className='clear-right'></div>
         <table className='table bg-white border border-slate-300 mt-4'>
@@ -89,9 +87,6 @@ export default function ChambalPriceList( { type } ) {
                             <td className='border border-slate-300 text-center'>
                             <Link to={`/admin/edit-price/${item._id}/${type}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 <i className="fas fa-pencil"></i>
-                            </Link>
-                            <Link onClick = {() => HandleDelete(item._id)}  className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i className="fas fa-trash"></i>
                             </Link>
                             </td>
                         </tr>
