@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import swal from 'sweetalert'
 import axios from 'axios';
+import moment from 'moment';
 
 import BookSafari from './BookSafari'
 
@@ -70,6 +71,10 @@ export default function Dates() {
                     }}
                     editable={true}
                     selectable={true}
+                    selectAllow= { function(select) {
+                        return moment().diff(select.start, 'days') <= 0
+                     }}
+                  
                     select={handleDateSelect}
                     plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
                     />

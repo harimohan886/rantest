@@ -310,7 +310,9 @@ export default function SafariTravellerBooking() {
                             <tbody>
                                 {users.map((user, index) => (
                                     <tr key={user.key}>
-                                        <TravellerInputs
+                                    { localStorage.getItem('selAvailable') >= index+1 ?  
+                                    <>
+                                         <TravellerInputs
                                             key={user.key}
                                             value={user}
                                             counter={index}
@@ -321,7 +323,11 @@ export default function SafariTravellerBooking() {
                                             <button type="button" onClick={() => removeElement(index)} disabled={users.length <= 1} className='btn btn-danger'>
                                                 Delete
                                             </button>
-                                        </td>   
+                                        </td> 
+                                    </> 
+                                    :
+                                     "Bookings seats are not available now!!!"                            
+                                    }
                                     </tr>
                                 ))}
                             </tbody>
