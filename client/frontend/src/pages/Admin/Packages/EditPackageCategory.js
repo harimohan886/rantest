@@ -19,13 +19,14 @@ export default function EditPackageCategory() {
   const [details, setDetails] = useState([]);
   const [cat_name, setCatName] = useState('');
   const [packageId, setPackageId] = useState();
+  const [tempSelected, setTempSelected] = useState([]);
 
   const GetDetails = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
       const fhotel = result.data.data.map(item => ({ value: item._id, label: item.name }));
@@ -36,10 +37,13 @@ export default function EditPackageCategory() {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
-      setSelectedHotels(result.data.data.hotels);
+      const slHotel = result.data.data.hotels.map((item) => (item.hotel_id));
+
+      setTempSelected(slHotel);
+
       setCatName(result.data.data.category);
       setPackageId(result.data.data.package_id);
     })
@@ -50,9 +54,27 @@ export default function EditPackageCategory() {
     GetDetails();
   }, []);
 
-  const handleChange = (e) => {
-    setSelectedHotels(e);
-  }
+
+  //Get selected Hotel form Id
+  useEffect(() => {
+
+    let tem_hotel = [];
+
+    if (tempSelected.length > 0) {
+
+      details?.map((item) => {
+        if (tempSelected.includes(item.value) === true) {
+          tem_hotel.push({ value: item.value, label: item.label });
+        }
+      });
+
+      setSelectedHotels(tem_hotel);
+    }
+
+
+  }, [details, tempSelected]);
+
+
 
   const HandleSubmit = () => {
 
@@ -93,7 +115,7 @@ export default function EditPackageCategory() {
     }
 
     selected.map(item => (
-      hotels.push(parseInt([item.value]))
+      hotels.push(item.value)
     ))
 
     const sendData = {
@@ -108,7 +130,7 @@ export default function EditPackageCategory() {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
       if (result.data.success === true) {
