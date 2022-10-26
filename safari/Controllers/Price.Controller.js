@@ -79,15 +79,15 @@ module.exports = {
       var checkCount = await isWeekend(req.body.date);
       var date_to =  req.body.date ;
 
-      const festivalData =  await Price.findOne({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type,  date_from: { '$gte': prevDate }, date_to: { '$lte': nextDate }});
+      const festivalData =  await Price.findOne({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type});
 
-      if (festivalData) {
+      if (festivalData && (req.body.date >= festivalData.date_from) && (req.body.date <= festivalData.date_to)) {
         return res.status(200)
         .send({
           success: true,
           message: 'data fetched!',
           data: festivalData
-        });
+        });        
       }else if (checkCount) {
 
         const weekendData =  await Price.findOne({ type: 'weekend', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type });
