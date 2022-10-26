@@ -91,7 +91,7 @@ export default function CreateRanthamboreDates() {
         </div>
         <div className='flex'>
           <button type="button"  onClick = {HandleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Submit</button>
-          <Link to='/admin/gir-events' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
+          <Link to='/admin/ranthambore-dates' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
         </div>
       </form>
         </div>
