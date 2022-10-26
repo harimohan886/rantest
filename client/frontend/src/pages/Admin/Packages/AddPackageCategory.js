@@ -81,7 +81,7 @@ export default function AddPackageCategory() {
       }
 
       selected.map(item => (
-        hotels.push(parseInt([item.value]))
+        hotels.push(item.value)
       ))
 
       const sendData = {
