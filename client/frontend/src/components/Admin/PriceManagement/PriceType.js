@@ -164,7 +164,7 @@ export default function PriceType({ id , type , action }) {
                     <div className="pricesColumns">
                     <div className="mb-6">
                         <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
-                        <input type="text" id="name"  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <input type="text" id="name" readOnly={(type === 'chambal') ? true : false }  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
 
                     <div className="mb-6">
@@ -204,7 +204,7 @@ export default function PriceType({ id , type , action }) {
 
             <div className="mb-6 max193">
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
-                <input type="text" id="name"  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <input type="text" id="name" readOnly={(type === 'chambal') ? true : false }  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
             </div>
  
             <div className="mb-6 max193">

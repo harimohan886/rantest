@@ -47,7 +47,6 @@ module.exports = {
       res.send({
         success: true,
         message: "data seeded success!",
-        data: done
       });
 
     } catch (err) {
