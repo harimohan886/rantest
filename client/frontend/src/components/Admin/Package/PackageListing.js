@@ -69,16 +69,16 @@ export default function PackageListing({ packages }) {
                                     <Link to={`/admin/package-to-features/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Features
                                     </Link>
-                                    <Link to='/admin/package-features' style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
+                                    <Link to={`/admin/package-to-inclusions/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Inclusion
                                     </Link>
-                                    <Link to='/admin/package-features' style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
+                                    <Link to={`/admin/package-to-exclusions/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Exclusion
                                     </Link>
                                     <Link to={`/admin/package-categories/${item._id}`} style={{ borderBottom: "1px solid #ddd" }} className="text-sm py-2 px-2 font-normal block  whitespace-no-wrap bg-transparent text-black">
                                         Categories
                                     </Link>
-                                    <Link to='/admin/package-features' className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
+                                    <Link to={`/admin/package-to-itineraries/${item._id}`} className="text-sm py-2 px-2 font-normal block whitespace-no-wrap bg-transparent text-black">
                                         Iternary
                                     </Link>
                                     <div className="h-0 border border-solid border-t-0 border-blueGray-800" />

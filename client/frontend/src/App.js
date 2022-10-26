@@ -71,6 +71,8 @@ import EditRoom from './pages/Admin/Hotel/EditRoom';
 import Packages from './pages/Admin/Packages/Packages';
 import PackageFeatures from './pages/Admin/Packages/PackageFeatures';
 import PackageToFeatures from './pages/Admin/Packages/PackageToFeatures';
+import PackageToExclusions from './pages/Admin/Packages/PackageToExclusions';
+import PackageToInclusions from './pages/Admin/Packages/PackageToInclusions';
 
 import CreatePackageAssets from './pages/Admin/Packages/CreatePackageAssets';
 import EditPackageAssets from './pages/Admin/Packages/EditPackageAssets';
@@ -216,6 +218,8 @@ function App() {
             <Route exact path="/admin/edit-package/:id" element={<EditPackage />} />
             <Route exact path="/admin/package-features" element={<PackageFeatures />} />
             <Route exact path="/admin/package-to-features/:id" element={<PackageToFeatures />} />
+            <Route exact path="/admin/package-to-exclusions/:id" element={<PackageToExclusions />} />
+            <Route exact path="/admin/package-to-inclusions/:id" element={<PackageToInclusions />} />
             <Route exact path="/admin/add-package-inclusion" element={<CreatePackageInclusion />} />
             <Route exact path="/admin/add-package-assets" element={<CreatePackageAssets />} />
             <Route exact path="/admin/edit-package-feature/:id" element={<EditPackageAssets />} />

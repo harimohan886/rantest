@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 import axios from 'axios';
+import ReactPaginate from "react-paginate";
+
 
 export default function PackageCategories() {
 
@@ -14,18 +16,33 @@ export default function PackageCategories() {
 
     const [categories, setCategories] = useState([]);
     const [packages, setPackageName] = useState();
+    const [pageCount, setpageCount] = useState(0);
+    const [page, setPage] = useState(1);
 
     function GetDetails() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/package/package-categories?package_id=${params.id}`, {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}/categories`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
         }).then(result => {
             setCategories(result.data.data);
-            setPackageName('Package...');
+            setpageCount(Math.ceil(result.data.total / result.data.perPage));
+            setPage(result.data.page);
         })
+
+
+        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}`, {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+            },
+        }).then(result => {
+            setPackageName(result.data.data.name);
+        })
+
     }
 
     useEffect(() => {
@@ -48,6 +65,30 @@ export default function PackageCategories() {
             }, 1000);
         })
     }
+
+
+    const paginationData = async (currentPage) => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}/categories?page=${currentPage}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+            },
+        }
+        );
+        const data = await res.json();
+
+        return data
+    };
+
+    const handlePageClick = async (data) => {
+        let currentPage = data.selected + 1;
+        const result = await paginationData(currentPage);
+        setCategories(result.data);
+    };
+
+
+
 
     return (
 
@@ -92,6 +133,25 @@ export default function PackageCategories() {
                             ))}
                         </tbody>
                     </table>
+                    <ReactPaginate
+                        previousLabel={"previous"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
                 </div>
             </div>
             <FooterAdmin />

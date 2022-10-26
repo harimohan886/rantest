@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
-import Pagination from '../../../components/Admin/Footer/Pagination';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
-import FilterHotel from '../../../components/Admin/Hotel/FilterHotel';
 import PackageListing from '../../../components/Admin/Package/PackageListing';
 import ReactPaginate from "react-paginate";
 import swal from 'sweetalert';
@@ -41,10 +39,6 @@ export default function Packages() {
 
     }
   }
-
-
-
-
 
 
   const HandleReset = () => {

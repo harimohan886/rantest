@@ -19,10 +19,7 @@ hotel/uploads
 package/uploads
 
 client/frontend/public/uploads/
-package/Controllers
-package/Models
-package/Routes
-payment
+
 # production
 /build
 /client/frontend/build
