@@ -35,7 +35,7 @@ export default function GeneralEnquiry({ enquiries }) {
 
     return (
         <div className='latestUsers'>
-            <h2 className="text-2xl text-black font-bold mt-8 mb-3">Recent General Enquiries</h2>
+            <h2 className="text-2xl text-black font-bold mt-8 mb-3">Recent Package Enquiries</h2>
             <table className="table bg-white">
                 <thead>
                     <tr>
@@ -43,7 +43,7 @@ export default function GeneralEnquiry({ enquiries }) {
                         <th>Booking Date</th>
                         <th>Name</th>
                         <th>Phone</th>
-                        <th>Type</th>
+                        <th>Package</th>
                         <th>Action</th>
                     </tr>
                 </thead>

@@ -73,7 +73,7 @@ export default function GeneralEnquiries() {
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 bigTable">
           <div className='mt-4'>
-            <h1 className='text-2xl text-black font-bold mb-3'>General Enquiries</h1>
+            <h1 className='text-2xl text-black font-bold mb-3'>Package Enquiries</h1>
           </div>
           <FilterEnquiry onSubmit={getFilterData} type='package' />
           <EnquiryList enquiries={enquiries} />
