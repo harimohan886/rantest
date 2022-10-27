@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import Select from 'react-select';
 
@@ -14,6 +14,7 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 export default function AddRoom() {
 
     const params = useParams();
+    const navigate = useNavigate();
 
     const [image, setImage] = useState();
     const [name, setName] = useState();
@@ -53,6 +54,8 @@ export default function AddRoom() {
         }).then(res => {
             if (res.data.success === true) {
                 swal("Data is added successfully");
+                navigate(`/admin/hotel-rooms/${params.id}`);
+
                 // setTimeout(() => {
                 //     window.location = `/admin/hotel-rooms/${params.id}`;
                 // }, 1000);
