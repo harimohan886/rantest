@@ -23,10 +23,10 @@ export default function ChambalOptions() {
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Chambal Safari
                         </p>
                         <p>
-                            <i aria-hidden="true" className="fa fa-times-circle-o" style={{color: "#008000", fontSize: "14px"}}></i> Pickup &amp; Drop
+                            <i aria-hidden="true" className="fa fa-times-circle" style={{color: "#eb394a", fontSize: "14px"}}></i> Pickup &amp; Drop
                         </p>
                         <p>
-                            <i aria-hidden="true" className="fa fa-times-circle-o" style={{color: "#008000", fontSize: "14px"}}></i> Lunch
+                            <i aria-hidden="true" className="fa fa-times-circle" style={{color: "#eb394a", fontSize: "14px"}}></i> Lunch
                         </p>
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
@@ -56,10 +56,10 @@ export default function ChambalOptions() {
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Pickup &amp; Drop
                         </p>
                         <p>
-                            <i aria-hidden="true" className="fa fa-times-circle-o" style={{color: "#ea2349", fontSize: "14px"}}></i> Lunch
+                            <i aria-hidden="true" className="fa fa-times-circle" style={{color: "#eb394a", fontSize: "14px"}}></i> Lunch
                         </p>
                         <p>
-                            <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#ea2349", fontSize: "14px"}}></i> Life Jackets
+                            <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
                         </p>
                         <Link to="/chambal-safari-booking">
                             <button id="item-1-button" name="item-1-button" type="button">Select</button>
@@ -83,7 +83,7 @@ export default function ChambalOptions() {
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Chambal Safari
                         </p>
                         <p>
-                            <i aria-hidden="true" className="fa fa-times-circle-o" style={{color: "#ea2349", fontSize: "14px"}}></i> Pickup &amp; Drop
+                            <i aria-hidden="true" className="fa fa-times-circle" style={{color: "#ea2349", fontSize: "14px"}}></i> Pickup &amp; Drop
                         </p>
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Lunch
