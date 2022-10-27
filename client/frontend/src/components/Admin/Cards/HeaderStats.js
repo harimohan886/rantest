@@ -7,6 +7,8 @@ import CardStats from "./CardStats";
 export default function HeaderStats({ total_enquiries }) {
 
   const [hotelCount, setHotelCount] = useState('0');
+  const [customerCount, setCustomerCount] = useState(0);
+  const [packageCount, setPackageCount] = useState(0);
 
 
   const getHotelCount = async () => {
@@ -15,6 +17,31 @@ export default function HeaderStats({ total_enquiries }) {
       const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/dashboard/`);
 
       setHotelCount(result.data.hotel_count);
+
+    } catch (err) {
+      console.log('err', err)
+
+    }
+
+    try {
+
+      const resultCustomer = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers/dashboard/`);
+
+      console.log('resultCustomer',resultCustomer);
+
+      setCustomerCount(resultCustomer.data.data);
+
+    } catch (err) {
+      console.log('err', err)
+
+    }
+
+
+    try {
+
+      const resultPackage = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/dashboard/`);
+
+      setPackageCount(resultPackage.data.package_count);
 
     } catch (err) {
       console.log('err', err)
@@ -49,7 +76,7 @@ export default function HeaderStats({ total_enquiries }) {
                 <CardStats
                   statBgColor="bg-package-maroon"
                   statSubtitle="Packages"
-                  statTitle="9"
+                  statTitle={packageCount}
                   statDescripiron="Added for Gir"
                   statIconName="fas fa-chart-pie"
                   statIconColor="text-white"
@@ -69,7 +96,7 @@ export default function HeaderStats({ total_enquiries }) {
                 <CardStats
                   statBgColor="bg-enquiry-brown"
                   statSubtitle="Customers"
-                  statTitle="577"
+                  statTitle={customerCount}
                   statDescripiron="Registered up to now"
                   statIconName="fas fa-percent"
                   statIconColor="text-white"
