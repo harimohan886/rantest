@@ -160,7 +160,7 @@ function App() {
           <Route exact path='/hotels' element={<Hotel />} />
           <Route exact path='/hotel-details/:id' element={<HotelDetails />} />
           <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
-          <Route exact path='/package-details' element={<PackageDetails />} />
+          <Route exact path='/package-details/:id' element={<PackageDetails />} />
           <Route exact path='/book-package' element={<FinalPackageBooking />} />
 
 
