@@ -5,102 +5,83 @@ import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import PackageItineraries from '../../../components/Admin/Package/PackageItineraries';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-import ReactPaginate from "react-paginate";
-
-
+import { useAlert } from "react-alert";
 
 export default function PackageToItineraries() {
-    const [itineraries, setItineraries] = useState([]);
-    const [pageCount, setpageCount] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [mPackageItineraries, setMPackageItineraries] = useState([]);
-
 
     const params = useParams();
-    const package_id = params.id;
+    const alert = useAlert();
+    const [users, setUsers] = useState([{
+        key: Date.now(),
+        title: "",
+        description: "",
+        status: 1,
 
+    }])
 
-
-    useEffect(() => {
-
-        // Get assigned inclusion for a package
-        const getMPackageItineraries = async () => {
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${package_id}/iternaries`, {
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem('accessToken')
-                },
-            });
-
-
-            if (result.data.data.itineraries.length) {
-                setMPackageItineraries(result.data.data.itineraries);
-
-            }
-        }
-        let limit = 100;
-
-        const getAllItineraries = async () => {
-
-            setLoading(true);
-
-            try {
-                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/iternaries/?page=1&size=${limit}`);
-
-                setItineraries(result.data.data);
-                setpageCount(Math.ceil(result.data.total / result.data.perPage));
-                //setPage(result.data.page);
-                setLoading(false);
-
-            } catch (err) {
-
-                setLoading(false);
-            }
-
-        };
-
-        getMPackageItineraries();
-        getAllItineraries();
-
-    }, []);
-
-
-    const handlePageClick = async (data) => {
-        setLoading(true);
-
-        try {
-
-            let currentPage = data.selected + 1;
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/iternaries/?page=${currentPage}`);
-            setItineraries(result.data.data);
-
-            setpageCount(Math.ceil(result.data.total / result.data.perPage));
-            //setPage(result.data.page);
-            setLoading(false);
-
-        } catch (err) {
-
-            setLoading(false);
-
-        }
+    const onChangeData = (i, e) => {
+        let newusers = [...users];
+        newusers[i]['title'] = e.title || '';
+        newusers[i]['description'] = e.description || '';
+        newusers[i]['status'] = 1;
+        setUsers(newusers);
     };
 
-    const handleDelete = (inclusion_id) => {
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/package/iternaries/${inclusion_id}`, {
+    const addElement = () => {
+        setUsers([...users, {
+            key: Date.now(),
+            title: "",
+            description: "",
+            status: 1,
+        }])
+    };
+
+    const removeElement = (i) => {
+        let newFormValues = [...users];
+        newFormValues.splice(i, 1);
+        setUsers(newFormValues)
+    };
+
+    const HandleSubmit = () => {
+
+        const data = {
+            "iternaries": users
+        }
+
+        axios.patch(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}/iternaries`, data, {
             headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
-        }).then(result => {
-            alert.success("Amenity is deleted");
-            setTimeout(() => {
-                window.location = '/admin/itineraries';
-            }, 1000);
-        })
+        }).then(res => {
+            if (res.data.success === true) {
+                alert.success("Data is updated successfully");
+                setTimeout(() => {
+                    window.location = `/admin/package-to-itineraries/${params.id}`;
+                }, 1000);
+            } else {
+                alert.error("Error")
+            }
+        });
+
     }
 
+    function GetDetails(id) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}/iternaries`, {
+            headers: {
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+            },
+        }).then(res => {
+            if (res.data.success === true) {
+                setUsers(res.data.data.iternaries);
+            } else {
+                alert.error("Error")
+            }
+        });
+    }
+
+    useEffect(() => {
+        GetDetails(params.id)
+    }, []);
 
     return (
         <div className="relative md:ml-64 bg-default-skin">
@@ -108,79 +89,44 @@ export default function PackageToItineraries() {
             <Navbar />
             <div className="flex flex-wrap min600">
                 <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className='mt-4'>
-                            <h1 className='text-2xl text-black font-bold mb-3'> Package Inclusion </h1>
-                        </div>
-                        <div className='mt-4'>
-                            <Link to='/admin/add-package-inclusion' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Inclusion</Link>
-                        </div>
+                    <div className='mt-4'>
+                        <h1 className='text-2xl text-black font-bold mb-3'>Package Itinerary</h1>
                     </div>
-                    {package_id && <PackageItineraries packageId={package_id} itineraries={itineraries} />}
-                    <table className='table bg-white border border-slate-300 mt-4'>
-                        <thead>
-                            <tr>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>ID</th>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Inclusion</th>
-                                {/* <th className='border border-slate-300 text-left bg-hotel-maroon text-white'>Availability</th> */}
-                                {!package_id && (<th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>)}
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {mPackageItineraries?.map((item, index) => (
-                                <tr key={index}>
-                                    <td className='border border-slate-300 text-center'>{index + 1}</td>
-                                    <td className='border border-slate-300 text-center'>{item.inclusion}</td>
-
-                                    {/* <td className='border border-slate-300 text-center'>
-                                        <label htmlFor={`default-toggle-${item.inclusion._id}`} className="inline-flex relative w-full cursor-pointer">
-                                            <input type="checkbox" defaultChecked={item.inclusion.status} value={item.inclusion.status} id={`default-toggle-${item.inclusion._id}`} className="sr-only peer" />
-                                            <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                                            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Available</span>
-                                        </label>
-                                    </td> */}
-
-                                </tr>
-
-                            ))}
-
-
-
-                            {loading &&
+                    <div className='iternaryForm'>
+                        <button type="button" onClick={addElement} className='text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center mb-4'>Add Slot</button>
+                        <table className='table bg-white border border-slate-300 mt-2 indianCategory'>
+                            <thead>
                                 <tr>
-                                    <td className='border border-slate-300 text-center' col-span="5">loading..</td>
+                                    <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Itinerary Title</th>
+                                    <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Itinerary Description</th>
+                                    <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>{users && users?.map((user, index) => (
+                                <tr key={user.key}>
+                                    <PackageItineraries
+                                        key={user.key}
+                                        value={user}
+                                        onChange={e => onChangeData(index, e)}
+                                    />
+                                    <td className='border border-slate-300 text-center'>
+                                        <button type="button" onClick={() => removeElement(index)} disabled={users.length <= 1} className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
 
+                        <button type="button" onClick={HandleSubmit} className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'>
+                            Save
+                        </button>
 
-
-                        </tbody>
-                    </table>
-
-
-                    <ReactPaginate
-                        previousLabel={"previous"}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination justify-content-center"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        previousClassName={"page-item"}
-                        previousLinkClassName={"page-link"}
-                        nextClassName={"page-item"}
-                        nextLinkClassName={"page-link"}
-                        breakClassName={"page-item"}
-                        breakLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                    />
-
+                    </div>
                 </div>
             </div>
+
             <FooterAdmin />
         </div>
     )
