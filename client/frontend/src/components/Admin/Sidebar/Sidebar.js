@@ -1,10 +1,61 @@
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Logo from './Logo.png';
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+
+  const [showHotels, setShowHotels] = React.useState('');
+
+  const [showPackages, setShowPackages] = React.useState('');
+
+  const [showEnquiries, setShowEnquiries] = React.useState('');
+
+  const [showBookings, setShowBookings] = React.useState('');
+
+  const [showPrices, setShowPrices] = React.useState('');
+
+  const [showDates, setShowDates] = React.useState('');
+
+  const [showSettings, setShowSettings] = React.useState('');
+
+  useEffect(() => {
+    if ((window.location.href.indexOf("hotels") > -1) || (window.location.href.indexOf("amenities") > -1) || (window.location.href.indexOf("room-facilities") > -1)) {
+      setShowHotels('show');
+    }
+
+    if ((window.location.href.indexOf("customers") > -1) || (window.location.href.indexOf("safari-booking") > -1) || (window.location.href.indexOf("package-booking") > -1)) {
+      setShowBookings('show');
+    }
+
+    if ((window.location.href.indexOf("change-password") > -1) || (window.location.href.indexOf("contact-details") > -1) || (window.location.href.indexOf("my-account") > -1) || (window.location.href.indexOf("razorpay-settings") > -1)) {
+      setShowSettings('show');
+    }
+
+    if (window.location.href.indexOf("/package") > -1) {
+      setShowPackages('show');
+    }
+
+    if (window.location.href.indexOf("enquiries") > -1) {
+      setShowEnquiries('show');
+    }
+
+    if (window.location.href.indexOf("prices") > -1) {
+      setShowPrices('show');
+    }
+
+    if (window.location.href.indexOf("dates") > -1) {
+      setShowDates('show');
+    }
+
+    if (window.location.href.indexOf("package-booking") > -1) {
+      setShowPackages('');
+    }
+
+  },[]);
+  
+
   return (
     <>
       <nav className="bg-safari-brown md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6 sideNav">
@@ -78,7 +129,7 @@ export default function Sidebar() {
                       Manage Safari Dates
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-safari" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-safari" className={`bg-hotel-maroon collapse${showDates}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -102,7 +153,7 @@ export default function Sidebar() {
                       Price Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-prices" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-prices" className={`bg-hotel-maroon collapse${showPrices}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -135,7 +186,7 @@ export default function Sidebar() {
                       Booking Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-booking" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-booking" className={`bg-hotel-maroon collapse${showBookings}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -161,7 +212,7 @@ export default function Sidebar() {
                       Hotel Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-hotel" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-hotel" className={`bg-hotel-maroon collapse${showHotels}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -187,7 +238,7 @@ export default function Sidebar() {
                       Package Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-package" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-package" className={`bg-hotel-maroon collapse${showPackages}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -225,7 +276,7 @@ export default function Sidebar() {
                       Enquiries
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-enquiry" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-enquiry" className={`bg-hotel-maroon collapse${showEnquiries}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
@@ -248,7 +299,7 @@ export default function Sidebar() {
                       Settings
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
                     </Link>
-                    <div id="collapse-settings" className="bg-hotel-maroon collapse" data-parent="#accordionMenu">
+                    <div id="collapse-settings" className={`bg-hotel-maroon collapse${showSettings}`} data-parent="#accordionMenu">
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">

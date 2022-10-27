@@ -1,9 +1,5 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
-const validator = require('../helpers/validate');
-const ApiFeatures = require("../Utils/ApiFeatures");
-
-const Validator = require('validatorjs');
 
 const asyncHandler = require('../Middleware/asyncHandler')
 
@@ -11,31 +7,10 @@ const Customer = require('../Models/Customer.model');
 const SafariBooking = require('../Models/SafariBooking.model');
 const PackageBooking = require('../Models/PackageBooking.model');
 const ChambalBooking = require('../Models/ChambalBooking.model');
-const BookingCustomer = require('../Models/BookingCustomer.model');
 
-async function checkNameIsUnique(email,type) {
-
-  totalPosts = await Customer.find({email: email, type: type}).countDocuments().exec();
-  if (totalPosts > 0) {
-    return true;
-  }else{
-    return false;
-  }
-};
-
-async function checkCustomerIsUnique(email, type, mobile) {
-
-  totalPosts = await Customer.find({email: email, type: type, mobile: mobile}).countDocuments().exec();
-  if (totalPosts > 0) {
-    return true;
-  }else{
-    return false;
-  }
-};
 
 module.exports = {
   getAllSafariBookings: asyncHandler(async (req, res, next) => {
-
 
     const filter_date = req.query.filter_date
         ? {
@@ -104,7 +79,6 @@ module.exports = {
 
   getAllPackageBookings: asyncHandler(async (req, res, next) => {
 
-
     const filter_date = req.query.filter_date
         ? {
           date: {
@@ -158,7 +132,7 @@ module.exports = {
 
     var  totalPosts = await PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
 
-    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{},
+    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{ booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -170,7 +144,6 @@ module.exports = {
   }),
 
   getAllChambalBookings: asyncHandler(async (req, res, next) => {
-
 
     const filter_date = req.query.filter_date
         ? {
@@ -225,7 +198,7 @@ module.exports = {
 
     var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
 
-    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{},
+    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -239,7 +212,7 @@ module.exports = {
   findChambalBookingById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await ChambalBooking.findById(id).populate(['customer']);
+      const result = await ChambalBooking.findById(id,'_id date zone customer booking_name booking_option vehicle time amount id_proof_no no_of_persons_indian no_of_persons_foreigner transaction_id createdAt').populate(['customer']);
       if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
@@ -262,7 +235,7 @@ module.exports = {
   findSafariBookingById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await SafariBooking.findById(id).populate(['booking_customers','customer']);
+      const result = await SafariBooking.findById(id, '_id date customer_id customer zone booking_customers vehicle timing amount transaction_id status addedAt createdAt').populate(['booking_customers','customer']);
       if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
@@ -285,7 +258,7 @@ module.exports = {
   findPackageBookingById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await PackageBooking.findById(id).populate(['customer']);;
+      const result = await PackageBooking.findById(id, '_id date package_id customer timing package_option_nationality package_option_id no_of_kids amount createdAt transaction_id').populate(['customer']);;
       if (!result) {
         throw createError(404, 'Customer does not exist!.');
       }

@@ -40,7 +40,7 @@ class ApiFeatures {
   filter() {
     const queryCopy = { ...this.queryStr };
     //   Removing some fields for category
-    const removeFields = ["filter_name", "page", "limit","size"];
+    const removeFields = ["filter_name", "page", "limit", "size"];
 
     removeFields.forEach((key) => delete queryCopy[key]);
 
@@ -50,6 +50,7 @@ class ApiFeatures {
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
+    this.query = this.query.select('_id name email mobile type address state createdAt');
 
     return this;
   }
@@ -61,6 +62,7 @@ class ApiFeatures {
 
     this.query.totalCount = this.query.length;
 
+    this.query = this.query.limit(resultPerPage).skip(skip).sort({$natural:-1});
     // this.query = this.query.limit(resultPerPage).skip(skip).sort({$natural:-1}).populate(['booking_customers', 'chambal_booking', 'safari_booking', 'package_booking']);
 
     return this;
