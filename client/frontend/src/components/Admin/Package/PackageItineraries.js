@@ -1,111 +1,42 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
-import swal from 'sweetalert';
+import { Component } from "react";
 
-export default function PackageItineraries({ packageId, itineraries }) {
-  const [selectedItineraries, setSelectedItineraries] = useState([]);
-  const [formatItineraries, setFormatItineraries] = useState([]);
-
-
-  const getItinerariesForPackage = async (packageId) => {
-
-    try {
-      const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${packageId}/iternaries`, {
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ` + localStorage.getItem('accessToken')
-        },
-      });
-
-
-      if (result.data.data.itineraries.length) {
-
-        const fa = result.data.data.itineraries.map(item => ({ value: item._id, label: item.title }));
-
-        setSelectedItineraries(fa);
-      }
-
-
-    } catch (err) {
-      swal(err, "error");
-
-    }
-
-  }
-
-  const getFormatItineraries = async (itineraries) => {
-
-    const fa = await itineraries.map((item) => {
-      return ({ value: item._id, label: item.title });
-
+class PackageItineraries extends Component {
+  handleChange = (ev) => {
+    const { name, value } = ev.target;
+    this.props.onChange({
+      ...this.props.value,
+      [name]: value
     });
+  };
 
-    setFormatItineraries(fa);
-  }
-
-
-  useEffect(() => {
-
-    getItinerariesForPackage(packageId);
-    getFormatItineraries(itineraries);
-
-
-  }, [packageId, itineraries]);
-
-  const updateStatus = () => {
-    let featrs = [];
-
-    selectedItineraries.forEach(item => {
-      featrs.push({ inclusion: item.label });
-
-    });
-
-    const data = {
-      itineraries: featrs,
-
-    }
-
-
-    axios.patch(`${process.env.REACT_APP_BASE_URL}/package/packages/${packageId}/iternaries`, data, {
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
-      },
-    }).then(result => {
-
-      if (result.data.success === true) {
-        swal(result.data.message, "success");
-        setTimeout(() => {
-          window.location.href = `/admin/package-to-itineraries/${packageId}`
-        }, 1000);
-      } else {
-        swal("Error in Api", "error");
-      }
-    })
-
-  }
-
-
-
-
-  return (
-    <>
-      <div>Package itineraries</div>
-      <div className='flex'>
-        <div>
-          <Select
-            value={selectedItineraries}
-            onChange={setSelectedItineraries}
-            options={formatItineraries}
-            isMulti
-            className='setReactSelect'
+  render() {
+    const { value: user } = this.props;
+    return (
+      <>
+        <td className='border border-slate-300 text-center'>
+          <input
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="title"
+            value={user.title}
+            onChange={this.handleChange}
+            placeholder="Itinerary Title"
+            type="text"
           />
-        </div>
-        <div><button type="button" onClick={updateStatus} className="text-white float-right bg-danger font-medium rounded px-5 py-2.5 text-center">Update</button></div>
-      </div>
-    </>
-  )
+        </td>
+
+        <td className='border border-slate-300 text-center'>
+          <textarea
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="description"
+            defaultValue={user.description}
+            onChange={this.handleChange}
+            placeholder="Itinerary Description"
+          />
+        </td>
+
+      </>
+    );
+  }
 }
+
+export default PackageItineraries;

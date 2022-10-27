@@ -139,10 +139,34 @@ export default function SafariTravellerBooking() {
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
                             if(result.status === 200 ) {
-                            alert.success("Booked");
-                            localStorage.clear();
-                            window.location.href = '/thankyou';
-                        }
+                                alert.success("Booked");
+
+                                const paymentData = {
+                                    "customer_id": result.data.data._id,
+                                    "transaction_id": response.razorpay_payment_id,
+                                    "amount": payable_Amount,
+                                    "booking_type": 'safari'
+                                }
+
+                                axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/safari/${result.data.data.safari_booking}`, paymentData , {
+                                    headers: {
+                                        'Accept': 'application/json, text/plain, */*',
+                                        'Content-Type': 'application/json'
+                                   },
+                                }).then((response)=>{
+                                    axios.post(`${process.env.REACT_APP_BASE_URL}/`, paymentData , {
+                                        headers: {
+                                            'Accept': 'application/json, text/plain, */*',
+                                            'Content-Type': 'application/json'
+                                       },
+                                    }).then((response)=>{});
+                                });
+
+                                
+
+                                localStorage.clear();
+                                window.location.href = '/thankyou';
+                            }
                     })
                     
                 },
