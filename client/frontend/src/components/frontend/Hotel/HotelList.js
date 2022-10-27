@@ -24,7 +24,7 @@ export default function HotelList() {
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ` + localStorage.getItem('user')
+                        'Authorization': `Bearer ` + localStorage.getItem('accessToken')
                     },
                 });
 
@@ -46,12 +46,13 @@ export default function HotelList() {
 
 
 
-    const fetchComments = async (currentPage) => {
+
+    const paginationData = async (currentPage) => {
         const res = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/hotel/hotels/front?page=${currentPage}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem('user')
+                'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
         }
         );
@@ -62,8 +63,8 @@ export default function HotelList() {
 
     const handlePageClick = async (data) => {
         let currentPage = data.selected + 1;
-        const commentsFormServer = await fetchComments(currentPage);
-        setHotels(commentsFormServer.hotels.data);
+        const result = await paginationData(currentPage);
+        setHotels(result.hotels.data);
     };
 
 
@@ -88,11 +89,15 @@ export default function HotelList() {
                                     <Link to="/hotel-details">
                                         <h3>{item.name}</h3>
                                         <div className="rating">
-                                            <span className="fa fa-star checked"></span>
-                                            <span className="fa fa-star checked"></span>
-                                            <span className="fa fa-star checked"></span>
+
+
+                                            {[...Array(item.rating)].map((star, index) => {
+
+                                                return (<span className="fa fa-star checked"></span>)
+
+                                            })}
                                         </div>
-                                        <p>Corbett Maya Resort is spread over an area of 3 acres. It is situated in Swaldeh village of Ramnagar near...</p>
+                                        <p>{item.description}</p>
                                         <div className="Resort">
                                             <ul className="list-inline">
 
@@ -135,7 +140,8 @@ export default function HotelList() {
                         </div>
                     </div>
 
-                ))}
+                ))
+                }
 
             </>
 
