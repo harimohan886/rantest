@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
 
-
 export default function BookSafari({ bookingDate  , date }) {
 
     const [ name , setName ] =  useState('');
