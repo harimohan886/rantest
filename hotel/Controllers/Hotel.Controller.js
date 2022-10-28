@@ -95,6 +95,8 @@ module.exports = {
         var search = {};
       }
 
+      console.log('search',search);
+
       var totalPosts = await Hotel.find(search).countDocuments().exec();
 
       Hotel.find(search, {},

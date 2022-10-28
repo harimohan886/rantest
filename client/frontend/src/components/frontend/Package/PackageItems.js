@@ -69,7 +69,7 @@ export default function PackageItems({ packages }) {
             </div>
 
             {/* Package Rooms */}
-            <PackageRooms />
+            <PackageRooms packages={packages} />
         </>
 
     )

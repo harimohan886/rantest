@@ -217,6 +217,7 @@ module.exports = {
       const booking_customer_data = new BookingCustomer({
         name : persons.name,
         customer_id : customer_data_result._id,
+        booking_id : safari_booking_result._id,
         gender : persons.gender,
         nationality : persons.nationality,
         id_proof : persons.id_proof,
@@ -232,6 +233,35 @@ module.exports = {
 
     await safari_booking_result.save();
     await customer_data_result.save();
+
+    /*save data to crm*/
+
+    /*const params = new URLSearchParams();
+
+    params.append('name', req.body.name);
+    params.append('email', req.body.email);
+    params.append('mobile', req.body.mobile);
+    params.append('address', req.body.address);
+    params.append('state', req.body.state);
+    params.append('website', 'ranthamboretigerreserve.in');
+    params.append('custom_data', '');
+    params.append('payment_status', 'unpaid');
+    params.append('lead_status', 4);
+    params.append('date', req.body.date);
+    params.append('time', req.body.timing);
+    params.append('adult', 0);
+    params.append('child', 0);
+    params.append('mode', req.body.vehicle);
+    params.append('zone', req.body.zone);
+    params.append('sanctuary', 'ranthambore');
+    params.append('amount', req.body.amount);
+    params.append('transaction_id', req.body.transaction_id);
+    params.append('booked_customers', JSON.stringify(req.body.booked_persons));
+
+    const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+    const data = await response.json(); */       
+
+    /*save data to crm*/
 
     res.send({
       success: true,
@@ -332,6 +362,51 @@ module.exports = {
 
       await customer_data_result.save();
 
+
+      /*save data to crm*/
+
+      /*
+      const params = new URLSearchParams();
+
+      var d = new Date(req.body.safari_date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+      if (month.length < 2) 
+      month = '0' + month;
+      if (day.length < 2) 
+      day = '0' + day;
+
+      var newDate = [year, month, day].join('-');
+
+      params.append('name', req.body.name);
+      params.append('email', req.body.email);
+      params.append('mobile', req.body.mobile);
+      params.append('address', req.body.address);
+      params.append('state', req.body.state);
+      params.append('website', 'ranthamboretigerreserve.in');
+      params.append('custom_data', '');
+      params.append('payment_status', 'unpaid');
+      params.append('lead_status', 4);
+      params.append('date', newDate);
+      params.append('time', req.body.time);
+      params.append('adult', req.body.no_of_persons_indian);
+      params.append('child', req.body.no_of_persons_foreigner);
+      params.append('mode', 'Boat');
+      params.append('area', booking_name);
+      params.append('zone', booking_option);
+      params.append('sanctuary', 'ranthambore');
+      params.append('amount', req.body.amount);
+      params.append('transaction_id', req.body.transaction_id);
+      params.append('booked_customers', '');
+
+      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+      const data = await response.json(); 
+      */       
+
+      /*save data to crm*/
+
       res.send({
         success: true,
         message: 'Data inserted',
@@ -417,6 +492,35 @@ createNewCustomerPackage: async (req, res, next) => {
 
       customer_data_result.save();
 
+
+      /*save data to crm*/
+
+      /*const params = new URLSearchParams();
+
+      params.append('name', req.body.name);
+      params.append('email', req.body.email);
+      params.append('mobile', req.body.mobile);
+      params.append('address', req.body.address);
+      params.append('state', req.body.state);
+      params.append('website', 'ranthamboretigerreserve.in');
+      params.append('custom_data', '');
+      params.append('payment_status', 'unpaid');
+      params.append('lead_status', 4);
+      params.append('date', req.body.date);
+      params.append('time', req.body.timing);
+      params.append('adult', 0);
+      params.append('child', 0);
+      params.append('mode', req.body.vehicle);
+      params.append('zone', req.body.zone);
+      params.append('sanctuary', 'ranthambore');
+      params.append('amount', req.body.amount);
+      params.append('transaction_id', req.body.transaction_id);
+
+      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+      const data = await response.json(); */       
+
+      /*save data to crm*/
+
       res.send({
         success: true,
         message: 'Data inserted',
@@ -479,17 +583,58 @@ createNewCustomerPackage: async (req, res, next) => {
     }
   },
 
-  deleteACustomer: async (req, res, next) => {
+  DeleteCustomers: async (req, res, next) => {
+
     const id = req.params.id;
+    const slug = req.params.slug;
+
+    console.log(id,slug);
+
     try {
-      const result = await Customer.findByIdAndDelete(id);
-      if (!result) {
-        throw createError(404, 'Customer does not exist.');
-      }
-      res.send({
+
+      if (slug === 'safari') {
+
+        await SafariBooking.findOneAndDelete({customer_id : id});
+        await BookingCustomer.deleteMany({customer_id : id});
+        const result = await Customer.findByIdAndDelete(id);
+
+        if (!result) {
+          throw createError(404, 'Customer does not exist.');
+        }
+        
+        res.send({
           success: true,
           message: "data deleted",
         });
+
+      }else if (slug === 'package') {
+
+        await PackageBooking.findOneAndDelete({customer_id : id});
+        const result = await Customer.findByIdAndDelete(id);
+
+        if (!result) {
+          throw createError(404, 'Customer does not exist.');
+        }
+
+        res.send({
+          success: true,
+          message: "data deleted",
+        });
+      }else {
+
+        await ChambalBooking.findOneAndDelete({customer_id : id});
+        const result = await Customer.findByIdAndDelete(id);
+
+        if (!result) {
+          throw createError(404, 'Customer does not exist.');
+        }
+
+        res.send({
+          success: true,
+          message: "data deleted",
+        });
+      }
+
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {

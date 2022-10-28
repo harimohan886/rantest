@@ -15,12 +15,12 @@ export default function HotelListing() {
 
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
-    //let limit = 10;
+    let limit = 2;
 
     const HandleFilter = async () => {
         try {
 
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}&filter_name=${name}&filter_rating=${rating}&filter_state=${city}&filter_availability=${status}`, {
+            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=1&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${status}`, {
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
@@ -29,8 +29,8 @@ export default function HotelListing() {
             });
 
             setHotels(result.data.data);
-            setpageCount(Math.ceil(result.data.total / result.data.per_page));
-            setPage(result.data.current_page);
+            setpageCount(Math.ceil(result.data.total / result.data.perPage));
+            setPage(result.data.page);
 
         } catch (err) {
             swal(err, "error");
@@ -65,8 +65,18 @@ export default function HotelListing() {
         setDropdownPopoverShow(false);
     }
 
-    const HandleReset = () => {
-        window.location = '/admin/hotels';
+    const HandleReset = async() => {
+        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=1&size=${limit}`, {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ` + localStorage.getItem('user')
+            },
+        });
+
+        setHotels(result.data.data);
+        setpageCount(Math.ceil(result.data.total / result.data.perPage));
+        setPage(result.data.page);
     }
 
 
@@ -78,7 +88,7 @@ export default function HotelListing() {
         const getHotels = async (search = '') => {
 
             try {
-                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}`, {
+                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}&size=${limit}`, {
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json',
@@ -87,8 +97,9 @@ export default function HotelListing() {
                 });
 
                 setHotels(result.data.data);
-                setpageCount(Math.ceil(result.data.hotels.total / result.data.hotels.per_page));
-                setPage(result.data.hotels.current_page);
+                setpageCount(result.data.total);
+                setpageCount(Math.ceil(result.data.total / result.data.perPage));
+                setPage(result.data.page);
 
 
             } catch (err) {
@@ -98,27 +109,25 @@ export default function HotelListing() {
         }
 
         getHotels();
-    }, [page])
+    }, [])
 
 
     const fetchComments = async (currentPage) => {
         const res = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${currentPage}`, {
+            `${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${currentPage}&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${status}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
             },
         }
         );
-        const data = await res.json();
-
-        return data
+        return res.data;
     };
 
     const handlePageClick = async (data) => {
         let currentPage = data.selected + 1;
         const commentsFormServer = await fetchComments(currentPage);
-        setHotels(commentsFormServer.hotels.data);
+        setHotels(commentsFormServer.data);
     };
 
     const handleDelete = (id) => {
@@ -209,9 +218,9 @@ export default function HotelListing() {
 
                                 <td className='border border-slate-300 text-center'>
                                     <label htmlFor={`default-toggle-${index}`} className="inline-flex relative items-center w-full cursor-pointer">
-                                        <input type="checkbox" value={item.status} defaultChecked={item.status} mid={`default-toggle-${index}`} className="sr-only peer" />
+                                        <input type="checkbox" value={item.availability} defaultChecked={item.availability} mid={`default-toggle-${index}`} className="sr-only peer" />
                                         <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{item.status === 1 ? 'Enabled' : 'Disabled'}</span>
+                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{item.availability === 1 ? 'Enabled' : 'Disabled'}</span>
                                     </label>
                                 </td>
 

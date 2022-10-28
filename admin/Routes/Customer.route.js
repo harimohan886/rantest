@@ -5,6 +5,8 @@ const CustomerController = require('../Controllers/Customer.Controller');
 
 router.get('/', CustomerController.getAllCustomers);
 
+router.delete('/:slug/:id', CustomerController.DeleteCustomers);
+
 router.get('/dashboard', CustomerController.countAllCustomers);
 
 router.post('/', CustomerController.createNewCustomer);
