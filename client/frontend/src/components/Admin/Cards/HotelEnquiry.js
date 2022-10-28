@@ -39,7 +39,7 @@ export default function HotelEnquiry({ enquiries }) {
                         <th>Booking Date</th>
                         <th>Name</th>
                         <th>Phone</th>
-                        <th>Hotel</th>
+                        <th>Type</th>
                         <th>Action</th>
                     </tr>
                 </thead>
