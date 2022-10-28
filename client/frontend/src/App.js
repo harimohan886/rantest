@@ -23,6 +23,7 @@ import Privacy from './pages/frontend/Privacy';
 import Cancellation from './pages/frontend/Cancellation';
 import SafariTravellerBooking from './pages/frontend/SafariTravellerBooking';
 import Thankyou from './pages/frontend/Thankyou';
+import Success from './pages/frontend/Success';
 import Hotel from './pages/frontend/Hotel/Hotel';
 import FrontendPackages from './pages/frontend/Packages/FrontendPackages';
 import HotelDetails from './pages/frontend/Hotel/HotelDetails';
@@ -158,6 +159,7 @@ function App() {
           <Route exact path='/privacy-policy' element={<Privacy />} />
           <Route exact path='/cancellation-policy' element={<Cancellation />} />
           <Route exact path='/thankyou' element={<Thankyou />} />
+          <Route exact path='/booking-success' element={<Success />} />
           <Route exact path='/hotels' element={<Hotel />} />
           <Route exact path='/hotel-details/:id' element={<HotelDetails />} />
           <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
