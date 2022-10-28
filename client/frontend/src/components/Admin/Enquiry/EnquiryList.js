@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import swal from 'sweetalert';
+import moment from 'moment';
 
 
 export default function EnquiryList({ enquiries, type }) {
@@ -48,7 +49,7 @@ export default function EnquiryList({ enquiries, type }) {
                             <td className='border border-slate-300 text-center'>{item.phone}</td>
                             <td className='border border-slate-300 text-center'>{item.message}</td>
                             <td className='border border-slate-300 text-center'><span className='bg-enquiry-brown text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs p-1 text-center inline-flex items-center mr-2'>{item.type}</span></td>
-                            <td className='border border-slate-300 text-center'>{item.createdAt}</td>
+                            <td className='border border-slate-300 text-center'>{moment(item.createdAt).format('YYYY-MM-DD')}</td>
                             <td className='border border-slate-300 text-center'>
                                 <button onClick={(e) => handleDelete(item._id)} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                     <i className='fas fa-trash'></i>

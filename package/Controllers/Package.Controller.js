@@ -133,7 +133,7 @@ module.exports = {
 
       var totalPosts = await Package.find({ availability: 1 }).countDocuments().exec();
 
-      Package.find({ availability: 1 }, {},
+      Package.find({ availability: 1 }, {__v: 0, updatedAt: 0, status: 0},
         query, function (err, data) {
           if (err) {
             response = { "error": true, "message": "Error fetching data" + err };
@@ -141,7 +141,7 @@ module.exports = {
             response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
           }
           res.json(response);
-        }).sort({ $natural: -1 }).populate(['inclusions', 'exclusions', 'features', 'iternaries']);
+        }).sort({ $natural: -1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
     } catch (error) {
       console.log(error.message);
     }
@@ -316,7 +316,7 @@ module.exports = {
   findPackageBySlug: async (req, res, next) => {
     const slug = req.params.slug;
     try {
-      const package = await Package.findOne({ slug: slug }).populate(['inclusions', 'exclusions', 'features', 'iternaries']);
+      const package = await Package.findOne({ slug: slug }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
       if (!package) {
         throw createError(404, 'Package does not exist.');
       }
@@ -348,9 +348,9 @@ module.exports = {
         })
       }
 
-      const paymentpolicy = await PaymentPolicy.find({});
-      const term = await Term.find({});
-      const cancellationpolicy = await CancellationPolicy.find({});
+      const paymentpolicy = await PaymentPolicy.find({},'policy');
+      const term = await Term.find({},'term');
+      const cancellationpolicy = await CancellationPolicy.find({},'policy');
 
       const data = {};
       data.package = package;

@@ -43,7 +43,6 @@ export default function EditRoom() {
                 'Authorization': `Bearer ` + localStorage.getItem('accessToken')
             },
         }).then(result => {
-            console.log("Room Info", result.data);
             setName(result.data.data.room);
             setHotelId(result.data.data.hotel_id);
             setStatus(result.data.data.status);

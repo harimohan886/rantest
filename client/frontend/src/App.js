@@ -93,6 +93,7 @@ import EditPackageCancellationPolicy from './pages/Admin/Packages/EditPackageCan
 import CreatePackageItinerary from './pages/Admin/Packages/CreatePackageItinerary';
 import EditPackageItinerary from './pages/Admin/Packages/EditPackageItinerary';
 import PackageItineraries from './pages/Admin/Packages/PackageItineraries';
+import PackageToItineraries from './pages/Admin/Packages/PackageToItineraries';
 
 import PackageInclusion from './pages/Admin/Packages/PackageInclusion';
 import PackageExclusion from './pages/Admin/Packages/PackageExclusion';
@@ -159,7 +160,7 @@ function App() {
           <Route exact path='/hotels' element={<Hotel />} />
           <Route exact path='/hotel-details/:id' element={<HotelDetails />} />
           <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
-          <Route exact path='/package-details' element={<PackageDetails />} />
+          <Route exact path='/package-details/:id' element={<PackageDetails />} />
           <Route exact path='/book-package' element={<FinalPackageBooking />} />
 
 
@@ -234,6 +235,7 @@ function App() {
             <Route exact path="/admin/add-package-term" element={<CreatePackageTerm />} />
             <Route exact path="/admin/edit-package-term/:id" element={<EditPackageTerm />} />
 
+            <Route exact path="/admin/package-to-itineraries/:id" element={<PackageToItineraries />} />
             <Route exact path="/admin/package-itineraries" element={<PackageItineraries />} />
             <Route exact path="/admin/add-package-itinerary" element={<CreatePackageItinerary />} />
             <Route exact path="/admin/edit-package-itinerary/:id" element={<EditPackageItinerary />} />

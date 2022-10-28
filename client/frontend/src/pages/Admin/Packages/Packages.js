@@ -9,52 +9,22 @@ import swal from 'sweetalert';
 import axios from 'axios';
 
 export default function Packages() {
+
   const [packages, setPackages] = useState([]);
   const [name, setName] = useState('');
   const [rating, setRating] = useState('');
-  const [price, setPrice] = useState('');
   const [availability, setAvailability] = useState('');
-
+  const [remountComponent, setRemountComponent] = useState(0);
   const [pageCount, setpageCount] = useState(0);
   const [page, setPage] = useState(1);
-  let limit = 10;
-
-  const HandleFilter = async () => {
-    try {
-
-      const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages?page=${page}&filter_name=${name}&filter_rating=${rating}&filter_price=${price}&filter_availability=${availability}`, {
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ` + localStorage.getItem('accessToken')
-        },
-      });
-
-      setPackages(result.data.data);
-      setpageCount(Math.ceil(result.data.totalItems / limit));
-      setPage(result.data.current_page);
-
-    } catch (err) {
-      swal(err, "error");
-
-    }
-  }
-
-
-  const HandleReset = () => {
-    window.location = '/admin/packages';
-  }
-
-
-
-
+  let limit = 15;
 
   useEffect(() => {
 
     const getPackages = async () => {
 
       try {
-        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages?page=${page}`, {
+        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages?page=${page}&size=${limit}`, {
           headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
@@ -63,33 +33,71 @@ export default function Packages() {
         });
 
         setPackages(result.data.data);
-        setpageCount(Math.ceil(result.data.total / limit));
-        setPage(result.data.current_page);
-
-
+        setpageCount(result.data.totalPages);
+        setPage(result.data.currentPage);
       } catch (err) {
-
       }
 
     }
-
     getPackages();
-  }, [page])
+  }, [])
 
 
   const paginationData = async (currentPage) => {
     const res = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/package/packages?page=${currentPage}`, {
+      `${process.env.REACT_APP_BASE_URL}/package/packages?page=${currentPage}&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${availability}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ` + localStorage.getItem('accesstoken')
       },
     }
     );
-    const data = await res.json();
-
-    return data
+    return res.data;
   };
+
+
+  const HandleFilter = async () => {
+    try {
+
+      const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages?page=1&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${availability}`, {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+        },
+      });
+
+      setPackages(result.data.data);
+      setpageCount(result.data.totalPages);
+      setPage(result.data.currentPage);
+      setRemountComponent(Math.random());
+
+    } catch (err) {
+      swal(err, "error");
+
+    }
+  }
+
+
+  const HandleReset = async() => {
+     try {
+        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages?page=1&size=${limit}`, {
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ` + localStorage.getItem('accessToken')
+          },
+        });
+
+        setPackages(result.data.data);
+        setpageCount(result.data.totalPages);
+        setPage(result.data.currentPage);
+        setRemountComponent(Math.random());
+
+      } catch (err) {
+
+      }
+  }
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
@@ -126,7 +134,6 @@ export default function Packages() {
               <Link to='/admin/add-package' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Package</Link>
             </div>
           </div>
-          {/* <FilterHotel /> */}
 
           <form className="grid grid-cols-5 gap-4 mt-2 mb-2">
             <div className='form-group'>
@@ -165,7 +172,7 @@ export default function Packages() {
           </form>
 
 
-
+        <div key={remountComponent}>
           <PackageListing packages={packages} />
           <ReactPaginate
             previousLabel={"previous"}
@@ -186,6 +193,7 @@ export default function Packages() {
             breakLinkClassName={"page-link"}
             activeClassName={"active"}
           />
+          </div>
         </div>
       </div>
       <FooterAdmin />

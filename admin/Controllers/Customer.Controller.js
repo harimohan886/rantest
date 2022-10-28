@@ -34,6 +34,7 @@ async function checkCustomerIsUnique(email, type, mobile) {
 };
 
 module.exports = {
+  
   getAllCustomers: asyncHandler(async (req, res, next) => {
 
     const resultPerPage = req.query.size||15;
