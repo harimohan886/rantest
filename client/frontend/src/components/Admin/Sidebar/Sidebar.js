@@ -73,7 +73,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link type="button" className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" data-toggle="collapse" data-target="#collapse-safari" aria-expanded="true" aria-controls="collapse-safari">
+                    <Link type="button" className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" data-toggle="collapse" data-target="#collapse-safari" aria-expanded="true" aria-controls="collapse-safari">
                       <i className="fas fa-th-large mr-2 text-md opacity-75"></i>{" "}
                       Manage Safari Dates
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -97,7 +97,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-prices" aria-expanded="true" aria-controls="collapse-prices">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-prices" aria-expanded="true" aria-controls="collapse-prices">
                       <i className="fas fa-suitcase mr-2 text-md opacity-75"></i>{" "}
                       Price Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -111,15 +111,6 @@ export default function Sidebar() {
                           <li className="items-center">
                             <a href='/admin/chambal-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Chambal Price</a>
                           </li>
-                          {/* <li className="items-center">
-                            <a href='/admin/price-list/default' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Default Price</a>
-                          </li>
-                          <li className="items-center">
-                            <a href='/admin/price-list/weekend' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Weekend Price</a>
-                          </li>
-                          <li className="items-center">
-                            <a href='/admin/price-list/festival' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Festival Price</a>
-                          </li> */}
                         </ul>
                       </div>
                     </div>
@@ -130,7 +121,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-booking" aria-expanded="true" aria-controls="collapse-booking">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-booking" aria-expanded="true" aria-controls="collapse-booking">
                       <i className="fas fa-suitcase mr-2 text-md opacity-75"></i>{" "}
                       Booking Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -156,7 +147,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-hotel" aria-expanded="true" aria-controls="collapse-hotel">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-hotel" aria-expanded="true" aria-controls="collapse-hotel">
                       <i className="fas fa-hotel mr-2 text-md opacity-75"></i>{" "}
                       Hotel Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -182,7 +173,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-package" aria-expanded="false" aria-controls="collapse-package">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-package" aria-expanded="false" aria-controls="collapse-package">
                       <i className="fas fa-chart-pie mr-2 text-md opacity-75"></i>{" "}
                       Package Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -220,7 +211,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-enquiry" aria-expanded="false" aria-controls="collapse-enquiry">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-enquiry" aria-expanded="false" aria-controls="collapse-enquiry">
                       <i className="fas fa-phone-volume mr-2 text-md opacity-75"></i>{" "}
                       Enquiries
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -243,7 +234,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-settings" aria-expanded="false" aria-controls="collapse-settings">
+                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-settings" aria-expanded="false" aria-controls="collapse-settings">
                       <i className="fas fa-wrench mr-2 text-md opacity-75"></i>{" "}
                       Settings
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
