@@ -154,7 +154,7 @@ export default function SafariTravellerBooking() {
                                         'Content-Type': 'application/json'
                                    },
                                 }).then((response)=>{
-                                    axios.post(`${process.env.REACT_APP_BASE_URL}/`, paymentData , {
+                                    axios.post(`${process.env.REACT_APP_BASE_URL}/payment/`, paymentData , {
                                         headers: {
                                             'Accept': 'application/json, text/plain, */*',
                                             'Content-Type': 'application/json'
