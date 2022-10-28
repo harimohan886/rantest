@@ -56,10 +56,6 @@ export default function AddRoom() {
                 swal("Data is added successfully");
                 navigate(`/admin/hotel-rooms/${params.id}`);
 
-                // setTimeout(() => {
-                //     window.location = `/admin/hotel-rooms/${params.id}`;
-                // }, 1000);
-
             } else if (res.data.validation_errors) {
                 swal(res.data.error.message, "error");
                 if (res.data.validation_erros.name) {
