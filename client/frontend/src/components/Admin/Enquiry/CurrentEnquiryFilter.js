@@ -30,7 +30,7 @@ export default function CurrentEnquiryFilter() {
             <DatePicker selected={bookingDate} onChange={(date) => setbookingDate(date)} />
         </div>
         <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
             <select id="vehicles" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option>Please Select</option>
                 <option>Gypsy</option>
@@ -38,7 +38,7 @@ export default function CurrentEnquiryFilter() {
             </select>
         </div>
         <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing <span style={{color: "#999", fontSize: "12px"}}>(Use it according to normal/chambal timings)</span></label>
             <select id="timings" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option>Please Select</option>
                 <option>Morning</option>
@@ -46,7 +46,7 @@ export default function CurrentEnquiryFilter() {
             </select>
         </div>
         <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
             <select id="zones" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option>Please Select</option>
                 <option>Zone 1/2/3/4/5</option>

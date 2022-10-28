@@ -20,46 +20,30 @@ export default function ViewSafariBooking() {
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Age</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Customer Type</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Gender</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Nationality</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Id Proof Type</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Id Proof Number</th>
                     </tr>
+                    
                 </thead>
                 <tbody>
                     <tr>
                         <td className='border border-slate-300 text-center'>Pritam Jena</td>
-                        <td className='border border-slate-300 text-center'>28</td>
-                        <td className='border border-slate-300 text-center'>Adult</td>
                         <td className='border border-slate-300 text-center'>Male</td>
                         <td className='border border-slate-300 text-center'>Indian</td>
                         <td className='border border-slate-300 text-center'>Aadhar Card</td>
                         <td className='border border-slate-300 text-center'>766351088154</td>
                     </tr>
                     <tr>
-                        <td className='border border-slate-300 text-center'>Sohrab Khan</td>
-                        <td className='border border-slate-300 text-center'>28</td>
-                        <td className='border border-slate-300 text-center'>Adult</td>
+                        <td className='border border-slate-300 text-center'>Pritam Jena</td>
                         <td className='border border-slate-300 text-center'>Male</td>
                         <td className='border border-slate-300 text-center'>Indian</td>
                         <td className='border border-slate-300 text-center'>Aadhar Card</td>
                         <td className='border border-slate-300 text-center'>766351088154</td>
                     </tr>
                     <tr>
-                        <td className='border border-slate-300 text-center'>Nurul Hasan</td>
-                        <td className='border border-slate-300 text-center'>28</td>
-                        <td className='border border-slate-300 text-center'>Adult</td>
-                        <td className='border border-slate-300 text-center'>Male</td>
-                        <td className='border border-slate-300 text-center'>Indian</td>
-                        <td className='border border-slate-300 text-center'>Aadhar Card</td>
-                        <td className='border border-slate-300 text-center'>766351088154</td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>Krishna Mishra</td>
-                        <td className='border border-slate-300 text-center'>28</td>
-                        <td className='border border-slate-300 text-center'>Adult</td>
+                        <td className='border border-slate-300 text-center'>Pritam Jena</td>
                         <td className='border border-slate-300 text-center'>Male</td>
                         <td className='border border-slate-300 text-center'>Indian</td>
                         <td className='border border-slate-300 text-center'>Aadhar Card</td>

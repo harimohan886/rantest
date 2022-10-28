@@ -189,6 +189,9 @@ export default function Sidebar() {
                           <li className="items-center">
                             <Link to='/admin/package-booking' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Package Booking</Link>
                           </li>
+                          <li className="items-center">
+                            <Link to='/admin/chambal-bookings' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Chambal Booking</Link>
+                          </li>
                         </ul>
                       </div>
                     </div>

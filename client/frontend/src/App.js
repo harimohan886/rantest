@@ -118,6 +118,8 @@ import PackageDetails from './pages/frontend/Packages/PackageDetails';
 import FinalPackageBooking from './pages/frontend/Packages/FinalPackageBooking';
 import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
 import { verifyToken } from "./pages/Admin/Auth/apiCalls";
+import ChambalManagement from './pages/Admin/BookingManagement/ChambalManagement';
+import ViewChambalBooking from './pages/Admin/BookingManagement/ViewChambalBooking';
 
 const options = {
   timeout: 2000,
@@ -203,6 +205,8 @@ function App() {
             <Route exact path="/admin/view-safari-booking" element={<ViewSafariBooking />} />
             <Route exact path="/admin/package-booking" element={<PackageBooking />} />
             <Route exact path="/admin/view-package-booking" element={<ViewPackageBooking />} />
+            <Route exact path="/admin/chambal-bookings" element={<ChambalManagement />} />
+            <Route exact path="/admin/view-chambal-bookings" element={<ViewChambalBooking />} />
             <Route exact path="/admin/hotels" element={<Hotels />} />
             <Route exact path="/admin/add-hotel" element={<AddHotel />} />
             <Route exact path="/admin/edit-hotel/:id" element={<EditHotel />} />
