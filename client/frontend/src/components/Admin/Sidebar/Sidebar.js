@@ -276,6 +276,9 @@ export default function Sidebar() {
                           <li className="items-center">
                             <Link to='/admin/hotel-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Hotel Enquiries</Link>
                           </li>
+                          <li className="items-center">
+                            <Link to='/admin/current-booking-enquiries' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Current Booking Enquiries</Link>
+                          </li>
                         </ul>
                       </div>
                     </div>

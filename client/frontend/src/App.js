@@ -104,6 +104,7 @@ import AddPackage from './pages/Admin/Packages/AddPackage';
 import EditPackage from './pages/Admin/Packages/EditPackage';
 import GeneralEnquiries from './pages/Admin/Enquiry/GeneralEnquiries';
 import HotelEnquiries from './pages/Admin/Enquiry/HotelEnquiries';
+import CurrentBooking from './pages/Admin/Enquiry/CurrentBooking';
 import Razorpay from './pages/Admin/Settings/Razorpay';
 import ContactDetails from './pages/Admin/Settings/ContactDetails';
 import MyAccount from './pages/Admin/Settings/MyAccount';
@@ -250,6 +251,7 @@ function App() {
 
             <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
             <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
+            <Route exact path="/admin/current-booking-enquiries" element={<CurrentBooking />} />
             <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />
             <Route exact path="/admin/contact-details" element={<ContactDetails />} />
             <Route exact path="/admin/my-account" element={<MyAccount />} />
