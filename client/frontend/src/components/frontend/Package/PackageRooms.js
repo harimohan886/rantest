@@ -1,5 +1,4 @@
 import React from 'react'
-import PackagePricing from './PackagePricing'
 import RoomType from './RoomType'
 
 export default function PackageRooms({ packages }) {
@@ -15,12 +14,14 @@ export default function PackageRooms({ packages }) {
                     </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">
+
+
                     <div className="tab-pane active" id='tab-indian'>
-                        <RoomType packages={packages} />
-                        <PackagePricing />
+                        <RoomType packages={packages} type="indian" />
+
                     </div>
                     <div className="tab-pane fade" id='tab-foreigner'>
-                        {/* <RoomType packages={packages} /> */}
+                        <RoomType packages={packages} type="foreigner" />
                     </div>
                 </div>
             </div>
