@@ -17,11 +17,11 @@ export default function PackageRooms({ packages }) {
 
 
                     <div className="tab-pane active" id='tab-indian'>
-                        <RoomType packages={packages} type="indian" />
+                        {packages && <RoomType packages={packages} type="indian" />}
 
                     </div>
                     <div className="tab-pane fade" id='tab-foreigner'>
-                        <RoomType packages={packages} type="foreigner" />
+                        {packages && <RoomType packages={packages} type="foreigner" />}
                     </div>
                 </div>
             </div>
