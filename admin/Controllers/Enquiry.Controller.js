@@ -180,6 +180,37 @@ module.exports = {
     }
   },
 
+  SveEnquiry: async (req, res, next) => {
+    try {
+
+      const params = new URLSearchParams();
+
+      const meta = {type:req.body.type};
+
+      params.append('name', req.body.name);
+      params.append('mobile', req.body.mobile);
+      params.append('email', req.body.email);
+      params.append('website', 'ranthamboretigerreserve.in');
+      params.append('meta', meta);
+
+      const response = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params});
+      const data = await response.json();
+
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: data
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error.name === 'ValidationError') {
+        next(createError(422, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
   findEnquiryById: async (req, res, next) => {
     const id = req.params.id;
     try {

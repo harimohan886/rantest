@@ -15,12 +15,12 @@ export default function HotelListing() {
 
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
-    //let limit = 10;
+    let limit = 2;
 
     const HandleFilter = async () => {
         try {
 
-            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}&filter_name=${name}&filter_rating=${rating}&filter_state=${city}&filter_availability=${status}`, {
+            const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=1&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${status}`, {
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
@@ -29,8 +29,9 @@ export default function HotelListing() {
             });
 
             setHotels(result.data.data);
-            setpageCount(Math.ceil(result.data.total / result.data.per_page));
-            setPage(result.data.current_page);
+            setpageCount(result.data.total);
+            setpageCount(Math.ceil(result.data.total / result.data.perPage));
+            setPage(result.data.page);
 
         } catch (err) {
             swal(err, "error");
@@ -78,7 +79,7 @@ export default function HotelListing() {
         const getHotels = async (search = '') => {
 
             try {
-                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}`, {
+                const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${page}&size=${limit}`, {
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json',
@@ -87,8 +88,9 @@ export default function HotelListing() {
                 });
 
                 setHotels(result.data.data);
-                setpageCount(Math.ceil(result.data.hotels.total / result.data.hotels.per_page));
-                setPage(result.data.hotels.current_page);
+                setpageCount(result.data.total);
+                setpageCount(Math.ceil(result.data.total / result.data.perPage));
+                setPage(result.data.page);
 
 
             } catch (err) {
@@ -98,27 +100,25 @@ export default function HotelListing() {
         }
 
         getHotels();
-    }, [page])
+    }, [])
 
 
     const fetchComments = async (currentPage) => {
         const res = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${currentPage}`, {
+            `${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=${currentPage}&size=${limit}&filter_name=${name}&filter_rating=${rating}&filter_availability=${status}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
             },
         }
         );
-        const data = await res.json();
-
-        return data
+        return res.data;
     };
 
     const handlePageClick = async (data) => {
         let currentPage = data.selected + 1;
         const commentsFormServer = await fetchComments(currentPage);
-        setHotels(commentsFormServer.hotels.data);
+        setHotels(commentsFormServer.data);
     };
 
     const handleDelete = (id) => {
