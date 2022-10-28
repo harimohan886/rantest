@@ -150,7 +150,7 @@ function App() {
           <Route exact path='/online-ranthambore-safari-booking' element={<OnlineSafariBooking />} />
           <Route exact path='/safari-booking-details' element={<SafariTravellerBooking />} />
           <Route exact path='/online-chambal-moter-boat-safari-booking' element={<Chambal />} />
-          <Route exact path='/chambal-safari-booking' element={<ChambalBooking />} />
+          <Route exact path='/chambal-safari-booking/:id' element={<ChambalBooking />} />
           <Route exact path='/about-us' element={<About />} />
           <Route exact path='/contact-us' element={<Contact />} />
           <Route exact path='/terms-and-conditions' element={<Terms />} />

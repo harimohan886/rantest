@@ -31,7 +31,7 @@ export default function ChambalOptions() {
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
                         </p>
-                        <Link to="/chambal-safari-booking">
+                        <Link to="/chambal-safari-booking/1">
                             <button id="item-1-button" name="item-1-button" type="button">Select</button>
                         </Link>
                         </div>
@@ -61,7 +61,7 @@ export default function ChambalOptions() {
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
                         </p>
-                        <Link to="/chambal-safari-booking">
+                        <Link to="/chambal-safari-booking/2">
                             <button id="item-1-button" name="item-1-button" type="button">Select</button>
                         </Link>
                         </div>
@@ -91,7 +91,7 @@ export default function ChambalOptions() {
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
                         </p>
-                        <Link to="/chambal-safari-booking">
+                        <Link to="/chambal-safari-booking/3">
                             <button id="item-1-button" name="item-1-button" type="button">Select</button>
                         </Link>
                         </div>
@@ -121,7 +121,7 @@ export default function ChambalOptions() {
                         <p>
                             <i aria-hidden="true" className="fa fa-check-circle" style={{color: "#008000", fontSize: "14px"}}></i> Life Jackets
                         </p>
-                        <Link to="/chambal-safari-booking">
+                        <Link to="/chambal-safari-booking/4">
                             <button id="item-1-button" name="item-1-button" type="button">Select</button>
                         </Link>
                         </div>

@@ -1,7 +1,215 @@
-import React from 'react' 
+import React , { useState , useEffect } from 'react' 
 import { Link } from 'react-router-dom' 
+import { useAlert } from "react-alert"
+import axios from 'axios'
+import { useParams } from "react-router-dom";
+import moment from 'moment';
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 export default function ChambalBooking() {
+
+    const params = useParams();
+    const alert = useAlert();
+
+    const [startDate, setStartDate] = useState(new Date());
+
+    const [Indian , setIndian] = useState(0);
+    const [Foreigner , setForeigner] = useState(0);
+    const [PayAmount , setPayAmount] = useState(0);
+    const [Gst , setGst] = useState(0);
+    const [Persons , setPersons] = useState(0);
+    const [Price , setPrice] = useState(0);
+
+    const IndianPersonHandle = (e) => {
+
+        setIndian(e.target.value);
+
+        const data = {
+            "indians": e.target.value,
+            "foreigners": Foreigner,
+            "id": params.id
+        }
+        
+        axios.post(`${process.env.REACT_APP_BASE_URL}/chambal/getBookingPrice`, data, {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+              },
+            }).then(result => { 
+                setPayAmount(result.data.data.total);
+                setGst(result.data.data.gst);
+                setPersons(result.data.data.persons);
+                setPrice(result.data.data.price);
+            }) 
+    }
+
+    const ForeignPersonHandle = (e) => {
+
+        setForeigner(e.target.value);
+
+        const data = {
+            "indians": Indian,
+            "foreigners": e.target.value,
+            "id": params.id
+        }
+        
+        axios.post(`${process.env.REACT_APP_BASE_URL}/chambal/getBookingPrice`, data, {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+              },
+            }).then(result => { 
+                setPayAmount(result.data.data.total);
+                setGst(result.data.data.gst);
+                setPersons(result.data.data.persons);
+                setPrice(result.data.data.price);
+            }) 
+    }
+
+    const [name , setName] = useState('');
+    const [email , setEmail] = useState('');
+    const [phone , setPhone] = useState('');
+    const [proof , setProof] = useState('');
+    const [time , setTime] = useState();
+    const [state , setSelState] = useState('');
+    const [address , setAddress] = useState('');
+
+    const HandlePayment = () => {
+
+        if((email === '' && state === '' && address === '') || PayAmount === 0) {
+            alert.error("Please do not leave any fields blank.");
+            return true;
+        } else {
+            const options = {
+
+                // key: credentials.razorpay_key,
+                key: 'rzp_test_FvMwf7j3FOOnh8',
+                amount: PayAmount+('00').toString(),
+                currency: "INR",
+                name: "Gir national park",
+                description: "Test Transaction",
+                image: "/image/logo.png",
+              
+                handler: async function (response) {
+
+                    const data = {
+                        name: name,
+                        mobile: phone,
+                        email:  email,
+                        address: address,
+                        state: state,
+                        date: moment(startDate).format("YYYY-MM-DD"),
+                        zone: params.id,
+                        amount: PayAmount,
+                        vehicle: 'boat',
+                        time: time,
+                        id_proof_no: proof,
+                        transaction_id: response.razorpay_payment_id,
+                        no_of_persons_indian: Indian,
+                        no_of_persons_foreigner: Foreigner,
+                    }
+                    
+                    //successPay
+                    axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/chambal`, data).then(result => {
+                            if(result.status === 200 ) {
+                                alert.success("Booked");
+
+                                const paymentData = {
+                                    "customer_id": result.data.data._id,
+                                    "transaction_id": response.razorpay_payment_id,
+                                    "amount": PayAmount,
+                                    "booking_type": 'chambal'
+                                }
+
+                                axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/chambal/${result.data.data.chambal_booking}`, paymentData , {
+                                        headers: {
+                                        'Accept': 'application/json, text/plain, */*',
+                                        'Content-Type': 'application/json'
+                                   },
+                                }).then((response)=>{
+                                    axios.post(`${process.env.REACT_APP_BASE_URL}/payment`, paymentData , {
+                                        headers: {
+                                            'Accept': 'application/json, text/plain, */*',
+                                            'Content-Type': 'application/json'
+                                       },
+                                    }).then((response)=>{});
+                                });
+
+                                localStorage.clear();
+                                window.location.href = '/thankyou';
+                            }
+                    })
+                    
+                },
+                prefill: {
+                    name: name,
+                    email: email,
+                    contact: phone,
+                },
+                notes: {
+                    address: "Gir national park",
+                },
+                theme: {
+                    color: "#61dafb",
+                },
+            };
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+        }
+    }
+
+    const loadScript=(src) =>{
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    }
+
+    const [ disableDates , setDisableDates ] = useState([]);
+
+    var dates = [];
+
+    useEffect(() => {
+
+        const res = loadScript(
+            "https://checkout.razorpay.com/v1/checkout.js"
+        );
+
+        if (!res) {
+            alert.error("Razorpay SDK failed to load. Are you online?");
+            return;
+        }
+
+        axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/getDisableDates` , {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+              },
+            }).then(result => { 
+                           
+                dates = result.data.data.map(itm => (
+                     itm.date
+                ))
+
+                setDisableDates(dates);
+        }); 
+    },[]);
+
+    const HandleDisableDate = (date) => {
+        setStartDate(date);
+    }
+
   return (
     <div className='container sectionFrame'>
         <div className='chambaBooking'>
@@ -11,34 +219,35 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Name</label>
-                            <input type='text' className='form-control' placeholder='Name' />
+                            <input type='text' className='form-control' onChange = {(e) => setName(e.target.value)} placeholder='Name' />
                         </div>
                     </div>
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Mobile number</label>
-                            <input type='tel' className='form-control' placeholder='Mobile number' />
+                            <input type='tel' className='form-control' onChange = {(e) => setPhone(e.target.value)}  placeholder='Mobile number' />
                         </div>
                     </div>
 
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Email ID</label>
-                            <input type='email' className='form-control' placeholder='Email' />
+                            <input type='email' className='form-control' onChange = {(e) => setEmail(e.target.value)}  placeholder='Email' />
                         </div>
                     </div>
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Id Proof No.(Adhar/pan/DL):</label>
-                            <input type='text' className='form-control' placeholder='Id Proof No.' />
+                            <input type='text' className='form-control'  onChange = {(e) => setProof(e.target.value)} placeholder='Id Proof No.' />
                         </div>
                     </div>
 
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>No. of Persons Indian:</label>
-                            <select className="form-control">
+                            <select className="form-control" onChange = { IndianPersonHandle } >
                                 <option value="">Please Select</option>
+                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -95,8 +304,9 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>No. of Persons Foreigner:</label>
-                            <select className="form-control">
+                            <select className="form-control" onChange = { ForeignPersonHandle }>
                                 <option value="">Please Select</option>
+                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -154,13 +364,15 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Select Safari Date:</label>
-                            <input type='date' className='form-control' />
+                            <DatePicker selected={startDate} onChange={(date) => HandleDisableDate(date)} 
+                                filterDate={(d) => disableDates.includes(moment(d).format('YYYY-MM-DD')) }
+                            />
                         </div>
                     </div>
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Select Safari Time:</label>
-                            <select className="form-control" formcontrolname="safari_time" id="safari_time" placeholder="Safari Time">
+                            <select className="form-control" formcontrolname="safari_time"  onChange = {(e) => setTime(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 <option value="8:00 am to 9:00 am">8:00 am to 9:00 am</option>
                                 <option value="9:00 am to 10:00 am">9:00 am to 10:00 am</option>
@@ -179,7 +391,7 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>State:</label>
-                            <select className="form-control" id="state" required="">
+                            <select className="form-control" id="state"  onChange = {(e) => setSelState(e.target.value)}  required="">
                                 <option disabled="" selected="" value="">Please Select State</option>
                                 <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -224,7 +436,7 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Full Address:</label>
-                            <input type='text' className='form-control' placeholder='Full address' />
+                            <input type='text' className='form-control'  onChange = {(e) => setAddress(e.target.value)}  placeholder='Full address' />
                         </div>
                     </div>
 
@@ -239,22 +451,22 @@ export default function ChambalBooking() {
                         </ul>
                     </div>
                     <div className='col-sm-6'>
-                        <label style={{fontSize: "18px", marginBottom: "2px"}}>20 persons:</label>
-                        <p>53000 INR</p>
+                        <label style={{fontSize: "18px", marginBottom: "2px"}}>{Persons} persons:</label>
+                        <p>{Price} INR</p>
                         <div>&nbsp;</div>
-                        <label style={{fontSize: "18px", marginBottom: "2px"}}>GST(5%):</label>
-                        <p>678 INR</p>
+                        <label style={{fontSize: "18px", marginBottom: "2px"}}>GST:</label>
+                        <p>{Gst} INR</p>
                     </div>
                 </div>
                 <div className="formsection" style={{marginTop: "20px"}}>
                     <div className="text-center paynow">
                         <ul className='inline-flex'>
                             <li className="list-inline-item paybtn">
-                                Payable Amount : <input id="booking_amount" type="hidden" value="0" />
-                                <span id="amount">0</span>
+                                Payable Amount : <input id="booking_amount" type="hidden" value={PayAmount} />
+                                <span id="amount">{PayAmount}</span>
                             </li>
                             <li className="list-inline-item">
-                                <button className="btn btn-primary" type="submit">Pay Now</button>
+                                <button className="btn btn-primary" type="button" onClick = {HandlePayment} >Pay Now</button>
                             </li>
                             <li className="list-inline-item">
                                 <Link className="btn btn-default" to="/online-Chambal-moter-boat-safari-booking">Go Back</Link>
