@@ -1,7 +1,9 @@
 import React from 'react'
-import ContentImage from './ContentImage'
+import ContentImage from './ContentImage';
+import PackagePricing from './PackagePricing'
 
-export default function RoomType({ packages }) {
+
+export default function RoomType({ packages, type }) {
     return (
         <>
             <ul className="nav nav-tabs" id="roomTab" role="tablist">
@@ -13,38 +15,22 @@ export default function RoomType({ packages }) {
                     </li>
 
                 ))}
-
-
-
-                {/* <li className="nav-item">
-                    <a className="nav-link" data-toggle="tab" href="#tab-deluxe" role="tab" aria-controls="tab-deluxe" aria-selected="false">Deluxe</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" data-toggle="tab" href="#tab-premium" role="tab" aria-controls="tab-premium" aria-selected="false">Premium</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" data-toggle="tab" href="#tab-luxury" role="tab" aria-controls="tab-luxury" aria-selected="false">Luxury</a>
-                </li> */}
             </ul>
             <div className="tab-content" id="roomTabContent">
 
                 {packages?.categories?.map((list, lindex) => (
-                    <div key={lindex} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${lindex}`}>
-                        <ContentImage hotels={list.hotels} counterkey={lindex} />
-                    </div>
+                    <>
+                        <div key={lindex} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${lindex}`}>
+                            <ContentImage hotels={list.hotels} counterkey={lindex} />
+
+                            {type === 'indian' ? <PackagePricing optionData={list.indianOptions} /> : <PackagePricing optionData={list.foreignerOptions} />}
+
+                        </div>
+
+                    </>
+
 
                 ))}
-
-
-                {/* <div className="tab-pane fade" id='tab-deluxe'>
-                    <ContentImage />
-                </div>
-                <div className="tab-pane fade" id='tab-premium'>
-                    <ContentImage />
-                </div>
-                <div className="tab-pane fade" id='tab-luxury'>
-                    <ContentImage />
-                </div> */}
             </div>
         </>
     )
