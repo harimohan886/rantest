@@ -76,6 +76,36 @@ export default function Customers() {
         })
     }
 
+    const [type , setType] = useState('');
+    const [filterName , setFilterName] = useState('');
+    const [filterEmail , setFilterEmail] = useState('');
+    const [filterMobile , setFilterMobile] = useState('');
+
+    const HandleFilter = () => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers?page=`+page+'&type='+type+'&filter_name='+filterName+'&filter_email='+filterEmail+'&filter_mobile='+filterMobile, {
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+          }).then(result => { 
+                if(result.data.products.length > 0) {
+                    setDetails(result.data.products);
+                    setpageCount(Math.ceil(result.data.productsCount / result.data.resultPerPage));
+                    setPage(result.data.page);
+                } else {
+                    setDetails([]);
+                    setpageCount(0);
+                    setPage(1);
+                }
+          })
+    }
+
+    const HandelReset = () => {
+        setType('');setFilterName('');setFilterEmail('');setFilterMobile('');
+        GetDetails();
+    }
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -86,28 +116,33 @@ export default function Customers() {
             <form className="grid grid-cols-5 gap-4 mt-2 mb-2">
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Type</label>
-                    <select id="safariType" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option>Gir Jungle Trail</option>
-                        <option>Devalia Safari</option>
-                        <option>Kankai Temple Safari</option>
+                    <select id="safariType" value = {type} onChange = {(e) => setType(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Please Select</option>
+                        <option value="safari">Safari</option>
+                        <option value="chambal">Chambal</option>
+                        <option value="package">Package</option>
                     </select>
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Name</label>
-                    <input type="text" placeholder='Customer Name' id="customerName" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <input type="text"   value = {filterName} onChange = {(e) => setFilterName(e.target.value)}  placeholder='Customer Name' id="customerName" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Email</label>
-                    <input type="email" placeholder='Customer Email' id="customerEmail" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <input type="email"   value = {filterEmail} onChange = {(e) => setFilterEmail(e.target.value)} placeholder='Customer Email' id="customerEmail" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mobile Number</label>
-                    <input type="number" placeholder='Mobile Number' id="customerMobile" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <input type="number"  value = {filterMobile}  onChange = {(e) => setFilterMobile(e.target.value)} placeholder='Mobile Number' id="customerMobile" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 <div className='form-group'>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
-                    <button type='button' className="min-150 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <button type='button' onClick = {HandleFilter} className="min-150 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         <i className="fas fa-filter mr-2"></i> Filter
+                    </button> 
+                   
+                    <button type='button' onClick = {HandelReset} className="min-150 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        <i className="fas fa-filter mr-2"></i> Reset
                     </button>
                 </div>
             </form>
