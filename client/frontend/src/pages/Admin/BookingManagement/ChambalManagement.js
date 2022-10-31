@@ -178,7 +178,7 @@ export default function ChambalManagement() {
                             <td className='border border-slate-300 text-center'>{item.timing}</td>
                             <td className='border border-slate-300 text-center'>{item.zone}</td>
                             <td className='border border-slate-300 text-center'>
-                                <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/view-safari-booking/${item._id}`}>View details</Link>
+                                <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/view-chambal-bookings/${item._id}`}>View details</Link>
                                 <button onClick = {() => HandleDelete(item._id)} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                     <i className='fas fa-trash'></i>
                                 </button>
