@@ -16,6 +16,7 @@ export default function ChambalDates() {
     const [startDate, setStartDate] = useState(new Date());
     const alert = useAlert();
     const [details, setDetails] = useState([]);
+    
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
 
