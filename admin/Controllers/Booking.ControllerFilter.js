@@ -22,6 +22,14 @@ module.exports = {
         }
         : {};
 
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: {
+            $regex: req.query.filter_customer
+          },
+        }
+        : {};
+
     const filter_created_at = req.query.filter_created_at
       ? {
         addedAt: {
@@ -29,40 +37,6 @@ module.exports = {
         }
       }
       : {};
-
-
-    const filter_name = req.query.filter_name
-        ? {
-          customer_name: {
-            $regex: req.query.filter_name,
-            $options: "i",
-          },
-        }
-        : {};
-
-    const filter_customer = req.query.filter_customer
-        ? {
-          customer_id: req.query.filter_customer
-        }
-        : {};
-
-      const filter_email = req.query.filter_email
-        ? {
-          customer_email: {
-            $regex: req.query.filter_email,
-            $options: "i",
-          },
-        }
-        : {};
-
-      const filter_mobile = req.query.filter_mobile
-        ? {
-          customer_mobile: {
-            $regex: req.query.filter_mobile,
-            $options: "i",
-          }
-        }
-        : {};
 
     const filter_zone = req.query.filter_zone
       ? {
@@ -99,17 +73,39 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
+    if (req.query.filter_customer_email && !req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' } };
+    }else  if (req.query.filter_customer_email && req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' },  mobile : {$regex: req.query.filter_customer_mobile} };
+    }else  if (req.query.filter_customer_mobile && !req.query.filter_customer_email) {
+      var filter = { mobile : {$regex: req.query.filter_customer_mobile} };
+    } else{
+      var filter = {};
+    }
 
-    SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{booking_customers: 0, customer: 0, __v: 0},
+    var  totalPosts = await SafariBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+
+    SafariBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{booking_customers: 0, __v: 0},
       query,function(err,data) {
+
+        /*var data = data.filter(function (el) {
+          if (el.customer === null) {
+            totalPosts = Number(totalPosts)-1;
+          }
+          return el.customer != null;
+        });*/
+
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
         } else {
           response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
         }
         res.json(response);
-      }).sort({ $natural: -1 });
+      }).sort({ $natural: -1 }).populate({
+        path: 'customer',
+        match: filter,
+        select: 'name email mobile -_id'
+      });
   }),
 
 
@@ -123,6 +119,14 @@ module.exports = {
         }
         : {};
 
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: {
+            $regex: req.query.filter_customer
+          },
+        }
+        : {};
+
     const filter_created_at = req.query.filter_created_at
       ? {
         addedAt: {
@@ -130,40 +134,6 @@ module.exports = {
         }
       }
       : {};
-
-
-    const filter_name = req.query.filter_name
-        ? {
-          customer_name: {
-            $regex: req.query.filter_name,
-            $options: "i",
-          },
-        }
-        : {};
-
-    const filter_customer = req.query.filter_customer
-        ? {
-          customer_id: req.query.filter_customer
-        }
-        : {};
-
-      const filter_email = req.query.filter_email
-        ? {
-          customer_email: {
-            $regex: req.query.filter_email,
-            $options: "i",
-          },
-        }
-        : {};
-
-      const filter_mobile = req.query.filter_mobile
-        ? {
-          customer_mobile: {
-            $regex: req.query.filter_mobile,
-            $options: "i",
-          }
-        }
-        : {};
 
     const filter_zone = req.query.filter_zone
       ? {
@@ -200,17 +170,39 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
+    if (req.query.filter_customer_email && !req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' } };
+    }else  if (req.query.filter_customer_email && req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' },  mobile : {$regex: req.query.filter_customer_mobile} };
+    }else  if (req.query.filter_customer_mobile && !req.query.filter_customer_email) {
+      var filter = { mobile : {$regex: req.query.filter_customer_mobile} };
+    } else{
+      var filter = {};
+    }
 
-    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{ booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
+    var  totalPosts = await PackageBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+
+    PackageBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{ booking_customers: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
+
+        /*var data = data.filter(function (el) {
+          if (el.customer === null) {
+            totalPosts = Number(totalPosts)-1;
+          }
+          return el.customer != null;
+        });*/
+
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
         } else {
           response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
         }
         res.json(response);
-      }).sort({ $natural: -1 });
+      }).sort({ $natural: -1 }).populate({
+        path: 'customer',
+        match: filter,
+        select: 'name email mobile -_id'
+      });
   }),
 
   getAllChambalBookings: asyncHandler(async (req, res, next) => {
@@ -223,6 +215,14 @@ module.exports = {
         }
         : {};
 
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: {
+            $regex: req.query.filter_customer
+          },
+        }
+        : {};
+
     const filter_created_at = req.query.filter_created_at
       ? {
         addedAt: {
@@ -230,40 +230,6 @@ module.exports = {
         }
       }
       : {};
-
-
-    const filter_name = req.query.filter_name
-        ? {
-          customer_name: {
-            $regex: req.query.filter_name,
-            $options: "i",
-          },
-        }
-        : {};
-
-    const filter_customer = req.query.filter_customer
-        ? {
-          customer_id: req.query.filter_customer
-        }
-        : {};
-
-      const filter_email = req.query.filter_email
-        ? {
-          customer_email: {
-            $regex: req.query.filter_email,
-            $options: "i",
-          },
-        }
-        : {};
-
-      const filter_mobile = req.query.filter_mobile
-        ? {
-          customer_mobile: {
-            $regex: req.query.filter_mobile,
-            $options: "i",
-          }
-        }
-        : {};
 
     const filter_zone = req.query.filter_zone
       ? {
@@ -300,17 +266,39 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
+    if (req.query.filter_customer_email && !req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' } };
+    }else  if (req.query.filter_customer_email && req.query.filter_customer_mobile) {
+      var filter = { email : {$regex: req.query.filter_customer_email, $options: 'i' },  mobile : {$regex: req.query.filter_customer_mobile} };
+    }else  if (req.query.filter_customer_mobile && !req.query.filter_customer_email) {
+      var filter = { mobile : {$regex: req.query.filter_customer_mobile} };
+    } else{
+      var filter = {};
+    }
 
-    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
+    var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+
+    ChambalBooking.find({...filter_date, ...filter_customer, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{booking_customers: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
+
+        /*var data = data.filter(function (el) {
+          if (el.customer === null) {
+            totalPosts = Number(totalPosts)-1;
+          }
+          return el.customer != null;
+        }); */
+
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
         } else {
           response = {"success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
         }
         res.json(response);
-      }).sort({ $natural: -1 }).populate(['customer']);
+      }).sort({ $natural: -1 }).populate({
+        path: 'customer',
+        match: filter,
+        select: 'name email mobile -_id'
+      });
   }),
 
   findSafariBookingById: async (req, res, next) => {
@@ -477,24 +465,6 @@ module.exports = {
   getCurrentBookings: async (req, res, next) => {
     try {
 
-      const filter_zone = req.query.filter_zone
-      ? {
-          zone : req.query.filter_zone
-      }
-      : {};
-
-    const filter_vehicle = req.query.filter_vehicle
-      ? {
-        vehicle: req.query.filter_vehicle
-      }
-      : {};
-
-    const filter_timing = req.query.filter_timing
-      ? {
-        time: req.query.filter_timing
-      }
-      : {};
-
       const filter_date = req.query.filter_date
         ? {
           date: {
@@ -523,7 +493,7 @@ module.exports = {
       const filter_email = req.query.filter_email
         ? {
           email: {
-            $regex: req.query.filter_email,
+            $regex: req.query.filter_name,
             $options: "i",
           },
         }
@@ -549,9 +519,9 @@ module.exports = {
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var totalPosts = await CurrentBooking.find({ ...filter_date, ...filter_name, ...filter_mobile, ...filter_created_at, ...filter_email, ...filter_timing, ...filter_vehicle, ...filter_zone }).countDocuments().exec();
+      var totalPosts = await CurrentBooking.find({ ...filter_date, ...filter_name, ...filter_mobile, ...filter_created_at, ...filter_email }).countDocuments().exec();
 
-      const data = await CurrentBooking.find({ ...filter_date, ...filter_name, ...filter_mobile, ...filter_created_at, ...filter_email, ...filter_timing, ...filter_vehicle, ...filter_zone }, {},
+      const data = await CurrentBooking.find({ ...filter_date, ...filter_name, ...filter_mobile, ...filter_created_at, ...filter_email }, {},
         query).sort({ $natural: -1 });
 
       if (!data) {

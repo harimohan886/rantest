@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 import Logo from './Logo.png';
 
 export default function Sidebar() {
-  const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [collapseShow, setCollapseShow] = useState("hidden");
 
-  const [showHotels, setShowHotels] = React.useState('');
+  const [showHotels, setShowHotels] = useState('');
 
-  const [showPackages, setShowPackages] = React.useState('');
+  const [showPackages, setShowPackages] = useState('');
 
-  const [showEnquiries, setShowEnquiries] = React.useState('');
+  const [showEnquiries, setShowEnquiries] = useState('');
 
-  const [showBookings, setShowBookings] = React.useState('');
+  const [showBookings, setShowBookings] = useState('');
 
-  const [showPrices, setShowPrices] = React.useState('');
+  const [showPrices, setShowPrices] = useState('');
 
-  const [showDates, setShowDates] = React.useState('');
+  const [showDates, setShowDates] = useState('');
 
-  const [showSettings, setShowSettings] = React.useState('');
+  const [showSettings, setShowSettings] = useState('');
 
   useEffect(() => {
     if ((window.location.href.indexOf("hotels") > -1) || (window.location.href.indexOf("amenities") > -1) || (window.location.href.indexOf("room-facilities") > -1)) {
       setShowHotels('show');
     }
 
-    if ((window.location.href.indexOf("customers") > -1) || (window.location.href.indexOf("safari-booking") > -1) || (window.location.href.indexOf("package-booking") > -1)) {
+    if ((window.location.href.indexOf("customers") > -1) || (window.location.href.indexOf("safari-booking") > -1) || (window.location.href.indexOf("package-booking") > -1) || (window.location.href.indexOf("chambal-booking") > -1)) {
       setShowBookings('show');
     }
 
@@ -41,11 +41,11 @@ export default function Sidebar() {
       setShowEnquiries('show');
     }
 
-    if (window.location.href.indexOf("prices") > -1) {
+    if ((window.location.href.indexOf("prices") > -1) || (window.location.href.indexOf("edit-price") > -1) || (window.location.href.indexOf("price-list") > -1) || (window.location.href.indexOf("add-price") > -1)) {
       setShowPrices('show');
     }
 
-    if (window.location.href.indexOf("dates") > -1) {
+    if ((window.location.href.indexOf("dates") > -1) || (window.location.href.indexOf("edit-ranthamboreDates") > -1 )) {
       setShowDates('show');
     }
 

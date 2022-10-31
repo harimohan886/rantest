@@ -19,9 +19,10 @@ export default function ChambalDates() {
     
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
+    const [size] = useState(5);
 
     const GetDetails = useCallback( () =>  {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=`+page, {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=${page}&size=${size}`, {
           headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
@@ -38,12 +39,12 @@ export default function ChambalDates() {
     
         GetDetails();
 
-    },[GetDetails]);
+    },[]);
 
 
     const fetchComments = async (currentPage) => {
         const res = await fetch(
-            `${process.env.REACT_APP_BASE_URL}/safari/disable-dates?page=`+currentPage , {
+            `${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=${currentPage}&size=${size}` , {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer `+localStorage.getItem('accessToken')
@@ -77,7 +78,7 @@ export default function ChambalDates() {
     }
 
     const HandleFilter = () => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=`+page+'&filter_date='+moment(startDate).format("YYYY-MM-DD"), {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=`+page+'&size=5&filter_date='+moment(startDate).format("YYYY-MM-DD"), {
             headers: {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
@@ -174,8 +175,8 @@ export default function ChambalDates() {
                 { details && details.map((item,index) => (
                     <tr key={index}>
                         <td className='border border-slate-300 text-center'>{item.date}</td>
-                        <td className='border border-slate-300 text-center'>{item.createdAt}</td>
-                        <td className='border border-slate-300 text-center'>{item.updatedAt}</td>
+                        <td className='border border-slate-300 text-center'>{moment(item.createdAt).format("DD-MM-YYYY hh:mm:ss")}</td>
+                        <td className='border border-slate-300 text-center'>{moment(item.updatedAt).format("DD-MM-YYYY hh:mm:ss")}</td>
                         <td className='border border-slate-300 text-center'>
                         <Link to={`/admin/edit-chambal-dates/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                              <i className="fas fa-pencil"></i>
