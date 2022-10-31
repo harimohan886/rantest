@@ -10,9 +10,19 @@ const SafariBookingSchema = new Schema({
 	customer_id : {
 		type : String,
 	},
+	customer_name : {
+		type: String
+	},
+	customer_email : {
+		type: String
+	},
+	customer_mobile : {
+		type: String
+	},
 	customer : {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "customers"
+		ref: "customers",
+		required: true
 	},
 	zone: {
 		type: String,

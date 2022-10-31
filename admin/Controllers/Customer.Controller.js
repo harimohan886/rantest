@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/ApiFeatures");
 
+const { body, validationResult } = require('express-validator');
+
 const Validator = require('validatorjs');
 
 const asyncHandler = require('../Middleware/asyncHandler')
@@ -153,6 +155,22 @@ module.exports = {
 
   createNewCustomerSafari: async (req, res, next) => {
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    /*req.body.booked_persons.forEach(function callback(value, index) {
+      if (value.idnumber === '') {
+        return res.status(412).send({
+          success: false,
+          message: 'In Booking persons at index '+index+' idnumber field is required!',
+          error: 'data required'
+        });
+      }
+
+    });*/
+
     let rules = {
       name: 'required',
       mobile: 'required',
@@ -197,6 +215,9 @@ module.exports = {
       date : req.body.date,
       zone : req.body.zone,
       customer_id : customer_data_result._id,
+      customer_name : customer_data_result.name,
+      customer_email : customer_data_result.email,
+      customer_mobile : customer_data_result.mobile,
       customer : customer_data_result._id,
       vehicle : req.body.vehicle,
       timing : req.body.timing,
@@ -342,6 +363,9 @@ module.exports = {
         date : req.body.date,
         zone : req.body.zone,
         customer_id : customer_data_result._id,
+        customer_name : customer_data_result.name,
+        customer_email : customer_data_result.email,
+        customer_mobile : customer_data_result.mobile,
         customer : customer_data_result._id,
         booking_name : booking_name,
         booking_option : booking_option,
@@ -474,6 +498,9 @@ createNewCustomerPackage: async (req, res, next) => {
       const safari_booking_data = new PackageBooking({
         date : req.body.date,
         customer_id : customer_data_result._id,
+        customer_name : customer_data_result.name,
+        customer_email : customer_data_result.email,
+        customer_mobile : customer_data_result.mobile,
         customer : customer_data_result._id,
         timing : req.body.timing,
         transaction_id : req.body.transaction_id,

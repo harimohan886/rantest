@@ -30,6 +30,40 @@ module.exports = {
       }
       : {};
 
+
+    const filter_name = req.query.filter_name
+        ? {
+          customer_name: {
+            $regex: req.query.filter_name,
+            $options: "i",
+          },
+        }
+        : {};
+
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: req.query.filter_customer
+        }
+        : {};
+
+      const filter_email = req.query.filter_email
+        ? {
+          customer_email: {
+            $regex: req.query.filter_email,
+            $options: "i",
+          },
+        }
+        : {};
+
+      const filter_mobile = req.query.filter_mobile
+        ? {
+          customer_mobile: {
+            $regex: req.query.filter_mobile,
+            $options: "i",
+          }
+        }
+        : {};
+
     const filter_zone = req.query.filter_zone
       ? {
           zone : req.query.filter_zone
@@ -54,6 +88,8 @@ module.exports = {
       }
       : {};
 
+      console.log('filter', filter_customer)
+
     var page = parseInt(req.query.page)||1;
     var size = parseInt(req.query.size)||15;
 
@@ -65,9 +101,9 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+    var  totalPosts = await SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
 
-    SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{booking_customers: 0, customer: 0, __v: 0},
+    SafariBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{booking_customers: 0, customer: 0, __v: 0},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -97,6 +133,40 @@ module.exports = {
       }
       : {};
 
+
+    const filter_name = req.query.filter_name
+        ? {
+          customer_name: {
+            $regex: req.query.filter_name,
+            $options: "i",
+          },
+        }
+        : {};
+
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: req.query.filter_customer
+        }
+        : {};
+
+      const filter_email = req.query.filter_email
+        ? {
+          customer_email: {
+            $regex: req.query.filter_email,
+            $options: "i",
+          },
+        }
+        : {};
+
+      const filter_mobile = req.query.filter_mobile
+        ? {
+          customer_mobile: {
+            $regex: req.query.filter_mobile,
+            $options: "i",
+          }
+        }
+        : {};
+
     const filter_zone = req.query.filter_zone
       ? {
           zone : req.query.filter_zone
@@ -132,9 +202,9 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+    var  totalPosts = await PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
 
-    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{ booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
+    PackageBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{ booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -163,6 +233,40 @@ module.exports = {
       }
       : {};
 
+
+    const filter_name = req.query.filter_name
+        ? {
+          customer_name: {
+            $regex: req.query.filter_name,
+            $options: "i",
+          },
+        }
+        : {};
+
+    const filter_customer = req.query.filter_customer
+        ? {
+          customer_id: req.query.filter_customer
+        }
+        : {};
+
+      const filter_email = req.query.filter_email
+        ? {
+          customer_email: {
+            $regex: req.query.filter_email,
+            $options: "i",
+          },
+        }
+        : {};
+
+      const filter_mobile = req.query.filter_mobile
+        ? {
+          customer_mobile: {
+            $regex: req.query.filter_mobile,
+            $options: "i",
+          }
+        }
+        : {};
+
     const filter_zone = req.query.filter_zone
       ? {
           zone : req.query.filter_zone
@@ -198,9 +302,9 @@ module.exports = {
     query.skip = size * (page - 1);
     query.limit = size;
 
-    var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing}).countDocuments().exec();
+    var  totalPosts = await ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer}).countDocuments().exec();
 
-    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing},{booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
+    ChambalBooking.find({...filter_date, ...filter_created_at, ...filter_zone, ...filter_status, ...filter_vehicle, ...filter_timing, ...filter_email, ...filter_mobile, ...filter_name, ...filter_customer},{booking_customers: 0, customer: 0, __v: 0, updatedAt: 0},
       query,function(err,data) {
         if(err) {
           response = {"error": true, "message": "Error fetching data"+err};
@@ -403,7 +507,7 @@ module.exports = {
       const filter_email = req.query.filter_email
         ? {
           email: {
-            $regex: req.query.filter_name,
+            $regex: req.query.filter_email,
             $options: "i",
           },
         }
