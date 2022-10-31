@@ -31,10 +31,10 @@ export default function ViewSafariBooking() {
       })
   },[params.id]);
 
-  useEffect(() => {
+  useEffect(() => { 
       GetDetails();
   },[GetDetails]);
-  
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
