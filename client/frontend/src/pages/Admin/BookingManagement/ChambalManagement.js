@@ -173,10 +173,11 @@ export default function ChambalManagement() {
                   { details && details.map((item,index) => (
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index+1}</td>
-                            <td className='border border-slate-300 text-center'>{item.date} </td>
-                            <td className='border border-slate-300 text-center'>{item.vehicle}</td>
-                            <td className='border border-slate-300 text-center'>{item.timing}</td>
-                            <td className='border border-slate-300 text-center'>{item.zone}</td>
+                            <td className='border border-slate-300 text-center'>{item.customer_name} </td>
+                            <td className='border border-slate-300 text-center'>{item.customer_mobile}</td>
+                            <td className='border border-slate-300 text-center'>{item.customer_email}</td>
+                            <td className='border border-slate-300 text-center'>{item.date}</td>
+                            <td className='border border-slate-300 text-center'>{item.time}</td>
                             <td className='border border-slate-300 text-center'>
                                 <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/view-chambal-bookings/${item._id}`}>View details</Link>
                                 <button onClick = {() => HandleDelete(item._id)} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">

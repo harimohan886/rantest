@@ -57,12 +57,12 @@ export default function ViewSafariBooking() {
                 </thead>
                 <tbody>
                   { travellers && travellers.map((item,index) => (
-                    <tr>
-                    <td className='border border-slate-300 text-center'>{item.name}</td>
-                    <td className='border border-slate-300 text-center'>{item.gender}</td>
-                    <td className='border border-slate-300 text-center'>{item.nationality}</td>
-                    <td className='border border-slate-300 text-center'>{item.id_proof}</td>
-                    <td className='border border-slate-300 text-center'>{item.idnumber}</td>
+                    <tr key={index}>
+                      <td className='border border-slate-300 text-center'>{item.name}</td>
+                      <td className='border border-slate-300 text-center'>{item.gender}</td>
+                      <td className='border border-slate-300 text-center'>{item.nationality}</td>
+                      <td className='border border-slate-300 text-center'>{item.id_proof}</td>
+                      <td className='border border-slate-300 text-center'>{item.idnumber}</td>
                     </tr>
                   ))}
                    

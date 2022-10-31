@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ChambalDetailsInfo() {
+export default function ChambalDetailsInfo({ details }) {
   return (
     <div>
         <h1 className='text-2xl text-black font-bold mb-2'>Chambal Booking Details</h1>
@@ -16,14 +16,16 @@ export default function ChambalDetailsInfo() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td className='border border-slate-300 text-center'>Chambal Safari Booking with Pickup and Drop from Resort</td>
-                    <td className='border border-slate-300 text-center'>19-09-2022</td>
-                    <td className='border border-slate-300 text-center'>08:00 am to 09:00 am</td>
-                    <td className='border border-slate-300 text-center'>5000</td>
-                    <td className='border border-slate-300 text-center'>Paid</td>
-                    <td className='border border-slate-300 text-center'>pay_KIqAs1457vJSH5</td>
-                </tr>
+                { details &&  
+                     <tr>
+                        <td className='border border-slate-300 text-center'>{details.booking_name}</td>
+                        <td className='border border-slate-300 text-center'>{details.date}</td>
+                        <td className='border border-slate-300 text-center'>{details.time}</td>
+                        <td className='border border-slate-300 text-center'>{details.amount}</td>
+                        <td className='border border-slate-300 text-center'>{ details.transaction_id ? 'Paid' : 'Unpaid' }</td>
+                        <td className='border border-slate-300 text-center'>{details.transaction_id}</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

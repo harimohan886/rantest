@@ -13,11 +13,15 @@ export default function CustomerDetails({ details }) {
                 </tr>
             </thead>
             <tbody>
+                {
+                    details &&
                     <tr>
                         <td className='border border-slate-300 text-center'>{details.name}</td>
                         <td className='border border-slate-300 text-center'>{details.mobile}</td>
                         <td className='border border-slate-300 text-center'>{details.email}</td>
                     </tr>
+                }
+                   
             </tbody>
         </table>
     </div>
