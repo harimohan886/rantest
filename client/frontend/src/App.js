@@ -202,7 +202,7 @@ function App() {
             <Route exact path="/admin/listing" element={<Listing />} />
             <Route exact path="/admin/customers" element={<Customers />} />
             <Route exact path="/admin/safari-booking" element={<SafariManagement />} />
-            <Route exact path="/admin/view-safari-booking" element={<ViewSafariBooking />} />
+            <Route exact path="/admin/view-safari-booking/:id" element={<ViewSafariBooking />} />
             <Route exact path="/admin/package-booking" element={<PackageBooking />} />
             <Route exact path="/admin/view-package-booking" element={<ViewPackageBooking />} />
             <Route exact path="/admin/chambal-bookings" element={<ChambalManagement />} />

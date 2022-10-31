@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
-import Pagination from '../../../components/Admin/Footer/Pagination';
 import axios from 'axios';
 import { useAlert } from "react-alert";
 import * as moment from 'moment';

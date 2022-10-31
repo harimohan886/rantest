@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BookingDetails() {
+export default function BookingDetails({ details }) {
   return (
     <div>
         <h1 className='text-2xl text-black font-bold mb-2'>Safari Booking Details</h1>
@@ -16,14 +16,16 @@ export default function BookingDetails() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td className='border border-slate-300 text-center'>Gypsy</td>
-                    <td className='border border-slate-300 text-center'>19-09-2022</td>
-                    <td className='border border-slate-300 text-center'>Morning</td>
-                    <td className='border border-slate-300 text-center'>Zone 1/2/3/4/5</td>
-                    <td className='border border-slate-300 text-center'>5000</td>
-                    <td className='border border-slate-300 text-center'>pay_KIqAs1457vJSH5</td>
-                </tr>
+                { details && 
+                    <tr>
+                        <td className='border border-slate-300 text-center'>{details.vehicle}</td>
+                        <td className='border border-slate-300 text-center'>{details.date}</td>
+                        <td className='border border-slate-300 text-center'>{details.timing}</td>
+                        <td className='border border-slate-300 text-center'>{details.zone}</td>
+                        <td className='border border-slate-300 text-center'>{details.amount}</td>
+                        <td className='border border-slate-300 text-center'>{details.transaction_id}</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
