@@ -41,11 +41,6 @@ export default function ChambalPriceList( { type } ) {
 
   return (
     <>
-     <div className='float-right'>
-      <Link to={`/admin/add-price/add/${type}`} className="text-white bg-success font-medium rounded px-5 py-2.5 text-center">
-        Add price
-      </Link>
-    </div>
     <div className='clear-right'></div>
         <table className='table bg-white border border-slate-300 mt-4'>
              <thead>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CustomerDetails() {
+export default function CustomerDetails({ details }) {
   return (
     <div>
         <h2 className='text-2xl text-black font-bold mb-2 mt-12'>Customer Details</h2>
@@ -13,11 +13,11 @@ export default function CustomerDetails() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td className='border border-slate-300 text-center'>John Doe</td>
-                    <td className='border border-slate-300 text-center'>9878651242</td>
-                    <td className='border border-slate-300 text-center'>johndoe@gmail.com</td>
-                </tr>
+                    <tr>
+                        <td className='border border-slate-300 text-center'>{details.name}</td>
+                        <td className='border border-slate-300 text-center'>{details.mobile}</td>
+                        <td className='border border-slate-300 text-center'>{details.email}</td>
+                    </tr>
             </tbody>
         </table>
     </div>
