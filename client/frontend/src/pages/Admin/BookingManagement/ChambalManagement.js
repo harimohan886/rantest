@@ -3,11 +3,12 @@ import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from "../../../components/Admin/Navbar/AdminNavbar";
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import { Link } from 'react-router-dom';
-import Pagination from '../../../components/Admin/Footer/Pagination';
-import CurrentEnquiryFilter from '../../../components/Admin/Enquiry/CurrentEnquiryFilter';
+import * as moment from 'moment';
 import axios from 'axios';
 import { useAlert } from "react-alert";
 import ReactPaginate from "react-paginate";
+import DatePicker from "react-datepicker";
+
 
 export default function ChambalManagement() {
 
@@ -76,34 +77,37 @@ export default function ChambalManagement() {
        })
    }
 
-   const [type , setType] = useState('');
-   const [filterName , setFilterName] = useState('');
-   const [filterEmail , setFilterEmail] = useState('');
-   const [filterMobile , setFilterMobile] = useState('');
+   const [filterZone , setFilterZone] = useState('');
+   const [filterTiming , setTiming] = useState('');
+   const [filterStatus , setFilterStatus] = useState('');
+   const [filterVehicle , setFilterVehicle] = useState('');
+   const [filterDate , setFilterDate] = useState();
 
    const HandleFilter = () => {
-       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers?page=`+page+'&type='+type+'&filter_name='+filterName+'&filter_email='+filterEmail+'&filter_mobile='+filterMobile, {
+
+       const filterDateSelected = filterDate != undefined ? moment(filterDate).format("YYYY-MM-DD") : '';
+
+       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_vehicle='+filterVehicle+'&filter_zone='+filterZone+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
            headers: {
              'Accept': 'application/json, text/plain, */*',
              'Content-Type': 'application/json',
              'Authorization': `Bearer `+localStorage.getItem('accessToken')
            },
          }).then(result => { 
-               if(result.data.data.length > 0) {
-                   setDetails(result.data.data);
-                   setpageCount(Math.ceil(result.data.total / result.data.perPage));
-                   setPage(result.data.page);
-                   setPage(result.data.page);
-               } else {
-                   setDetails([]);
-                   setpageCount(0);
-                   setPage(1);
-               }
+           if(result.data.data.length > 0) {
+               setDetails(result.data.data);
+               setpageCount(Math.ceil(result.data.total / result.data.perPage));
+               setPage(result.data.page);
+           } else {
+               setDetails([]);
+               setpageCount(0);
+               setPage(1);
+           } 
          })
    }
 
    const HandelReset = () => {
-       setType('');setFilterName('');setFilterEmail('');setFilterMobile('');
+       setFilterZone('');setTiming('');setFilterStatus('');setFilterDate();setFilterVehicle('');
        GetDetails();
    }
    
@@ -114,7 +118,45 @@ export default function ChambalManagement() {
       <div className="flex flex-wrap min600">
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
             <h1 className='text-2xl text-black font-bold mb-3'>Chambal booking</h1>
-            <CurrentEnquiryFilter/>
+            <form className="grid grid-cols-4 gap-4 mt-2 mb-2">
+                    <div className='controlEnquiryDate'>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Booking Date</label>
+                        <DatePicker selected={filterDate} onChange={(date) => setFilterDate(date)} />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
+                        <select id="vehicles" value = {filterVehicle} onChange = {(e) => setFilterVehicle(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Please Select</option>
+                            <option value="Gypsy">Gypsy</option>
+                            <option value="Canter">Canter</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing <span style={{color: "#999", fontSize: "12px"}}>(Use it according to normal/chambal timings)</span></label>
+                        <select id="timings" value = {filterTiming} onChange = {(e) => setTiming(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Please Select</option>
+                            <option value="Morning">Morning</option>
+                            <option value="Evening">Evening</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
+                        <select id="zones" value = {filterZone} onChange = {(e) => setFilterZone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Please Select</option>
+                            <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
+                            <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
+                        <button type='button' onClick = {HandleFilter} className="text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <i className="fas fa-filter mr-2"></i> Filter
+                        </button>
+                        <button type='button' onClick = {HandelReset} className="text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <i className="fas fa-filter mr-2"></i> Reset
+                        </button>
+                    </div>
+                </form>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
