@@ -123,7 +123,7 @@ export default function SafariManagement() {
                         <DatePicker selected={filterDate} onChange={(date) => setFilterDate(date)} />
                     </div>
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
                         <select id="vehicles" value = {filterVehicle} onChange = {(e) => setFilterVehicle(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
                             <option value="Gypsy">Gypsy</option>
@@ -131,7 +131,7 @@ export default function SafariManagement() {
                         </select>
                     </div>
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing <span style={{color: "#999", fontSize: "12px"}}>(Use it according to normal/chambal timings)</span></label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing</label>
                         <select id="timings" value = {filterTiming} onChange = {(e) => setTiming(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
                             <option value="Morning">Morning</option>
@@ -139,7 +139,7 @@ export default function SafariManagement() {
                         </select>
                     </div>
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone</label>
                         <select id="zones" value = {filterZone} onChange = {(e) => setFilterZone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
                             <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
