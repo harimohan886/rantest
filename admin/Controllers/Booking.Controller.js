@@ -285,7 +285,10 @@ module.exports = {
 
     const filter_timing = req.query.filter_timing
       ? {
-        timing: req.query.filter_timing
+        time: {
+            $regex: req.query.filter_timing,
+            $options: "i",
+          }
       }
       : {};
 
