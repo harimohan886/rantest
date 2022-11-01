@@ -12,7 +12,7 @@ export default function ChambalBooking() {
     const params = useParams();
     const alert = useAlert();
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
 
     const [Indian , setIndian] = useState(0);
     const [Foreigner , setForeigner] = useState(0);
@@ -79,7 +79,9 @@ export default function ChambalBooking() {
 
     const HandlePayment = () => {
 
-        if((email === '' && state === '' && address === '') || PayAmount === 0) {
+        console.log("StartDate", startDate);
+
+        if((email === '' && state === '' && address === '') || PayAmount === 0 || startDate == undefined) {
             alert.error("Please do not leave any fields blank.");
             return true;
         } else {
@@ -366,6 +368,7 @@ export default function ChambalBooking() {
                         <div className='form-group'>
                             <label>Select Safari Date:</label>
                             <DatePicker selected={startDate} onChange={(date) => HandleDisableDate(date)} 
+                                minDate={new Date()}
                                 filterDate={(d) => disableDates.includes(moment(d).format('YYYY-MM-DD')) }
                             />
                         </div>
