@@ -87,7 +87,8 @@ export default function ChambalBooking() {
 
                 // key: credentials.razorpay_key,
                 key: 'rzp_test_FvMwf7j3FOOnh8',
-                amount: PayAmount+('00').toString(),
+                // amount: PayAmount+('00').toString(),
+                amount: Math.round(PayAmount*100),
                 currency: "INR",
                 name: "Gir national park",
                 description: "Test Transaction",

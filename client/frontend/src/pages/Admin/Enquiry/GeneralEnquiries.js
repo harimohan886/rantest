@@ -25,7 +25,6 @@ export default function GeneralEnquiries() {
       },
     }).then(result => {
 
-      console.log('result enq', result)
       if (result.data.data.length > 0) {
         setEnquiries(result.data.data);
         setpageCount(Math.ceil(result.data.total / result.data.perPage));

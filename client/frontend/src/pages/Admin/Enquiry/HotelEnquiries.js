@@ -23,8 +23,6 @@ export default function HotelEnquiries() {
         'Authorization': `Bearer ` + localStorage.getItem('accessToken')
       },
     }).then(result => {
-
-      console.log('result enq', result)
       if (result.data.data.length > 0) {
         setEnquiries(result.data.data);
         setpageCount(Math.ceil(result.data.total / result.data.perPage));

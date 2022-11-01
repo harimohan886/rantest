@@ -2,11 +2,8 @@ import axios from 'axios';
 import { React, useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import { SelectPicker } from 'rsuite';
-import 'rsuite/dist/rsuite.min.css'; // or 'rsuite/dist/rsuite.min.css'
+import 'rsuite/dist/rsuite.min.css';
 import moment from 'moment'
-
-
-
 
 
 export default function FilterEnquiry(props) {
@@ -27,10 +24,9 @@ export default function FilterEnquiry(props) {
         }).then(result => {
 
             if (result.data.data.length > 0) {
-                //setEnquiries(result.data.data);
 
                 const data = result.data.data.map(
-                    item => ({ label: item.traveller_name, value: item.traveller_name })
+                    item => ({ label: item, value: item })
                 );
 
                 setCustomerData(data);
@@ -38,7 +34,6 @@ export default function FilterEnquiry(props) {
             }
         })
     }
-    console.log('customerData', customerData);
 
     useEffect(() => {
         getAllCustomer();

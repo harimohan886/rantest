@@ -110,21 +110,15 @@ module.exports = {
   getAllEnquiriesCustomer: async (req, res, next) => {
     try {
 
-
       var type = req.query.type || 'general';
 
-      var query = {}
-
-
-      Enquiry.find({ type: type }, { traveller_name: 1 },
-        query, function (err, data) {
-          if (err) {
+      const enq_cust = await Enquiry.distinct('traveller_name', { type: type });
+      if (!enq_cust) {
             response = { "error": true, "message": "Error fetching data" + err };
           } else {
-            response = { "success": true, "message": 'data fetched', 'data': data };
+            response = { "success": true, "message": 'data fetched', 'data': enq_cust };
           }
-          res.json(response);
-        }).sort({ $natural: -1 });
+          return res.json(response);
     } catch (error) {
       console.log(error.message);
     }
