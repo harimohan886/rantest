@@ -7,6 +7,9 @@ const AuthSchema = new Schema({
 		required: [true, "fullname required!"],
 		index: true,
 	},
+	avatar: {
+		type: String
+	},
 	username: {
 		type: String,
 		required: [true, "username required!"],

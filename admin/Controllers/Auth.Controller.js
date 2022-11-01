@@ -199,7 +199,7 @@ module.exports = {
 
   profile: async (req, res, next) => {
     try {
-      const auth = await Auth.findOne({ _id: req.user._id }, { __v: 0 });
+      const auth = await Auth.findOne({ _id: req.user._id }, { __v: 0, tokens: 0 });
       if (!auth) {
         throw createError(404, 'Auth does not exist.');
       }
@@ -221,10 +221,15 @@ module.exports = {
   updateAAuth: async (req, res, next) => {
     try {
       const id = req.user._id;
+
+      if (req.file) {
+        req.body.avatar = req.file.path;
+      }
+
       const updates = req.body;
       const options = { new: true };
 
-      const result = await Auth.findByIdAndUpdate(id.toString(), updates, options);
+      const result = await Auth.findByIdAndUpdate(id, updates, options);
       if (!result) {
         throw createError(404, 'Auth does not exist');
       }
