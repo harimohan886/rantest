@@ -39,7 +39,7 @@ class TravellerInputs extends Component {
             </select>
         </td>
         <td className='border border-slate-300 text-center'>
-            <select className="form-control" name="idProof" value={user.idProof} onChange={this.handleChange}>
+            <select className="form-control" name="id_proof" value={user.id_proof} onChange={this.handleChange}>
                 <option>Please Select</option>
                 <option value = "Aadhar Card">Aadhar Card</option>
                 <option value = "Voter Id">Voter ID</option>
@@ -50,28 +50,13 @@ class TravellerInputs extends Component {
         <td className='border border-slate-300 text-center brNone'>
             <input
             className="form-control"
-            name="idNumber"
-            value={user.idNumber}
+            name="idnumber"
+            value={user.idnumber}
             onChange={this.handleChange}
             placeholder="ID Number"
             type="text"
             />
         </td>
-
-      {/* { this.props.counter == 0 &&  
-        <td className='border border-slate-300 text-center brNone'>
-          <input
-            className="inputstyle inputborder h-10 bg-white border border-gray-300 shadow-lg text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-0 bo focus-within:outline-none block w-full p-2.5 dark:border-gray-300 dark:placeholder-gray-400"
-            name="idAttach"
-            value={user.idAttach}
-            onChange={this.handleChange}
-            placeholder="Document Attach"
-            type="file"
-          />
-        </td>
-        
-      } */}
-
       </>
     );
   }
