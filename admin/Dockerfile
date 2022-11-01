@@ -3,6 +3,7 @@ WORKDIR /app/admin
 COPY package.json /app/admin
 RUN npm install
 RUN npm install express-validator --legacy-peer-deps
+RUN npm install multer
 COPY . /app/admin
 COPY ./.env.dev /app/admin/.env
 EXPOSE 5005

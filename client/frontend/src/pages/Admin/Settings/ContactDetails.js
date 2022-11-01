@@ -1,32 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
-
+import { useAlert } from "react-alert";
+import axios from 'axios';
 
 export default function ContactDetails() {
 
-    const [formValues, setFormValues] = useState([{ name: ""}]);
-    let handleChange = (i, e) => {
-        let newFormValues = [...formValues];
-        newFormValues[i][e.target.name] = e.target.value;
-        setFormValues(newFormValues);
+    const alert = useAlert();
+    const [phone, setPhone] = useState();
+    const [altphone, setAltPhone] = useState();
+    const [altphone2, setAltPhone2] = useState();
+    const [email, setEmail] = useState();
+    const [address, setAddress] = useState();
+    
+    const data = {
+        "phone" : phone,
+        "altphone" : altphone,
+        "altphone2" : altphone2,
+        "email" : email,
+        "address" : address
     }
 
-    let addFormFields = () => {
-        setFormValues([...formValues, { name: ""}])
+    function getDetails() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/contact`, {
+            headers: {
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+          }).then(res => {
+              setPhone(res.data.data.value.phone);
+              setAltPhone(res.data.data.value.altphone);
+              setAltPhone2(res.data.data.value.altphone2);
+              setEmail(res.data.data.value.email);
+              setAddress(res.data.data.value.address);
+          });
     }
 
-    let removeFormFields = (i) => {
-        let newFormValues = [...formValues];
-        newFormValues.splice(i, 1);
-        setFormValues(newFormValues)
+    const HandleSubmit = () => {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/admin/settings/contact`,  data, {
+            headers: {
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+          }).then(res => {
+              if(res.status === 200) {
+                  alert.success("Data is updated successfully");
+                  setTimeout(() => {
+                      window.location = `/admin/contact-details`;
+                  }, 1000);
+  
+              } else {
+                    alert.error("Please do not fill blank email,phone and address fields")
+              }
+          });
     }
 
-    let handleSubmit = (event) => {
-        event.preventDefault();
-        alert(JSON.stringify(formValues));
-    }
+    useEffect(() => {
+        getDetails();
+    },[])
 
   return (
     <div className="relative md:ml-64 bg-default-skin">
@@ -37,38 +67,29 @@ export default function ContactDetails() {
             <div className='mt-4'>
                 <h1 className='text-2xl text-black font-bold mb-3'>Contact details</h1>
             </div>
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                {formValues.map((element, index) => (
-                    <div className="flex mb-3" key={index}>
-                    <input type="text" name="name" placeholder='Phone number' value={element.name || ""} onChange={e => handleChange(index, e)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    {
-                        index ? 
-                        <button type="button"  className="ml-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 remove" onClick={() => removeFormFields(index)}>Remove</button> 
-                        : null
-                    }
-                    </div>
-                ))}
-                <div className="button-section">
-                    <button className="text-white bg-success font-medium rounded px-5 py-2.5 text-center add" type="button" onClick={() => addFormFields()}>Add more phone numbers</button>
-                </div>
+            <div className='form-group'>
+                    <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Phone Number</label>
+                    <input type="text" id="phone" value = {phone} placeholder='Phone Number' onChange = {(e) => setPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Alt. Phone Number</label>
-                    <input type="text" id="altPhone" placeholder='Alt. Phone Number' value='+91 9971717045' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="altPhone"value = {altphone}  placeholder='Alt. Phone Number' onChange = {(e) => setAltPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                </div>
+                <div className='form-group'>
+                    <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Second Alt. Phone Number</label>
+                    <input type="text" id="altPhone" value = {altphone2}  placeholder='Second Alt. Phone Number' onChange = {(e) => setAltPhone2(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Contact Email</label>
-                    <input type="email" id="contactEmail" placeholder='Contact Email' value='dailytourandtravel@gmail.com' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="email" id="contactEmail" value = {email} placeholder='Contact Email' onChange = {(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div> 
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Contact Address</label>
-                    <textarea id="address" rows="3" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
+                    <textarea id="address" value = {address} onChange = {(e) => setAddress(e.target.value)} rows="3" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
                 </div>  
                 <div className='form-group'>
-                    <button type="submit" className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
+                    <button type="button" onClick = {HandleSubmit} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
                 </div>
-            </form>
         </div>
       </div>
       <FooterAdmin/>
