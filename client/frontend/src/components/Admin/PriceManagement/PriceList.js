@@ -27,19 +27,22 @@ export default function PriceList( { type } ) {
     },[]);
 
     const HandleDelete = (id) => {
-      const typeData = type == 'chambal' ? 'chambal' : 'safari';
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}?type=${type}`, {
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer `+localStorage.getItem('accessToken')
-            },
-          }).then(result => {
-              alert.success("Data is deleted");
-              setTimeout(() => {
-                window.location = `/admin/price-list/${type}`
-               }, 1000);
-          })
+      var result = window.confirm("Want to delete?");
+        if (result) {
+          const typeData = type == 'chambal' ? 'chambal' : 'safari';
+            axios.delete(`${process.env.REACT_APP_BASE_URL}/${typeData}/prices/${id}?type=${type}`, {
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer `+localStorage.getItem('accessToken')
+                },
+              }).then(result => {
+                  alert.success("Data is deleted");
+                  setTimeout(() => {
+                    window.location = `/admin/price-list/${type}`
+                  }, 1000);
+              })
+          }
     }
   
 

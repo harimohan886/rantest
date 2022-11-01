@@ -61,18 +61,21 @@ export default function SafariManagement() {
 
 
     const HandleDelete = (id) => {
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/admin/bookings/safari/${id}`, {
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer `+localStorage.getItem('accessToken')
-        },
-        }).then(result => {
-            alert.success("Data is deleted");
-            setTimeout(() => {
-            window.location = '/admin/safari-booking';
-            }, 1000);
-        })
+        var result = window.confirm("Want to delete?");
+        if (result) {
+            axios.delete(`${process.env.REACT_APP_BASE_URL}/admin/bookings/safari/${id}`, {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+            }).then(result => {
+                alert.success("Data is deleted");
+                setTimeout(() => {
+                window.location = '/admin/safari-booking';
+                }, 1000);
+            })
+        }
     }
 
     const [filterZone , setFilterZone] = useState('');

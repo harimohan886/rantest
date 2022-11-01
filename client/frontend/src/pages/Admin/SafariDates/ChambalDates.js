@@ -63,18 +63,22 @@ export default function ChambalDates() {
     };
 
     const HandleDelete = (id) => {
-        axios.delete(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates/${id}`, {
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer `+localStorage.getItem('accessToken')
-          },
-        }).then(result => {
-            alert.success("Data is deleted");
-            setTimeout(() => {
-              window.location = '/admin/chambal-dates';
-             }, 1000);
-        })
+
+        var result = window.confirm("Want to delete?");
+        if (result) {
+            axios.delete(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates/${id}`, {
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer `+localStorage.getItem('accessToken')
+                },
+              }).then(result => {
+                  alert.success("Data is deleted");
+                  setTimeout(() => {
+                    window.location = '/admin/chambal-dates';
+                   }, 1000);
+              }) 
+        }
     }
 
     const HandleFilter = () => {
