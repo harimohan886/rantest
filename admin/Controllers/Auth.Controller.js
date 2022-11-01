@@ -168,7 +168,7 @@ module.exports = {
 
     if (req.body.password !== req.body.password_confirmation) {
 
-      next(createError(400, "Pass and Confirm Password does not match!"));
+      next(createError(201, "Pass and Confirm Password does not match!"));
       return;
     }
 
@@ -179,7 +179,7 @@ module.exports = {
 
     if (!passwordIsValid) {
 
-      next(createError(400, "Invalid or expired current password"));
+      next(createError(201, "Invalid or expired current password"));
       return;
     }
     await Auth.updateOne(

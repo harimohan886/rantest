@@ -27,12 +27,12 @@ export default function SafariTravellerBooking() {
 
       const [users , setUsers ] = useState([{
         key: Date.now(),
-        name: "",
-        gender: "",
-        nationality: "",
-        idProof: "",
-        idNumber: "",
-        price: 0
+            name: "",
+            gender: "",
+            nationality: "",
+            id_proof: "",
+            idnumber: "",
+            price: 0 
       }]);
 
       const onChange = (i,e) => {
@@ -41,8 +41,8 @@ export default function SafariTravellerBooking() {
         newUsers[i]['name'] = e.name ;
         newUsers[i]['gender'] = e.gender ;
         newUsers[i]['nationality'] = e.nationality ;
-        newUsers[i]['idProof'] = e.idProof ;
-        newUsers[i]['idNumber'] = e.idNumber ;
+        newUsers[i]['id_proof'] = e.id_proof ;
+        newUsers[i]['idnumber'] = e.idnumber ;
         newUsers[i]['price'] = 0;
 
             const data = {
@@ -73,8 +73,8 @@ export default function SafariTravellerBooking() {
             name: "",
             gender: "",
             nationality: "",
-            idProof: "",
-            idNumber: "",
+            id_proof: "",
+            idnumber: "",
             price: 0 
         }])
       };
@@ -128,13 +128,6 @@ export default function SafariTravellerBooking() {
                     "timing": localStorage.getItem('selTiming'),
                     "transaction_id": response.razorpay_payment_id
                 }
-
-                    // axios.post(`/api/front/safari_booking/proof_attach/${localStorage.getItem('bid')}`, fileData,{
-                    //     headers: {
-                    //         'Accept': 'application/json, text/plain, */*',
-                    //         'Content-Type': 'application/json'
-                    //    },
-                    // }).then((response)=>{});
                     
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {

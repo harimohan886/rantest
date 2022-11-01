@@ -87,7 +87,7 @@ export default function ChambalManagement() {
 
        const filterDateSelected = filterDate != undefined ? moment(filterDate).format("YYYY-MM-DD") : '';
 
-       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_vehicle='+filterVehicle+'&filter_zone='+filterZone+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
+       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
            headers: {
              'Accept': 'application/json, text/plain, */*',
              'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export default function ChambalManagement() {
    }
 
    const HandelReset = () => {
-       setFilterZone('');setTiming('');setFilterStatus('');setFilterDate();setFilterVehicle('');
+       setTiming('');setFilterStatus('');setFilterDate();
        GetDetails();
    }
    
@@ -120,32 +120,24 @@ export default function ChambalManagement() {
             <h1 className='text-2xl text-black font-bold mb-3'>Chambal booking</h1>
             <form className="grid grid-cols-4 gap-4 mt-2 mb-2">
                     <div className='controlEnquiryDate'>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Booking Date</label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Date</label>
                         <DatePicker selected={filterDate} onChange={(date) => setFilterDate(date)} />
                     </div>
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
-                        <select id="vehicles" value = {filterVehicle} onChange = {(e) => setFilterVehicle(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Please Select</option>
-                            <option value="Gypsy">Gypsy</option>
-                            <option value="Canter">Canter</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Timing <span style={{color: "#999", fontSize: "12px"}}>(Use it according to normal/chambal timings)</span></label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Timing</label>
                         <select id="timings" value = {filterTiming} onChange = {(e) => setTiming(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
-                            <option value="Morning">Morning</option>
-                            <option value="Evening">Evening</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone <span style={{color: "#999", fontSize: "12px"}}>(Use it only for normal safari and remove from chambal safari)</span></label>
-                        <select id="zones" value = {filterZone} onChange = {(e) => setFilterZone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Please Select</option>
-                            <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
-                            <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
-                        </select>
+                                <option value="8:00 am to 9:00 am">8:00 am to 9:00 am</option>
+                                <option value="9:00 am to 10:00 am">9:00 am to 10:00 am</option>
+                                <option value="10:00 am to 11:00 am">10:00 am to 11:00 am</option>
+                                <option value="11:00 am to 12:00 pm">11:00 am to 12:00 pm</option>
+                                <option value="12:00 pm to 01:00 pm">12:00 pm to 01:00 pm</option>
+                                <option value="01:00 pm to 02:00 pm">01:00 pm to 02:00 pm</option>
+                                <option value="02:00 pm to 03:00 pm">02:00 pm to 03:00 pm</option>
+                                <option value="03:00 pm to 04:00 pm">03:00 pm to 04:00 pm</option>
+                                <option value="04:00 pm to 05:00 pm">04:00 pm to 05:00 pm</option>
+                                <option value="05:00 pm to 06:00 pm">05:00 pm to 06:00 pm</option>
+                            </select>
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
@@ -161,11 +153,13 @@ export default function ChambalManagement() {
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>ID</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Phone</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Email</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Date</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Safari Timing</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Name</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Option</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Amount</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Id Proof Number</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Status</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                     </tr>
                 </thead>
@@ -173,11 +167,13 @@ export default function ChambalManagement() {
                   { details && details.map((item,index) => (
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index+1}</td>
-                            <td className='border border-slate-300 text-center'>{item.customer_name} </td>
-                            <td className='border border-slate-300 text-center'>{item.customer_mobile}</td>
-                            <td className='border border-slate-300 text-center'>{item.customer_email}</td>
-                            <td className='border border-slate-300 text-center'>{item.date}</td>
+                            <td className='border border-slate-300 text-center'>{item.date} </td>
+                            <td className='border border-slate-300 text-center'>{item.booking_name}</td>
+                            <td className='border border-slate-300 text-center'>{item.booking_option} </td>
                             <td className='border border-slate-300 text-center'>{item.time}</td>
+                            <td className='border border-slate-300 text-center'>{item.amount}</td>
+                            <td className='border border-slate-300 text-center'>{item.id_proof_no}</td>
+                            <td className='border border-slate-300 text-center'>{item.status}</td>
                             <td className='border border-slate-300 text-center'>
                                 <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/view-chambal-bookings/${item._id}`}>View details</Link>
                                 <button onClick = {() => HandleDelete(item._id)} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
