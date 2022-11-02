@@ -13,6 +13,7 @@ export default function PackagePricing({ optionData }) {
     const [email, setEmail] = useState('');
     const [country, setCountry] = useState('');
     const [choose, setChoose] = useState('');
+    const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
     const slug = useParams().id;
 
@@ -38,11 +39,13 @@ export default function PackagePricing({ optionData }) {
             var current = document.querySelector('.choose_package:checked');
             var package_cat = document.querySelector(child_selector).innerHTML;
             var package_id = current.getAttribute('package_id');
+            var category_id = current.getAttribute('category_id');
 
             let nextSibling = current.parentNode.nextElementSibling;
             let counter = 0;
             let children = 0;
             let adults = current.getAttribute('adults');
+            let rooms = current.getAttribute('rooms');
             while (nextSibling) {
                 if (counter == 3) {
                     children = nextSibling.childNodes[0].selectedIndex;
@@ -52,24 +55,31 @@ export default function PackagePricing({ optionData }) {
             }
 
             const data = {
+                "date": "2022-11-02",
+                "timing": "10:30",
+                "type": "package",
                 "name": name,
-                "phone": number,
+                "mobile": number,
                 "email": email,
                 "country": country,
-                "optionId": choose,
-                "package_slug": slug,
-                "adults": adults,
-                "child": children,
-                "person": person,
+                "package_option_id": choose,
                 "package_id": package_id,
-                "package_category": package_cat
+                "package_slug": slug,
+                "no_of_adult": adults,
+                "no_of_kids": children,
+                "no_of_rooms": rooms,
+                "amount": amount,
+                "nationality_type": person,
+                "category_id": category_id,
+                "category_name": package_cat,
+                "address": 'Delhi',
+
             }
 
-            console.log("data info", data);
 
-            axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/package-booking`, data).then((result) => {
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
 
-                localStorage.setItem('package_booking_id', result.data.booking_id);
+                localStorage.setItem('package_booking_id', result.data.data.package_booking);
                 localStorage.setItem('bookingData', JSON.stringify(data));
                 navigate("/book-package");
             })
@@ -81,18 +91,37 @@ export default function PackagePricing({ optionData }) {
 
 
     }
-    const handleChange = e => {
-        setChoose(e.target.value)
+    const handleChange = (e, price, child_cost) => {
+        setChoose(e.target.value);
+
+        let numChild = document.getElementById('kids' + e.target.value);
+        let no_of_child = numChild.options[numChild.selectedIndex].text;
+        let total_child_cost = 0;
+        if (no_of_child) {
+            total_child_cost = parseInt(child_cost * no_of_child)
+        }
+
+        let total = parseInt(total_child_cost) + parseInt(price)
+
+        setAmount(total);
 
     }
+
     const setTotalPrice = e => {
 
         let childCount = e.nativeEvent.target.selectedIndex;
         let childPrice = e.target.getAttribute('cprice');
         let totalPrice = e.target.getAttribute('ctotal');
+        let p_option_id = e.target.getAttribute('p_option_id');
         let total = parseInt(childPrice * childCount) + parseInt(totalPrice);
         e.target.parentNode.nextElementSibling.innerHTML = '';
         e.target.parentNode.nextElementSibling.innerHTML = total;
+
+        if (choose === '' || p_option_id == choose) {
+            setAmount(total);
+
+        }
+
 
     }
 
@@ -125,17 +154,17 @@ export default function PackagePricing({ optionData }) {
                                 return (
                                     <tr key={key} className="package-group">
                                         <td className='text-center'>
-                                            <input className="check choose_package" type="radio" onChange={handleChange} adults={option.adults} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
+                                            <input className="check choose_package" type="radio" onChange={e => handleChange(e, option.price, option.kid)} adults={option.adults} category_id={option.category_id} rooms={option.rooms} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
                                         </td>
                                         <td className='text-center'>{option.adults}</td>
                                         <td className='text-center'> {option.rooms} Room {(option.extra_beds != 0) ? option.extra_beds + " Extra Bed" : ''}</td>
                                         <td className="package-price text-center"> {option.price}</td>
                                         <td className='text-center'>
 
-                                            <select id="kids" cprice={option.kid} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_kids">
+                                            <select id={`kids${option._id}`} p_option_id={option._id} cprice={option.kid} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_kids">
 
                                                 {child && child.map((ch, i) => {
-                                                    return (<option selected={i === 0}>{i}</option>)
+                                                    return (<option value={i}>{i}</option>)
                                                 })}
                                             </select>
                                         </td>
