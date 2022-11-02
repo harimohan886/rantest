@@ -14,7 +14,7 @@ export default function PackagePricing({ optionData }) {
     const [country, setCountry] = useState('');
     const [choose, setChoose] = useState('');
     const navigate = useNavigate();
-    const slug = useParams().slug
+    const slug = useParams().id;
 
 
 
@@ -27,10 +27,18 @@ export default function PackagePricing({ optionData }) {
         }
         else {
 
-            var person = document.querySelector('input[name="btnradio"]:checked').value;
+            var person = '';
+
+            var person = document.querySelector('#myTab .active').innerHTML;
+            var child_selector = '#tab-indian .active';
+            if (person == 'Foreigner') {
+                var child_selector = '#tab-foreigner .active';
+            }
+
             var current = document.querySelector('.choose_package:checked');
-            var package_cat = document.querySelector('.active').innerHTML;
+            var package_cat = document.querySelector(child_selector).innerHTML;
             var package_id = current.getAttribute('package_id');
+
             let nextSibling = current.parentNode.nextElementSibling;
             let counter = 0;
             let children = 0;
@@ -56,6 +64,8 @@ export default function PackagePricing({ optionData }) {
                 "package_id": package_id,
                 "package_category": package_cat
             }
+
+            console.log("data info", data);
 
             axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/package-booking`, data).then((result) => {
 
@@ -115,7 +125,7 @@ export default function PackagePricing({ optionData }) {
                                 return (
                                     <tr key={key} className="package-group">
                                         <td className='text-center'>
-                                            <input className="check" type="radio" onChange={handleChange} adults={option.adults} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
+                                            <input className="check choose_package" type="radio" onChange={handleChange} adults={option.adults} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
                                         </td>
                                         <td className='text-center'>{option.adults}</td>
                                         <td className='text-center'> {option.rooms} Room {(option.extra_beds != 0) ? option.extra_beds + " Extra Bed" : ''}</td>
