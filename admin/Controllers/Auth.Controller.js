@@ -88,7 +88,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
       if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
+        next(createError(201, error.message));
         return;
       }
       next(error);
@@ -110,7 +110,7 @@ module.exports = {
         user.password
       );
       if (!passwordIsValid) {
-        return res.status(401)
+        return res.status(201)
           .send({
             accessToken: null,
             message: "Invalid Password!"
@@ -139,7 +139,7 @@ module.exports = {
         });
 
     } else {
-      next(createError(422, 'Username or password incorrect'));
+      next(createError(201, 'Username or password incorrect'));
     }
 
   },
@@ -150,13 +150,13 @@ module.exports = {
       const auth = await Auth.findById(id);
       // const auth = await Auth.findOne({ _id: id });
       if (!auth) {
-        throw createError(404, 'Auth does not exist.');
+        throw createError(201, 'Auth does not exist.');
       }
       res.send(auth);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Auth id'));
+        next(createError(201, 'Invalid Auth id'));
         return;
       }
       next(error);
@@ -201,7 +201,7 @@ module.exports = {
     try {
       const auth = await Auth.findOne({ _id: req.user._id }, { __v: 0, tokens: 0 });
       if (!auth) {
-        throw createError(404, 'Auth does not exist.');
+        throw createError(201, 'Auth does not exist.');
       }
       res.send({
         success: true,
@@ -211,7 +211,7 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Auth id'));
+        next(createError(201, 'Invalid Auth id'));
         return;
       }
       next(error);
@@ -231,13 +231,13 @@ module.exports = {
 
       const result = await Auth.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Auth does not exist');
+        throw createError(201, 'Auth does not exist');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Auth Id'));
+        return next(createError(201, 'Invalid Auth Id'));
       }
       next(error);
     }
@@ -248,13 +248,13 @@ module.exports = {
     try {
       const result = await Auth.findByIdAndDelete(id);
       if (!result) {
-        throw createError(404, 'Auth does not exist.');
+        throw createError(201, 'Auth does not exist.');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Auth id'));
+        next(createError(201, 'Invalid Auth id'));
         return;
       }
       next(error);
