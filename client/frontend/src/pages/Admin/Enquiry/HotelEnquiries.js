@@ -33,19 +33,21 @@ export default function HotelEnquiries() {
 
   useEffect(() => {
     getEnquiries();
-  }, [limit]);
+  }, [page]);
 
 
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
+    setPage(currentPage);
+
   };
 
 
 
   const getFilterData = ({ phone, type, customer, booking_date, created_date }) => {
 
-    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?filter_type=${type}&page=${page}&filter_name=${customer}&filter_phone=${phone}&filter_date=${booking_date}&filter_created_at=${created_date}`, {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/enquiries?filter_type=${type}&page=1&filter_name=${customer}&filter_phone=${phone}&filter_date=${booking_date}&filter_created_at=${created_date}`, {
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar'
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar'
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin'
-import CurrentEnquiryFilter from '../../../components/Admin/Enquiry/CurrentEnquiryFilter'
+
 import CurrentEnquiryList from '../../../components/Admin/Enquiry/CurrentEnquiryList'
 
 
@@ -15,8 +15,7 @@ export default function CurrentBooking() {
         <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 bigTable">
           <div className='mt-4'>
             <h1 className='text-2xl text-black font-bold mb-3'>Current Booking Enquiries</h1>
-          </div>
-          <CurrentEnquiryFilter/>
+          </div>          
           <CurrentEnquiryList/>
         </div>
       </div>
