@@ -71,7 +71,7 @@ export default function EditPackageTerm() {
                     </div>
                     <div className='flex'>
                         <button type="button" onClick={handleSubmit} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
-                        <Link to='/admin/package-term' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
+                        <Link to='/admin/package-terms' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
                     </div>
                 </div>
             </div>
