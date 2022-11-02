@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAlert } from "react-alert"
 import axios from 'axios'
-import { useParams } from "react-router-dom";
-//import moment from 'moment';
-//import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
 
 
 
@@ -16,6 +12,7 @@ export default function FinalPackageBooking() {
     const packageCustomerId = localStorage.getItem("package_customer_id");
     const bookingId = localStorage.getItem("package_booking_id");
 
+
     if (packageBookingInfo !== null || packageBookingInfo !== '') {
         packageBookingInfo = JSON.parse(packageBookingInfo);
 
@@ -23,19 +20,25 @@ export default function FinalPackageBooking() {
         navigate("/package-details");
     }
 
-
-    const params = useParams();
     const alert = useAlert();
-
     const [startDate, setStartDate] = useState();
-
-    const [Gst, setGst] = useState(0);
-
+    const gstPerc = 18;
 
 
-    const HandlePayment = () => {
 
-        console.log("StartDate", startDate);
+    let amountText = parseInt(packageBookingInfo.amount)
+    let gstAmountText = amountText * (gstPerc / 100);
+    let totalAmountText = amountText + gstAmountText;
+
+
+
+
+    const HandleHalfPayment = () => {
+
+        let amount = parseInt(packageBookingInfo.amount) / 2;
+        let gstAmount = (parseInt(packageBookingInfo.amount) / 2) * (gstPerc / 100);
+        let totalAmount = amount + gstAmount;
+
 
         if ((packageBookingInfo.amount === '' || bookingId == '')) {
             alert.error("Data are missing please try again!");
@@ -46,7 +49,68 @@ export default function FinalPackageBooking() {
                 // key: credentials.razorpay_key,
                 key: 'rzp_test_FvMwf7j3FOOnh8',
                 // amount: PayAmount+('00').toString(),
-                amount: Math.round(packageBookingInfo.amount * 100),
+                amount: Math.round(totalAmount * 100),
+                currency: "INR",
+                name: "Ranthambore",
+                description: "Test Transaction",
+                image: "/image/logo.png",
+
+                handler: async function (response) {
+
+                    const data = {
+                        customer_id: packageCustomerId,
+                        amount: totalAmount,
+                        transaction_id: response.razorpay_payment_id,
+                        booking_id: bookingId,
+                    }
+
+                    //successPay
+                    axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/package/${bookingId}`, data).then(result => {
+                        localStorage.clear();
+                        alert.success("Successfully Booked!");
+                        navigate('/thankyou');
+                    }).catch(function (error) {
+                        alert.error(error.response.data.error.message);
+                    });
+
+                },
+                prefill: {
+                    name: packageBookingInfo.name,
+                    email: packageBookingInfo.email,
+                    contact: packageBookingInfo.mobile,
+                },
+                notes: {
+                    address: "Ranthambore",
+                },
+                theme: {
+                    color: "#61dafb",
+                },
+            };
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+        }
+
+    }
+
+
+
+    const HandlePayment = () => {
+
+        let amount = parseInt(packageBookingInfo.amount)
+        let gstAmount = amount * (gstPerc / 100);
+        let totalAmount = amount + gstAmount;
+
+
+        if ((packageBookingInfo.amount === '' || bookingId == '')) {
+            alert.error("Data are missing please try again!");
+            return true;
+        } else {
+            const options = {
+
+                // key: credentials.razorpay_key,
+                key: 'rzp_test_FvMwf7j3FOOnh8',
+                // amount: PayAmount+('00').toString(),
+                amount: Math.round(totalAmount * 100),
                 currency: "INR",
                 name: "Ranthambore",
                 description: "Test Transaction",
@@ -102,10 +166,6 @@ export default function FinalPackageBooking() {
         });
     }
 
-    const [disableDates, setDisableDates] = useState([]);
-
-    var dates = [];
-
     useEffect(() => {
 
         const res = loadScript(
@@ -117,25 +177,7 @@ export default function FinalPackageBooking() {
             return;
         }
 
-        // axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/getDisableDates`, {
-        //     headers: {
-        //         'Accept': 'application/json, text/plain, */*',
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ` + localStorage.getItem('accessToken')
-        //     },
-        // }).then(result => {
-
-        //     dates = result.data.data.map(itm => (
-        //         itm.date
-        //     ))
-
-        //     setDisableDates(dates);
-        // });
     }, []);
-
-    const HandleDisableDate = (date) => {
-        setStartDate(date);
-    }
 
 
     return (
@@ -157,8 +199,10 @@ export default function FinalPackageBooking() {
                                     <tbody>
                                         <tr>
                                             <td><strong>Travel Date :</strong></td>
-                                            <td><input type="date" className="input-travel-date travel-date form-control" name="travel_date" min="2022-10-12" />
-                                                <div className="text-danger travel-date-error" style={{ display: "none" }}>Booking not Available.Please Select another Date.</div>
+                                            <td><strong>{packageBookingInfo.date}</strong>
+
+                                                {/* <input type="date" className="input-travel-date travel-date form-control" name="travel_date" min="2022-10-12" />
+                                                <div className="text-danger travel-date-error" style={{ display: "none" }}>Booking not Available.Please Select another Date.</div> */}
                                             </td>
                                         </tr>
                                         <tr>
@@ -198,10 +242,7 @@ export default function FinalPackageBooking() {
                                             <td>No of Rooms :</td>
                                             <td className="text-right">{packageBookingInfo.rooms} Rooms </td>
                                         </tr>
-                                        <tr>
-                                            <td>Price (RS) :</td>
-                                            <td className="text-right" id="package-price">{packageBookingInfo.amount}</td>
-                                        </tr>
+
                                         <tr>
                                             <td>Kids :</td>
                                             <td className="text-right">{packageBookingInfo.no_of_kids}</td>
@@ -211,12 +252,16 @@ export default function FinalPackageBooking() {
                                             <td className="text-right" id="total-kid-price">1800</td>
                                         </tr> */}
                                         <tr>
+                                            <td>Price (RS) :</td>
+                                            <td className="text-right" id="package-price">{packageBookingInfo.amount}</td>
+                                        </tr>
+                                        <tr>
                                             <td>GST :</td>
-                                            <td className="text-right">500</td>
+                                            <td className="text-right">{gstAmountText}</td>
                                         </tr>
                                         <tr>
                                             <td className="payable text-left">Payable Amount:</td>
-                                            <td className="payable text-right" id="total-payable-amount">{packageBookingInfo.amount}</td>
+                                            <td className="payable text-right" id="total-payable-amount">{totalAmountText}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -232,7 +277,7 @@ export default function FinalPackageBooking() {
                                         <div className="radio">
                                             <label>
                                                 <input type="radio" value="6075" className="nationality-type" name="payment" data-payment="partially-paid" />
-                                                <span className="forcustom half-payable-amount">Pay 50% ( INR <span>6075</span>)</span>
+                                                <span onClick={HandleHalfPayment} className="forcustom half-payable-amount">Pay 50% ( INR <span>{totalAmountText / 2}</span>)</span>
                                             </label>
                                         </div>
                                     </li>
@@ -240,7 +285,7 @@ export default function FinalPackageBooking() {
                                         <div className="radio">
                                             <label>
                                                 <input type="radio" value="12150" className="nationality-type" name="payment" checked data-payment="paid" />
-                                                <span className="forcustom total-payable-amount">Pay full (INR <span>{packageBookingInfo.amount} </span>)</span>
+                                                <span onClick={HandlePayment} className="forcustom total-payable-amount">Pay full (INR <span>{totalAmountText} </span>)</span>
                                             </label>
                                         </div>
                                     </li>

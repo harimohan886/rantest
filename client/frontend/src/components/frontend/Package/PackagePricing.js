@@ -4,6 +4,8 @@ import swal from 'sweetalert'
 import { useParams } from 'react-router';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
+
 
 
 export default function PackagePricing({ optionData }) {
@@ -11,6 +13,8 @@ export default function PackagePricing({ optionData }) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [date, setDate] = useState();
+    const [states, setStates] = useState('');
     const [country, setCountry] = useState('');
     const [choose, setChoose] = useState('');
     const [amount, setAmount] = useState(0);
@@ -20,7 +24,7 @@ export default function PackagePricing({ optionData }) {
 
 
     const submit = () => {
-        if (name == '' || number == '' || email == '' || country == '') {
+        if (name == '' || number == '' || email == '' || country == '' || states == '' || date == '') {
             swal("Please fill all feilds to proceed")
 
         } else if (choose == '') {
@@ -55,12 +59,13 @@ export default function PackagePricing({ optionData }) {
             }
 
             const data = {
-                "date": "2022-11-02",
+                "date": moment(date).format("YYYY-MM-DD"),
                 "type": "package",
                 "name": name,
                 "mobile": number,
                 "email": email,
                 "country": country,
+                "state": states,
                 "package_option_id": choose,
                 "package_id": package_id,
                 "package_slug": slug,
@@ -74,7 +79,6 @@ export default function PackagePricing({ optionData }) {
 
             }
 
-
             axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
                 console.log('result', result.data)
 
@@ -85,7 +89,6 @@ export default function PackagePricing({ optionData }) {
                 navigate("/book-package");
 
 
-
             }).catch(
                 function (error) {
                     console.log('Show error notification!', error.response.data.error.message);
@@ -93,9 +96,6 @@ export default function PackagePricing({ optionData }) {
                 }
             )
 
-
-            //location.href = "/create-package-booking";
-            //navigate('/create-package-booking');
         }
 
 
@@ -198,8 +198,17 @@ export default function PackagePricing({ optionData }) {
                             <input type="text" className="form-control" name="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                         </div>
                         <div className="form-group col-md-3">
+                            <input type="text" className="form-control" name="states" id="states" onChange={(e) => setStates(e.target.value)} placeholder="State" required />
+                        </div>
+
+                        <div className="form-group col-md-3">
                             <input type="text" className="form-control" name="country" id="country" onChange={(e) => setCountry(e.target.value)} placeholder="Country" required />
                         </div>
+
+                        <div className="form-group col-md-3">
+                            <input type="date" onChange={(e) => setDate(e.target.value)} className="input-travel-date travel-date form-control" name="travel_date" min="2022-10-12" />
+                        </div>
+
                     </div>
                     <div className="text-center">
                         <button onClick={submit} className="btn btn-warning btn-lg">Proceed</button>
