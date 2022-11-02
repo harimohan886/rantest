@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import * as moment from 'moment'
 import { useAlert } from "react-alert"
+import { useNavigate } from 'react-router-dom';
 
 export default function PriceType({ id , type , action }) {
 
@@ -17,6 +18,9 @@ export default function PriceType({ id , type , action }) {
   const [vehicleType , setVehicleType] = useState();
   const [selectType , setSelectType] = useState(type);
   const alert = useAlert();
+
+  const navigate = useNavigate();
+
 
   function getDetails(type) {
     const typeData = type == 'chambal' ? 'chambal' : 'safari';
@@ -232,7 +236,7 @@ export default function PriceType({ id , type , action }) {
 
             <div className='flex'>
                 <button ype="button" onClick = {HandleUpdate} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 ml-2 text-center">Submit</button>
-                <Link to='/admin/chambal-dates' className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
+                <Link onClick={() => navigate(-1)} className="text-white bg-dark font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center ml-2">Go Back</Link>
             </div>
 
             </div>
