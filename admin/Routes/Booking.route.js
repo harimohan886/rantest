@@ -15,6 +15,7 @@ router.get('/safari/:id', BookingController.findSafariBookingById);
 
 router.get('/package', BookingController.getAllPackageBookings);
 
+router.get('/current/customers', BookingController.getCurrentBookingCustomers);
 router.get('/current', BookingController.getCurrentBookings);
 router.get('/current/:id', BookingController.getCurrentBooking);
 router.post('/current', BookingController.saveCurrentBookings);

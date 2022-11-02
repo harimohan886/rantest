@@ -614,4 +614,25 @@ module.exports = {
     }
   },
 
+  getCurrentBookingCustomers: async (req, res, next) => {
+    try {
+      const date = await CurrentBooking.distinct('name');
+      if (!date) {
+        throw createError(404, 'Booking does not exist.');
+      }
+      res.send({
+        success: true,
+        message: 'Data fetched',
+        data: date
+      });
+    } catch (error) {
+      console.log(error);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Booking id1'));
+        return;
+      }
+      next(error);
+    }
+  },
+
 };

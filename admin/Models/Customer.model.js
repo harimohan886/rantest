@@ -10,7 +10,6 @@ const CustomerSchema = new Schema({
 		type: String, 
 		require: true, 
 		index:true, 
-		// unique:true,
 		sparse:true
 	},
 	booking_customers:[{
