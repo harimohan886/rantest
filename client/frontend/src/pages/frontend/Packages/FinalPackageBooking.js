@@ -13,6 +13,7 @@ export default function FinalPackageBooking() {
     const navigate = useNavigate();
 
     let packageBookingInfo = localStorage.getItem("bookingData");
+    const packageCustomerId = localStorage.getItem("package_customer_id");
     const bookingId = localStorage.getItem("package_booking_id");
 
     if (packageBookingInfo !== null || packageBookingInfo !== '') {
@@ -54,7 +55,7 @@ export default function FinalPackageBooking() {
                 handler: async function (response) {
 
                     const data = {
-                        customer_id: '89790879879',
+                        customer_id: packageCustomerId,
                         amount: packageBookingInfo.amount,
                         transaction_id: response.razorpay_payment_id,
                         booking_id: bookingId,
@@ -62,36 +63,12 @@ export default function FinalPackageBooking() {
 
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/package/${bookingId}`, data).then(result => {
-                        if (result.status === 200) {
-
-                            console.log('result booking', result);
-                            alert.success("Booked");
-
-                            // const paymentData = {
-                            //     "customer_id": result.data.data._id,
-                            //     "transaction_id": response.razorpay_payment_id,
-                            //     "amount": PayAmount,
-                            //     "booking_type": 'chambal'
-                            // }
-
-                            // axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/chambal/${result.data.data.chambal_booking}`, paymentData, {
-                            //     headers: {
-                            //         'Accept': 'application/json, text/plain, */*',
-                            //         'Content-Type': 'application/json'
-                            //     },
-                            // }).then((response) => {
-                            //     axios.post(`${process.env.REACT_APP_BASE_URL}/payment`, paymentData, {
-                            //         headers: {
-                            //             'Accept': 'application/json, text/plain, */*',
-                            //             'Content-Type': 'application/json'
-                            //         },
-                            //     }).then((response) => { });
-                            // });
-
-                            // localStorage.clear();
-                            window.location.href = '/thankyou';
-                        }
-                    })
+                        localStorage.clear();
+                        alert.success("Successfully Booked!");
+                        navigate('/thankyou');
+                    }).catch(function (error) {
+                        alert.error(error.response.data.error.message);
+                    });
 
                 },
                 prefill: {
@@ -186,19 +163,19 @@ export default function FinalPackageBooking() {
                                         </tr>
                                         <tr>
                                             <td>Name :</td>
-                                            <td>Developer</td>
+                                            <td>{packageBookingInfo.name}</td>
                                         </tr>
                                         <tr>
                                             <td>Mobile :</td>
-                                            <td>000000000000</td>
+                                            <td>{packageBookingInfo.mobile}</td>
                                         </tr>
                                         <tr>
                                             <td>Email ID :</td>
-                                            <td>test123@gmail.com</td>
+                                            <td>{packageBookingInfo.email}</td>
                                         </tr>
                                         <tr>
                                             <td>Packages :</td>
-                                            <td>Corbett Fun Tour With 1 Jeep Safari</td>
+                                            <td>{packageBookingInfo.package_slug}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -211,7 +188,7 @@ export default function FinalPackageBooking() {
                                     <tbody>
                                         <tr>
                                             <td>Package :</td>
-                                            <td className="text-right">Standard</td>
+                                            <td className="text-right">{packageBookingInfo.category_name}</td>
                                         </tr>
                                         <tr>
                                             <td>Adults :</td>
@@ -219,27 +196,27 @@ export default function FinalPackageBooking() {
                                         </tr>
                                         <tr>
                                             <td>No of Rooms :</td>
-                                            <td className="text-right">1 Rooms </td>
+                                            <td className="text-right">{packageBookingInfo.rooms} Rooms </td>
                                         </tr>
                                         <tr>
                                             <td>Price (RS) :</td>
-                                            <td className="text-right" id="package-price">9850</td>
+                                            <td className="text-right" id="package-price">{packageBookingInfo.amount}</td>
                                         </tr>
                                         <tr>
                                             <td>Kids :</td>
-                                            <td className="text-right">2</td>
+                                            <td className="text-right">{packageBookingInfo.no_of_kids}</td>
                                         </tr>
-                                        <tr>
+                                        {/* <tr>
                                             <td>Total Child Cost :</td>
                                             <td className="text-right" id="total-kid-price">1800</td>
-                                        </tr>
+                                        </tr> */}
                                         <tr>
                                             <td>GST :</td>
                                             <td className="text-right">500</td>
                                         </tr>
                                         <tr>
                                             <td className="payable text-left">Payable Amount:</td>
-                                            <td className="payable text-right" id="total-payable-amount">12150</td>
+                                            <td className="payable text-right" id="total-payable-amount">{packageBookingInfo.amount}</td>
                                         </tr>
                                     </tbody>
                                 </table>

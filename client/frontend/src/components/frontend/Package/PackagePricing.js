@@ -56,7 +56,6 @@ export default function PackagePricing({ optionData }) {
 
             const data = {
                 "date": "2022-11-02",
-                "timing": "10:30",
                 "type": "package",
                 "name": name,
                 "mobile": number,
@@ -72,17 +71,27 @@ export default function PackagePricing({ optionData }) {
                 "nationality_type": person,
                 "category_id": category_id,
                 "category_name": package_cat,
-                "address": 'Delhi',
 
             }
 
 
             axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
+                console.log('result', result.data)
 
+
+                localStorage.setItem('package_customer_id', result.data.data._id);
                 localStorage.setItem('package_booking_id', result.data.data.package_booking);
                 localStorage.setItem('bookingData', JSON.stringify(data));
                 navigate("/book-package");
-            })
+
+
+
+            }).catch(
+                function (error) {
+                    console.log('Show error notification!', error.response.data.error.message);
+                    swal(error.response.data.error.message)
+                }
+            )
 
 
             //location.href = "/create-package-booking";
