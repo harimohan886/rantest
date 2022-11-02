@@ -5,14 +5,24 @@ const PackageBookingSchema = new Schema({
 	date: {
 		type: String,
 		required: [true, "date required!"],
-		index: true,
 	},
 	package_id: {
 		type: String,
 		required: [true, "Package Id required!"],
+		index: true
+	},
+	package_name: {
+		type: String,
+	},
+	category_name: {
+		type: String,
 	},
 	customer_id: {
 		type: String,
+	},
+	customer:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "customers"
 	},
 	customer_name : {
 		type: String
@@ -23,29 +33,29 @@ const PackageBookingSchema = new Schema({
 	customer_mobile : {
 		type: String
 	},
-	customer:{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "customers"
-	},
-	timing: {
+	nationality_type: {
 		type: String,
-		required: [true, "timing required!"],
 	},
-	package_option_nationality: {
+	room_type: {
 		type: String,
-		required: [true, "nationality type required!"],
 	},
 	package_option_id: {
 		type: String,
-		required: [true, "option id required!"],
 	},
 	no_of_kids: {
 		type: String,
-		required: [true, "no of kids required!"],
+	},
+	no_of_rooms: {
+		type: String,
+	},
+	no_of_adult: {
+		type: String,
+	},
+	price: {
+		type: String,
 	},
 	amount: {
 		type: String,
-		required: [true, "amount required!"],
 	},
 	transaction_id: {
 		type: String,

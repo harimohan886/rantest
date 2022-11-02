@@ -15,7 +15,7 @@ export default function HotelListing() {
 
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
-    let limit = 2;
+    let limit = 15;
 
     const HandleFilter = async () => {
         try {

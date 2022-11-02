@@ -19,7 +19,7 @@ export default function ChambalDates() {
     
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [size] = useState(5);
+    const [size] = useState(15);
 
     const GetDetails = useCallback( () =>  {
         axios.get(`${process.env.REACT_APP_BASE_URL}/chambal/disable-dates?page=${page}&size=${size}`, {

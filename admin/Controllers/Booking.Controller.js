@@ -341,7 +341,7 @@ module.exports = {
   findPackageBookingById: async (req, res, next) => {
     const id = req.params.id;
     try {
-      const result = await PackageBooking.findById(id, '_id date package_id customer timing package_option_nationality package_option_id no_of_kids amount createdAt transaction_id').populate(['customer']);;
+      const result = await PackageBooking.findById(id, '_id date package_name category_name customer_name customer_email customer_mobile nationality_type room_type package_option_id no_of_kids no_of_rooms no_of_adult price amount status createdAt transaction_id').populate(['customer']);
       if (!result) {
         throw createError(404, 'Customer does not exist!.');
       }

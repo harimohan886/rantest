@@ -452,8 +452,6 @@ createNewCustomerPackage: async (req, res, next) => {
 
   let rules = {
     date:'required',
-    type:'required',
-    timing:'required',
     name:'required',
     email:'required',
     mobile:'required',
@@ -462,8 +460,7 @@ createNewCustomerPackage: async (req, res, next) => {
     package_id:'required',
     no_of_kids:'required',
     amount:'required',
-    category_id:'required',
-    address:'required',
+    category_name:'required',
   };
 
     const validation = new Validator(req.body, rules);
@@ -502,13 +499,18 @@ createNewCustomerPackage: async (req, res, next) => {
         customer_email : customer_data_result.email,
         customer_mobile : customer_data_result.mobile,
         customer : customer_data_result._id,
-        timing : req.body.timing,
         transaction_id : req.body.transaction_id,
         amount : req.body.amount,
-        package_option_nationality : req.body.nationality_type,
+        price : req.body.price,
+        nationality_type : req.body.nationality_type,
+        room_type : req.body.room_type,
         package_option_id : req.body.package_option_id,
         package_id : req.body.package_id,
+        package_name : req.body.package_name,
         no_of_kids : req.body.no_of_kids,
+        no_of_rooms : req.body.no_of_rooms,
+        no_of_adult : req.body.no_of_adult,
+        category_name : req.body.category_name,
         addedAt : today,
         status : 'unpaid'
       });
