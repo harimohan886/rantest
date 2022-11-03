@@ -97,11 +97,11 @@ export default function HotelList() {
 
                                             })}
                                         </div>
-                                        <p>{item.description}</p>
+                                        <p>{item.description.length > 215 ? item.description.substring(0, 215) + "..." : item.description}</p>
                                         <div className="Resort">
                                             <ul className="list-inline">
 
-                                                {item.amenities && item.amenities.map((list, lindex) => (
+                                                {item.amenities && item.amenities.slice(0, 3).map((list, lindex) => (
 
                                                     <li key={lindex} className='list-inline-item'>
                                                         <span> {list.amenity.amenity}</span>
