@@ -33,7 +33,7 @@ export default function AdminNavbar() {
   return (
     <>
       {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-0">
+      <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-0 hidden-xs">
         <div className="w-full first-letter:md:px-10 px-4">
           <div className="dropdown float-right">
             <button className="font-bold text-lg px-6 py-2 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1,6 +1,8 @@
 
-import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect, useContext} from "react";
+import { AuthContext } from '../../../context/admin/AuthContext';
+import { loginOut } from "../../../pages/Admin/Auth/apiCalls";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from './Logo.png';
 
 export default function Sidebar() {
@@ -54,6 +56,31 @@ export default function Sidebar() {
     }
 
   },[]);
+
+  const { user, accessToken, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  const logout = async (e) => {
+
+    e.preventDefault();
+
+
+    if (!localStorage.getItem("accessToken") || localStorage.getItem("accessToken") === 'null' || localStorage.getItem("accessToken") === '') {
+      dispatch({ type: "LOGIN_OUT" });
+
+      return false;
+
+    }
+
+    const res = await loginOut(accessToken, dispatch);
+
+    if (res === true) {
+      navigate("/admin/login");
+    }
+
+
+  }
   
 
   return (
@@ -62,7 +89,7 @@ export default function Sidebar() {
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
-            className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+            className="cursor-pointer text-white md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-white"
             type="button"
             onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
           >
@@ -78,25 +105,25 @@ export default function Sidebar() {
           {/* Collapse */}
           <div
             className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
+              "resNavbar md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
               collapseShow
             }
           >
             {/* Collapse header */}
-            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
+            <div className="mt-2 md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
-                <div className="w-6/12">
+                <div className="w-10/12">
                   <Link
-                    className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-medium p-4 px-0"
-                    to="/"
+                    className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-medium p-0"
+                    to="/admin/dashboard"
                   >
-                    Notus React
+                    <img alt='Logo' src={Logo} />
                   </Link>
                 </div>
-                <div className="w-6/12 flex justify-end">
+                <div className="w-2/12 flex justify-end">
                   <button
                     type="button"
-                    className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+                    className="colllapbtn cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
                     onClick={() => setCollapseShow("hidden")}
                   >
                     <i className="fas fa-times"></i>
@@ -104,16 +131,6 @@ export default function Sidebar() {
                 </div>
               </div>
             </div>
-            {/* Form */}
-            <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form>
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link to="/admin/dashboard" className="text-white text-md py-3 font-medium block">
@@ -319,6 +336,12 @@ export default function Sidebar() {
                     </div>
                   </div>
                 </div>
+              </li>
+              <li className="items-center">
+                <a href="#!" onClick={logout} className="text-white text-md py-3 block">
+                  <i className="fas fa-user mr-2 text-md opacity-75"></i>{" "}
+                  Logout
+                </a>
               </li>
             </ul>
 
