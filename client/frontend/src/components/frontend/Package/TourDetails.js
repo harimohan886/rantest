@@ -5,7 +5,7 @@ export default function TourDetails({ packages }) {
         <div className='packages-view'>
             <div className='container sectionFrame'>
                 <div className='packages-views'>
-                    <h1>Ranthambore Holiday Tour With 1 Jeep Safari</h1>
+                    <h1>{packages?.package?.name}</h1>
                     <div class="rating">
                         {[...Array(packages?.package?.rating)].map((star, index) => {
                             return (<span key={index} className="fa fa-star checked"></span>)
