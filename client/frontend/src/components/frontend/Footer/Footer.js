@@ -18,17 +18,17 @@ export default function Footer() {
                 <ul className="social-circle list-inline">
                     <li className='list-inline-item'>
                     <a className="icoFacebook" href="#!" title="Facebook">
-                        <i className="fas fa-facebook"></i>
+                        <i className="fa fa-facebook"></i>
                     </a>
                     </li>
                     <li className='list-inline-item'>
                     <a className="icoYoutube" href="#!" title="Twitter">
-                        <i className="fas fa-twitter"></i>
+                        <i className="fa fa-twitter"></i>
                     </a>
                     </li>
                     <li className='list-inline-item'>
                     <a className="icoInstagram" href="#!" title="Email">
-                        <i className="fas fa-envelope"></i>
+                        <i className="fa fa-envelope"></i>
                     </a>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@ export default function Footer() {
                         <Link to="/cancellation-policy">Cancellation Policy</Link>|
                     </li>
                     <li className='list-inline-item' style={{listStyle: "disc"}}>
-                        <Link to="/blog">Blog</Link>|
+                        <Link to="https://blog.ranthamboretigerreserve.in/">Blog</Link>|
                     </li>
                     <li className='list-inline-item' style={{listStyle: "disc"}}>
                     <Link to="/contact-us">Contact Us</Link>

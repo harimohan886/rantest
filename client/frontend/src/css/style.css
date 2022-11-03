@@ -90,7 +90,7 @@ box-shadow: none;
 background: #fff;
 border-radius: 0;
 color: #6c757d;
-font-weight: 500;
+font-weight: 600;
 font-size: 14px;
 height: 35px !important;
 }
@@ -654,7 +654,7 @@ padding: 0px;
     background: #fff;
     border-radius: 0;
     color: #98a3ae !important;
-    font-weight: 500;
+    font-weight: 600;
     height: 34px;
     font-size: 14px;
 }
@@ -739,10 +739,14 @@ border:none !important;
 .zoneinfo ul li {
 	color: #fff;
 	line-height: 48px;
+	display: inline-flex;
 }
 .zoneinfo ul li img {
 	margin-right: 15px;
 	display: inline;
+	width: 32px;
+	height: 32px;
+	margin-top: 7px;
 }
 #tourist-attraction {
 	margin-top: 30px;
@@ -768,7 +772,7 @@ width: 100%;
 height: auto;
 }
 .leftimg.img-overlay-image {
-	height: 765px;
+	height: 785px;
 }
 .overlay {
 position: absolute;
@@ -1149,6 +1153,16 @@ border-left:1px solid #5d5d5d;
 	font-size: 15px !important;
 	color: #98a3ae;
 }
+.plusMinusInputs {
+	padding-top: 10px;
+    padding-bottom: 10px;
+}
+.plusMinusInputs .btn-light {
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 1px 3px #00000047;
+    font-weight: 500;
+}
 .plusMinusInputs .btn {
     padding: 6px 14px;
     font-size: 15px;
@@ -1177,6 +1191,10 @@ border-left:1px solid #5d5d5d;
 #safaribanner h1 {
 	font-weight: 600;
 	color: #111;
+	font-size: 36px;
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 .cambal-safari {
 	margin-bottom: 40px;
@@ -2214,8 +2232,26 @@ ul#roomTab {
     margin: 50px auto 0;
     max-width: 650px;
 }
+.fc .fc-highlight {
+    background: #ea2349 !important;
+    color: #fff;
+}
+.tabs-nav2 ul{
+    margin-bottom: 0px;
+}
 /********End***********/
 @media (max-width: 767px){
+.swal-title	{
+	font-size: 15px !important;
+}
+.swal-text{
+	font-size: 20px;
+	color: green;
+}
+.packages-detail h2 {
+	font-size: 22px;
+	line-height: 30px;
+}	
 .collapse {
 	visibility: inherit !important;
 }	
@@ -2766,6 +2802,7 @@ font-size: 12px;
 	height: 22px;
 	position: relative;
 	top: 5px;
+	margin-top: 0px;
 }
 .zoneinfo ul li {
 	color: #fff;

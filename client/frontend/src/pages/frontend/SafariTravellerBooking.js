@@ -354,9 +354,9 @@ export default function SafariTravellerBooking() {
                     </div>
                 </form>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
-                            <button className='btn btn-success'>Payable amount : { payable_Amount }</button> &nbsp;
-                            <button type="button" onClick={handleSaveData} className='btn btn-success'>Pay Now</button> &nbsp; 
-                            <button className='btn btn-success'>Go Back</button>       
+                            <button className='btn btn-light'>Payable amount : { payable_Amount }</button> &nbsp;
+                            <button type="button" onClick={handleSaveData} className='btn btn-danger'>Pay Now</button> &nbsp; 
+                            <button className='btn btn-primary'>Go Back</button>       
                         </div>
             </div>
         </div>    

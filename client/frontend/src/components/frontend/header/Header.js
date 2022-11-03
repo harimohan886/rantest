@@ -66,8 +66,8 @@ export default function Header() {
 
     <div className="mobileheader d-sm-none d-md-none d-lg-none d-xl-none">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" href="/">
-                <img alt="Ranthambore Safari" className="img-responsive" src="../image/logo.png" />
+            <Link className="navbar-brand" to="/">
+                <img alt="Ranthambore Safari" className="img-responsive" src="../image/Logo.svg" />
             </Link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
