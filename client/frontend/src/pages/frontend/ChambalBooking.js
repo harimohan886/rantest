@@ -369,7 +369,7 @@ export default function ChambalBooking() {
                             <label>Select Safari Date:</label>
                             <DatePicker selected={startDate} onChange={(date) => HandleDisableDate(date)} 
                                 minDate={new Date()}
-                                filterDate={(d) => disableDates.includes(moment(d).format('YYYY-MM-DD')) }
+                                filterDate={(d) => !disableDates.includes(moment(d).format('YYYY-MM-DD')) }
                             />
                         </div>
                     </div>
