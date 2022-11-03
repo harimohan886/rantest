@@ -17,6 +17,7 @@ module.exports = {
       const id = req.params.id;
       const customer_id = req.body.customer_id;
 
+      req.body.status = 'paid';
       const updates = req.body;
       const options = { new: true };
 
@@ -76,6 +77,8 @@ module.exports = {
       const id = req.params.id;
       const customer_id = req.body.customer_id;
 
+      req.body.status = 'paid';
+
       const updates = req.body;
       const options = { new: true };
 
@@ -133,6 +136,8 @@ module.exports = {
     try {
       const id = req.params.id;
       const customer_id = req.body.customer_id;
+
+      req.body.status = 'paid';
 
       const updates = req.body;
       const options = { new: true };
