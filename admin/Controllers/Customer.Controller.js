@@ -45,8 +45,8 @@ module.exports = {
     const resultPerPage = req.query.size||15;
 
     const apiFeature1 = new ApiFeatures(Customer.find(), req.query)
-    .search()
-    .filter();
+    .search();
+    // .filter();
 
     var productsCount = await apiFeature1.query;
 
@@ -54,7 +54,7 @@ module.exports = {
 
     const apiFeature = new ApiFeatures(Customer.find(), req.query)
     .search()
-    .filter()
+    // .filter()
     .pagination(resultPerPage);
 
     let products = await apiFeature.query;
@@ -99,6 +99,28 @@ module.exports = {
         }
         res.json(response);
       }).sort({ $natural: -1 }).populate(['booking_customers','safari_booking','chambal_booking']);
+  }),
+
+
+  getAllCustomersList: asyncHandler(async (req, res, next) => {
+    try {
+      const result = await Customer.distinct('name');
+      if (!result) {
+        throw createError(404, 'Customer does not exist.');
+      }
+      res.send({
+          success: true,
+          message: "data fetched",
+          data: result
+        });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Customer id'));
+        return;
+      }
+      next(error);
+    }
   }),
 
   countAllCustomers: async (req, res, next) => {

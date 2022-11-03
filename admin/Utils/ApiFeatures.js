@@ -33,14 +33,21 @@ class ApiFeatures {
       : {};
 
 
-    this.query = this.query.find({ ...filter_name, ...filter_email, ...filter_mobile });
+      const type = this.queryStr.type
+      ? {
+          type: this.queryStr.type
+        }
+      : {};
+
+
+    this.query = this.query.find({ ...filter_name, ...filter_email, ...filter_mobile, ...type });
     return this;
   }
 
   filter() {
     const queryCopy = { ...this.queryStr };
     //   Removing some fields for category
-    const removeFields = ["filter_name", "page", "limit", "size"];
+    const removeFields = ["filter_name", "page", "limit", "size", "type"];
 
     removeFields.forEach((key) => delete queryCopy[key]);
 

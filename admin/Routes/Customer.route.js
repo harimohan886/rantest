@@ -6,6 +6,7 @@ const { body, validationResult } = require('express-validator');
 const CustomerController = require('../Controllers/Customer.Controller');
 
 router.get('/', CustomerController.getAllCustomers);
+router.get('/customers', CustomerController.getAllCustomersList);
 
 router.delete('/:slug/:id', CustomerController.DeleteCustomers);
 
