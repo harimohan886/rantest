@@ -14,6 +14,19 @@ export default function Customers() {
    const alert = useAlert();
    const [pageCount, setpageCount] = useState(0);
    const [page, setPage] = useState(1);
+   const [result_customers, setCustomers] = useState([]); 
+
+   function customers() {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers/customers`, {
+        headers: {
+        'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+        },
+        }).then(result => { 
+            setCustomers(result.data.data);  
+        })  
+    }
 
    const GetDetails = useCallback( () =>  {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers?page=`+page, {
@@ -36,6 +49,7 @@ export default function Customers() {
     },[page]);
 
     useEffect(() => {
+        customers();
         GetDetails();
     },[GetDetails]);
 
@@ -124,11 +138,17 @@ export default function Customers() {
                         <option value="chambal">Chambal</option>
                         <option value="package">Package</option>
                     </select>
-                </div>
+                </div>result_ustomers
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Name</label>
-                    <input type="text"   value = {filterName} onChange = {(e) => setFilterName(e.target.value)}  placeholder='Customer Name' id="customerName" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                </div>
+                    <select id="safariType" value = {filterName} onChange = {(e) => setFilterName(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Please Select</option>
+                        {
+                            result_customers && result_customers.map((res,i) => (
+                                <option value={res} key={i}>{res}</option>
+                            ))
+                        }
+                    </select> </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Email</label>
                     <input type="email"   value = {filterEmail} onChange = {(e) => setFilterEmail(e.target.value)} placeholder='Customer Email' id="customerEmail" className="block w-full text-gray-900 bg-white rounded border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
@@ -152,6 +172,7 @@ export default function Customers() {
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date Time</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Bokking Type</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Email</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Mobile Number</th>
@@ -163,6 +184,7 @@ export default function Customers() {
                     { details && details.map((item,index) => (
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{moment(item.createdAt).format("DD/MM/YYYY")} , <span className='font-bold'>{moment(item.createdAt).format("hh:mm A")}</span></td>
+                            <td className='border border-slate-300 text-center'>{item.type}</td>
                             <td className='border border-slate-300 text-center'>{item.name}</td>
                             <td className='border border-slate-300 text-center'>{item.email}</td>
                             <td className='border border-slate-300 text-center'>{item.mobile}</td>
