@@ -170,7 +170,7 @@ export default function PackageBooking() {
                           <td className='border border-slate-300 text-left'>{item.package_name}</td>
                           <td className='border border-slate-300 text-left'>{item.amount}</td>
                           <td className='border border-slate-300 text-left'>{item.status}</td>
-                          <td className='border border-slate-300 text-left'>{item.createdAt}</td>
+                          <td className='border border-slate-300 text-left'>{moment(item.createdAt).format("YYYY-MM-DD")}</td>
                           <td className='border border-slate-300 text-left' style={{minWidth: "110px"}}>
                           <Link to={`/admin/view-package-booking/${item._id}`} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                               <i className="fas fa-eye"></i>
