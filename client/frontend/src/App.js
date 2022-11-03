@@ -120,6 +120,7 @@ import PrivateAdminRoutes from './pages/Admin/Auth/PrivateAdminRoutes';
 import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 import ChambalManagement from './pages/Admin/BookingManagement/ChambalManagement';
 import ViewChambalBooking from './pages/Admin/BookingManagement/ViewChambalBooking';
+import ContactEnquiries from './pages/Admin/Enquiry/ContactEnquiries';
 
 const options = {
   timeout: 2000,
@@ -258,6 +259,7 @@ function App() {
             <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
             <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
             <Route exact path="/admin/current-booking-enquiries" element={<CurrentBooking />} />
+            <Route exact path="/admin/contact-enquiries" element={<ContactEnquiries />} />
             <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />
             <Route exact path="/admin/contact-details" element={<ContactDetails />} />
             <Route exact path="/admin/my-account" element={<MyAccount />} />
