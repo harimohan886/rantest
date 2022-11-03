@@ -169,7 +169,19 @@ table tbody tr td{
   background: #1f5fbc !important;
 }
 @media (max-width: 767px){
-  .md\:ml-64{
-    margin-left: 0rem !important;
-  }
+.md\:ml-64{
+  margin-left: 0rem !important;
+}
+.hidden-xs{
+  display: none;
+}
+.resNavbar{
+  background: #394e6d !important;
+  margin: 0 !important;
+}
+.resNavbar .colllapbtn{
+  background: #fff !important;
+  height: 40px !important;
+  margin-top: 25px;
+}
 }
