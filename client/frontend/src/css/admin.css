@@ -168,3 +168,8 @@ table tbody tr td{
 .bg-green-700{
   background: #1f5fbc !important;
 }
+@media (max-width: 767px){
+  .md\:ml-64{
+    margin-left: 0rem !important;
+  }
+}
