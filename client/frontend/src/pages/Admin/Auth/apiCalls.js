@@ -7,8 +7,23 @@ export const loginCall = async (userCredential, dispatch) => {
 
     dispatch({ type: "LOGIN_START" });
 
+
     try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/admin/auth/login`, userCredential);
+
+        console.log('err res', res)
+
+        if (res.status !== 200) {
+
+            if (res.data?.error?.message) {
+                swal(res.data.error.message, "error");
+
+            } else if (res?.data?.message) {
+                swal(res.data.message, "error");
+
+            }
+
+        }
 
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 
