@@ -128,11 +128,11 @@ export default function PackageBooking() {
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Phone number</label>
-                        <input type="number" id="phNumber" onChange = {(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <input type="number" id="phNumber" value = {filterPhone} onChange = {(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Email</label>
-                        <input type="email" id="email" onChange = {(e) => setEmailFilter(e.target.value)} placeholder="Email" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <input type="email" id="email" value = {filterEmail} onChange = {(e) => setEmailFilter(e.target.value)} placeholder="Email" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
