@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -29,11 +28,24 @@ h1,h2,h3,h4,h5,h6{
 	color: #fff;
 	padding: 11px 0px;
 }
+#myModal .modal-header span.modal-title {
+    padding-left: 15px;
+}
 #myModal .modal-header .close{
 opacity: 1;
 	color: #fff;
 	text-shadow: none;
 	margin-right: 10px;
+}
+.form-div input {
+    border-radius: 4px;
+    font-size: 14px;
+    height: 40px;
+}
+.form-div select {
+    border-radius: 4px;
+    font-size: 14px;
+    height: 40px;
 }
 .menu{
 padding-top: 15px;
@@ -69,6 +81,8 @@ border: 1px solid #ddd;
 background: #fff;
 padding: 4px 10px;
 margin-bottom: 15px;
+border-radius: 8px;
+box-shadow: 0px 1px 3px #00000047;
 }
 .selectdesign select{
 border: none;
@@ -76,7 +90,7 @@ box-shadow: none;
 background: #fff;
 border-radius: 0;
 color: #6c757d;
-font-weight: 600;
+font-weight: 500;
 font-size: 14px;
 height: 35px !important;
 }
@@ -199,6 +213,7 @@ font-weight: 600;
 text-align: center;
 padding-top: 50px;
 font-size: 26px;
+color: #111;
 }
 .special{
 font-size: 14px;
@@ -622,10 +637,12 @@ padding: 0px;
 }
 .inputdesign {
 	border: 1px solid #ddd;
-	background: #fff;
-	padding: 4px 10px;
-	margin-bottom: 15px;
-	width: 100%;
+    background: #fff;
+    padding: 4px 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px #00000047;
 }
 .inputdesign input{
 	color: #98a3ae;
@@ -633,13 +650,13 @@ padding: 0px;
 }
 .inputdesign .form-control{
 	border: none;
-	box-shadow: none;
-	background: #fff;
-	border-radius: 0;
-	color: #98a3ae !important;
-	font-weight: 600;
-	height: 34px;
-	font-size: 14px;
+    box-shadow: none;
+    background: #fff;
+    border-radius: 0;
+    color: #98a3ae !important;
+    font-weight: 500;
+    height: 34px;
+    font-size: 14px;
 }
 .inputdesign .input-group-btn img, .selectdesign .input-group-btn img {
 	position: relative;
@@ -655,13 +672,15 @@ padding: 0px;
 }
 #select-date h4 {
 	text-align: center;
-	font-size: 18px;
-	line-height: 28px;
-	margin-top: 60px;
-	margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    color: #111;
+    font-weight: 500;
 }
 #form_date {
-	margin: 45px;
+	margin: 25px;
 	margin-top: 0;
 }
 #jungle-safari h3 {
@@ -734,6 +753,10 @@ border:none !important;
 	text-align: center;
 	font-size: 22px;
 	padding-bottom: 25px;
+	color: #111;
+}
+.lists p strong {
+    color: #111;
 }
 .img-overlay {
 position: relative;
@@ -889,7 +912,7 @@ padding-bottom: 20px;
 .emailicon{
 	width: 30px;
 	background: #000;
-	padding: 4px 8px;
+	padding: 8px 8px;
 	border-radius: 20px;
 	height: 30px;
 	margin-right: 10px;
@@ -906,7 +929,7 @@ padding-bottom: 20px;
 .callicon {
 	width: 30px;
 	background: #000;
-	padding: 4px 9px;
+	padding: 9px 9px;
 	border-radius: 20px;
 	height: 30px;
 	margin-right: 10px;
@@ -919,6 +942,7 @@ padding-bottom: 20px;
 	margin-top: 30px;
 	font-weight: 600;
 	text-align: center;
+	color: #111;
 }
 .discription {
 	margin-top: 10px;
@@ -996,7 +1020,9 @@ border-left:1px solid #5d5d5d;
     font-size: 24px;
     margin-top: 60px;
     margin-bottom: 30px;
+	color: #111;
 }
+
 .about-ranthambore p {
 	line-height: 32px;
 }
@@ -1143,6 +1169,7 @@ border-left:1px solid #5d5d5d;
 }
 #safaribanner h1 {
 	font-weight: 600;
+	color: #111;
 }
 .cambal-safari {
 	margin-bottom: 40px;
@@ -1199,6 +1226,7 @@ border-left:1px solid #5d5d5d;
 .chambal-disc .title {
 	font-size: 17px;
 	margin-bottom: 15px;
+	color: #000;
 }
 .chambal-disc p {
 	font-size: 13px;
@@ -1596,12 +1624,51 @@ border-left:1px solid #5d5d5d;
 
 
 /******* Calendar CSS *****/
-
+.fc .fc-daygrid-day-top {
+    display: inherit !important;
+    flex-direction: inherit !important;
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 15px;
+    text-align: center;
+    padding-bottom: 16px;
+}
+ .fc-daygrid-event-harness{
+	height: 0px !important;
+ }
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 0 !important;
+    position: relative;
+}
+.fc .fc-view-harness {
+    flex-grow: 1 ;
+    height: 320.296px!important;
+    position: relative;
+	
+}
+.fc .fc-scroller-liquid-absolute{
+	overflow: hidden !important;
+}
+.fc .fc-scrollgrid-section table {
+    height: 1px;
+    width: 100% !important;
+}
+.fc .fc-scroller {
+    overflow: hidden !important;
+}
+.fc .fc-daygrid-body {
+    width: 100% !important;
+}
+.fc .fc-toolbar-title {
+    font-size: 1.75em;
+    margin: 0;
+    color: #000;
+}
 .fc-col-header-cell{
 	background: #6ea324 !important;
 }
 .fc .fc-col-header-cell-cushion{
-	padding: 15px 4px !important;
+	padding: 6px 4px !important;
 	color: #fff !important;
 }
 .fc .fc-daygrid-day-number{
@@ -1867,12 +1934,13 @@ border-left:1px solid #5d5d5d;
 #myTab.nav-tabs .nav-link{
 	padding: 8px 35px;
     margin-left: 15px;
-    border: 2px solid #f9c446;
+    border: 2px solid #ea2349;
+    background: #fff;
 }
 #myTab.nav-tabs .nav-link.active{
-	background: #ffc419;
-    color: #111;
-    border-color: #ffc419;
+	background: #ea2349;
+    color: #FFF;
+    border-color: #ea2349;
 }
 .packTab{
 	background: #f4f4f4;
@@ -2141,6 +2209,25 @@ ul#roomTab {
 }
 /********End***********/
 @media (max-width: 767px){
+.collapse {
+	visibility: inherit !important;
+}	
+.mobileheader .navbar-nav li a {
+    color: #111;
+    text-decoration: none;
+}
+.fc .fc-view-harness {
+	height: 234.296px!important;
+}	
+.fc .fc-daygrid-day-top{
+	padding-top: 8px;
+	padding-bottom: 9px;
+}
+.fc .fc-col-header-cell-cushion {
+    padding: 5px 4px !important;
+    font-weight: 500;
+    font-size: 13px;
+}
 .grid-box img {
 	width: 44px;
 }	
@@ -2256,6 +2343,7 @@ padding: 2px 0;
 	padding-top: 30px;
 	font-size: 21px;
 	padding-bottom: 20px;
+	line-height: 30px;
 }
 #tableinformation .nav-tabs .nav-item{
 	float: left;
@@ -2567,6 +2655,7 @@ min-height: auto;
 .bannercaption h1{
 font-size: 19px;
 margin-top: 0px;
+line-height: 30px;
 }
 .bannercaption p{
 font-size: 12px;
@@ -2683,6 +2772,7 @@ font-size: 12px;
 	font-size: 20px;
 	padding-bottom: 15px;
 	margin-top: 0;
+	line-height: 30px;
 }
 .text {
 	font-size: 22px;
