@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const AuthRoute = require('./Routes/Auth.route');
 const SeedDataRoute = require('./Routes/SeedData.route');
 const EnquiryRoute = require('./Routes/Enquiry.route');
+const ContactUsRoute = require('./Routes/ContactUs.route');
 const SettingRoute = require('./Routes/Setting.route');
 const CustomerRoute = require('./Routes/Customer.route');
 const BookingRoute = require('./Routes/Booking.route');
@@ -26,6 +27,8 @@ const PaymentRoute = require('./Routes/Payment.route');
 app.use('/auth', AuthRoute);
 
 app.use('/enquiries', EnquiryRoute);
+
+app.use('/contactus/enquiries', ContactUsRoute);
 
 app.use('/settings', SettingRoute);
 
