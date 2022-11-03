@@ -25,10 +25,10 @@ export default function PackagePricing({ optionData }) {
 
     const submit = () => {
         if (name == '' || number == '' || email == '' || country == '' || states == '' || date == '') {
-            swal("Please fill all feilds to proceed")
+            swal("Please fill all feilds to proceed");
 
         } else if (choose == '') {
-            swal("Please choose one package")
+            swal("Please choose one package");
         }
         else {
 
@@ -92,7 +92,7 @@ export default function PackagePricing({ optionData }) {
             }).catch(
                 function (error) {
                     console.log('Show error notification!', error.response.data.error.message);
-                    swal(error.response.data.error.message)
+                    swal(error.response.data.error.message);
                 }
             )
 
@@ -140,7 +140,7 @@ export default function PackagePricing({ optionData }) {
                 <div className="table-responsive">
                     <table className="table table-bordered">
                         <thead>
-                            <tr>
+                            <tr key="099">
                                 <th scope="col" className='font-bold text-center'>Select</th>
                                 <th scope="col" className='font-bold text-center'>Adults</th>
                                 <th scope="col" className='font-bold text-center'>No of Rooms </th>
@@ -161,7 +161,7 @@ export default function PackagePricing({ optionData }) {
 
 
                                 return (
-                                    <tr key={key} className="package-group">
+                                    <tr key={key.toString()} className="package-group">
                                         <td className='text-center'>
                                             <input className="check choose_package" type="radio" onChange={e => handleChange(e, option.price, option.kid)} adults={option.adults} category_id={option.category_id} rooms={option.rooms} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
                                         </td>
@@ -206,7 +206,7 @@ export default function PackagePricing({ optionData }) {
                         </div>
 
                         <div className="form-group col-md-3">
-                            <input type="date" onChange={(e) => setDate(e.target.value)} className="input-travel-date travel-date form-control" name="travel_date" min="2022-10-12" />
+                            <input type="date" onChange={(e) => setDate(e.target.value)} className="input-travel-date travel-date form-control" name="travel_date" min={moment().format("YYYY-MM-DD")} />
                         </div>
 
                     </div>

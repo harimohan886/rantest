@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { useAlert } from "react-alert"
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 
@@ -12,21 +12,19 @@ export default function FinalPackageBooking() {
     const packageCustomerId = localStorage.getItem("package_customer_id");
     const bookingId = localStorage.getItem("package_booking_id");
 
-
-    if (packageBookingInfo !== null || packageBookingInfo !== '') {
+    if (packageBookingInfo !== null && packageBookingInfo !== 'null') {
         packageBookingInfo = JSON.parse(packageBookingInfo);
 
     } else {
-        navigate("/package-details");
+        window.location.href = "/ranthambore-packages";
     }
 
     const alert = useAlert();
-    const [startDate, setStartDate] = useState();
     const gstPerc = 18;
 
 
 
-    let amountText = parseInt(packageBookingInfo.amount)
+    let amountText = parseInt(packageBookingInfo?.amount)
     let gstAmountText = amountText * (gstPerc / 100);
     let totalAmountText = amountText + gstAmountText;
 
@@ -35,12 +33,12 @@ export default function FinalPackageBooking() {
 
     const HandleHalfPayment = () => {
 
-        let amount = parseInt(packageBookingInfo.amount) / 2;
-        let gstAmount = (parseInt(packageBookingInfo.amount) / 2) * (gstPerc / 100);
+        let amount = parseInt(packageBookingInfo?.amount) / 2;
+        let gstAmount = (parseInt(packageBookingInfo?.amount) / 2) * (gstPerc / 100);
         let totalAmount = amount + gstAmount;
 
 
-        if ((packageBookingInfo.amount === '' || bookingId == '')) {
+        if ((packageBookingInfo?.amount === '' || bookingId == '')) {
             alert.error("Data are missing please try again!");
             return true;
         } else {
@@ -199,7 +197,7 @@ export default function FinalPackageBooking() {
                                     <tbody>
                                         <tr>
                                             <td><strong>Travel Date :</strong></td>
-                                            <td><strong>{packageBookingInfo.date}</strong>
+                                            <td><strong>{packageBookingInfo?.date}</strong>
 
                                                 {/* <input type="date" className="input-travel-date travel-date form-control" name="travel_date" min="2022-10-12" />
                                                 <div className="text-danger travel-date-error" style={{ display: "none" }}>Booking not Available.Please Select another Date.</div> */}
@@ -207,19 +205,19 @@ export default function FinalPackageBooking() {
                                         </tr>
                                         <tr>
                                             <td>Name :</td>
-                                            <td>{packageBookingInfo.name}</td>
+                                            <td>{packageBookingInfo?.name}</td>
                                         </tr>
                                         <tr>
                                             <td>Mobile :</td>
-                                            <td>{packageBookingInfo.mobile}</td>
+                                            <td>{packageBookingInfo?.mobile}</td>
                                         </tr>
                                         <tr>
                                             <td>Email ID :</td>
-                                            <td>{packageBookingInfo.email}</td>
+                                            <td>{packageBookingInfo?.email}</td>
                                         </tr>
                                         <tr>
                                             <td>Packages :</td>
-                                            <td>{packageBookingInfo.package_slug}</td>
+                                            <td>{packageBookingInfo?.package_slug}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -232,20 +230,20 @@ export default function FinalPackageBooking() {
                                     <tbody>
                                         <tr>
                                             <td>Package :</td>
-                                            <td className="text-right">{packageBookingInfo.category_name}</td>
+                                            <td className="text-right">{packageBookingInfo?.category_name}</td>
                                         </tr>
                                         <tr>
                                             <td>Adults :</td>
-                                            <td className="text-right">2 </td>
+                                            <td className="text-right">{packageBookingInfo?.no_of_adult} </td>
                                         </tr>
                                         <tr>
                                             <td>No of Rooms :</td>
-                                            <td className="text-right">{packageBookingInfo.rooms} Rooms </td>
+                                            <td className="text-right">{packageBookingInfo?.no_of_rooms} Rooms </td>
                                         </tr>
 
                                         <tr>
                                             <td>Kids :</td>
-                                            <td className="text-right">{packageBookingInfo.no_of_kids}</td>
+                                            <td className="text-right">{packageBookingInfo?.no_of_kids}</td>
                                         </tr>
                                         {/* <tr>
                                             <td>Total Child Cost :</td>
@@ -253,7 +251,7 @@ export default function FinalPackageBooking() {
                                         </tr> */}
                                         <tr>
                                             <td>Price (RS) :</td>
-                                            <td className="text-right" id="package-price">{packageBookingInfo.amount}</td>
+                                            <td className="text-right" id="package-price">{packageBookingInfo?.amount}</td>
                                         </tr>
                                         <tr>
                                             <td>GST :</td>
