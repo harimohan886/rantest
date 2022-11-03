@@ -55,7 +55,7 @@ export default function Footer() {
                         <Link to="/cancellation-policy">Cancellation Policy</Link>|
                     </li>
                     <li className='list-inline-item' style={{listStyle: "disc"}}>
-                        <Link to="https://blog.ranthamboretigerreserve.in/">Blog</Link>|
+                        <a target="/blank" href="https://blog.ranthamboretigerreserve.in/">Blog</a>|
                     </li>
                     <li className='list-inline-item' style={{listStyle: "disc"}}>
                     <Link to="/contact-us">Contact Us</Link>
