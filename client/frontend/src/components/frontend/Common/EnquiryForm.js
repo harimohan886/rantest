@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import swal from 'sweetalert';
-
+import * as moment from 'moment';
 
 export default function EnquiryForm({ hotel_id, type, hotel_name }) {
+
+  const toDayDate = moment(new Date()).format("YYYY-MM-DD");
 
   const [error_list, setErrorList] = useState([]);
   const [success_msg, setSuccessMsg] = useState("");
@@ -89,7 +91,7 @@ export default function EnquiryForm({ hotel_id, type, hotel_name }) {
             <span className="input-group-addon">
               <img src="../image/icons/calendar.png" alt='Calendar' />
             </span>
-            <input type="date" name="booking_date" value={enquiry.booking_date} onChange={handleChange} className="form-control" id="booking_date" min="2022-09-28" />
+            <input type="date" name="booking_date" value={enquiry.booking_date} onChange={handleChange} className="form-control" id="booking_date" min={toDayDate} />
             <span className="text-danger left col-md-12">{error_list.booking_date}</span>
 
 
