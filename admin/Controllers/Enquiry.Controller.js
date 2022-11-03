@@ -187,8 +187,10 @@ module.exports = {
       params.append('website', 'ranthamboretigerreserve.in');
       params.append('meta', meta);
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params});
-      const data = await response.json();
+      const data = {};
+
+      // const response = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params});
+      // const data = await response.json();
 
       res.send({
         success: true,

@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/ApiFeatures");
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
+ fetch(...args));
+
 const { body, validationResult } = require('express-validator');
 
 const Validator = require('validatorjs');
@@ -257,7 +260,17 @@ module.exports = {
 
     /*save data to crm*/
 
-    /*const params = new URLSearchParams();
+    /*const params1 = new URLSearchParams();
+
+    params1.append('name', req.body.name);
+    params1.append('mobile', req.body.mobile);
+    params1.append('email', req.body.email);
+    params1.append('website', 'ranthamboretigerreserve.in');
+
+    const response1 = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params1});
+    const data1 = await response1.json();
+
+    const params = new URLSearchParams();
 
     params.append('name', req.body.name);
     params.append('email', req.body.email);
@@ -280,7 +293,8 @@ module.exports = {
     params.append('booked_customers', JSON.stringify(req.body.booked_persons));
 
     const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
-    const data = await response.json(); */       
+
+    const data = await response.json();        */
 
     /*save data to crm*/
 
@@ -377,7 +391,8 @@ module.exports = {
         no_of_persons_indian : req.body.no_of_persons_indian,
         no_of_persons_foreigner : req.body.no_of_persons_foreigner,
         addedAt : today,
-        status : 'unpaid'
+        status : 'unpaid',
+        transaction_id: ''
       });
 
       const safari_booking_result = await safari_booking_data.save();
@@ -512,7 +527,8 @@ createNewCustomerPackage: async (req, res, next) => {
         no_of_adult : req.body.no_of_adult,
         category_name : req.body.category_name,
         addedAt : today,
-        status : 'unpaid'
+        status : 'unpaid',
+        transaction_id: ''
       });
 
       const safari_booking_result = await safari_booking_data.save();

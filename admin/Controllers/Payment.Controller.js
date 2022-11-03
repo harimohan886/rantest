@@ -1,6 +1,9 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
+ fetch(...args));
+
 const SafariBooking = require('../Models/SafariBooking.model');
 
 const PackageBooking = require('../Models/PackageBooking.model');
@@ -50,7 +53,7 @@ module.exports = {
       params.append('booked_customers', JSON.stringify(booking.booking_customers));
 
       const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
-      const data = await response.json();  */      
+      const data = await response.json();        */
 
       /*save data to crm*/
 
