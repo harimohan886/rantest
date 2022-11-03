@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function PackageDetailsInfo() {
+export default function PackageDetailsInfo({ details }) {
   return (
     <div>
-        <h1 className='text-2xl text-black font-bold mb-2'>Package Booking Details</h1>
+        <h1 className='text-2xl text-black font-bold mb-2'>Booking Details</h1>
         <table className='table bg-white border border-slate-300'>
             <thead>
                 <tr>
@@ -14,12 +14,14 @@ export default function PackageDetailsInfo() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td className='border border-slate-300 text-center'>19-09-2022</td>
-                    <td className='border border-slate-300 text-center'>5000</td>
-                    <td className='border border-slate-300 text-center'>Paid</td>
-                    <td className='border border-slate-300 text-center'>pay_KIqAs1457vJSH5</td>
-                </tr>
+                { details &&
+                    <tr>
+                        <td className='border border-slate-300 text-center'>{details.date}</td>
+                        <td className='border border-slate-300 text-center'>{details.amount}</td>
+                        <td className='border border-slate-300 text-center'>{details.status}</td>
+                        <td className='border border-slate-300 text-center'>{details.transaction_id}</td>
+                    </tr>
+                }   
             </tbody>
         </table>
     </div>
