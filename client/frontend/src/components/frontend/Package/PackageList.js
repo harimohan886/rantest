@@ -84,18 +84,18 @@ export default function PackageList() {
                         </div>
                         <div className="col-sm-8 col-xs-12">
                             <div className="packages-listing">
-                                <h2>{item.title} </h2>
+                                <h2>{item.name} </h2>
                                 <div className="rating">
                                     {[...Array(item.rating)].map((star, index) => {
                                         return (<span className="fa fa-star checked"></span>)
 
                                     })}
                                 </div>
-                                <p>{item.description}</p>
+                                <p>{item.description.length > 215 ? item.description.substring(0, 215) + "..." : item.description}</p>
                                 <div className="package-detail">
                                     <ul className="list-unstyled">
 
-                                        {item.features && item.features.map((list, lindex) => (
+                                        {item.features && item.features.slice(0, 3).map((list, lindex) => (
 
                                             <li key={lindex}>
                                                 <span> {list.feature}</span>
