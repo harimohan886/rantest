@@ -89,7 +89,7 @@ border: none;
 box-shadow: none;
 background: #fff;
 border-radius: 0;
-color: #6c757d;
+color: #000;
 font-weight: 600;
 font-size: 14px;
 height: 35px !important;
@@ -653,7 +653,7 @@ padding: 0px;
     box-shadow: none;
     background: #fff;
     border-radius: 0;
-    color: #98a3ae !important;
+    color: #000 !important;
     font-weight: 600;
     height: 34px;
     font-size: 14px;
@@ -733,7 +733,7 @@ border:none !important;
 	margin-bottom: 20px;
 }
 .zoneinfo {
-	max-width: 72%;
+	max-width: 75%;
 	margin: 0 auto;
 }
 .zoneinfo ul li {
@@ -1158,10 +1158,24 @@ border-left:1px solid #5d5d5d;
     padding-bottom: 10px;
 }
 .plusMinusInputs .btn-light {
-    background: #fff;
-    border: 1px solid #ddd;
+    background: #ff9b34;
+    border: 1px solid #ff9b34;
     box-shadow: 0px 1px 3px #00000047;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 20px !important;
+}
+.plusMinusInputs .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle{
+	background: #ff9b34;
+    border: 1px solid #ff9b34;
+}
+.plusMinusInputs .btn-success.paynow {
+    font-size: 20px;
+    font-weight: 600;
+}
+.plusMinusInputs .btn-danger.goback {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 15px;
 }
 .plusMinusInputs .btn {
     padding: 6px 14px;
@@ -1709,11 +1723,11 @@ border-left:1px solid #5d5d5d;
     padding: 5px 0px!important;
 }
 .fc .fc-daygrid-day.fc-day-today {
-    background: #ea2349 !important;
+    background: #f3f9ff !important;
     position: relative;
 }
 .fc-day-today .fc-daygrid-day-number{
-	color: #fff !important;
+	color: #000 !important;
 	font-weight: bold;
 }
 .chm2 .title{
@@ -2242,6 +2256,12 @@ ul#roomTab {
 }
 .tabs-nav2 ul{
     margin-bottom: 0px;
+}
+.fa-facebook:before {
+    font-family: "Font Awesome 5 Brands";
+}
+.fa-twitter:before {
+	font-family: "Font Awesome 5 Brands";
 }
 /********End***********/
 @media (max-width: 767px){

@@ -64,7 +64,9 @@ export default function FinalPackageBooking() {
 
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/package/${bookingId}`, data).then(result => {
-                        localStorage.clear();
+                        localStorage.removeItem("bookingData");
+                        localStorage.removeItem("package_booking_id");
+
                         alert.success("Successfully Booked!");
                         navigate('/thankyou');
                     }).catch(function (error) {
@@ -125,7 +127,9 @@ export default function FinalPackageBooking() {
 
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/payment/package/${bookingId}`, data).then(result => {
-                        localStorage.clear();
+                        localStorage.removeItem("bookingData");
+                        localStorage.removeItem("package_booking_id");
+
                         alert.success("Successfully Booked!");
                         navigate('/thankyou');
                     }).catch(function (error) {

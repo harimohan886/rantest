@@ -155,9 +155,13 @@ export default function SafariTravellerBooking() {
                                     }).then((response)=>{});
                                 });
 
-                                
-
-                                localStorage.clear();
+                                localStorage.removeItem('selName');
+                                localStorage.removeItem('selPhone');
+                                localStorage.removeItem('selDate');
+                                localStorage.removeItem('selVehicle');
+                                localStorage.removeItem('selZone');
+                                localStorage.removeItem('selTiming');
+                                localStorage.removeItem('selAvailable');
                                 window.location.href = '/thankyou';
                             }
                     })
@@ -355,8 +359,9 @@ export default function SafariTravellerBooking() {
                 </form>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
                             <button className='btn btn-light'>Payable amount : { payable_Amount }</button> &nbsp;
-                            <button type="button" onClick={handleSaveData} className='btn btn-danger'>Pay Now</button> &nbsp; 
-                            <button className='btn btn-primary'>Go Back</button>       
+                            <button type="button" onClick={handleSaveData} className='btn btn-success paynow'>Pay Now</button> &nbsp; 
+                            <br />
+                            <button className='btn btn-danger goback'>Go Back</button>       
                         </div>
             </div>
         </div>    
