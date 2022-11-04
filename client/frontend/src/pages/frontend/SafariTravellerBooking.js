@@ -155,9 +155,13 @@ export default function SafariTravellerBooking() {
                                     }).then((response)=>{});
                                 });
 
-                                
-
-                                localStorage.clear();
+                                localStorage.removeItem('selName');
+                                localStorage.removeItem('selPhone');
+                                localStorage.removeItem('selDate');
+                                localStorage.removeItem('selVehicle');
+                                localStorage.removeItem('selZone');
+                                localStorage.removeItem('selTiming');
+                                localStorage.removeItem('selAvailable');
                                 window.location.href = '/thankyou';
                             }
                     })

@@ -140,8 +140,6 @@ export default function ChambalBooking() {
                                        },
                                     }).then((response)=>{});
                                 });
-
-                                localStorage.clear();
                                 window.location.href = '/thankyou';
                             }
                     })
