@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const asyncHandler = require('../Middleware/asyncHandler')
 const ResponseHandler = require('../Middleware/responseHandler')
 
+const imageUpload = require('../util/imageUpload.util')
+
 let responseHandler = new ResponseHandler();
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) =>
@@ -277,6 +279,8 @@ module.exports = {
           data: 'duplicate name'
         });
     }
+
+    await imageUpload(req);
 
     if (req.file) {
       req.body.image = req.file.path;
