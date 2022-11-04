@@ -42,6 +42,8 @@ router.get('/:id/amenities', HotelController.findHotelAmenitiesById);
 //Update a product by id
 router.patch('/:id', uploads.any(), HotelController.updateAHotel);
 
+router.put('/:id', HotelController.updateAHotelAvilability);
+
 router.patch('/:id/amenities', HotelController.updateHotelAmenities);
 
 //Delete a product by id

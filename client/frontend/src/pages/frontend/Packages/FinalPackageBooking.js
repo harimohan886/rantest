@@ -217,7 +217,7 @@ export default function FinalPackageBooking() {
                                         </tr>
                                         <tr>
                                             <td>Packages :</td>
-                                            <td>{packageBookingInfo?.package_slug}</td>
+                                            <td>{packageBookingInfo?.package_name}</td>
                                         </tr>
                                     </tbody>
                                 </table>

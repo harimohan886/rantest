@@ -529,6 +529,35 @@ module.exports = {
     }
   },
 
+
+  updateAHotelAvilability: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+
+      const hotel = await Hotel.findById(id);
+
+      const image_arr = hotel.images;
+
+      const options = { new: true };
+
+      const result = await Hotel.findByIdAndUpdate(id, req.body, options);
+      if (!result) {
+        throw createError(404, 'Hotel does not exist');
+      }
+      res.send({
+        success: true,
+        message: 'Data updated',
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        return next(createError(400, 'Invalid Hotel Id'));
+      }
+
+      next(error);
+    }
+  },
+
   updateHotelAmenities: async (req, res, next) => {
     try {
       const id = req.params.id;

@@ -24,7 +24,7 @@ export default function RoomType({ packages, type }) {
                         <div key={lindex.toString()} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${type}${lindex}`}>
                             <ContentImage hotels={list.hotels} counterkey={type + lindex} />
 
-                            {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} /> : <PackagePricing optionData={list?.foreignerOptions} />}
+                            {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} packageName={packages?.package?.name} /> : <PackagePricing optionData={list?.foreignerOptions} packageName={packages?.package?.name} />}
 
                         </div>
 
