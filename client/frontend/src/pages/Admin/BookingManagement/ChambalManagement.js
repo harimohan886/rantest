@@ -85,12 +85,15 @@ export default function ChambalManagement() {
    const [filterStatus , setFilterStatus] = useState('');
    const [filterVehicle , setFilterVehicle] = useState('');
    const [filterDate , setFilterDate] = useState();
+   const [filterName , setFilterName] = useState('');
+   const [filterEmail , setFilterEmail] = useState('');
+   const [filterPhone , setFilterPhone] = useState('');
 
    const HandleFilter = () => {
 
        const filterDateSelected = filterDate != undefined ? moment(filterDate).format("YYYY-MM-DD") : '';
 
-       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
+       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_name='+filterName+'&filter_email='+filterEmail+'&filter_mobile='+filterPhone+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
            headers: {
              'Accept': 'application/json, text/plain, */*',
              'Content-Type': 'application/json',
@@ -110,7 +113,7 @@ export default function ChambalManagement() {
    }
 
    const HandelReset = () => {
-       setTiming('');setFilterStatus('');setFilterDate();
+       setTiming('');setFilterStatus('');setFilterDate();setFilterEmail('');setFilterPhone('');setFilterName('');
        GetDetails();
    }
    
@@ -125,6 +128,18 @@ export default function ChambalManagement() {
                     <div className='controlEnquiryDate'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Date</label>
                         <DatePicker selected={filterDate} onChange={(date) => setFilterDate(date)} />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+                        <input id="name" value = {filterName} onChange = {(e) => setFilterName(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                        <input id="email" value = {filterEmail} onChange = {(e) => setFilterEmail(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone</label>
+                        <input id="phone" value = {filterPhone} onChange = {(e) => setFilterPhone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Timing</label>
@@ -157,6 +172,9 @@ export default function ChambalManagement() {
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>ID</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Date</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Email</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Phone</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Option</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
@@ -171,6 +189,9 @@ export default function ChambalManagement() {
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index+1}</td>
                             <td className='border border-slate-300 text-center'>{item.date} </td>
+                            <td className='border border-slate-300 text-center'>{item.customer_name}</td>
+                            <td className='border border-slate-300 text-center'>{item.customer_email}</td>
+                            <td className='border border-slate-300 text-center'>{item.customer_mobile}</td>
                             <td className='border border-slate-300 text-center'>{item.booking_name}</td>
                             <td className='border border-slate-300 text-center'>{item.booking_option} </td>
                             <td className='border border-slate-300 text-center'>{item.time}</td>
