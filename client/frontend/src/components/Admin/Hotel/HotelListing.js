@@ -65,7 +65,7 @@ export default function HotelListing() {
         setDropdownPopoverShow(false);
     }
 
-    const HandleReset = async() => {
+    const HandleReset = async () => {
         const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels?page=1&size=${limit}`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -217,10 +217,10 @@ export default function HotelListing() {
                                 <td className='border border-slate-300 text-center'>{item.rating} Star</td>
 
                                 <td className='border border-slate-300 text-center'>
-                                    <label htmlFor={`default-toggle-${index}`} className="inline-flex relative items-center w-full cursor-pointer">
-                                        <input type="checkbox" value={item.availability} defaultChecked={item.availability} mid={`default-toggle-${index}`} className="sr-only peer" />
+                                    <label htmlFor={`default-toggle-`} className="inline-flex relative w-full cursor-pointer">
+                                        <input type="checkbox" defaultChecked={item.status} value={item.status} id={`default-toggle-0`} className="sr-only peer" />
                                         <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
-                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{item.availability === 1 ? 'Enabled' : 'Disabled'}</span>
+                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{item.status === 1 ? 'Available' : 'Not Available'}</span>
                                     </label>
                                 </td>
 
