@@ -197,13 +197,13 @@ export default function PackagePricing({ optionData, packageName }) {
                         <div className="form-group col-md-3">
                             <input type="text" className="form-control" name="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                         </div>
-                        <div className="form-group col-md-3">
+                        {/*<div className="form-group col-md-3">
                             <input type="text" className="form-control" name="states" id="states" onChange={(e) => setStates(e.target.value)} placeholder="State" required />
-                        </div>
+                        </div>*/}
 
-                        <div className="form-group col-md-3">
+                        {/*<div className="form-group col-md-3">
                             <input type="text" className="form-control" name="country" id="country" onChange={(e) => setCountry(e.target.value)} placeholder="Country" required />
-                        </div>
+                        </div>*/}
 
                         <div className="form-group col-md-3">
                             <input type="date" onChange={(e) => setDate(e.target.value)} className="input-travel-date travel-date form-control" name="travel_date" min={moment().format("YYYY-MM-DD")} />
