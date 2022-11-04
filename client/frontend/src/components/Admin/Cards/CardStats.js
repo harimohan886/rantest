@@ -12,9 +12,9 @@ export default function CardStats({
   return (
     <>
       <div className={"relative flex flex-col min-w-0 break-words rounded mb-6 xl:mb-0 shadow-lg " + statBgColor}>
-        <div className="flex-auto p-4">
+        <div className="flex-auto p-3">
           <div className="flex flex-wrap">
-            <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+            <div className="relative w-full pr-3 max-w-full flex-grow flex-1">
               <h5 className="text-white uppercase font-bold text-sm">
                 {statSubtitle}
               </h5>
@@ -22,7 +22,7 @@ export default function CardStats({
                 {statTitle}
               </span>
             </div>
-            <div className="relative w-auto pl-4 flex-initial">
+            <div className="relative w-auto pl-3 flex-initial">
               <div
                 className={
                   "text-beige bg-no-repeat shadow-none p-3 text-center inline-flex items-center justify-center w-12 h-12  " +

@@ -11,11 +11,11 @@ const imageUpload = async (req) => {
       
        await sharp(req.file.path)
         .resize(280, 252, {fit:"contain"})
-        .jpeg({ quality: 90 })
+        .jpeg({ quality: 95 })
         .toFile(
             path.resolve(req.file.destination,newFilename)
         )
-        console.log(req.file.path);
+
         fs.unlinkSync(req.file.path)
         return req.file.destination+''+newFilename;
 	} catch (error) {
