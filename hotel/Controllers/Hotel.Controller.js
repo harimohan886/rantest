@@ -1,7 +1,9 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
+const sharp = require('sharp');
 fs = require('fs')
+const path = require('path');
 
 const Hotel = require('../Models/Hotel.model');
 const HotelImage = require('../Models/HotelImage.model');
@@ -283,8 +285,29 @@ module.exports = {
     const package_image = req.files.filter(function (item) {
       return item.fieldname == 'package_image'
     });
+
+
+    console.log('package_image',package_image[0]);
+
+
+    /*resize image*/
+
+    const fileNameFile = package_image[0].originalname.replace(/\..+$/, "");
+    const newFilename = `${fileNameFile}-${Date.now()}.jpg`;
+
+    await sharp(package_image[0].path)
+    .resize(1140, 300, {fit:"contain"})
+    .jpeg({ quality: 95 })
+    .toFile(
+      path.resolve(package_image[0].destination,newFilename)
+    )
+
+    fs.unlinkSync(package_image[0].path);
+
+    /*resize image*/
+
     if (req.files && package_image && package_image[0]) {
-      req.body.package_image = package_image[0].path;
+      req.body.package_image = package_image[0].destination+''+newFilename;
     }else{
       req.body.package_image = '';
     }
@@ -293,8 +316,25 @@ module.exports = {
     const image = req.files.filter(function (item) {
       return item.fieldname == 'image'
     });
+
+    /*resize image*/
+
+    const fileName = image[0].originalname.replace(/\..+$/, "");
+    const newFilenameFile = `${fileName}-${Date.now()}.jpg`;
+
+    await sharp(image[0].path)
+    .resize(335, 257, {fit:"contain"})
+    .jpeg({ quality: 95 })
+    .toFile(
+      path.resolve(image[0].destination,newFilenameFile)
+    )
+
+    fs.unlinkSync(image[0].path);
+
+    /*resize image*/
+
     if (req.files && image && image[0]) {
-      req.body.image = image[0].path;
+      req.body.image = image[0].destination+newFilenameFile;
     }else{
       req.body.image = '';
     }
@@ -315,8 +355,26 @@ module.exports = {
       if (req.files && req.files.length && imagesArr) {
 
         for (const image of imagesArr) {
+
+
+          /*resize image*/
+
+          const fileNamefile = image.originalname.replace(/\..+$/, "");
+          const newFilename = `${fileNamefile}-${Date.now()}.jpg`;
+
+          await sharp(image.path)
+          .resize(820, 404, {fit:"contain"})
+          .jpeg({ quality: 95 })
+          .toFile(
+            path.resolve(image.destination,newFilename)
+            )
+
+          fs.unlinkSync(image.path);
+
+          /*resize image*/
+
           const hotel_images = new HotelImage({
-            image: image.path,
+            image: image.destination+newFilename,
             hotel_id: result._id
           });
 
