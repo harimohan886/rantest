@@ -5,6 +5,12 @@
 a:hover{
   text-decoration: none !important;
 }
+#accordionMenu .accordion-item a {
+  font-size: 13px;
+}
+.sideNav ul li a{
+  font-size: 13px;
+}
 .sideNav ul li{
   border-bottom: 1px solid #677a8d;
 }
