@@ -8,7 +8,7 @@ import moment from 'moment';
 
 
 
-export default function PackagePricing({ optionData }) {
+export default function PackagePricing({ optionData, packageName }) {
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -68,7 +68,7 @@ export default function PackagePricing({ optionData }) {
                 "state": states,
                 "package_option_id": choose,
                 "package_id": package_id,
-                "package_slug": slug,
+                "package_name": packageName,
                 "no_of_adult": adults,
                 "no_of_kids": children,
                 "no_of_rooms": rooms,
