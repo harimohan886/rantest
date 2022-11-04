@@ -8,7 +8,6 @@ export default function TopHead() {
     const [altPhone, setAltPhone] = useState('');
     const [altSecondPhone, setAltSecondPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
 
     const getContactInfo = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/contact`).then(res => {
@@ -18,7 +17,6 @@ export default function TopHead() {
                 setAltPhone(res.data.data.value.altphone);
                 setAltSecondPhone(res.data.data.value.altphone2);
                 setEmail(res.data.data.value.email);
-                setAddress(res.data.data.value.address);
             } else {
                 swal("Warning", res.data.error.message, "warning");
             }
@@ -44,9 +42,9 @@ export default function TopHead() {
                 <div className="row">
                     <div className="col-sm-8 col-xs-12">
                         <ul className="list-inline">
-                            <li className="list-inline-item"><a href="tel:7838498645"><img alt="Call" src="../image/icons/callicon.png" /> {phone}</a>|</li>
-                            <li className="list-inline-item"><a href="tel:7289842772">{altPhone}</a>|</li>
-                            <li className="list-inline-item"><a href="tel:9718717119">{altSecondPhone}</a></li>
+                            <li className="list-inline-item"><a href={`tel:${phone}`}><img alt="Call" src="../image/icons/callicon.png" /> {phone}</a>|</li>
+                            <li className="list-inline-item"><a href={`tel:${altPhone}`}>{altPhone}</a>|</li>
+                            <li className="list-inline-item"><a href={`tel:${altSecondPhone}`}>{altSecondPhone}</a></li>
                         </ul>
                     </div>
                     <div className="col-sm-4 col-xs-12">
