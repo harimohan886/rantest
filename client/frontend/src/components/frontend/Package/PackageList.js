@@ -91,13 +91,13 @@ export default function PackageList() {
 
                                     })}
                                 </div>
-                                <p>{item.description.length > 215 ? item.description.substring(0, 215) + "..." : item.description}</p>
+                                <p>{item.description.length > 120 ? item.description.substring(0, 120) + "..." : item.description}</p>
                                 <div className="package-detail">
-                                    <ul className="list-unstyled">
+                                    <ul className="list-inline">
 
                                         {item.features && item.features.slice(0, 3).map((list, lindex) => (
 
-                                            <li key={lindex}>
+                                            <li className='list-inline-item' key={lindex}>
                                                 <span> {list.feature}</span>
                                             </li>
 

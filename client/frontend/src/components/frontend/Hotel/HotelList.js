@@ -97,7 +97,7 @@ export default function HotelList() {
 
                                             })}
                                         </div>
-                                        <p>{item.description.length > 215 ? item.description.substring(0, 215) + "..." : item.description}</p>
+                                        <p>{item.description.length > 120 ? item.description.substring(0, 120) + "..." : item.description}</p>
                                         <div className="Resort">
                                             <ul className="list-inline">
 

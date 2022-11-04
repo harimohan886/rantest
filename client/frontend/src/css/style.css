@@ -1772,6 +1772,7 @@ border-left:1px solid #5d5d5d;
     background-color: #f4f4f4;
     border-radius: 12px;
     box-shadow: 0px 3px 6px #00000047;
+	min-height: 250px;
 }
 .packages-listing h2 {
     font-size: 24px;
@@ -1791,7 +1792,7 @@ border-left:1px solid #5d5d5d;
     color: orange;
 }
 .package-margin .package-detail {
-    width: 65%;
+    width: 78%;
     float: left;
 }
 .packages-listing .package-detail ul li{
@@ -1804,6 +1805,7 @@ border-left:1px solid #5d5d5d;
     padding: 4px 7px;
     border-radius: 3px;
 	font-weight: bold;
+	font-size: 13px;
 }
 .package-margin .price-from {
     float: right;
@@ -1811,24 +1813,26 @@ border-left:1px solid #5d5d5d;
     text-align: end;
 }
 .price-from h6 {
-    font-size: 18px;
+    font-size: 14px;
     letter-spacing: -0.2px;
     margin-bottom: 0px;
     font-weight: bold;
     color: #000;
+	line-height: 10px;
+    margin-top: 12px;
 }
 .price-from .price {
     margin-bottom: 10px;
 }
 .price i {
     color: #851b18;
-    font-size: 28px;
+    font-size: 26px;
     margin-right: 5px;
 }
 .price b {
     color: #851b18;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
 }
 .price span {
@@ -1841,7 +1845,7 @@ border-left:1px solid #5d5d5d;
 }
 .package-margin .price-from .findButton .btn-danger{
 	padding: 8px 14px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }
 .destination {
@@ -3135,7 +3139,7 @@ line-height: 26px;
 	line-height: 22px;
   }
   .packages-listing p{
-	margin-bottom: 15px;
+	margin-bottom: 0px;
   }
   .packages-listing h2{
 	font-size: 21px;
