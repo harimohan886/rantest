@@ -1726,6 +1726,9 @@ border-left:1px solid #5d5d5d;
     background: #f3f9ff !important;
     position: relative;
 }
+.fc .fc-daygrid-day.fc-day-past .fc-daygrid-day-top {
+    opacity: 0.3;
+}
 .fc-day-today .fc-daygrid-day-number{
 	color: #000 !important;
 	font-weight: bold;
