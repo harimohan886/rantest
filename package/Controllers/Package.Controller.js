@@ -280,10 +280,10 @@ module.exports = {
         });
     }
 
-    await imageUpload(req);
+    const fileName = await imageUpload(req);
 
     if (req.file) {
-      req.body.image = req.file.path;
+      req.body.image = fileName;
     }
 
     const package = new Package(req.body);

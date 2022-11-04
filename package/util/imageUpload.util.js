@@ -7,7 +7,7 @@ const imageUpload = async (req) => {
 		const { filename: image } = req.file;
 
 		const filename = req.file.originalname.replace(/\..+$/, "");
-	const newFilename = `${filename}-${Date.now()}.jpg`;
+		const newFilename = `${filename}-${Date.now()}.jpg`;
       
        await sharp(req.file.path)
         .resize(280, 252, {fit:"contain"})
@@ -15,7 +15,9 @@ const imageUpload = async (req) => {
         .toFile(
             path.resolve(req.file.destination,newFilename)
         )
+        console.log(req.file.path);
         fs.unlinkSync(req.file.path)
+        return req.file.destination+''+newFilename;
 	} catch (error) {
 		console.log(error);
 	}
