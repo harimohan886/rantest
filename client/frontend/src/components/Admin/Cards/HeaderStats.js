@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// components
 
 import CardStats from "./CardStats";
 
 export default function HeaderStats({ total_enquiries }) {
 
-  const [hotelCount, setHotelCount] = useState('0');
+  const [hotelCount, setHotelCount] = useState(0);
   const [customerCount, setCustomerCount] = useState(0);
   const [packageCount, setPackageCount] = useState(0);
 
@@ -26,8 +25,6 @@ export default function HeaderStats({ total_enquiries }) {
     try {
 
       const resultCustomer = await axios.get(`${process.env.REACT_APP_BASE_URL}/admin/customers/dashboard/`);
-
-      console.log('resultCustomer',resultCustomer);
 
       setCustomerCount(resultCustomer.data.data);
 
@@ -66,7 +63,7 @@ export default function HeaderStats({ total_enquiries }) {
                 <CardStats
                   statBgColor="bg-hotel-maroon"
                   statSubtitle="Hotels"
-                  statTitle={hotelCount.toString()}
+                  statTitle={hotelCount}
                   statDescripiron="Total hotels available"
                   statIconName="fas fa-hotel"
                   statIconColor="text-white"
@@ -86,7 +83,7 @@ export default function HeaderStats({ total_enquiries }) {
                 <CardStats
                   statBgColor="bg-customer-brown"
                   statSubtitle="Enquiries"
-                  statTitle={total_enquiries.toString()}
+                  statTitle={total_enquiries}
                   statDescripiron="Since 2022"
                   statIconName="fas fa-users"
                   statIconColor="text-white"
