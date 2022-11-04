@@ -49,15 +49,15 @@ export default function ChangePassword() {
             <form>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Current password*</label>
-                    <input type="text" id="currentPass"  onChange= {(e) => setPwdCurrConf(e.target.value)} placeholder='Enter current password' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="currentPass"  onChange= {(e) => setPwdCurrConf(e.target.value)} placeholder='Enter current password' className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">New password*</label>
-                    <input type="text" id="newPass" onChange= {(e) => setPwd(e.target.value)} placeholder='Enter new password' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="newPass" onChange= {(e) => setPwd(e.target.value)} placeholder='Enter new password' className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">New password confirmation*</label>
-                    <input type="text" id="confirmNewPass"  onChange= {(e) => setPwdConf(e.target.value)} placeholder='Confirm new password' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="confirmNewPass"  onChange= {(e) => setPwdConf(e.target.value)} placeholder='Confirm new password' className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div> 
                 <div className='form-group mt-2'>
                     <button type="button"  onClick={HandleSubmit} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>

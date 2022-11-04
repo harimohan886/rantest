@@ -124,7 +124,7 @@ export default function PackageBooking() {
             <form className="grid grid-cols-4 gap-4 mt-2 mb-2">
                     <div className='controlEnquiryDate'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Date</label>
-                        <DatePicker selected={filterDate} onChange={(date) => setFilterDate(date)} />
+                        <DatePicker placeholderText={'Please select a date'} selected={filterDate} onChange={(date) => setFilterDate(date)} />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Phone number</label>

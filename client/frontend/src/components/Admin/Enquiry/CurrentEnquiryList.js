@@ -115,7 +115,8 @@ export default function CurrentEnquiryList() {
         }
             
         </tbody>
-        <ReactPaginate
+    </table>
+    <ReactPaginate
             previousLabel={"previous"}
             nextLabel={"next"}
             breakLabel={"..."}
@@ -134,7 +135,6 @@ export default function CurrentEnquiryList() {
             breakLinkClassName={"page-link"}
             activeClassName={"active"}
           />
-    </table>
     </>
   )
 }

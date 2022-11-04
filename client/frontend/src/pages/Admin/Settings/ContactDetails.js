@@ -69,19 +69,19 @@ export default function ContactDetails() {
             </div>
             <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Phone Number</label>
-                    <input type="text" id="phone" value = {phone} placeholder='Phone Number' onChange = {(e) => setPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="phone" value = {phone} placeholder='Phone Number' onChange = {(e) => setPhone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Alt. Phone Number</label>
-                    <input type="text" id="altPhone"value = {altphone}  placeholder='Alt. Phone Number' onChange = {(e) => setAltPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="altPhone"value = {altphone}  placeholder='Alt. Phone Number' onChange = {(e) => setAltPhone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Second Alt. Phone Number</label>
-                    <input type="text" id="altPhone" value = {altphone2}  placeholder='Second Alt. Phone Number' onChange = {(e) => setAltPhone2(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="text" id="altPhone" value = {altphone2}  placeholder='Second Alt. Phone Number' onChange = {(e) => setAltPhone2(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Contact Email</label>
-                    <input type="email" id="contactEmail" value = {email} placeholder='Contact Email' onChange = {(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                    <input type="email" id="contactEmail" value = {email} placeholder='Contact Email' onChange = {(e) => setEmail(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div> 
                 <div className='form-group'>
                     <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Contact Address</label>
