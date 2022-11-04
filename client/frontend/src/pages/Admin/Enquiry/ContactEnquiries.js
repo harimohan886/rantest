@@ -109,22 +109,22 @@ export default function ContactEnquiries() {
                         <h1 className='text-2xl text-black font-bold mb-3'>Contact Enquiries</h1>
                     </div>
 
-                    <form className="grid grid-cols-6 gap-4 mt-2 mb-2" onSubmit={getFilterData}>
+                    <form className="grid grid-cols-5 gap-4 mt-2 mb-2" onSubmit={getFilterData}>
                         <div className='form-group'>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer Name</label>
-                            <input type="text" id="name" onChange={(e) => setCustomer(e.target.value)} placeholder="Customer Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                            <input type="text" id="name" onChange={(e) => setCustomer(e.target.value)} placeholder="Customer Name" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                         <div className='form-group'>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone number</label>
-                            <input type="number" id="phNumber" onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                            <input type="number" id="phNumber" onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                         <div className='form-group'>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                            <input type="text" id="Email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                            <input type="text" id="Email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                         <div className='form-group'>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Added Date</label>
-                            <DatePicker selected={createdDate} dateFormat="yyyy-MM-dd" onChange={date => setCreatedDate(date)} />
+                            <DatePicker placeholderText={'Please select a date'} selected={createdDate} dateFormat="yyyy-MM-dd" onChange={date => setCreatedDate(date)} />
                         </div>
                         <div className='form-group'>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
