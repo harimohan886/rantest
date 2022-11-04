@@ -21,7 +21,7 @@ export default function BookingDetails({details}) {
                     <tr>
                         <td className='border border-slate-300 text-center'>{details.date}</td>
                         <td className='border border-slate-300 text-center'>{details.package_name}</td>
-                        <td className='border border-slate-300 text-center'>{details.room_type}</td>
+                        <td className='border border-slate-300 text-center'>{details.category_name}</td>
                         <td className='border border-slate-300 text-center'>{details.nationality_type}</td>
                         <td className='border border-slate-300 text-center'>{details.no_of_kids}</td>
                         <td className='border border-slate-300 text-center'>{details.no_of_rooms}</td>
