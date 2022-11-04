@@ -362,19 +362,19 @@ module.exports = {
      switch (Number(req.body.zone)) {
       case 1:
       var booking_name = 'Chambal safari booking';
-      var booking_option = 'Cambal Safari Option 1';
+      var booking_option = 'Chambal Safari Option 1';
       break;
       case 2:
       var booking_name = 'Chambal Safari Booking with Pickup and Drop from Resort';
-      var booking_option = 'Cambal Safari Option 2';
+      var booking_option = 'Chambal Safari Option 2';
       break;
       case 3:
       var booking_name = 'Chambal Safari Booking with Lunch';
-      var booking_option = 'Cambal Safari Option 3';
+      var booking_option = 'Chambal Safari Option 3';
       break;
       case 4:
       var booking_name = 'Chambal Safari Booking with Luch including Pickup and Drop from Resort';
-      var booking_option = 'Cambal Safari Option 4';
+      var booking_option = 'Chambal Safari Option 4';
       break;
     }  
 
