@@ -5,7 +5,7 @@ const ContactUsSchema = new Schema({
 	name: {
 		type: String
 	},
-	mobile: {
+	phone: {
 		type: String
 	},
 	email: {
@@ -14,7 +14,7 @@ const ContactUsSchema = new Schema({
 	message: {
 		type: String
 	},
-	addedAt: {
+	createdAt: {
 		type: String
 	}
 },

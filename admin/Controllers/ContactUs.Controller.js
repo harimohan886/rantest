@@ -1,8 +1,8 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
- fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) =>
+  fetch(...args));
 
 const ContactUs = require('../Models/ContactUs.model');
 
@@ -12,7 +12,7 @@ module.exports = {
 
       const filter_created_at = req.query.filter_created_at
         ? {
-          addedAt: {
+          createdAt: {
             $regex: req.query.filter_created_at
           }
         }
@@ -36,10 +36,10 @@ module.exports = {
         }
         : {};
 
-      const filter_mobile = req.query.filter_mobile
+      const filter_phone = req.query.filter_phone
         ? {
-          mobile: {
-            $regex: req.query.filter_mobile,
+          phone: {
+            $regex: req.query.filter_phone,
             $options: "i",
           }
         }
@@ -56,9 +56,9 @@ module.exports = {
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var totalPosts = await ContactUs.find({ ...filter_email, ...filter_name, ...filter_mobile, ...filter_created_at }).countDocuments().exec();
+      var totalPosts = await ContactUs.find({ ...filter_email, ...filter_name, ...filter_phone, ...filter_created_at }).countDocuments().exec();
 
-      const data = await ContactUs.find({ ...filter_email, ...filter_name, ...filter_mobile, ...filter_created_at }, {createdAt: 0, updatedAt: 0, __v:0},
+      const data = await ContactUs.find({ ...filter_email, ...filter_name, ...filter_phone, ...filter_created_at }, { createdAt: 0, updatedAt: 0, __v: 0 },
         query).sort({ $natural: -1 });
 
       if (!data) {
@@ -83,7 +83,7 @@ module.exports = {
       var yyyy = today.getFullYear();
       today = yyyy + '-' + mm + '-' + dd;
 
-      req.body.addedAt = today;
+      req.body.createdAt = today;
 
       const date = new ContactUs(req.body);
 

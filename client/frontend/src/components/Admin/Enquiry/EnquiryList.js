@@ -28,7 +28,7 @@ export default function EnquiryList({ enquiries, type }) {
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>ID</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Date</th>
+                        {type !== 'contact' && <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Date</th>}
                         {type === 'hotel' && <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Hotel</th>}
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Phone</th>
@@ -43,9 +43,9 @@ export default function EnquiryList({ enquiries, type }) {
                     {enquiries && enquiries?.map((item, index) => (
                         <tr key={index}>
                             <td className='border border-slate-300 text-center'>{index + 1}</td>
-                            <td className='border border-slate-300 text-center'>{item.booking_date}</td>
+                            {type !== 'contact' && <td className='border border-slate-300 text-center'>{item.booking_date}</td>}
                             {type === 'hotel' && <td className='border border-slate-300 text-center'>{item.hotel}</td>}
-                            <td className='border border-slate-300 text-center'>{item.traveller_name}</td>
+                            <td className='border border-slate-300 text-center'>{type === 'contact' ? item?.name : item.traveller_name}</td>
                             <td className='border border-slate-300 text-center'>{item.phone}</td>
                             <td className='border border-slate-300 text-center'>{item.message}</td>
                             <td className='border border-slate-300 text-center'><span className='bg-enquiry-brown text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs p-1 text-center inline-flex items-center mr-2'>{item.type}</span></td>

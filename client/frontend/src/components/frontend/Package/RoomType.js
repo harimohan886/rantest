@@ -11,7 +11,7 @@ export default function RoomType({ packages, type }) {
 
 
                 {packages?.categories?.map((list, lindex) => (
-                    <li key={lindex} className="nav-item">
+                    <li key={lindex.toString()} className="nav-item">
                         <a className={`nav-link ${lindex === 0 ? 'active' : ''}`} data-toggle="tab" href={`#tab-cat${type}${lindex}`} role="tab" aria-controls={`tab-cat${type}${lindex}`} >{list.category}</a>
                     </li>
 
@@ -21,7 +21,7 @@ export default function RoomType({ packages, type }) {
 
                 {packages?.categories?.map((list, lindex) => (
                     <>
-                        <div key={lindex} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${type}${lindex}`}>
+                        <div key={lindex.toString()} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${type}${lindex}`}>
                             <ContentImage hotels={list.hotels} counterkey={type + lindex} />
 
                             {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} /> : <PackagePricing optionData={list?.foreignerOptions} />}
