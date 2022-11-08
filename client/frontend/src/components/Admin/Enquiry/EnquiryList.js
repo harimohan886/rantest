@@ -24,6 +24,7 @@ export default function EnquiryList({ enquiries, type }) {
 
     return (
         <>
+        <div className='table-responsive'>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
@@ -68,7 +69,7 @@ export default function EnquiryList({ enquiries, type }) {
                     }
                 </tbody>
             </table>
-
+            </div>
 
 
 

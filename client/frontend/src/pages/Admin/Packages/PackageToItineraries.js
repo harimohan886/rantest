@@ -88,12 +88,13 @@ export default function PackageToItineraries() {
             <Sidebar />
             <Navbar />
             <div className="flex flex-wrap min600">
-                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 hotel">
                     <div className='mt-4'>
                         <h1 className='text-2xl text-black font-bold mb-3'>Package Itinerary</h1>
                     </div>
                     <div className='iternaryForm'>
                         <button type="button" onClick={addElement} className='text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center mb-4'>Add Slot</button>
+                        <div className='tabel-responsive'>
                         <table className='table bg-white border border-slate-300 mt-2 indianCategory'>
                             <thead>
                                 <tr>
@@ -118,6 +119,7 @@ export default function PackageToItineraries() {
                             ))}
                             </tbody>
                         </table>
+                        </div>
 
                         <button type="button" onClick={HandleSubmit} className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'>
                             Save

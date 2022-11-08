@@ -78,6 +78,7 @@ export default function ForeignCategory({ action, package_id }) {
     <div className='indianForm'>
       <h5 className='mt-8 text-black'>Category Options (For Foreigner)</h5> &nbsp;
       <button type="button" onClick={() => addFormFields()} className='text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center mb-4'>Add Slot</button>
+      <div className='table-responsive'>
       <table className='table bg-white border border-slate-300 mt-2 indianCategory'>
         <thead>
           <tr>
@@ -110,6 +111,7 @@ export default function ForeignCategory({ action, package_id }) {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ export default function PackageAssets({ data, handleDelete, type, editType = '' 
 
 
     return (
+        <div className='table-responsive'>
         <table className='table bg-white border border-slate-300 mt-4'>
             <thead>
                 <tr>
@@ -41,5 +42,6 @@ export default function PackageAssets({ data, handleDelete, type, editType = '' 
                     </tr>))}
             </tbody>
         </table >
+        </div>
     )
 }

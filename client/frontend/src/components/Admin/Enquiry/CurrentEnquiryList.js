@@ -74,6 +74,7 @@ export default function CurrentEnquiryList() {
   return (
     <>
     <CurrentEnquiryFilter onSubmit={getFilterData} onReset={resetData}/>
+    <div className='table-responsive'>
     <table className='table bg-white border border-slate-300 mt-4'>
         <thead>
             <tr>
@@ -116,6 +117,7 @@ export default function CurrentEnquiryList() {
             
         </tbody>
     </table>
+    </div>
     <ReactPaginate
             previousLabel={"previous"}
             nextLabel={"next"}

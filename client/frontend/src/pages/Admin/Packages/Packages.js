@@ -125,7 +125,7 @@ export default function Packages() {
       <Sidebar />
       <AdminNavbar />
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 hotel pack">
           <div className="grid grid-cols-2 gap-4">
             <div className='mt-4'>
               <h1 className='text-2xl text-black font-bold mb-3'>Packages</h1>
@@ -157,14 +157,14 @@ export default function Packages() {
                 <option value="0">Not available</option>
               </select>
             </div>
-            <div className='form-group'>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
+            <div className='form-group margin'>
+              {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label> */}
               <button type='button' onClick={HandleFilter} className="min-150 text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                 <i className="fas fa-filter mr-2"></i> Filter
               </button>
             </div>
-            <div className='form-group'>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label>
+            <div className='form-group margin'>
+              {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">&nbsp;</label> */}
               <button type='button' onClick={HandleReset} className="min-150 text-white bg-hotel-maroon hover:bg-hotel-maroon focus:ring-4 focus:outline-none focus:bg-hotel-maroon font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                 <i className="fas fa-filter mr-2"></i> Reset
               </button>

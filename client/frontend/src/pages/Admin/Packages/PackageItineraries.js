@@ -56,7 +56,7 @@ export default function PackageItineraries() {
       <Sidebar />
       <AdminNavbar />
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 hotel">
           <div className="grid grid-cols-2 gap-4">
             <div className='mt-4'>
               <h1 className='text-2xl text-black font-bold mb-3'>Tour Itineraries</h1>
@@ -65,6 +65,7 @@ export default function PackageItineraries() {
               <Link to='/admin/add-package-itinerary' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add</Link>
             </div>
           </div>
+          <div className='table-responsive'>
           <table className='table bg-white border border-slate-300 mt-4'>
             <thead>
               <tr>
@@ -93,7 +94,7 @@ export default function PackageItineraries() {
                     <i className="fas fa-trash"></i>
                   </button>
                 </td>
-              </tr>))}</tbody></table>
+              </tr>))}</tbody></table></div>
         </div>
       </div>
       <FooterAdmin />

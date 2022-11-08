@@ -274,4 +274,8 @@ table thead tr th {
 .margin {
   margin-top: 0;
 }
+.pack .bg-success {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
 }

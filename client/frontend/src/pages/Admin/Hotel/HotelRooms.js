@@ -57,6 +57,7 @@ export default function HotelRooms() {
                             <Link to={`/admin/add-room/${params.id}`} type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Room</Link>
                         </div>
                     </div>
+                    <div className='table-responsive'>
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>
@@ -88,6 +89,7 @@ export default function HotelRooms() {
                             ))}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
             <FooterAdmin />

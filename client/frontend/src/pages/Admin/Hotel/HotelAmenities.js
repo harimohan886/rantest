@@ -133,6 +133,7 @@ export default function HotelAmenities() {
                         </div>
                     </div>
                     {hotel_id && <AmenityStatus hotelId={hotel_id} amenities={amenities} />}
+                    <div className='table-responsive'>
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>
@@ -206,7 +207,7 @@ export default function HotelAmenities() {
 
                         </tbody>
                     </table>
-
+                    </div>
 
                     {!hotel_id && <ReactPaginate
                         previousLabel={"previous"}
