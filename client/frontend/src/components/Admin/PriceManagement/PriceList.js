@@ -54,6 +54,7 @@ export default function PriceList( { type } ) {
       </Link>
     </div>
     <div className='clear-right'></div>
+    <div className='table-responsive'>
         <table className='table bg-white border border-slate-300 mt-4'>
              <thead>
                  <tr>
@@ -105,6 +106,7 @@ export default function PriceList( { type } ) {
                     ))}
                 </tbody>
          </table>
+         </div>
     </>
   )
 }

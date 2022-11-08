@@ -135,8 +135,8 @@ export default function RanthamboreDates() {
       <Sidebar/>
       <AdminNavbar/>
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-            <div className="grid grid-cols-3 gap-4">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 gridstyle">
+            <div className="grid grid-cols-3 gap-4 ">
                 <div>
                     <h1 className='text-2xl text-black font-bold mb-3'>Ranthambore Dates</h1>
                     <div className='mt-2'>
@@ -164,6 +164,7 @@ export default function RanthamboreDates() {
                     <Link to='/admin/add-ranthambore-dates' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Create Event</Link>
                 </div>
             </div>
+            <div className='table-responsive'>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
@@ -196,6 +197,7 @@ export default function RanthamboreDates() {
                     )) }
                 </tbody>
             </table>
+            </div>
                     <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

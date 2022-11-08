@@ -182,6 +182,9 @@ table tbody tr td{
 .bg-green-700{
   background: #1f5fbc !important;
 }
+.margin {
+  margin-top: 29px;
+}
 @media (max-width: 767px){
 .md\:ml-64{
   margin-left: 0rem !important;
@@ -197,5 +200,78 @@ table tbody tr td{
   background: #fff !important;
   height: 40px !important;
   margin-top: 25px;
+}
+.latestUsers h2 {
+  font-size: 18px;
+}
+.latestUsers table tbody tr td button {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+table tbody tr td {
+  font-size: 12px;
+  padding: 5px !important;
+}
+table thead tr th {
+  font-size: 12px;
+  padding: 5px !important;
+}
+.grid {
+  display: block;
+}
+.padding-top80 {
+  padding-top: 25px;
+}
+.gridstyle {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.react-datepicker__input-container input {
+  min-width: 160px !important;
+  width: 160px !important;
+}
+.gridstyle .mt-50 {
+  margin-top: 20px;
+}
+.gridstyle .mt-77 {
+  margin-top: 20px;
+}
+.gridstyle .mt-77 a{
+  width: 100%;
+}
+.bg-hotel-maroon {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+.Chambal-Dates .flex {
+  display: initial;
+}
+.Chambal-Dates .flex .react-datepicker__input-container input {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+.Chambal-Dates .flex button {
+  width: 100% !important;
+  margin-left: 0px !important;
+  margin-bottom: 10px;
+}
+.max193 {
+  max-width: 100%;
+}
+.mt-50 {
+  margin-top: 0px;
+}
+.controlEnquiryDate .react-datepicker__input-container input {
+  height: 42px;
+  width: 100% !important;
+}
+.hotel .mt-4 a {
+  margin-top: -55px;
+}
+.min-150 {
+  min-width: auto;
+}
+.margin {
+  margin-top: 0;
 }
 }

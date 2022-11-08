@@ -168,11 +168,12 @@ export default function Customers() {
                     </button>
                 </div>
             </form>
+            <div className='table-responsive'>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date Time</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Bokking Type</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Type</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Email</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Mobile Number</th>
@@ -198,6 +199,7 @@ export default function Customers() {
                     ))}
                 </tbody>
             </table>
+            </div>
                     <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

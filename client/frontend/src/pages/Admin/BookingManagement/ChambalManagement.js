@@ -167,6 +167,7 @@ export default function ChambalManagement() {
                         </button>
                     </div>
                 </form>
+                <div className='table-responsive'>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
@@ -202,6 +203,7 @@ export default function ChambalManagement() {
                     ))}
                 </tbody>
             </table>
+            </div>
                    <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

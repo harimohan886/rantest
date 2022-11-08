@@ -12,7 +12,7 @@ export default function Hotels() {
       <Sidebar />
       <AdminNavbar />
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 hotel">
           <div className="grid grid-cols-2 gap-4">
             <div className='mt-4'>
               <h1 className='text-2xl text-black font-bold mb-3'>Hotels</h1>
@@ -21,7 +21,9 @@ export default function Hotels() {
               <Link to='/admin/add-hotel' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Hotel</Link>
             </div>
           </div>
+          
           <HotelListing />
+          
         </div>
       </div>
       <FooterAdmin />

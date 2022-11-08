@@ -5,6 +5,7 @@ export default function Listing() {
 
   return (
     <>
+        <div className='table-responsive'>
         <table className='table bg-white border border-slate-300'>
             <thead>
                 <tr>
@@ -60,6 +61,7 @@ export default function Listing() {
                 </tr>
             </tbody>
         </table>
+        </div>
      </>
   )
 }

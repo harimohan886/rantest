@@ -138,7 +138,8 @@ export default function ChambalDates() {
       <Sidebar/>
       <AdminNavbar/>
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 gridstyle Chambal-Dates
+">
             <div className="grid grid-cols-3 gap-4">
                 <div>
                     <h1 className='text-2xl text-black font-bold mb-3'>Chambal Dates</h1>
@@ -166,6 +167,7 @@ export default function ChambalDates() {
                     <Link to='/admin/add-chambal-dates' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add</Link>
                 </div>
             </div>
+            <div className='table-responsive'>
             <table className='table bg-white border border-slate-300 mt-4'>
                 <thead>
                     <tr>
@@ -193,6 +195,7 @@ export default function ChambalDates() {
                      )) }
                 </tbody>
             </table>
+            </div>
                     <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

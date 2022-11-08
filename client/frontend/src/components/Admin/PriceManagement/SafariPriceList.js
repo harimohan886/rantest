@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 export default function SafariPriceList() {
 
   return (
-    <>
+    <>      
+    <div className='table-responsive'>
              <table className='table bg-white border border-slate-300 mt-4'>
              <thead>
                  <tr>
@@ -43,7 +44,7 @@ export default function SafariPriceList() {
                  </tr>
              </tbody>
          </table>
- 
+         </div>    
      
 
            </>
