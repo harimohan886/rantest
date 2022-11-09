@@ -73,6 +73,7 @@ export default function RoomFacilities() {
                             <Link to='/admin/add-room-facility' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Facility</Link>
                         </div>
                     </div>
+                    <div className='table-responsive'>
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>
@@ -113,6 +114,7 @@ export default function RoomFacilities() {
                             }
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
             <FooterAdmin />

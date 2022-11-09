@@ -96,7 +96,8 @@ export default function PackageCategories() {
             <Sidebar />
             <Navbar />
             <div className="flex flex-wrap min600">
-                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 Package-Categories
+">
                     <div className="grid grid-cols-2 gap-4">
                         <div className='mt-4'>
                             <h1 className='text-2xl text-black font-bold mb-3'>Package Categories</h1>
@@ -106,6 +107,7 @@ export default function PackageCategories() {
                         </div>
                     </div>
                     <h3 className='text-lg bg-danger text-white p-2 mt-2'>{packages}</h3>
+                    <div className='table-responsive'>
                     <table className='table bg-white border border-slate-300 mt-4'>
                         <thead>
                             <tr>
@@ -133,6 +135,7 @@ export default function PackageCategories() {
                             ))}
                         </tbody>
                     </table>
+                    </div>
                     <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

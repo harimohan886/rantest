@@ -79,7 +79,7 @@ export default function AddPackage() {
             <Sidebar />
             <Navbar />
             <div className="flex flex-wrap min600">
-                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+                <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 formstyle">
                     <div className='mt-4'>
                         <h1 className='text-2xl text-black font-bold mb-3'>Add Package</h1>
                     </div>

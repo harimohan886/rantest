@@ -121,7 +121,7 @@ export default function SafariManagement() {
       <Sidebar />
       <AdminNavbar />
       <div className="flex flex-wrap min600">
-        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80 formstyle">
             <h1 className='text-2xl text-black font-bold mb-3'>Safari Booking</h1>
                 <form className="grid grid-cols-4 gap-4 mt-2 mb-2">
                     <div className='controlEnquiryDate'>

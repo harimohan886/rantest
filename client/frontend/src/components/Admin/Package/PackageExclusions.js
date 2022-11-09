@@ -93,7 +93,8 @@ export default function PackageExclusions({ packageId, exclusions }) {
 
   return (
     <>
-      <div>Package exclusions</div>
+    <div className='AmenityStatus'>
+      <div className='status'>Package exclusions</div>
       <div className='flex'>
         <div>
           <Select
@@ -105,6 +106,7 @@ export default function PackageExclusions({ packageId, exclusions }) {
           />
         </div>
         <div><button type="button" onClick={updateStatus} className="text-white float-right bg-danger font-medium rounded px-5 py-2.5 text-center">Update</button></div>
+      </div>
       </div>
     </>
   )

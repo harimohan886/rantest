@@ -90,7 +90,8 @@ export default function AmenityStatus({ hotelId, amenities }) {
 
   return (
     <>
-      <div>AmenityStatus</div>
+    <div className='AmenityStatus'>
+      <div className='status'>AmenityStatus</div>
       <div className='flex'>
         <div>
           <Select
@@ -102,6 +103,7 @@ export default function AmenityStatus({ hotelId, amenities }) {
           />
         </div>
         <div><button type="button" onClick={updateStatus} className="text-white float-right bg-danger font-medium rounded px-5 py-2.5 text-center">Update</button></div>
+      </div>
       </div>
     </>
   )

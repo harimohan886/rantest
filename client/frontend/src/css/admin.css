@@ -264,6 +264,7 @@ table thead tr th {
 .controlEnquiryDate .react-datepicker__input-container input {
   height: 42px;
   width: 100% !important;
+  margin-bottom: 10px;
 }
 .hotel .mt-4 a {
   margin-top: -55px;
@@ -277,5 +278,62 @@ table thead tr th {
 .pack .bg-success {
   padding-left: 15px !important;
   padding-right: 15px !important;
+}
+.formstyle div input {
+  margin-bottom: 10px;
+}
+.formstyle div select {
+  margin-bottom: 10px;
+}
+.dropdown-menu.show a {
+  font-size: 13px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  display: inline-block;
+  width: 100%;
+}
+.dropdown.show button {
+  font-size: 13px;
+  width: 100%;
+  padding: 9px !important;
+}
+.dropdown .bg-danger {
+  font-size: 12px;
+  padding: 9px;
+}
+.setReactSelect {
+  min-width: auto;
+}
+#file_input {
+  width: 100%;
+}
+.AmenityStatus .flex {
+  display: inline-block;
+  width: 100%;
+}
+.setReactSelect .css-1s2u09g-control {
+  height: auto;
+  margin-right: 0;
+  margin-top: 10px;
+}
+.AmenityStatus .flex div button {
+  width: 100%;
+  margin-top: 10px;
+}
+.AmenityStatus .status {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+}
+.amenities .bg-success {
+  width: 100%;
+}
+.Package-Categories .mt-4 a.bg-success {
+  width: 100%;
+}
+.Package-Categories h3 {
+  margin-top: 15px !important;
+  display: inline-block;
+  width: 100%;
 }
 }
