@@ -154,6 +154,10 @@ export default function Sidebar() {
                               <i className="fas fa-dot-circle mr-2"></i> Ranthambore Dates </Link>
                           </li>
                           <li className="items-center">
+                            <Link to="/admin/zone-categories" className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block">
+                              <i className="fas fa-dot-circle mr-2"></i> Zone Categories </Link>
+                          </li>
+                          <li className="items-center">
                             <Link to='/admin/chambal-dates' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i>Chambal Blocked Dates </Link>
                           </li>
                         </ul>

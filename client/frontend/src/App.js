@@ -121,6 +121,8 @@ import { verifyToken } from "./pages/Admin/Auth/apiCalls";
 import ChambalManagement from './pages/Admin/BookingManagement/ChambalManagement';
 import ViewChambalBooking from './pages/Admin/BookingManagement/ViewChambalBooking';
 import ContactEnquiries from './pages/Admin/Enquiry/ContactEnquiries';
+import ZoneCategory from './pages/Admin/SafariDates/ZonesCategory';
+import EditZone from './pages/Admin/SafariDates/EditZone';
 
 const options = {
   timeout: 2000,
@@ -184,6 +186,8 @@ function App() {
 
 
             <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
+            <Route exact path="/admin/zone-categories" element={<ZoneCategory />} />
+            <Route exact path="/admin/edit-zone" element={<EditZone />} />
             <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
             <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
             <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />
