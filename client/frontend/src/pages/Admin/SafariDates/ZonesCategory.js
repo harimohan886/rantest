@@ -53,7 +53,7 @@ export default function ZoneCategory() {
                                 <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/edit-zone/${item._id}`} >
                                     <i class="fas fa-pencil"></i>
                                 </Link>
-                                <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
+                                {/* <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a> */}
                             </td>
                          </tr>
                     )) }
