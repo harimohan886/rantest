@@ -13,12 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 const PriceRoute = require('./Routes/Price.route');
 app.use('/prices', PriceRoute);
 
+const ZoneCategoryRoute = require('./Routes/ZoneCategory.route');
+app.use('/zone-categories', ZoneCategoryRoute);
 
 const DateRoute = require('./Routes/Date.route');
 app.use('/dates', DateRoute);
 
 const SafariRoute = require('./Routes/Safari.route');
 app.use('/', SafariRoute);
+
+const SeedDataRoute = require('./Routes/SeedData.route');
+app.use('/seed-data', SeedDataRoute);
 
 
 // 404 handler and pass to error handler
