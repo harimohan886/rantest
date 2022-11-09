@@ -4,6 +4,7 @@ export default function CustomerDetails({ details }) {
   return (
     <div>
         <h2 className='text-2xl text-black font-bold mb-2 mt-12'>Customer Details</h2>
+        <div className='table-responsive'>
         <table className='table bg-white border border-slate-300'>
             <thead>
                 <tr>
@@ -24,6 +25,7 @@ export default function CustomerDetails({ details }) {
                    
             </tbody>
         </table>
+        </div>
     </div>
   )
 }

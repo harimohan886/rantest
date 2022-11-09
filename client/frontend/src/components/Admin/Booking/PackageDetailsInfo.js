@@ -4,6 +4,7 @@ export default function PackageDetailsInfo({ details }) {
   return (
     <div>
         <h1 className='text-2xl text-black font-bold mb-2'>Booking Details</h1>
+        <div className='table-responsive'>
         <table className='table bg-white border border-slate-300'>
             <thead>
                 <tr>
@@ -24,6 +25,7 @@ export default function PackageDetailsInfo({ details }) {
                 }   
             </tbody>
         </table>
+        </div>
     </div>
   )
 }

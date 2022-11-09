@@ -44,6 +44,7 @@ export default function ViewSafariBooking() {
             <BookingDetails details = {details} />
             <CustomerDetails details = {customers} />
             <h3 className='text-2xl text-black font-bold mb-2 mt-12'>Traveller Details</h3>
+            <div className='table-responsive'>
             <table className='table bg-white border border-slate-300'>
                 <thead>
                     <tr>
@@ -68,6 +69,7 @@ export default function ViewSafariBooking() {
                    
                 </tbody>
             </table>
+            </div>
         </div>
       </div>
       <FooterAdmin/>
