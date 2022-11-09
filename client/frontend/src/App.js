@@ -187,7 +187,7 @@ function App() {
 
             <Route exact path='/admin/dashboard' element={<AdminDashboard />} />
             <Route exact path="/admin/zone-categories" element={<ZoneCategory />} />
-            <Route exact path="/admin/edit-zone" element={<EditZone />} />
+            <Route exact path="/admin/edit-zone/:id" element={<EditZone />} />
             <Route exact path="/admin/ranthambore-dates" element={<RanthamboreDates />} />
             <Route exact path="/admin/add-ranthambore-dates" element={<CreateRanthamboreDates />} />
             <Route exact path="/admin/edit-ranthamboreDates/:id" element={<EditRanthamboreDates />} />

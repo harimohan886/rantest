@@ -1,11 +1,30 @@
-import React from 'react'
+import React  , { useState , useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar'
 import Navbar from '../../../components/Admin/Navbar/AdminNavbar'
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin'
-
+import axios from 'axios'
 
 export default function ZoneCategory() {
+
+  const [details , setDetails] = useState([]);
+  
+  useEffect( () =>  {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
+        headers: {
+        'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+        },
+        }).then(result => { 
+            if(result.data.data.length > 0) {
+                setDetails(result.data.data);
+            } else {
+                setDetails([]);
+            }
+         })  
+    },[]);
+
   return (
     <div className="relative md:ml-64 bg-default-skin">
      <Sidebar/>
@@ -24,140 +43,21 @@ export default function ZoneCategory() {
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>1</td>
-                        <td className='border border-slate-300 text-center'>Zone 1</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>2</td>
-                        <td className='border border-slate-300 text-center'>Zone 2</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>3</td>
-                        <td className='border border-slate-300 text-center'>Zone 3</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>4</td>
-                        <td className='border border-slate-300 text-center'>Zone 4</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>5</td>
-                        <td className='border border-slate-300 text-center'>Zone 5</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>6</td>
-                        <td className='border border-slate-300 text-center'>Zone 6</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>7</td>
-                        <td className='border border-slate-300 text-center'>Zone 7</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>8</td>
-                        <td className='border border-slate-300 text-center'>Zone 8</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>9</td>
-                        <td className='border border-slate-300 text-center'>Zone 9</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>10</td>
-                        <td className='border border-slate-300 text-center'>Zone 10</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>11</td>
-                        <td className='border border-slate-300 text-center'>Zone 11</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className='border border-slate-300 text-center'>12</td>
-                        <td className='border border-slate-300 text-center'>Zone 12</td>
-                        <td className='border border-slate-300 text-center'>Available</td>
-                        <td class="border border-slate-300 text-center">
-                            <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/admin/edit-zone">
-                                <i class="fas fa-pencil"></i>
-                            </Link>
-                            <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
+                 <tbody>
+                    { details && details.map((item,index) => (
+                         <tr>
+                            <td className='border border-slate-300 text-center'>{index+1}</td>
+                            <td className='border border-slate-300 text-center'>{item.name}</td>
+                            <td className='border border-slate-300 text-center'>{item.availability == 1 ? 'Available' : 'NA'}</td>
+                            <td class="border border-slate-300 text-center">
+                                <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/edit-zone/${item._id}`} >
+                                    <i class="fas fa-pencil"></i>
+                                </Link>
+                                <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a>
+                            </td>
+                         </tr>
+                    )) }
+                 </tbody>
             </table>
         </div>
       </div>
