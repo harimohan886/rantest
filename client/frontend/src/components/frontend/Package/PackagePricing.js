@@ -24,7 +24,7 @@ export default function PackagePricing({ optionData, packageName }) {
 
 
     const submit = () => {
-        if (name == '' || number == '' || email == '' || country == '' || states == '' || date == '') {
+        if (name == '' || number == '' || email == '' || date == '') {
             swal("Please fill all feilds to proceed");
 
         } else if (choose == '') {
