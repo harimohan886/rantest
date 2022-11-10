@@ -55,6 +55,10 @@ export default function Sidebar() {
       setShowPackages('');
     }
 
+    if (window.location.href.indexOf("zone-categories") > -1) {
+      setShowDates('show');
+    }
+
   },[]);
 
   const { user, accessToken, dispatch } = useContext(AuthContext);
