@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const csv=require('csvtojson');
 
 const Date = require('../Models/Date.model');
+const ZoneCategory = require('../Models/ZoneCategory.model');
 
 module.exports = {
   getAllDates: async (req, res, next) => {
@@ -108,6 +109,13 @@ module.exports = {
 
   checkAvilability: async (req, res, next) => {
     try {
+
+      const ZoneCategoryCount = await ZoneCategory.countDocuments({name: req.body.zone, availability: 0});
+
+      if (ZoneCategoryCount > 0) {
+        throw createError(201, 'Booking is not available in this zone.');
+      }
+
       const date = await Date.findOne({date: req.body.date ,timing: req.body.timing  , vehicle: req.body.vehicle , zone: req.body.zone});
       if (!date) {
         throw createError(201, 'Date does not exist.');
