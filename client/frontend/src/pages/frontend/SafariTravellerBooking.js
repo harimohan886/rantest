@@ -155,6 +155,21 @@ export default function SafariTravellerBooking() {
                                     }).then((response)=>{});
                                 });
 
+                                const UpdateData = {
+                                    "date": localStorage.getItem('selDate'),
+                                    "vehicle": localStorage.getItem('selVehicle'),
+                                    "zone": localStorage.getItem('selZone'),
+                                    "timing": localStorage.getItem('selTiming'),
+                                    "booking_persons": users.length
+                                }
+
+                                axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/update-avilability`, UpdateData , {
+                                    headers: {
+                                        'Accept': 'application/json, text/plain, */*',
+                                        'Content-Type': 'application/json'
+                                   },
+                                }).then((response)=>{});
+
                                 localStorage.removeItem('selName');
                                 localStorage.removeItem('selPhone');
                                 localStorage.removeItem('selDate');
