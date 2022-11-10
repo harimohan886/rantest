@@ -86,10 +86,14 @@ export default function OnlineSafariBooking() {
                         select={handleDateSelect}
                         plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
                     />
+                    <div className='onlineSafariB'>
+                        <FormSafariBooking  bookingDate  = {booking_date} date = {date} />
+                    </div>
                 </div>
             </div>
+            
         </div>
-        <FormSafariBooking  bookingDate  = {booking_date} date = {date} />
+        
         <InfoSafariBooking/>
         <Timing/>
         <SafariZone/>

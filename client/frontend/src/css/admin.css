@@ -336,4 +336,10 @@ table thead tr th {
   display: inline-block;
   width: 100%;
 }
+.indianForm .table tbody tr td {
+  min-width: 100px;
+}
+.CurrentB .rs-picker-toggle-wrapper {
+  margin-bottom: 10px;
+}
 }
