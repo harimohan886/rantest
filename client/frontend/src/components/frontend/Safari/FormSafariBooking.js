@@ -56,7 +56,7 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                             <span className="input-group-btn">
                                 <img alt="phone" src="../image/icons/phoneicon.png"/>
                             </span>
-                            <input className="form-control" id="mobile_number" onChange = {(e) => setPhone(e.target.value)} placeholder="Enter your number" type="number"/>
+                            <input className="form-control" id="mobile_number" onChange = {(e) => setPhone(e.target.value)} placeholder="Mobile number" type="number"/>
                         </div>
                     </div>
                     <div className="col-sm-4 col-xs-12">
@@ -77,7 +77,7 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                                 <img alt="zone" src="../image/icons/jeep.png"/>
                             </span>
                             <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
-                                <option>Select your Vehicle</option>
+                                <option>Choose vehicle</option>
                                 <option value="Canter">Canter</option>
                                 <option value="Gypsy">Gypsy</option>
                             </select>
