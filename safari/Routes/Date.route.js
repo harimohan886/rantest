@@ -29,6 +29,8 @@ router.patch('/:id', DateController.updateADate);
 //Update a date by id
 router.put('/avilability/:id', DateController.updateAvilability);
 
+router.post('/update-avilability', DateController.updateAvilabilityFront);
+
 router.post('/import-csv', uploads.single('csv'), DateController.uploadCsv);
 
 
