@@ -667,6 +667,14 @@ padding: 0px;
     height: 34px;
     font-size: 14px;
 }
+.onlineSafariB .inputdesign .form-control {
+    font-size: 13px;
+    padding-right: 5px;
+}
+.onlineSafariB .selectdesign select{
+	font-size: 13px;
+    padding-right: 5px;
+}
 .inputdesign .form-control::-webkit-input-placeholder { 
 	color: #000;
   }
