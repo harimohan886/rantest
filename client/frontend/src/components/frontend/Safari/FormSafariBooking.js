@@ -41,75 +41,69 @@ export default function FormSafariBooking({ bookingDate  , date }) {
 
   return (
     <section id="select-date" style={{marginTop: "30px"}}>
-        <div className="container">
-            <div className="row">
-                <div className="col-sm-12 col-xs-12">
-                    <form className="form ng-untouched ng-pristine ng-valid" id="form_date_safari" noValidate="">
-                        <div className="row">
-                            <div className="col-sm-4 col-xs-12">
-                                <div className="input-group inputdesign">
-                                    <span className="input-group-btn">
-                                        <img alt="user" src="../image/icons/usericon.png" />
-                                    </span>
-                                    <input className="form-control" id="name"  onChange = {(e) => setName(e.target.value)} placeholder="Enter your name" type="name" />
-                                </div>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <div className="input-group inputdesign">
-                                    <span className="input-group-btn">
-                                        <img alt="phone" src="../image/icons/phoneicon.png"/>
-                                    </span>
-                                    <input className="form-control" id="mobile_number" onChange = {(e) => setPhone(e.target.value)} placeholder="Enter your number" type="number"/>
-                                </div>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <div className="input-group selectdesign">
-                                    <span className="input-group-btn">
-                                        <img alt="zone" src="../image/icons/zone.png"/>
-                                    </span>
-                                    <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
-                                        <option>Select your Zone</option>
-                                        <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
-                                        <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <div className="input-group selectdesign">
-                                    <span className="input-group-btn">
-                                        <img alt="zone" src="../image/icons/jeep.png"/>
-                                    </span>
-                                    <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
-                                        <option>Select your Vehicle</option>
-                                        <option value="Canter">Canter</option>
-                                        <option value="Gypsy">Gypsy</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <div className="input-group selectdesign">
-                                    <span className="input-group-btn">
-                                        <img alt="zone" src="../image/icons/zone2.png"/>
-                                    </span>
-                                    <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
-                                        <option>Select Timing</option>
-                                        <option value="Morning">Morning</option>
-                                        <option value="Evening">Evening</option>
-                                    </select>
-                                </div>
-                            </div>
-                            { bookingDate && bookingDate.length > 0 &&
-                                <div className="col-sm-4 col-xs-12">
-                                    <div className="booknowbtn">
-                                        <Link onClick = {HandleSubmit} className="btn btn-primary btn-block" id="stepTwo">Book Now</Link>
-                                    </div>
-                                </div>
-                            }
+        <form className="form ng-untouched ng-pristine ng-valid" id="form_date_safari" noValidate="">
+                <div className="row">
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group inputdesign">
+                            <span className="input-group-btn">
+                                <img alt="user" src="../image/icons/usericon.png" />
+                            </span>
+                            <input className="form-control" id="name"  onChange = {(e) => setName(e.target.value)} placeholder="Enter your name" type="name" />
                         </div>
-                    </form>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group inputdesign">
+                            <span className="input-group-btn">
+                                <img alt="phone" src="../image/icons/phoneicon.png"/>
+                            </span>
+                            <input className="form-control" id="mobile_number" onChange = {(e) => setPhone(e.target.value)} placeholder="Enter your number" type="number"/>
+                        </div>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group selectdesign">
+                            <span className="input-group-btn">
+                                <img alt="zone" src="../image/icons/zone.png"/>
+                            </span>
+                            <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
+                                <option>Select your Zone</option>
+                                <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
+                                <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group selectdesign">
+                            <span className="input-group-btn">
+                                <img alt="zone" src="../image/icons/jeep.png"/>
+                            </span>
+                            <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
+                                <option>Select your Vehicle</option>
+                                <option value="Canter">Canter</option>
+                                <option value="Gypsy">Gypsy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group selectdesign">
+                            <span className="input-group-btn">
+                                <img alt="zone" src="../image/icons/zone2.png"/>
+                            </span>
+                            <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
+                                <option>Select Timing</option>
+                                <option value="Morning">Morning</option>
+                                <option value="Evening">Evening</option>
+                            </select>
+                        </div>
+                    </div>
+                    { bookingDate && bookingDate.length > 0 &&
+                        <div className="col-sm-4 col-xs-12">
+                            <div className="booknowbtn">
+                                <Link onClick = {HandleSubmit} className="btn btn-primary btn-block" id="stepTwo">Book Now</Link>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
-        </div>
+        </form>
     </section>
   )
 }

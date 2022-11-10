@@ -1723,17 +1723,19 @@ border-left:1px solid #5d5d5d;
     transform: scale(1.1);
     border-radius: 12px;
 }
-
+.safaribgmain img {
+    width: 100%;
+}
 
 /******* Calendar CSS *****/
 .fc .fc-daygrid-day-top {
     display: inherit !important;
     flex-direction: inherit !important;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    padding-top: 15px;
+    padding-top: 11px;
     text-align: center;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
 }
  .fc-daygrid-event-harness{
 	height: 0px !important;
@@ -1744,7 +1746,7 @@ border-left:1px solid #5d5d5d;
 }
 .fc .fc-view-harness {
     flex-grow: 1 ;
-    height: 320.296px!important;
+    height: 269.296px!important;
     position: relative;
 	
 }
@@ -2359,8 +2361,8 @@ ul#roomTab {
 	height: 234.296px!important;
 }	
 .fc .fc-daygrid-day-top{
-	padding-top: 8px;
-	padding-bottom: 9px;
+	padding-top: 0px;
+	padding-bottom: 5px;
 }
 .fc .fc-col-header-cell-cushion {
     padding: 5px 4px !important;
