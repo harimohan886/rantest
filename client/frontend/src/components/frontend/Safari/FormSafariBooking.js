@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React , { useState , useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -10,6 +10,7 @@ export default function FormSafariBooking({ bookingDate  , date }) {
     const [ zone , setZone ] =  useState('');
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
+    const [ zones , setZones ] =  useState([]);
 
     const HandleSubmit = () => {
 
@@ -39,6 +40,22 @@ export default function FormSafariBooking({ bookingDate  , date }) {
       })
     }
 
+    function GetAllZones()   {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+        }).then(result => { 
+            setZones(result.data.data);
+        })
+    };
+
+    useEffect(() => {
+        GetAllZones();
+    },[])
+
   return (
     <section id="select-date" style={{marginTop: "30px"}}>
         <form className="form ng-untouched ng-pristine ng-valid" id="form_date_safari" noValidate="">
@@ -66,8 +83,9 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                             </span>
                             <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
                                 <option>Select your Zone</option>
-                                <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
-                                <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
+                                { zones && zones.map((item,index) => (
+                                    <option value={item.name} key={index}>{item.name}</option>
+                                ))}
                             </select>
                         </div>
                     </div>

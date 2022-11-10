@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useState , useEffect } from 'react';
 import axios from 'axios';
 
 export default function CurrentBooking() {
@@ -11,6 +11,7 @@ export default function CurrentBooking() {
   const [zone , setZone] = useState('');
   const [vehicle , setVehicle] = useState('');
   const [person , setPerson] = useState('');
+  const [zones , setZones] = useState([]);
 
   const disablePastDate = () => {
     const today = new Date();
@@ -19,6 +20,22 @@ export default function CurrentBooking() {
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
   };
+
+  function GetAllZones()   {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+            },
+        }).then(result => { 
+            setZones(result.data.data);
+        })
+    };
+
+    useEffect(() => {
+        GetAllZones();
+    },[])
 
   const HandleSubmit = () => {
 
@@ -92,8 +109,9 @@ export default function CurrentBooking() {
 
                             <select className="form-control" formcontrolname="zone"  onChange = {(e) => setZone(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
-                                <option value="1/2/3/4/5/6/7">1/2/3/4/5/6/7</option>
-                                <option value="8/9/10">8/9/10</option>
+                                { zones && zones.map((item,index) => (
+                                    <option value={item.name} key={index}>{item.name}</option>
+                                ))}
                             </select>
                         
                    </div>
