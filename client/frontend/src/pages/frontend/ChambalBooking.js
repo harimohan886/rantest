@@ -88,7 +88,7 @@ export default function ChambalBooking() {
             const options = {
 
                 // key: credentials.razorpay_key,
-                key: 'rzp_test_FvMwf7j3FOOnh8',
+                key: razorpaykey,
                 // amount: PayAmount+('00').toString(),
                 amount: Math.round(PayAmount*100),
                 currency: "INR",
@@ -182,9 +182,12 @@ export default function ChambalBooking() {
 
     useEffect(() => {
 
+        getSettings();
+
         const res = loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
+        
 
         if (!res) {
             alert.error("Razorpay SDK failed to load. Are you online?");
@@ -206,6 +209,14 @@ export default function ChambalBooking() {
                 setDisableDates(dates);
         }); 
     },[]);
+
+    const [ razorpaykey , setRazorpaykey ] = useState('');
+
+    function getSettings() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
+            setRazorpaykey(res.data.data.value.razorpay_key);
+        })  
+    }
 
     const HandleDisableDate = (date) => {
         setStartDate(date);

@@ -7,6 +7,8 @@ export default function SafariTravellerBooking() {
 
     useEffect(() => {
 
+        getSettings();
+
         const res = loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -17,7 +19,14 @@ export default function SafariTravellerBooking() {
         }
     },[]);
 
+    function getSettings() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
+            setRazorpaykey(res.data.data.value.razorpay_key);
+        })  
+    }
+
       const alert = useAlert();
+      const [ razorpaykey , setRazorpaykey ] = useState('');
       const [ Name , setName ] = useState(localStorage.getItem('selName'));
       const [ Phone , setPhone ] = useState(localStorage.getItem('selPhone'));
       const [ Email , setEmail ] = useState('');
@@ -105,7 +114,7 @@ export default function SafariTravellerBooking() {
             const options = {
 
                 // key: credentials.razorpay_key,
-                key: 'rzp_test_FvMwf7j3FOOnh8',
+                key: razorpaykey,
                 amount: payable_Amount+('00').toString(),
                 currency: "INR",
                 name: "Gir national park",
