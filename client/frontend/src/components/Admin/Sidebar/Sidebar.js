@@ -55,6 +55,10 @@ export default function Sidebar() {
       setShowPackages('');
     }
 
+    if (window.location.href.indexOf("zone-categories") > -1) {
+      setShowDates('show');
+    }
+
   },[]);
 
   const { user, accessToken, dispatch } = useContext(AuthContext);
@@ -178,10 +182,10 @@ export default function Sidebar() {
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
-                            <a href='/admin/safari-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Safari Price</a>
+                            <Link to='/admin/safari-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Safari Price</Link>
                           </li>
                           <li className="items-center">
-                            <a href='/admin/chambal-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Chambal Price</a>
+                            <Link to='/admin/chambal-prices' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Chambal Price</Link>
                           </li>
                         </ul>
                       </div>
