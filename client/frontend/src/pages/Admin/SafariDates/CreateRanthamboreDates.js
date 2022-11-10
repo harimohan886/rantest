@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState , useEffect } from 'react';
 import Sidebar from '../../../components/Admin/Sidebar/Sidebar';
 import AdminNavbar from '../../../components/Admin/Navbar/AdminNavbar';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
@@ -16,8 +16,25 @@ export default function CreateRanthamboreDates() {
   const [timing, setTiming] = useState('');
   const [vehicle, setVehicle] = useState('');
   const [zone, setZone] = useState('');
+  const [zones, setZones] = useState([]);
   
   const alert = useAlert();
+
+  function GetAllZones()   {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer `+localStorage.getItem('accessToken')
+        },
+    }).then(result => { 
+        setZones(result.data.data);
+    })
+  };
+
+  useEffect(() => {
+    GetAllZones();
+  },[]);
 
   const HandleSaveData = (e) => {
     e.preventDefault();
@@ -73,8 +90,9 @@ export default function CreateRanthamboreDates() {
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Zone</label>
           <select id="zone" onChange = { (e) => setZone(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option>Please select</option>
-            <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
-            <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
+            { zones && zones.map((itm,index) => (
+               <option value={itm.name} key={index}>{itm.name}</option>
+            )) }
         </select>
         </div>
         <div className="mb-6">
