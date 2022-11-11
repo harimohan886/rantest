@@ -96,7 +96,7 @@ export default function CurrentBooking() {
                     <div className="form-group">
                     <label className="control-label">Safari Time:</label>
                     <br/>
-                            <select className="form-control" fname="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
+                            <select className="form-control" name="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 <option value="Morning>">Morning</option>
                                 <option value="Evening">Evening</option>
