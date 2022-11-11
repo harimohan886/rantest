@@ -121,7 +121,7 @@ export default function CurrentBooking() {
                     
                             <select className="form-control" formcontrolname="vehicle"  onChange = {(e) => setVehicle(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
-                                <option value="Jeep">Jeep</option>
+                                <option value="Gypsy">Gypsy</option>
                                 <option value="Canter">Canter</option>
                             </select>
                      </div>
