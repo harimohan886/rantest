@@ -96,7 +96,7 @@ export default function CurrentBooking() {
                     <div className="form-group">
                     <label className="control-label">Safari Time:</label>
                     <br/>
-                            <select className="form-control" formcontrolname="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
+                            <select className="form-control" fname="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 <option value="Morning>">Morning</option>
                                 <option value="Evening">Evening</option>
@@ -107,7 +107,7 @@ export default function CurrentBooking() {
                     <label className="control-label">Safari Zone:</label>
                     <br/>
 
-                            <select className="form-control" formcontrolname="zone"  onChange = {(e) => setZone(e.target.value)} id="safari_time" placeholder="Safari Time">
+                            <select className="form-control" name="zone"  onChange = {(e) => setZone(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 { zones && zones.map((item,index) => (
                                     <option value={item.name} key={index}>{item.name}</option>
@@ -119,7 +119,7 @@ export default function CurrentBooking() {
                     <label className="control-label">Safari Vehicle:</label>
                     <br/>
                     
-                            <select className="form-control" formcontrolname="vehicle"  onChange = {(e) => setVehicle(e.target.value)} id="safari_time" placeholder="Safari Time">
+                            <select className="form-control" name="vehicle"  onChange = {(e) => setVehicle(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 <option value="Gypsy">Gypsy</option>
                                 <option value="Canter">Canter</option>
