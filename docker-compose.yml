@@ -19,7 +19,7 @@ services:
       - "nosql-db"
     volumes:
       - .:/app
-      - /app/node_modules
+      - /app/client/api-gateway/node_modules
 
     env_file:
       - ./client/api-gateway/.env.dev
@@ -51,7 +51,7 @@ services:
       - "nosql-db"
     volumes:
       - .:/app
-      - /app/node_modules
+      - /app/chambal/node_modules
     env_file:
       - ./chambal/.env.dev
   hotel:
@@ -68,7 +68,7 @@ services:
     volumes:
       - .:/app/
       - ./hotel/uploads:/root/ranthambore/hotel/uploads
-      - /app/node_modules
+      - /app/hotel/node_modules
     env_file:
       - ./hotel/.env.dev
   package:
@@ -84,7 +84,7 @@ services:
 
     volumes:
       - .:/app/
-      - /app/node_modules
+      - /app/package/node_modules
     env_file:
       - ./package/.env.dev
   payment:
@@ -100,7 +100,7 @@ services:
 
     volumes:
       - .:/app/
-      - /app/node_modules
+      - /app/payment/node_modules
     env_file:
       - ./payment/.env.dev
   safari:
@@ -116,7 +116,7 @@ services:
 
     volumes:
       - .:/app/
-      - /app/node_modules
+      - /app/safari/node_modules
     env_file:
       - ./safari/.env.dev
   client:
@@ -129,6 +129,6 @@ services:
     volumes:
       - .:/app/
       - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
-      - /app/node_modules
+      - /app/client/frontend/node_modules
     environment:
       NODE_ENV: production
