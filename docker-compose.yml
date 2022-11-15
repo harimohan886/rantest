@@ -18,8 +18,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/app/client/api-gateway/
-      - /app/client/api-gateway/node_modules
+      - .:/app
+      - /app/node_modules
 
     env_file:
       - ./client/api-gateway/.env.dev
@@ -34,8 +34,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/app/admin
-      - /app/admin/node_modules
+      - .:/app
+      - /app/node_modules
 
     env_file:
       - ./admin/.env.dev
@@ -50,8 +50,8 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/app/chambal
-      - /app/chambal/node_modules
+      - .:/app
+      - /app/node_modules
     env_file:
       - ./chambal/.env.dev
   hotel:
@@ -66,9 +66,9 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/app/hotel
+      - .:/app/
       - ./hotel/uploads:/root/ranthambore/hotel/uploads
-      - /app/hotel/node_modules
+      - /app/node_modules
     env_file:
       - ./hotel/.env.dev
   package:
@@ -83,8 +83,8 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/app/package
-      - /app/package/node_modules
+      - .:/app/
+      - /app/node_modules
     env_file:
       - ./package/.env.dev
   payment:
@@ -99,8 +99,8 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/app/payment
-      - /app/payment/node_modules
+      - .:/app/
+      - /app/node_modules
     env_file:
       - ./payment/.env.dev
   safari:
@@ -115,8 +115,8 @@ services:
       - "nosql-db"
 
     volumes:
-      - .:/app/safari
-      - /app/safari/node_modules
+      - .:/app/
+      - /app/node_modules
     env_file:
       - ./safari/.env.dev
   client:
@@ -127,8 +127,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - .:/app/client/frontend/
+      - .:/app/
       - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
-      - /app/client/frontend/node_modules
+      - /app/node_modules
     environment:
       NODE_ENV: production
