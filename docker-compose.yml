@@ -34,7 +34,7 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/app
+      - .:/app/admin
       - /app/admin/node_modules
 
     env_file:
