@@ -126,6 +126,8 @@ services:
     container_name: client
     ports:
       - 80:80
+    depends_on:
+      - "nosql-db"
     volumes:
       - .:/app/
       - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
