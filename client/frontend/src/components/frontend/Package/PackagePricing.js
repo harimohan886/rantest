@@ -58,6 +58,10 @@ export default function PackagePricing({ optionData, packageName }) {
                 counter++;
             }
 
+            localStorage.setItem('adultss', adults);
+            localStorage.setItem('childd', children);
+            localStorage.setItem('pcat', package_cat)
+
             const data = {
                 "date": moment(date).format("YYYY-MM-DD"),
                 "type": "package",
@@ -232,15 +236,13 @@ export default function PackagePricing({ optionData, packageName }) {
                                     </tr>
                                     <tr>
                                     <th className='text-black italic'>Package Name:</th>
-                                    <td className='text-black italic'>{packageName}</td>
-                                    <th className='text-black italic'>Package Category Name:</th>
-                                    <td className='text-black italic'>{package_cat}</td>
+                                    <td className='text-black italic'>{localStorage.getItem('pcat')}</td>
                                     </tr>
                                     <tr>
                                     <th className='text-black italic'>No of Adults:</th>
-                                    <td className='text-black italic'>{adults}</td>
+                                    <td className='text-black italic'>{localStorage.getItem('adultss')}</td>
                                     <th className='text-black italic'>No of Children:</th>
-                                    <td className='text-black italic'>{children}</td>
+                                    <td className='text-black italic'>{localStorage.getItem('childd')}</td>
                                     </tr>
                                     <tr>
                                     <th className='text-black italic'>Total Amount:</th>
