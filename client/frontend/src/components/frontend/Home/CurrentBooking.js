@@ -96,41 +96,37 @@ export default function CurrentBooking() {
                     <div className="form-group">
                     <label className="control-label">Safari Time:</label>
                     <br/>
-                            <select className="form-control" name="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
-                                <option value="">Please select </option>
-                                <option value="Morning>">Morning</option>
-                                <option value="Evening">Evening</option>
-                            </select>
-                        
+                        <select className="form-control" name="timing"  onChange = {(e) => setTiming(e.target.value)} id="safari_time" placeholder="Safari Time">
+                            <option value="">Please select </option>
+                            <option value="Morning>">Morning</option>
+                            <option value="Evening">Evening</option>
+                        </select>
                     </div>
                     <div className="form-group">
                     <label className="control-label">Safari Zone:</label>
                     <br/>
-
-                            <select className="form-control" name="zone"  onChange = {(e) => setZone(e.target.value)} id="safari_time" placeholder="Safari Time">
-                                <option value="">Please select </option>
-                                { zones && zones.map((item,index) => (
+                       <select className="form-control" name="zone"  onChange = {(e) => setZone(e.target.value)} id="safari_time" placeholder="Safari Time">
+                          <option value="">Please select </option>
+                            { zones && zones.map((item,index) => (
                                     <option value={item.name} key={index}>{item.name}</option>
-                                ))}
-                            </select>
-                        
+                            ))}
+                        </select>
                    </div>
                     <div className="form-group">
-                    <label className="control-label">Safari Vehicle:</label>
-                    <br/>
-                    
+                        <label className="control-label">Safari Vehicle:</label>
+                        <br/>
                             <select className="form-control" name="vehicle"  onChange = {(e) => setVehicle(e.target.value)} id="safari_time" placeholder="Safari Time">
                                 <option value="">Please select </option>
                                 <option value="Gypsy">Gypsy</option>
                                 <option value="Canter">Canter</option>
                             </select>
-                     </div>
+                    </div>
                     <div className="form-group">
-                    <label className="control-label">Number of Person:</label>
-                    <input className="form-control ng-untouched ng-pristine ng-invalid"  onChange = {(e) => setPerson(e.target.value) }  id="no_of_person" name="no_of_person" placeholder="Enter Number of Person" required="" type="text"/>
+                        <label className="control-label">Number of Person:</label>
+                        <input className="form-control ng-untouched ng-pristine ng-invalid"  onChange = {(e) => setPerson(e.target.value) }  id="no_of_person" name="no_of_person" placeholder="Enter Number of Person" required="" type="text"/>
                     </div>
                     <div className="form-group text-center">
-                    <input className="btn btn-primary" type="button" onClick = {HandleSubmit}  value="Submit"/>
+                        <input className="btn btn-primary" type="button" onClick = {HandleSubmit}  value="Submit"/>
                     </div>
                 </form>
                 </div>
