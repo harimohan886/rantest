@@ -486,7 +486,7 @@ export default function ChambalBooking() {
                             </li>
                         </ul>
 
-                        <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                     <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                             <div className="modal-header">
@@ -495,7 +495,7 @@ export default function ChambalBooking() {
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                    <div className="modal-body">
+                         <div className="modal-body">
                             <div className='table-responsive'>
                             <table class="table table-bordered">
                                 <tbody>
