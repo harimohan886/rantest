@@ -11,6 +11,7 @@ export default function BookSafari({ zones , timings , vehicles, bookingDate  , 
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
 
+
     const HandleSubmit = () => {
 
         const data = {

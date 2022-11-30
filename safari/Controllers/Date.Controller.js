@@ -90,9 +90,9 @@ module.exports = {
   checkAvilabilityByDate: async (req, res, next) => {
     try {
       const date = await Date.find({date:req.body.date});
-      const zones = await Date.find({date:req.body.date},{zone:1});
-      const vehicles = await Date.find({date:req.body.date},{vehicle:1});
-      const timings = await Date.find({date:req.body.date},{timing:1});
+      const zones = await Date.find({date:req.body.date},{zone:1}).distinct('zone');
+      const vehicles = await Date.find({date:req.body.date},{vehicle:1}).distinct('vehicle');
+      const timings = await Date.find({date:req.body.date},{timing:1}).distinct('timing');
       if (!date.length) {
         throw createError(201, 'Date does not exist.');
       }
