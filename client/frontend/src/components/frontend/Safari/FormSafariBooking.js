@@ -67,7 +67,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
                                 <option>Select your Zone</option>
                                 { zones && zones.map((item,index) => (
-                                    <option value={item.zone} key={index}>{item.zone}</option>
+                                    <option value={item} key={index}>{item}</option>
                                 ))}
                             </select>
                         </div>
@@ -80,7 +80,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
                                 <option>Choose vehicle</option>
                                 { vehicles && vehicles.map((item,index) => (
-                                    <option value={item.vehicle} key={index}>{item.vehicle}</option>
+                                    <option value={item} key={index}>{item}</option>
                                 ))}
                             </select>
                         </div>
@@ -93,7 +93,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
                                 <option>Select Timing</option>
                                 { timings && timings.map((item,index) => (
-                                    <option value={item.timing} key={index}>{item.timing}</option>
+                                    <option value={item} key={index}>{item}</option>
                                 ))}
                             </select>
                         </div>
