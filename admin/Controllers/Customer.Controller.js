@@ -195,6 +195,109 @@ module.exports = {
 
   createNewCustomerSafari: async (req, res, next) => {
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    /*req.body.booked_persons.forEach(function callback(value, index) {
+      if (value.idnumber === '') {
+        return res.status(412).send({
+          success: false,
+          message: 'In Booking persons at index '+index+' idnumber field is required!',
+          error: 'data required'
+        });
+      }
+
+    });*/
+
+    let rules = {
+      name: 'required',
+      mobile: 'required',
+      email: 'required',
+      address: 'required',
+      state: 'required',
+      date: 'required',
+      zone: 'required',
+      amount: 'required',
+      vehicle: 'required',
+      timing: 'required',
+    };
+
+    const validation = new Validator(req.body, rules);
+
+    if (validation.fails()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: validation.errors
+      });
+    }
+
+    const customer_data = new Customer({
+      name : req.body.name,
+      mobile : req.body.mobile,
+      email : req.body.email,
+      type : 'safari',
+      address : req.body.address,
+      state : req.body.state,
+    });
+
+    const customer_data_result = await customer_data.save();
+     
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    const safari_booking_data = new SafariBooking({
+      date : req.body.date,
+      zone : req.body.zone,
+      customer_id : customer_data_result._id,
+      customer_name : customer_data_result.name,
+      customer_email : customer_data_result.email,
+      customer_mobile : customer_data_result.mobile,
+      customer : customer_data_result._id,
+      vehicle : req.body.vehicle,
+      timing : req.body.timing,
+      transaction_id : req.body.transaction_id,
+      amount : req.body.amount,
+      addedAt : today,
+      status : 'unpaid'
+    });
+
+    const safari_booking_result = await safari_booking_data.save();
+
+    customer_data_result.safari_booking = safari_booking_result._id;
+    await customer_data_result.save();
+
+    for (const persons of req.body.booked_persons) 
+    { 
+
+      const booking_customer_data = new BookingCustomer({
+        name : persons.name,
+        customer_id : customer_data_result._id,
+        booking_id : safari_booking_result._id,
+        gender : persons.gender,
+        nationality : persons.nationality,
+        id_proof : persons.id_proof,
+        idnumber : persons.idnumber
+      });
+
+      const booking_customer_result = await booking_customer_data.save();
+
+      safari_booking_result.booking_customers.push(booking_customer_result._id);
+
+      customer_data_result.booking_customers.push(booking_customer_result._id);
+    }
+
+    await safari_booking_result.save();
+    await customer_data_result.save();
+
+    /*save data to crm*/
+
+
     var json_arr = {};
     json_arr["name"] = req.body.name;
     json_arr["mobile"] = req.body.mobile;
@@ -273,112 +376,7 @@ module.exports = {
         )
       );
 
-return     res.send((result) ? { message: "Message Sent."+result } : { message: "An error has occurred while sending message." });
-
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    /*req.body.booked_persons.forEach(function callback(value, index) {
-      if (value.idnumber === '') {
-        return res.status(412).send({
-          success: false,
-          message: 'In Booking persons at index '+index+' idnumber field is required!',
-          error: 'data required'
-        });
-      }
-
-    });*/
-
-    let rules = {
-      name: 'required',
-      mobile: 'required',
-      email: 'required',
-      address: 'required',
-      state: 'required',
-      date: 'required',
-      zone: 'required',
-      amount: 'required',
-      vehicle: 'required',
-      timing: 'required',
-    };
-
-    const validation = new Validator(req.body, rules);
-
-    if (validation.fails()) {
-      return res.status(412).send({
-        success: false,
-        message: 'Validation failed',
-        data: validation.errors
-      });
-    }
-
-    const customer_data = new Customer({
-      name : req.body.name,
-      mobile : req.body.mobile,
-      email : req.body.email,
-      type : 'safari',
-      address : req.body.address,
-      state : req.body.state,
-    });
-
-    const customer_data_result = await customer_data.save();
-
-
-     
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
-
-    const safari_booking_data = new SafariBooking({
-      date : req.body.date,
-      zone : req.body.zone,
-      customer_id : customer_data_result._id,
-      customer_name : customer_data_result.name,
-      customer_email : customer_data_result.email,
-      customer_mobile : customer_data_result.mobile,
-      customer : customer_data_result._id,
-      vehicle : req.body.vehicle,
-      timing : req.body.timing,
-      transaction_id : req.body.transaction_id,
-      amount : req.body.amount,
-      addedAt : today,
-      status : 'unpaid'
-    });
-
-    const safari_booking_result = await safari_booking_data.save();
-
-    customer_data_result.safari_booking = safari_booking_result._id;
-    await customer_data_result.save();
-
-    for (const persons of req.body.booked_persons) 
-    { 
-
-      const booking_customer_data = new BookingCustomer({
-        name : persons.name,
-        customer_id : customer_data_result._id,
-        booking_id : safari_booking_result._id,
-        gender : persons.gender,
-        nationality : persons.nationality,
-        id_proof : persons.id_proof,
-        idnumber : persons.idnumber
-      });
-
-      const booking_customer_result = await booking_customer_data.save();
-
-      safari_booking_result.booking_customers.push(booking_customer_result._id);
-
-      customer_data_result.booking_customers.push(booking_customer_result._id);
-    }
-
-    await safari_booking_result.save();
-    await customer_data_result.save();
-
-    /*save data to crm*/
+    
 
     /*const params1 = new URLSearchParams();
 
