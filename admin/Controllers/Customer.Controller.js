@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/ApiFeatures");
 
+
+const amqp = require('amqplib');
+
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
  fetch(...args));
 
@@ -17,6 +20,18 @@ const SafariBooking = require('../Models/SafariBooking.model');
 const PackageBooking = require('../Models/PackageBooking.model');
 const ChambalBooking = require('../Models/ChambalBooking.model');
 const BookingCustomer = require('../Models/BookingCustomer.model');
+
+
+let channel;
+
+async function connect() {
+  const amqpServer = process.env.RABBITMQ_URL;
+  const connection = await amqp.connect(amqpServer);
+  channel = await connection.createChannel();
+  await channel.assertQueue('booking');
+}
+connect();
+
 
 async function checkNameIsUnique(email,type) {
 
@@ -158,7 +173,7 @@ module.exports = {
         type : req.body.type,
         address : req.body.address,
         state : req.body.state,
-      });
+      });        
 
       const customer_data_result = await customer_data.save();
 
@@ -179,6 +194,87 @@ module.exports = {
   },
 
   createNewCustomerSafari: async (req, res, next) => {
+
+    var json_arr = {};
+    json_arr["name"] = req.body.name;
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["website"] = 'ranthamboretigerreserve.in';
+    json_arr["custom_data"] = "";
+    json_arr["method"] = "save-lead";
+
+    const result = await channel.sendToQueue(
+      'booking',
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["name"] = req.body.name;
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["email"] = req.body.email;
+    json_arr["method"] = "update-lead-data";
+
+    const result1 = await channel.sendToQueue(
+      'booking',
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["payment_status"] = 'paid';
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["method"] = "update-lead-status";
+
+    const result4 = await channel.sendToQueue(
+      'booking',
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["address"] = req.body.address;
+    json_arr["state"] = req.body.state;
+    json_arr["method"] = "save-address";
+
+    const result2 = await channel.sendToQueue(
+      'booking',
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["website"] = 'ranthamboretigerreserve.in';
+    json_arr["address"] = req.body.address;
+    json_arr["date"] = req.body.date;
+    json_arr["transaction_id"] = req.body.transaction_id;
+    json_arr["booked_customers"] = JSON.stringify(req.body.booked_persons);
+    json_arr["time"] = req.body.timing;
+    json_arr["adult"] = 0;
+    json_arr["child"] = 0;
+    json_arr["mode"] = req.body.vehicle;
+    json_arr["amount"] = req.body.amount;
+    json_arr["sanctuary"] = "ranthambore";
+    json_arr["method"] = "direct-booking";
+
+    const result3 = await channel.sendToQueue(
+      'booking',
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+return     res.send((result) ? { message: "Message Sent."+result } : { message: "An error has occurred while sending message." });
+
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -230,6 +326,8 @@ module.exports = {
 
     const customer_data_result = await customer_data.save();
 
+
+     
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');

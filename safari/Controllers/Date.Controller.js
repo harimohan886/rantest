@@ -90,13 +90,19 @@ module.exports = {
   checkAvilabilityByDate: async (req, res, next) => {
     try {
       const date = await Date.find({date:req.body.date});
+      const zones = await Date.find({date:req.body.date},{zone:1});
+      const vehicles = await Date.find({date:req.body.date},{vehicle:1});
+      const timings = await Date.find({date:req.body.date},{timing:1});
       if (!date.length) {
         throw createError(201, 'Date does not exist.');
       }
       res.send({
         success: true,
         message: 'Data fateched',
-        data: date
+        data: date,
+        zones: zones,
+        vehicles: vehicles,
+        timings: timings
       });
     } catch (error) {
       if (error.name === 'ValidationError') {
@@ -264,7 +270,6 @@ module.exports = {
     .then( async(jsonObj) =>{
       await Date.deleteMany({});
       const result = await  Date.insertMany(jsonObj);
-      console.log(result);
       res.send({
         success: true,
         message: 'Csv data uploaded',

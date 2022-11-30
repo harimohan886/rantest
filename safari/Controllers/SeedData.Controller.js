@@ -11,24 +11,24 @@ module.exports = {
       const zone_category = [
 
           new ZoneCategory({
-            name: "Zone 1",
+            name: "Zone 1/2/3/4/5/6/7",
             sort: "1",
             availability: 1
           }),
 
           new ZoneCategory({
-            name: "Zone 2",
+            name: "Zone 8/9/10",
             sort: "2",
             availability: 1
           }),
 
           new ZoneCategory({
-            name: "Zone 3",
+            name: "Zone 1/2/3/4/5/6/7/8/9/10",
             sort: "3",
             availability: 1
           }),
 
-          new ZoneCategory({
+          /*new ZoneCategory({
             name: "Zone 4",
             sort: "4",
             availability: 1
@@ -80,7 +80,7 @@ module.exports = {
             name: "Zone 12",
             sort: "12",
             availability: 1
-          })
+          })*/
       ];
 
       let done = 0;
