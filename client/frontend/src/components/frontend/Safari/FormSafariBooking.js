@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
 
-export default function FormSafariBooking({ bookingDate  , date }) {
+export default function FormSafariBooking({ zones , timings , vehicles, bookingDate  , date }) {
 
     const [ name , setName ] =  useState('');
     const [ phone , setPhone ] =  useState('');
     const [ zone , setZone ] =  useState('');
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
-    const [ zones , setZones ] =  useState([]);
 
     const HandleSubmit = () => {
 
@@ -40,22 +39,6 @@ export default function FormSafariBooking({ bookingDate  , date }) {
       })
     }
 
-    function GetAllZones()   {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer `+localStorage.getItem('accessToken')
-            },
-        }).then(result => { 
-            setZones(result.data.data);
-        })
-    };
-
-    useEffect(() => {
-        GetAllZones();
-    },[])
-
   return (
     <section id="select-date" style={{marginTop: "30px"}}>
         <form className="form ng-untouched ng-pristine ng-valid" id="form_date_safari" noValidate="">
@@ -84,7 +67,7 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                             <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
                                 <option>Select your Zone</option>
                                 { zones && zones.map((item,index) => (
-                                    <option value={item.name} key={index}>{item.name}</option>
+                                    <option value={item.zone} key={index}>{item.zone}</option>
                                 ))}
                             </select>
                         </div>
@@ -96,8 +79,9 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                             </span>
                             <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
                                 <option>Choose vehicle</option>
-                                <option value="Canter">Canter</option>
-                                <option value="Gypsy">Gypsy</option>
+                                { vehicles && vehicles.map((item,index) => (
+                                    <option value={item.vehicle} key={index}>{item.vehicle}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -108,8 +92,9 @@ export default function FormSafariBooking({ bookingDate  , date }) {
                             </span>
                             <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
                                 <option>Select Timing</option>
-                                <option value="Morning">Morning</option>
-                                <option value="Evening">Evening</option>
+                                { timings && timings.map((item,index) => (
+                                    <option value={item.timing} key={index}>{item.timing}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
