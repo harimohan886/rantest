@@ -19,6 +19,9 @@ export default function Dates() {
     const [ timing ,setTiming ] = useState();
     const [ vehicle ,setVehicle ] = useState();
     const [ zone ,setZone ] = useState();
+    const [zones , setZones] = useState([]);
+    const [timings , setTimings] = useState([]);
+    const [vehicles , setVehicles] = useState([]);
 
 
     const handleDateSelect = (selectInfo) => {
@@ -40,12 +43,16 @@ export default function Dates() {
       axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByDate`, data).then(res => {
             console.log("res", res);
           if (res.status === 200) {
+              setZones(res.data.zones);
+              setTimings(res.data.timings);
+              setVehicles(res.data.vehicles);
               setBookingDate(res.data.data);
               setDate(res.data.data[0].date);
               setTiming(res.data.data[0].timing);
               setVehicle(res.data.data[0].vehicle);
               setZone(res.data.data[0].zone);
           } else {
+            setDetails([]);
               setBookingDate([]);
               swal("Warning", res.data.error.message, "warning");
           }
@@ -81,7 +88,7 @@ export default function Dates() {
                 </div>
                 </div>
                 <div className='col-sm-6 col-xs-12'>
-                    <BookSafari bookingDate  = {booking_date} date = {date} />
+                    { details && <BookSafari zones = {zones} timings = {timings} vehicles = {vehicles} bookingDate  = {booking_date} date = {date} /> }
                 </div>
             </div>
         </div>

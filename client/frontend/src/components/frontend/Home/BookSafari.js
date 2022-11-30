@@ -3,30 +3,14 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
 
-export default function BookSafari({ bookingDate  , date }) {
+export default function BookSafari({ zones , timings , vehicles, bookingDate  , date }) {
 
     const [ name , setName ] =  useState('');
     const [ phone , setPhone ] =  useState('');
     const [ zone , setZone ] =  useState('');
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
-    const [ zones , setZones ] =  useState([]);
 
-    function GetAllZones()   {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer `+localStorage.getItem('accessToken')
-            },
-        }).then(result => { 
-            setZones(result.data.data);
-        })
-    };
-
-    useEffect(() => {
-        GetAllZones();
-    },[]);
 
     const HandleSubmit = () => {
 
@@ -55,6 +39,8 @@ export default function BookSafari({ bookingDate  , date }) {
             swal("Warning", error, "warning");
       })
     }
+
+    console.log("Details", zones);
 
   return (
     <>
@@ -85,7 +71,7 @@ export default function BookSafari({ bookingDate  , date }) {
                 <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
                     <option>Select your Zone</option>
                     { zones && zones.map((item,index) => (
-                        <option value={item.name} key={index}>{item.name}</option>
+                        <option value={item} key={index}>{item}</option>
                     ))}
                 </select>
                 </div>
@@ -97,8 +83,9 @@ export default function BookSafari({ bookingDate  , date }) {
                 </span>
                 <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
                     <option>Select your Vehicle</option>
-                    <option value="Canter">Canter</option>
-                    <option value="Gypsy">Gypsy</option>
+                    { vehicles && vehicles.map((item,index) => (
+                        <option value={item} key={index}>{item}</option>
+                    ))}
                 </select>
                 </div>
             </div>
@@ -109,8 +96,9 @@ export default function BookSafari({ bookingDate  , date }) {
                 </span>
                 <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
                     <option>Select Timing</option>
-                    <option value="Morning">Morning</option>
-                    <option value="Evening">Evening</option>
+                    { timings && timings.map((item,index) => (
+                        <option value={item} key={index}>{item}</option>
+                    ))}
                 </select>
                 </div>
             </div>
