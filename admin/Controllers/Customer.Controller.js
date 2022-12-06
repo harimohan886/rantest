@@ -306,7 +306,7 @@ module.exports = {
     json_arr["method"] = "save-lead";
 
     const result = await channel.sendToQueue(
-      'booking',
+      process.env.RABBITMQ_QUEUE,
       Buffer.from(
         JSON.stringify(json_arr)
         )
@@ -320,7 +320,7 @@ module.exports = {
     json_arr["method"] = "update-lead-data";
 
     const result1 = await channel.sendToQueue(
-      'booking',
+      process.env.RABBITMQ_QUEUE,
       Buffer.from(
         JSON.stringify(json_arr)
         )
@@ -333,7 +333,7 @@ module.exports = {
     json_arr["method"] = "update-lead-status";
 
     const result4 = await channel.sendToQueue(
-      'booking',
+      process.env.RABBITMQ_QUEUE,
       Buffer.from(
         JSON.stringify(json_arr)
         )
@@ -347,7 +347,7 @@ module.exports = {
     json_arr["method"] = "save-address";
 
     const result2 = await channel.sendToQueue(
-      'booking',
+      process.env.RABBITMQ_QUEUE,
       Buffer.from(
         JSON.stringify(json_arr)
         )
@@ -372,7 +372,7 @@ module.exports = {
 
 
     const result3 = await channel.sendToQueue(
-      'booking',
+      process.env.RABBITMQ_QUEUE,
       Buffer.from(
         JSON.stringify(json_arr)
         )
