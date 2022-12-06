@@ -19,6 +19,22 @@ hotel/uploads
 package/uploads
 
 client/frontend/public/uploads/
+hotel/uploads/
+hotel/uploads
+/hotel/uploads
+package/uploads
+/package/uploads
+package/uploads/
+admin/uploads/
+admin/uploads
+safari/uploads
+safari/uploads/
+
+
+admin/initDB.js
+package/initDB.js
+safari/initDB.js
+.gitignore
 
 # production
 /build

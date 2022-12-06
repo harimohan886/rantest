@@ -19,6 +19,8 @@ module.exports = () => {
     console.log(err.message);
   });
 
+  // mongoose.set('debug', true);
+
   mongoose.connection.on('disconnected', () => {
     console.log('Mongoose connection is disconnected...');
   });
