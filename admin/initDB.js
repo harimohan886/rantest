@@ -15,6 +15,8 @@ module.exports = () => {
     console.log('Mongoose connected to db...');
   });
 
+  // mongoose.set('debug',true);
+
   mongoose.connection.on('error', err => {
     console.log(err.message);
   });
