@@ -1,10 +1,23 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
+const amqp = require('amqplib');
+
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
  fetch(...args));
 
 const Enquiry = require('../Models/Enquiry.model');
+
+let channel;
+
+async function connect() {
+  const amqpServer = process.env.RABBITMQ_URL;
+  const connection = await amqp.connect(amqpServer);
+  channel = await connection.createChannel();
+  await channel.assertQueue('booking');
+}
+connect();
+
 
 module.exports = {
   getAllEnquirys: async (req, res, next) => {
@@ -189,13 +202,27 @@ module.exports = {
 
       const data = {};
 
+      var json_arr = {};
+      json_arr["name"] = req.body.name;
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["website"] = 'ranthamboretigerreserve.in';
+      json_arr["custom_data"] = "";
+      json_arr["method"] = "save-lead";
+
+      const result = await channel.sendToQueue(
+        process.env.RABBITMQ_QUEUE,
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );
+
       // const response = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params});
       // const data = await response.json();
 
       res.send({
         success: true,
         message: 'Data inserted',
-        data: data
+        data: result
       });
     } catch (error) {
       console.log(error.message);
