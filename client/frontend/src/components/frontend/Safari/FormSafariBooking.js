@@ -11,6 +11,28 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
 
+
+    const handleChange = (e) => {
+
+        setPhone(e.target.value);
+
+        const data = {
+            "name": name,
+            "mobile": e.target.value
+        }
+
+        if (e.target.value.length >= 10) {
+
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/enquiries/save-enquery`, data).then(res => {
+                if (res.status === 200) {
+                } else {
+                }
+            }).catch(error => {
+                swal("Warning", error, "warning");
+            })
+        }
+    }
+
     const HandleSubmit = () => {
 
         const data = {
@@ -56,7 +78,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <span className="input-group-btn">
                                 <img alt="phone" src="../image/icons/phoneicon.png"/>
                             </span>
-                            <input className="form-control" id="mobile_number" onChange = {(e) => setPhone(e.target.value)} placeholder="Mobile number" type="number"/>
+                            <input className="form-control" id="mobile_number"  onChange={handleChange} placeholder="Mobile number" type="number"/>
                         </div>
                     </div>
                     <div className="col-sm-4 col-xs-12">

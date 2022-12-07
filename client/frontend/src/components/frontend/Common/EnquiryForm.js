@@ -25,6 +25,25 @@ export default function EnquiryForm({ hotel_id, type, hotel_name }) {
 
   const handleChange = (e) => {
     setEnquiry(enquiry => ({ ...enquiry, [e.target.name]: e.target.value }));
+
+    if (e.target.name === 'phone') {
+      
+
+      if (e.target.value.length >= 10) {
+        const data = {
+          "name": enquiry.traveller_name,
+          "mobile": e.target.value
+        }
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/admin/enquiries/save-enquery`, data).then(res => {
+          if (res.status === 200) {
+          } else {
+          }
+        }).catch(error => {
+          swal("Warning", error, "warning");
+        })
+      }
+    }
   }
 
   const HandleAddEnquiry = (e) => {
