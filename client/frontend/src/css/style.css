@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 body{
 	color: #000;
 	font-size: 14px;
@@ -3399,5 +3400,246 @@ line-height: 26px;
   }
 }
 
+/* HOME 2 */
 
-
+.btn-info{
+	background: #f8bd45;
+    color: #222;
+    font-family: 'Source Sans Pro';
+    text-transform: uppercase;
+    border: 1px solid orange;
+    font-weight: 600;
+}
+.btn-info:hover{
+	background: orange;
+	border: 1px solid #f8bd45;
+	color: #222;
+}
+.Nabnner{
+	background-color: #000;
+}
+.Nabnner h1{
+	color: #fff;
+    font-weight: 700;
+    line-height: 52px;
+    text-align: center;
+    padding-top: 40px;
+    font-size: 40px;
+    font-family: 'Prata', serif;
+}
+.Nabnner p{
+	color: #fff;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Open Sans'
+}
+.Nabnner h1 span{
+	color: #ffee7c;
+}
+.common-title{
+	color: #000;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: center;
+    padding-top: 40px;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-family: 'Prata', serif;
+    letter-spacing: 0.8px;
+}
+.adventures{
+	font-family: 'Source Sans Pro';
+}
+.adventures img{
+	border-radius: 100px;
+	border: 4px solid #fff;
+    outline: 2px solid #ddd;
+}
+.adventures h5{
+	text-align: center;
+    color: #000;
+    font-weight: 500;
+    font-size: 17px;
+    margin-top: 8px;
+}
+.goWild{
+	margin-top: 40px;
+}
+.goWild .fc-col-header-cell {
+    background: #da002a !important;
+    border: 1px solid #ff6c6c !important;
+}
+.goWild table tbody tr td{
+	color: #333;
+    background: #eee;
+    border: 1px solid #b5b2af !important;
+}
+.goWild .fc .fc-daygrid-day.fc-day-today {
+    background: gold !important;
+}
+.goWild .fc .fc-daygrid-day.fc-day-past .fc-daygrid-day-top {
+    opacity: 0.6;
+}
+.goWild .fc .fc-toolbar.fc-header-toolbar{
+	margin-bottom: 0;
+}
+.goWild .fc .fc-toolbar-title{
+	font-family: 'Source Sans Pro';
+}
+.goWild #select-date h4{
+	font-family: 'Source Sans Pro';
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 600;
+}
+.goWild #form_date{
+	margin: 0 !important;
+}
+.goWild .inputdesign, .goWild .selectdesign{
+	box-shadow: none;
+    border: 2px solid #e6e8eb;
+    border-radius: 4px;
+}
+.goWild .inputdesign .form-control, .goWild .selectdesign select {
+	font-family: 'Source Sans Pro';
+    letter-spacing: 0.3px;
+    font-weight: 500;
+    font-size: 15px;
+}
+.new-timing{
+	margin-top: 20px;
+}
+.new-timing .tBox h5{
+	font-family: 'Prata', serif;
+    color: #283233;
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #73848e;
+    line-height: 70px;
+}
+.new-timing .tBox h5 span{
+	float: right;
+    color: #73848e;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+}
+.new-timing ul{
+	padding-left: 30px;
+}
+.new-timing ul li{
+	margin-bottom: 35px;
+    font-family: 'Prata', serif;
+    font-size: 17px;
+    line-height: 28px;
+	color: #000;
+}
+.new-timing ul li i{
+	background: #73848e;
+    color: #fff;
+    padding: 7px 10px;
+    border-radius: 60px;
+    margin-right: 5px;
+	font-size: 13px;
+}
+.leafBg{
+	padding: 20px 20px 0 20px;
+	margin-top: 10px;
+}
+.hotelbgIn{
+	margin-top: 50px;
+}
+.hotelbgIn .caption{
+    padding: 120px 0;
+}
+.hotelbgIn .capTitle{
+	text-align: center;
+    border: 3px solid #a3afdd;
+    padding: 70px;
+    background: rgb(47 69 130 / 50%);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.hotelbgIn h4{
+	color: #fff;
+    font-family: 'Open Sans';
+    font-size: 15px;
+}
+.hotelbgIn h2{
+	color: #fff;
+    font-family: 'Prata', serif;
+    letter-spacing: 1px;
+    font-size: 46px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+	line-height: 60px;
+}
+.hotelbgIn p{
+	color: #fff;
+    font-weight: 600;
+    font-size: 17px;
+}
+.hotelbgIn .btn-transparent{
+	background: #001e62;
+    margin-top: 20px;
+    color: #fff;
+    font-family: 'Open Sans';
+    font-weight: 600;
+}
+.seoContent h4{
+	margin-bottom: 10px;
+}
+.seoContent p{
+	color: #000;
+    max-width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    line-height: 33px;
+}
+.hotelbgIn{
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.holidays{
+	margin: 60px 0;
+}
+.holidays .hlday{
+	text-align: center;
+	padding-top: 22px;
+}
+.holidays .hlday h4{
+	font-family: 'Source Sans Pro';
+    font-weight: 600;
+    font-size: 19px;
+    color: #db332e;
+}
+.holidays .hlday h2{
+	font-family: 'Prata', serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #000;
+}
+.holidays .hlday p{
+	font-size: 19px;
+    line-height: 37px;
+    max-width: 300px;
+    margin: 0 auto;
+    color: #000;
+}
+.holidays .hlday a{
+	background: #db332e;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 20px;
+}
+.padr-20{
+	padding-right: 20px;
+}
+.padl-20{
+	padding-left: 20px;
+}

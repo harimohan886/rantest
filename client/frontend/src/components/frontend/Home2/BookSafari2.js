@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
 
-export default function BookSafari({ zones , timings , vehicles, bookingDate  , date }) {
+export default function BookSafari2({ zones , timings , vehicles, bookingDate  , date }) {
 
     const [ name , setName ] =  useState('');
     const [ phone , setPhone ] =  useState('');
@@ -68,7 +68,7 @@ export default function BookSafari({ zones , timings , vehicles, bookingDate  , 
         <h4>Please choose the date first then enter the details here</h4>
         <form className="form ng-untouched ng-pristine ng-valid" id="form_date" noValidate="">
             <div className="row">
-            <div className="col-sm-12 col-xs-12">
+            <div className="col-sm-6 col-xs-12 padding-right-zero">
                 <div className="input-group inputdesign">
                 <span className="input-group-btn">
                     <img alt="user" src="../image/icons/usericon.png" />
@@ -76,7 +76,7 @@ export default function BookSafari({ zones , timings , vehicles, bookingDate  , 
                 <input className="form-control" id="name1" onChange = {(e) => setName(e.target.value)} placeholder="Enter your name" type="name" />
                 </div>
             </div>
-            <div className="col-sm-12 col-xs-12">
+            <div className="col-sm-6 col-xs-12">
                 <div className="input-group inputdesign">
                 <span className="input-group-btn">
                     <img alt="phone" src="../image/icons/phoneicon.png" />
@@ -84,7 +84,7 @@ export default function BookSafari({ zones , timings , vehicles, bookingDate  , 
                 <input className="form-control" id="mobile_number" onChange={handleChange}  placeholder="Enter your number" type="number" />
                 </div>
             </div>
-            <div className="col-sm-12 col-xs-12">
+            <div className="col-sm-4 col-xs-12 padding-right-zero">
                 <div className="input-group selectdesign">
                 <span className="input-group-btn">
                     <img alt="zone" src="../image/icons/zone.png" />
@@ -97,20 +97,20 @@ export default function BookSafari({ zones , timings , vehicles, bookingDate  , 
                 </select>
                 </div>
             </div>
-            <div className="col-sm-12 col-xs-12">
+            <div className="col-sm-4 col-xs-12 padding-right-zero">
                 <div className="input-group selectdesign">
                 <span className="input-group-btn">
                     <img alt="zone" src="../image/icons/jeep.png" />
                 </span>
                 <select className="form-control" id="vehicle" name="vehicle" onChange = {(e) => setVehicle(e.target.value)} required="">
-                    <option>Select your Vehicle</option>
+                    <option>Choose Vehicle</option>
                     { vehicles && vehicles.map((item,index) => (
                         <option value={item} key={index}>{item}</option>
                     ))}
                 </select>
                 </div>
             </div>
-            <div className="col-sm-12 col-xs-12">
+            <div className="col-sm-4 col-xs-12">
                 <div className="input-group selectdesign">
                 <span className="input-group-btn">
                     <img alt="zone" src="../image/icons/zone2.png" />

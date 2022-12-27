@@ -4,7 +4,6 @@ import swal from 'sweetalert';
 
 export default function ContactForm() {
   const [error_list, setErrorList] = useState([]);
-  const [success_msg, setSuccessMsg] = useState("");
 
 
   const [enquiry, setEnquiry] = useState({
@@ -85,7 +84,7 @@ export default function ContactForm() {
         setErrorList([]);
       } else if (res.data.validation_errors) {
         setErrorList(res.data.validation_errors);
-      } else if (res.data.status == 401) {
+      } else if (res.data.status === 401) {
         //  setDuplicateDate(true);
       }
     });

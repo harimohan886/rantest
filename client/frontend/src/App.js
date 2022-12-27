@@ -123,6 +123,7 @@ import ViewChambalBooking from './pages/Admin/BookingManagement/ViewChambalBooki
 import ContactEnquiries from './pages/Admin/Enquiry/ContactEnquiries';
 import ZoneCategory from './pages/Admin/SafariDates/ZonesCategory';
 import EditZone from './pages/Admin/SafariDates/EditZone';
+import Home2 from './pages/frontend/Home2';
 
 const options = {
   timeout: 2000,
@@ -170,6 +171,7 @@ function App() {
           <Route exact path='/ranthambore-packages' element={<FrontendPackages />} />
           <Route exact path='/package-details/:id' element={<PackageDetails />} />
           <Route exact path='/book-package' element={<FinalPackageBooking />} />
+          <Route exact path='/home2' element={<Home2 />} />
 
 
           {/* Admin routing starts here */}

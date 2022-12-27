@@ -1,5 +1,4 @@
 import React , { useState } from 'react'
-import Calendar from '../../components/frontend/Calendar/Calendar'
 import SafariZone from '../../components/frontend/Home/SafariZone'
 import Timing from '../../components/frontend/Home/Timing'
 import AboutSafari from '../../components/frontend/Safari/AboutSafari'
@@ -19,11 +18,11 @@ import moment from 'moment';
 export default function OnlineSafariBooking() {
 
     const [booking_date , setBookingDate] = useState([]);
-    const [details , setDetails] = useState([]);
+    // const [details , setDetails] = useState([]);
     const [ date ,setDate ] = useState();
-    const [ timing ,setTiming ] = useState();
-    const [ vehicle ,setVehicle ] = useState();
-    const [ zone ,setZone ] = useState();
+    const [ setTiming ] = useState();
+    const [ setVehicle ] = useState();
+    const [ setZone ] = useState();
     const [zones , setZones] = useState([]);
     const [timings , setTimings] = useState([]);
     const [vehicles , setVehicles] = useState([]);

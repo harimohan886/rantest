@@ -8,7 +8,7 @@ export default function EnquiryForm({ hotel_id, type, hotel_name }) {
   const toDayDate = moment(new Date()).format("YYYY-MM-DD");
 
   const [error_list, setErrorList] = useState([]);
-  const [success_msg, setSuccessMsg] = useState("");
+  const [success_msg] = useState("");
   console.log("htel info", hotel_id);
 
 
@@ -90,7 +90,7 @@ export default function EnquiryForm({ hotel_id, type, hotel_name }) {
         setErrorList([]);
       } else if (res.data.validation_errors) {
         setErrorList(res.data.validation_errors);
-      } else if (res.data.status == 401) {
+      } else if (res.data.status === 401) {
         //  setDuplicateDate(true);
       }
     });

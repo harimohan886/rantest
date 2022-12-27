@@ -81,7 +81,7 @@ export default function ChambalBooking() {
 
         console.log("StartDate", startDate);
 
-        if((email === '' && state === '' && address === '') || PayAmount === 0 || startDate == undefined) {
+        if((email === '' && state === '' && address === '') || PayAmount === 0 || startDate === undefined) {
             alert.error("Please do not leave any fields blank.");
             return true;
         } else {

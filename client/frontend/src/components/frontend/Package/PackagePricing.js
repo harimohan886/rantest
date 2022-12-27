@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 //import { Helmet } from "react-helmet";
 import swal from 'sweetalert'
-import { useParams } from 'react-router';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -14,20 +13,20 @@ export default function PackagePricing({ optionData, packageName }) {
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
     const [date, setDate] = useState();
-    const [states, setStates] = useState('');
-    const [country, setCountry] = useState('');
+    const [states] = useState('');
+    const [country] = useState('');
     const [choose, setChoose] = useState('');
     const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
-    const slug = useParams().id;
+   // const slug = useParams().id;
 
 
 
     const submit = () => {
-        if (name == '' || number == '' || email == '' || date == '') {
+        if (name === '' || number === '' || email === '' || date === '') {
             swal("Please fill all feilds to proceed");
 
-        } else if (choose == '') {
+        } else if (choose === '') {
             swal("Please choose one package");
         }
         else {
@@ -36,7 +35,7 @@ export default function PackagePricing({ optionData, packageName }) {
 
             var person = document.querySelector('#myTab .active').innerHTML;
             var child_selector = '#tab-indian .active';
-            if (person == 'Foreigner') {
+            if (person === 'Foreigner') {
                 var child_selector = '#tab-foreigner .active';
             }
 
@@ -51,7 +50,7 @@ export default function PackagePricing({ optionData, packageName }) {
             let adults = current.getAttribute('adults');
             let rooms = current.getAttribute('rooms');
             while (nextSibling) {
-                if (counter == 3) {
+                if (counter === 3) {
                     children = nextSibling.childNodes[0].selectedIndex;
                 }
                 nextSibling = nextSibling.nextElementSibling;
@@ -130,7 +129,7 @@ export default function PackagePricing({ optionData, packageName }) {
         e.target.parentNode.nextElementSibling.innerHTML = '';
         e.target.parentNode.nextElementSibling.innerHTML = total;
 
-        if (choose === '' || p_option_id == choose) {
+        if (choose === '' || p_option_id === choose) {
             setAmount(total);
 
         }
@@ -170,7 +169,7 @@ export default function PackagePricing({ optionData, packageName }) {
                                             <input className="check choose_package" type="radio" onChange={e => handleChange(e, option.price, option.kid)} adults={option.adults} category_id={option.category_id} rooms={option.rooms} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
                                         </td>
                                         <td className='text-center'>{option.adults}</td>
-                                        <td className='text-center'> {option.rooms} Room {(option.extra_beds != 0) ? option.extra_beds + " Extra Bed" : ''}</td>
+                                        <td className='text-center'> {option.rooms} Room {(option.extra_beds !== 0) ? option.extra_beds + " Extra Bed" : ''}</td>
                                         <td className="package-price text-center"> {option.price}</td>
                                         <td className='text-center'>
 

@@ -50,7 +50,7 @@ export default function CurrentBooking() {
         "persons": person
     }
 
-    if(name == '' || phone == '' || email == '' || person == '' || vehicle == '' || zone == '' || timing == '') {
+    if(name === '' || phone === '' || email === '' || person === '' || vehicle === '' || zone === '' || timing === '') {
         alert("Please fill all the fields");
     } else {
         axios.post(`${process.env.REACT_APP_BASE_URL}/admin/bookings/current`, data , {

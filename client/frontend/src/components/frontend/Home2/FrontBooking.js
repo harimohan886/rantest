@@ -6,10 +6,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 import swal from 'sweetalert'
 import axios from 'axios';
 import moment from 'moment';
+import BookSafari2 from './BookSafari2';
 
-import BookSafari from './BookSafari'
 
-export default function Dates() {
+export default function FrontBooking() {
 
     const [booking_date , setBookingDate] = useState([]);
 
@@ -63,35 +63,28 @@ export default function Dates() {
 
   return (
     <section id='select-date'>
-        <div className='container sectionFrame'>
-            <h3 className='text-2xl'>Please select the dates</h3>
-            <div className='row'>
-                <div className='col-sm-6 col-xs-12'>
-                <div className='n2rCalendar'>
-                    <FullCalendar
-                    defaultView="dayGridMonth"
-                    displayEventTime={true}
-                    header={{
-                        left: "prev,next today",
-                        center: "title",
-                        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-                    }}
-                    editable={true}
-                    selectable={true}
-                    selectAllow= { function(select) {
-                        return moment().diff(select.start, 'days') <= 0
-                     }}
-                  
-                    select={handleDateSelect}
-                    plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
-                    />
-                </div>
-                </div>
-                <div className='col-sm-6 col-xs-12'>
-                    { details && <BookSafari zones = {zones} timings = {timings} vehicles = {vehicles} bookingDate  = {booking_date} date = {date} /> }
-                </div>
-            </div>
+        <div className='n2rCalendar'>
+            <FullCalendar
+            defaultView="dayGridMonth"
+            displayEventTime={true}
+            header={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+            }}
+            editable={true}
+            selectable={true}
+            selectAllow= { function(select) {
+                return moment().diff(select.start, 'days') <= 0
+                }}
+            
+            select={handleDateSelect}
+            plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+            />
         </div>
+        <div className='slot-form'>
+            { details && <BookSafari2 zones = {zones} timings = {timings} vehicles = {vehicles} bookingDate  = {booking_date} date = {date} /> }
+        </div>  
     </section>
   )
 }
