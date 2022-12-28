@@ -20,7 +20,7 @@ export default function Home2() {
                     <FrontBooking/>
                 </div>
                 <div className='col-sm-6'>
-                    <img src='../image/tiger-rock.jpeg' className='img-fluid mt-3' alt='Tiger'/>
+                    <img src='../image/jeeep.jpeg' className='img-fluid mt-3' alt='Tiger'/>
                 </div>
             </div>
         </div>

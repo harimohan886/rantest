@@ -3454,16 +3454,14 @@ line-height: 26px;
 	font-family: 'Source Sans Pro';
 }
 .adventures img{
-	border-radius: 100px;
-	border: 4px solid #fff;
-    outline: 2px solid #ddd;
+	box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 .adventures h5{
 	text-align: center;
     color: #000;
-    font-weight: 500;
-    font-size: 17px;
-    margin-top: 8px;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: 600;
 }
 .goWild{
 	margin-top: 40px;
@@ -3550,23 +3548,54 @@ line-height: 26px;
 	margin-top: 10px;
 }
 .hotelbgIn{
-	margin-top: 50px;
-}
-.hotelbgIn .caption{
-    padding: 120px 0;
-}
-.hotelbgIn .capTitle{
-	text-align: center;
-    border: 3px solid #a3afdd;
-    padding: 70px;
-    background: rgb(47 69 130 / 50%);
-    max-width: 1000px;
-    margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 .hotelbgIn h4{
-	color: #fff;
-    font-family: 'Open Sans';
-    font-size: 15px;
+	color: #000;
+    font-weight: 600;
+    font-size: 17px;
+    font-family: 'Source Sans Pro';
+    margin-top: 10px;
+    line-height: 20px;
+    margin-bottom: 5px;
+	padding: 0 10px;
+}
+.hotelbgIn .hotelBox{
+	box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
+    background: #fcfcfc;
+}
+.hotelbgIn ul li{
+	font-family: 'Open Sans';
+	line-height: 23px;
+}
+.hotelbgIn ul li span{
+	font-size: 17px;
+    font-weight: 600;
+    font-family: 'Prata';
+}
+.hotelbgIn .star{
+	float: left;
+}
+.hotelbgIn .bookButton{
+	float: right;
+}
+.hotelbgIn .star label{
+	background: #449640;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px;
+    margin-right: 5px;
+}
+.hotelbgIn .star label img{
+	display: inline;
+    position: relative;
+    top: -2px;
+}
+.hotelbgIn a, .hotelbgIn a:hover{
+	color: #000;
 }
 .hotelbgIn h2{
 	color: #fff;
@@ -3583,11 +3612,21 @@ line-height: 26px;
     font-size: 17px;
 }
 .hotelbgIn .btn-transparent{
-	background: #001e62;
-    margin-top: 20px;
-    color: #fff;
+	background: #fcd84a;
+    font-size: 13px;
+    color: #444;
     font-family: 'Open Sans';
-    font-weight: 600;
+    font-weight: 700;
+    padding: 4px 6px;
+}
+.hotelbgIn ul{
+	padding: 0 10px;
+}
+.hotelbgIn .star-buttons{
+	display: block;
+    margin-top: 10px;
+	min-height: 40px;
+	padding: 0 10px;
 }
 .seoContent h4{
 	margin-bottom: 10px;
