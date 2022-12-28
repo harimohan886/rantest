@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import CurrentBooking from '../Home/CurrentBooking'
+import Logo from './Logo.svg'
 
 export default function Header() {
 
@@ -38,9 +39,11 @@ export default function Header() {
             </div>
             <div className="col-sm-2 logo-padding">
                 <div className="logo">
-                <Link to="/">
-                    <img alt="Ranthambore Safari" className="img-responsive" src="../image/logo.png" />
-                </Link>
+                    <Link to="/">
+                        <svg width="195" height="62" xmlns="http://www.w3.org/2000/svg">      
+                            <image href={Logo} width="195" height="62"/>
+                        </svg>
+                    </Link>
                 </div>
             </div>
             <div className="col-sm-5">
