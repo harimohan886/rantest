@@ -7,7 +7,7 @@ export default function NewTiming() {
             <h3 className='common-title'>Safari Zone & Timings</h3>
             <div className='row'>
             <div className='col-sm-6'>
-                    <div className='leafBg' style={{background: "url('../image/leaf.jpeg')"}}>
+                    <div className='leafBg'>
                         <ul className="list-group">
                             <li>
                                 <i className='fa fa-angle-right'></i> Zone will be allowed as per availability

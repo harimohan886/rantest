@@ -464,7 +464,7 @@ font-size: 8px;
 color: #fff;
 }
 .tabletabs2 .tab-pane {
-border: 2px solid #eee;
+box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
 padding: 20px 10px 10px 20px;
 }
 .tabletabs{
@@ -1034,7 +1034,7 @@ border-left:1px solid #5d5d5d;
 .safarizone .zoneinfo {
 	max-width: 100%;
 	display: flex;
-	margin-top: 40px;
+	margin-top: 36px;
 }
 .safarizone .zoneicon {
 	margin-right: 15px;
@@ -1278,9 +1278,8 @@ border-left:1px solid #5d5d5d;
 	font-weight: 600;
 	color: #111;
 	font-size: 36px;
-    margin-top: 20px;
-    text-align: center;
     margin-bottom: 20px;
+	font-family: 'Prata';
 }
 .cambal-safari {
 	margin-bottom: 40px;
@@ -2060,13 +2059,15 @@ border-left:1px solid #5d5d5d;
 #myTab.nav-tabs .nav-link{
 	padding: 8px 35px;
     margin-left: 15px;
-    border: 2px solid #ea2349;
+    border: 2px solid #444;
     background: #fff;
+	font-family: 'Prata', serif;
 }
 #myTab.nav-tabs .nav-link.active{
-	background: #ea2349;
+	background: #444;
     color: #FFF;
-    border-color: #ea2349;
+    border-color: #444;
+	font-weight: bold;
 }
 .packTab{
 	background: #f4f4f4;
@@ -3046,7 +3047,7 @@ line-height: 26px;
 	text-align: center;
 	font-size: 18px;
 	margin-top: 0;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 }
 .about-ranthambore p {
 	
@@ -3415,7 +3416,7 @@ line-height: 26px;
 	border: 1px solid #f8bd45;
 	color: #222;
 }
-.Nabnner{
+.Nabnner .nCaption{
 	background-color: #000;
 }
 .Nabnner h1{
@@ -3512,7 +3513,7 @@ line-height: 26px;
 	margin-top: 20px;
 }
 .new-timing .tBox h5{
-	font-family: 'Prata', serif;
+	font-family: 'Source Sans Pro';
     color: #283233;
     font-size: 20px;
     margin-bottom: 10px;
@@ -3522,7 +3523,7 @@ line-height: 26px;
 .new-timing .tBox h5 span{
 	float: right;
     color: #73848e;
-    font-size: 14px;
+    font-size: 17px;
     letter-spacing: 0.4px;
 }
 .new-timing ul{
@@ -3530,14 +3531,15 @@ line-height: 26px;
 }
 .new-timing ul li{
 	margin-bottom: 35px;
-    font-family: 'Prata', serif;
-    font-size: 17px;
+    font-family: 'Source Sans Pro';
+    font-size: 15px;
     line-height: 28px;
-	color: #000;
+    color: #fff;
+    font-weight: 600;
 }
 .new-timing ul li i{
-	background: #73848e;
-    color: #fff;
+	background: #fff;
+    color: #73848e;
     padding: 7px 10px;
     border-radius: 60px;
     margin-right: 5px;
@@ -3545,13 +3547,14 @@ line-height: 26px;
 }
 .leafBg{
 	padding: 20px 20px 0 20px;
-	margin-top: 10px;
+	margin-top: 35px;
+	background: #333;
 }
 .hotelbgIn{
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
-.hotelbgIn h4{
+.hotelbgIn h4, .paBox h4, .bBox h5{
 	color: #000;
     font-weight: 600;
     font-size: 17px;
@@ -3561,7 +3564,7 @@ line-height: 26px;
     margin-bottom: 5px;
 	padding: 0 10px;
 }
-.hotelbgIn .hotelBox{
+.hotelbgIn .hotelBox, .paBox, .bBox{
 	box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
     background: #fcfcfc;
 }
@@ -3574,13 +3577,13 @@ line-height: 26px;
     font-weight: 600;
     font-family: 'Prata';
 }
-.hotelbgIn .star{
+.star-buttons .star{
 	float: left;
 }
-.hotelbgIn .bookButton{
+.star-buttons .bookButton{
 	float: right;
 }
-.hotelbgIn .star label{
+.star-buttons .star label{
 	background: #449640;
     border-radius: 4px;
     color: #fff;
@@ -3589,12 +3592,12 @@ line-height: 26px;
     padding: 5px;
     margin-right: 5px;
 }
-.hotelbgIn .star label img{
+.star-buttons .star label img{
 	display: inline;
     position: relative;
     top: -2px;
 }
-.hotelbgIn a, .hotelbgIn a:hover{
+.hotelbgIn a, .hotelbgIn a:hover, .paBox a, .paBox a:hover{
 	color: #000;
 }
 .hotelbgIn h2{
@@ -3611,7 +3614,7 @@ line-height: 26px;
     font-weight: 600;
     font-size: 17px;
 }
-.hotelbgIn .btn-transparent{
+.hotelbgIn .btn-transparent, .paBox .btn-transparent{
 	background: #fcd84a;
     font-size: 13px;
     color: #444;
@@ -3622,7 +3625,7 @@ line-height: 26px;
 .hotelbgIn ul{
 	padding: 0 10px;
 }
-.hotelbgIn .star-buttons{
+.star-buttons{
 	display: block;
     margin-top: 10px;
 	min-height: 40px;
@@ -3646,39 +3649,124 @@ line-height: 26px;
 }
 .holidays{
 	margin: 60px 0;
-}
-.holidays .hlday{
-	text-align: center;
-	padding-top: 22px;
-}
-.holidays .hlday h4{
 	font-family: 'Source Sans Pro';
-    font-weight: 600;
-    font-size: 19px;
-    color: #db332e;
-}
-.holidays .hlday h2{
-	font-family: 'Prata', serif;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #000;
-}
-.holidays .hlday p{
-	font-size: 19px;
-    line-height: 37px;
-    max-width: 300px;
-    margin: 0 auto;
-    color: #000;
-}
-.holidays .hlday a{
-	background: #db332e;
-    color: #fff;
-    font-weight: 600;
-    margin-top: 20px;
 }
 .padr-20{
 	padding-right: 20px;
 }
 .padl-20{
 	padding-left: 20px;
+}
+.paBox p{
+	padding: 0 10px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-style: italic;
+    color: brown;
+}
+.paBox h6{
+	background: gold;
+    color: #111;
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    padding: 10px;
+}
+.new-blogs{
+	margin-bottom: 50px;
+}
+.new-blogs .bBox a{
+    margin-top: 10px;
+    display: block;
+    padding-bottom: 15px;
+	color: #000;
+}
+.new-blogs .bBox a span{
+	margin-left: 5px;
+}
+.new-blogs .bottom{
+	padding: 0 10px;
+}
+.bBox{
+	min-height: 359px;
+}
+.min32{
+	min-width: 32px;
+}
+@media (max-width: 767px){
+.Nabnner h1{
+	line-height: 28px;
+    padding-top: 15px;
+    font-size: 18px;
+}
+.Nabnner p{
+	margin-top: 6px;
+    margin-bottom: 13px;
+	font-size: 14px;
+}
+.Nabnner a img{
+	max-width: 115px;
+}
+.common-title{
+	line-height: 30px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+.adventures h5{
+	margin-bottom: 15px;
+	line-height: 20px;
+	font-size: 15px;
+}
+.leafBg{
+	margin-top: 0;
+	padding-left: 0;
+}
+.new-timing ul{
+	padding-left: 15px;
+}
+.new-timing ul li{
+	margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 25px;
+}
+.new-timing ul li i{
+	padding: 5px 7px;
+	font-size: 10px;
+}
+.new-timing .tBox h5{
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 30px;
+}
+.new-timing .tBox h5 span{
+	float: unset;
+    display: block;
+    font-size: 14px;
+}
+.hotelbgIn .hotelBox, .paBox, .bBox{
+	margin-bottom: 20px;
+}
+.hotelBox img, .holidays img{
+	width: 100%;
+}
+.star-buttons img{
+	width: unset;
+}
+.seoContent p{
+	font-size: 13px;
+    line-height: 22px;
+	max-width: 100%;
+}
+.holidays{
+	margin: 20px 0;
+}
+.bBox {
+    min-height: unset;
+}
+.min32{
+	min-width: 22px;
+}
 }

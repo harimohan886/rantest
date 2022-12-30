@@ -1,9 +1,11 @@
 import React from 'react'
+import HomeTabs from '../../components/frontend/Home/HomeTabs'
 import Adventures from '../../components/frontend/Home2/Adventures'
 import FrontBooking from '../../components/frontend/Home2/FrontBooking'
 import HolidayTour from '../../components/frontend/Home2/HolidayTour'
 import HotelsIn from '../../components/frontend/Home2/HotelsIn'
 import NewBanner from '../../components/frontend/Home2/NewBanner'
+import NewBlogs from '../../components/frontend/Home2/NewBlogs'
 import NewTiming from '../../components/frontend/Home2/NewTiming'
 import SeoContent from '../../components/frontend/Home2/SeoContent'
 
@@ -29,6 +31,8 @@ export default function Home2() {
     <HotelsIn/>
     <SeoContent/>
     <HolidayTour/>
+    <HomeTabs/>
+    <NewBlogs/>
     </>
   )
 }

@@ -1,6 +1,5 @@
 import React , { useState } from 'react'
 import SafariZone from '../../components/frontend/Home/SafariZone'
-import Timing from '../../components/frontend/Home/Timing'
 import AboutSafari from '../../components/frontend/Safari/AboutSafari'
 import BookingProcedure from '../../components/frontend/Safari/BookingProcedure'
 import FormSafariBooking from '../../components/frontend/Safari/FormSafariBooking'
@@ -14,6 +13,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import swal from 'sweetalert'
 import axios from 'axios';
 import moment from 'moment';
+import SafariTiming from '../../components/frontend/Home2/SafariTiming'
+import Newzone from '../../components/frontend/Home2/Newzone'
 
 export default function OnlineSafariBooking() {
 
@@ -72,7 +73,7 @@ export default function OnlineSafariBooking() {
                         <img alt="Safari" class="img-responsive" src="../image/safari-banner.png" />
                     </div>
                 </div>
-                <div className='col-sm-6 col-xs-12'>
+                <div className='col-sm-6 col-xs-12 goWild'>
                     <h1>Ranthambore Safari Booking</h1>
                     <FullCalendar
                         defaultView="dayGridMonth"
@@ -100,8 +101,8 @@ export default function OnlineSafariBooking() {
         </div>
         
         <InfoSafariBooking/>
-        <Timing/>
-        <SafariZone/>
+        <SafariTiming/>
+        <Newzone/>
         <AboutSafari/>
         <BookingProcedure/>
         <TransportMode/>

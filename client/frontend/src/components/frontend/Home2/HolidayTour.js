@@ -5,22 +5,81 @@ export default function HolidayTour() {
   return (
     <div className='container'>
         <div className='holidays'>
-            <div className='row'>
-                <div className='col-sm-4'>
-                    <img src='../image/hawa.jpeg' className='img-fluid padr-20' alt='Hawa Mahal' />
-                </div>
-                <div className='col-sm-4'>
-                    <div className='hlday'>
-                        <h4>See the beauty with your own eyes</h4>
-                        <h2>Ranthambore Holiday <span>Tour Packages</span></h2>
-                        <p>Book your Ranthambore Holiday Tour Package from our Multiple Packages and explore the Royal Forts, Mueseum. You will experience the Luxury Hotels, Sight Seeing, Rajasthani Heritage and Desert Activities.</p>
-                        <Link to='ranthambore-packages' className='btn btn-transparent'>Explore packages</Link>
-                    </div>
-                </div>
-                <div className='col-sm-4'>
-                    <img src='../image/girl.jpeg' className='img-fluid padl-20' alt='Holiday Tour' />
+        <h3 className='common-title'>Book your Holiday Tour Packages</h3>
+        <div className='row'>
+            <div className='col-sm-3'>
+                <div className='paBox'>
+                    <Link to='/package-details/the-dwarka-somnath-gir-tour-package'>
+                        <img src='../image/package/pa1.jpeg' className='img-fluid' alt='Holiday Package' /> 
+                        <h4>The Dwarka Somnath Gir tour package</h4>
+                        <p>1 Night / 2 Days, Pickup & Drop, Lunch & Breakfast</p>
+                        <h6>₹ 4500</h6>
+                        <div className='star-buttons'>
+                            <div className='star'>
+                                <label>5.0 <img src='../image/icons/star2.png' className='img-fluid' alt='Rating' /></label>
+                            </div>
+                            <div className='bookButton'>
+                                <button className='btn btn-transparent'>Book Now</button>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
+            <div className='col-sm-3'>
+                <div className='paBox'>
+                    <Link to='/package-details/the-dwarka-somnath-gir-tour-package'>
+                        <img src='../image/package/pa2.jpeg' className='img-fluid' alt='Holiday Package' /> 
+                        <h4>The Dwarka Somnath Gir tour package</h4>
+                        <p>1 Night / 2 Days, Pickup & Drop, Lunch & Breakfast</p>
+                        <h6>₹ 4500</h6>
+                        <div className='star-buttons'>
+                            <div className='star'>
+                                <label>5.0 <img src='../image/icons/star2.png' className='img-fluid' alt='Rating' /></label>
+                            </div>
+                            <div className='bookButton'>
+                                <button className='btn btn-transparent'>Book Now</button>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            <div className='col-sm-3'>
+                <div className='paBox'>
+                    <Link to='/package-details/the-dwarka-somnath-gir-tour-package'>
+                        <img src='../image/package/pa3.jpeg' className='img-fluid' alt='Holiday Package' /> 
+                        <h4>The Dwarka Somnath Gir tour package</h4>
+                        <p>1 Night / 2 Days, Pickup & Drop, Lunch & Breakfast</p>
+                        <h6>₹ 4500</h6>
+                        <div className='star-buttons'>
+                            <div className='star'>
+                                <label>5.0 <img src='../image/icons/star2.png' className='img-fluid' alt='Rating' /></label>
+                            </div>
+                            <div className='bookButton'>
+                                <button className='btn btn-transparent'>Book Now</button>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            <div className='col-sm-3'>
+                <div className='paBox'>
+                    <Link to='/package-details/the-dwarka-somnath-gir-tour-package'>
+                        <img src='../image/package/pa4.jpeg' className='img-fluid' alt='Holiday Package' /> 
+                        <h4>The Dwarka Somnath Gir tour package</h4>
+                        <p>1 Night / 2 Days, Pickup & Drop, Lunch & Breakfast</p>
+                        <h6>₹ 4500</h6>
+                        <div className='star-buttons'>
+                            <div className='star'>
+                                <label>5.0 <img src='../image/icons/star2.png' className='img-fluid' alt='Rating' /></label>
+                            </div>
+                            <div className='bookButton'>
+                                <button className='btn btn-transparent'>Book Now</button>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
   )
