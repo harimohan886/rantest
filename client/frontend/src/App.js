@@ -154,7 +154,7 @@ function App() {
       <Provider template={AlertTemplate} {...options}>
         <Routes>
 
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/' element={<Home2 />} />
           <Route exact path='/online-ranthambore-safari-booking' element={<OnlineSafariBooking />} />
           <Route exact path='/safari-booking-details' element={<SafariTravellerBooking />} />
           <Route exact path='/online-chambal-moter-boat-safari-booking' element={<Chambal />} />
