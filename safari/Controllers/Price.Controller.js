@@ -78,7 +78,6 @@ module.exports = {
     try {
       var checkCount = await isWeekend(req.body.date);
       var date_to =  req.body.date ;
-
       const festivalData =  await Price.findOne({type: 'festival', person_type: req.body.person_type, vehicle_type: req.body.vehicle_type});
 
       if (festivalData && (req.body.date >= festivalData.date_from) && (req.body.date <= festivalData.date_to)) {
