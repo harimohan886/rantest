@@ -7,7 +7,7 @@ export default function NewBanner() {
     <div className='Nabnner'>
       <div className='nCaption'>
         <div className='container'>
-          <h1>Explore the Real Tigers in <span>Ranthambore</span> National Park</h1>
+          <h1>Ranthambore National Park</h1>
           <p>Book your Jeep and Canter Safari Online</p>
           <div className='text-center'>
               <Link to='/online-ranthambore-safari-booking'>
