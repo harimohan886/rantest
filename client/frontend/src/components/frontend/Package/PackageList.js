@@ -65,7 +65,7 @@ export default function PackageList() {
         const resutl = await paginationData(currentPage);
         setPackages(resutl.packages.data);
     };
-
+    
     return (
 
         <>

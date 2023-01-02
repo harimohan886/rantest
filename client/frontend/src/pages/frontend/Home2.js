@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{ useState,useEffect}from 'react'
 import HomeTabs from '../../components/frontend/Home/HomeTabs'
 import Adventures from '../../components/frontend/Home2/Adventures'
 import FrontBooking from '../../components/frontend/Home2/FrontBooking'
@@ -8,8 +8,20 @@ import NewBanner from '../../components/frontend/Home2/NewBanner'
 import NewBlogs from '../../components/frontend/Home2/NewBlogs'
 import NewTiming from '../../components/frontend/Home2/NewTiming'
 import SeoContent from '../../components/frontend/Home2/SeoContent'
-
+import axios from 'axios';
 export default function Home2() {
+    
+    const [packages,setPackages] = useState([]);
+    const [hotels,setHotels]     = useState([]);
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/front`).then((res)=>{
+            setPackages(res.data.data);
+        });
+        axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/front`).then((res)=>{
+            setHotels(res.data.data);
+        });
+    },[])
+    
   return (
     <>
     <NewBanner/>
@@ -28,9 +40,9 @@ export default function Home2() {
         </div>
     </div>
     <NewTiming/>
-    <HotelsIn/>
+    <HotelsIn hotels={ hotels }/>
     <SeoContent/>
-    <HolidayTour/>
+    <HolidayTour packages={ packages }/>
     <HomeTabs/>
     <NewBlogs/>
     </>
