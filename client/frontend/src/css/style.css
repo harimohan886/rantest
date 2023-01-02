@@ -576,10 +576,9 @@ padding: 0px;
 	left: auto;
 }
 .menuleft ul li a.active {
-	color: #fff;
+	color: #ea2349;
 	font-weight: 600;
 	padding: 10px 10px;
-	background-color: #ea2349;
 	border-radius: 3px;
 }
 .menuright {
@@ -1950,22 +1949,24 @@ border-left:1px solid #5d5d5d;
     border-radius: 9px;
 }
 .destination h5 {
-    margin-top: 0;
+    background: #db332e;
     text-align: center;
-    padding-top: 10px;
-	font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.7px;
-    text-transform: capitalize;
-    margin-bottom: 15px;
-	padding-bottom: 0;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
 }
-.destination .carousel-control {
-    top: 31%;
-    font-size: 70px;
-    color: #ffc419;
-    opacity: 1;
-    text-shadow: none;
+.destination li{
+	border-bottom: 1px dashed #ccc;
+    padding-left: 10px;
+    line-height: 35px;
+}
+.destination li:last-child{
+	border-bottom: none;
+}
+.destination li i{
+	color: #db332e;
+	font-size: 10px;
+    margin-right: 5px;
 }
 .carousel .carousel-caption {
     padding-bottom: 0;
@@ -3554,7 +3555,7 @@ line-height: 26px;
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
-.hotelbgIn h4, .paBox h4, .bBox h5{
+.hotelbgIn h4, .paBox h4{
 	color: #000;
     font-weight: 600;
     font-size: 17px;
@@ -3679,9 +3680,6 @@ line-height: 26px;
 	margin-bottom: 50px;
 }
 .new-blogs .bBox a{
-    margin-top: 10px;
-    display: block;
-    padding-bottom: 15px;
 	color: #000;
 }
 .new-blogs .bBox a span{
@@ -3691,10 +3689,88 @@ line-height: 26px;
 	padding: 0 10px;
 }
 .bBox{
-	min-height: 359px;
+	min-height: 464px;
+    border-radius: 10px !important;
 }
 .min32{
 	min-width: 32px;
+}
+#tab-faq .accordion-title:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content:"\f068";
+    padding-right: 5px;
+	color: #db332e;
+}
+#tab-faq .accordion-title.collapsed:before {
+    float: right !important;
+    content:"\f067";
+}
+#tab-faq .collapse.show{
+	visibility: visible;
+}
+#tab-faq .card{
+	border: none;
+}
+#tab-faq .card:last-child .card-header{
+	border-bottom: none;
+}
+#tab-faq .card-header a:focus{
+	text-decoration: none;
+}
+#tab-faq .card-header{
+	background: none;
+	padding: 15px 0px;
+}
+#tab-faq .card-header a{
+	color: #444;
+	font-weight: 600;
+}
+#tab-faq .card-body{
+	padding: 15px 0px;
+}
+.new-blogs .news-date{
+	position: absolute;
+    left: 23px;
+    top: 23px;
+    width: 80px;
+    height: 80px;
+    line-height: 30px;
+    padding: 12px 10px 10px;
+    text-align: center;
+    font-size: 25px;
+    color: #ffffff;
+    font-weight: 800;
+    background: #b80500;
+    border-radius: 40px 0px 40px 40px;
+}
+.new-blogs .news-date span{
+	font-size: 16px;
+    line-height: 24px;
+    display: block;
+}
+.bBox h5{
+	color: #000;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 10px;
+    line-height: 24px;
+    margin-bottom: 5px;
+    padding: 0 15px;
+}
+.bBox p{
+	padding: 0 15px;
+	font-size: 13px;
+}
+.new-blogs .bBox .btn-dark{
+	background: #b92925;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid #b92925;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 @media (max-width: 767px){
 .Nabnner h1{

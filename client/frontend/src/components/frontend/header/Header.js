@@ -24,15 +24,15 @@ export default function Header() {
                 <div className="menuleft">
                 <ul className="list-inline">
                     <li className="list-inline-item">
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li className="list-inline-item">
                         <Link className="active" to="/online-ranthambore-safari-booking">Online Safari booking</Link>
                     </li>
                     <li className="list-inline-item">
                         <Link to="/online-Chambal-moter-boat-safari-booking">Chambal Safari booking
                          <span><img alt="gif" src="../image/icons/new-blinking.gif" /></span>
                         </Link>
-                    </li>
-                    <li className="list-inline-item">
-                        <a data-target="#myModal" data-toggle="modal" href="#!">Current Booking</a>
                     </li>
                 </ul>
                 </div>
