@@ -139,6 +139,7 @@ a:hover{
 }
 .setReactSelect{
   min-width: 945px;
+  z-index: 999 !important;
 }
 .setReactSelect .css-1s2u09g-control{
   height: 40px;

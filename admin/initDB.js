@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 module.exports = () => {
   mongoose
     .connect(process.env.MONGO_URL, {
+      dbName: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      pass: process.env.DB_PASS,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -15,11 +18,11 @@ module.exports = () => {
     console.log('Mongoose connected to db...');
   });
 
-  // mongoose.set('debug',true);
-
   mongoose.connection.on('error', err => {
     console.log(err.message);
   });
+
+  // mongoose.set('debug',true);
 
   mongoose.connection.on('disconnected', () => {
     console.log('Mongoose connection is disconnected...');

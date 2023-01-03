@@ -579,10 +579,11 @@ padding: 0px;
 	left: auto;
 }
 .menuleft ul li a.active {
-	color: #ea2349;
+	color: #fff;
 	font-weight: 600;
 	padding: 10px 10px;
 	border-radius: 3px;
+	background: #ea2349;
 }
 .menuright {
 	float: right;
@@ -3571,6 +3572,7 @@ line-height: 26px;
 .hotelbgIn .hotelBox, .paBox, .bBox{
 	box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
     background: #fcfcfc;
+	margin-bottom: 20px;
 }
 .hotelbgIn ul li{
 	font-family: 'Open Sans';
@@ -3697,6 +3699,10 @@ line-height: 26px;
 }
 .min32{
 	min-width: 32px;
+}
+#tab-faq{
+	margin-top: 50px;
+    max-width: 800px;
 }
 #tab-faq .accordion-title:before {
     float: right !important;

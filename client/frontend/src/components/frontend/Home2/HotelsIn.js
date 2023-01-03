@@ -16,7 +16,7 @@ export default function HotelsIn({ hotels }) {
                     <img src={ `${process.env.REACT_APP_HOTEL_SERVER_URL}/`+hotel.image } className='img-fluid' alt='Hotel' />
                     <h4>{ hotel.name }</h4>
                     <ul className='list-group'>
-                      <li>{ hotel.state }, { hotel.city }</li>
+                      <li>{ hotel.city }, { hotel.state }</li>
                       <li>Starting from <span>₹ { hotel.price }</span></li>
                     </ul>
                     <div className='star-buttons'>

@@ -23,6 +23,7 @@ const CustomerRoute = require('./Routes/Customer.route');
 const BookingRoute = require('./Routes/Booking.route');
 const SeoManagerRoute = require('./Routes/SeoManager.route');
 const PaymentRoute = require('./Routes/Payment.route');
+console.log('process.env.MONGO_URL',process.env.MONGO_URL)
 
 app.use('/auth', AuthRoute);
 
@@ -60,5 +61,7 @@ app.use((err, req, res, next) => {
 
 
 app.listen(process.env.PORT || 5005, () => {
+console.log('process.env.MONGO_URL',process.env.MONGO_URL)
+
   console.log("Ranthambore admin server is running on port! ", process.env.PORT);
 });

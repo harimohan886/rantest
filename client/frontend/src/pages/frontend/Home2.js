@@ -9,6 +9,7 @@ import NewBlogs from '../../components/frontend/Home2/NewBlogs'
 import NewTiming from '../../components/frontend/Home2/NewTiming'
 import SeoContent from '../../components/frontend/Home2/SeoContent'
 import axios from 'axios';
+import NewFAQ from '../../components/frontend/Home2/NewFAQ'
 export default function Home2() {
     
     const [packages,setPackages] = useState([]);
@@ -44,6 +45,7 @@ export default function Home2() {
     <SeoContent/>
     <HolidayTour packages={ packages }/>
     <HomeTabs/>
+    <NewFAQ/>
     <NewBlogs/>
     </>
   )
