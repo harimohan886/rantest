@@ -21,6 +21,9 @@ h1,h2,h3,h4,h5,h6{
 .bodyHeight{
 	min-height: 600px;
 }
+#react-select-3-listbox{
+	z-index: 999999990;
+}
 #myModal .modal-header {
 	padding: 0;
 	border-bottom: none;
