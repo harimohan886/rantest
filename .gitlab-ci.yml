@@ -21,9 +21,9 @@ deploy_staging:
   stage: deploy
   environment:
     name: staging
-    url: 38.242.196.238
+    url: 13.233.31.22
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/ && git checkout main && git pull origin main && exit"
+    - ssh ubuntu@13.233.31.22 "cd ranthambore/ && git checkout main && git pull origin main && exit"
   only:
     - main
 
@@ -31,9 +31,9 @@ build_staging:
   stage: build
   environment:
     name: staging
-    url: 38.242.196.238
+    url: 13.233.31.22
   script:
-    - ssh root@38.242.196.238 "cd ranthambore/ && docker-compose up --build -d"
+    - ssh ubuntu@13.233.31.22 "cd ranthambore/ && docker-compose up --build -d"
   when: manual
   only:
     - main

@@ -2,6 +2,7 @@ import React, { useState , useEffect } from 'react'
 import TravellerInputs from '../../components/frontend/Safari/TravellerInputs';
 import axios from 'axios';
 import { useAlert } from "react-alert";
+import swal from 'sweetalert';
 
 export default function SafariTravellerBooking() {
 
@@ -108,7 +109,7 @@ export default function SafariTravellerBooking() {
       const handleSaveData = () => {
 
         if(Email === '' && State === '' && Address === '') {
-            alert.error("Please do not leave any fields blank.");
+            swal('Please fill all person details',' Email/ State / Adress','warning');
             return true;
         } else {
             const options = {
@@ -223,6 +224,99 @@ export default function SafariTravellerBooking() {
         });
     }
 
+    const handlePayNow = (e) =>{
+      e.preventDefault();
+      var an = document.querySelector('.pname').value;
+      var am = document.querySelector('.pmobile').value;
+      var ae = document.querySelector('.pemail').value;
+      var as = document.querySelector('.pstate').value;
+      var aa = document.querySelector('.paddr').value;
+      var mpop = true;
+      if(an == ''){
+        swal('Please fill Name','person name is fillable','warning');
+        mpop = false;
+        return;
+      }
+      if(am == ''){
+        swal('Please fill mobile','person mobile number is fillable','warning');
+        mpop = false;
+        return;
+      }
+      if(ae == ''){
+        swal('Please fill email','person email is fillable','warning');
+        mpop = false;
+        return;
+      }
+      if(as == 'Please Select State'){
+        swal('Please select state','person state is not selected','warning');
+        mpop = false;
+        return;
+      }
+      if(aa == ''){
+        swal('Please fill Address','person address is mandatory','warning');
+        mpop = false;
+        return;
+      }
+      var alen = localStorage.getItem('adults');
+      var filter   = Array.prototype.filter;
+
+      var tn = document.querySelectorAll('.tname');
+      var tg = document.querySelectorAll('.tgender');
+      var tna = document.querySelectorAll('.tnation');
+      var tp = document.querySelectorAll('.tidproof');
+      var tpi = document.querySelectorAll('.tidno');
+      var tlen = tn.length;
+
+        var $e_tn = filter.call(tn,function(node) {
+            return node.value != ''
+        });
+        var $e_tg = filter.call(tg,function(node) {
+            return node.value != 'Please Select'
+        });
+        var $e_tna = filter.call(tna,function(node) {
+            return node.value != 'Please Select'
+        });
+        var $e_tp = filter.call(tp,function(node) {
+            return node.value != 'Please Select'
+        });
+        var $e_tpi = filter.call(tpi,function(node) {
+            return node.value != ''
+        });
+     
+      if($e_tn.length < tlen){
+        swal('Please fill traveller name','One of the traveller name is missing','warning');
+        mpop = false;
+        return;
+      }
+      if($e_tg.length < tlen){
+        swal('Please select traveller gender','One of the traveller gender is not selected','warning');
+        mpop = false;
+        return;
+      }
+      if($e_tna.length < tlen){
+        swal('Please select traveller nationality','One of the traveller nationality  is not selected','warning');
+        mpop = false;
+        return;
+      }
+      if($e_tp.length < tlen){
+        swal('Please select traveller ID Proof','One of the traveller ID Proof is not selected','warning');
+        mpop = false;
+        return;
+      }
+      if($e_tpi.length < tlen){
+        swal('Please fill traveller ID number','One of the traveller ID number is missing','warning');
+        mpop = false;
+        return;
+      }
+
+      if(mpop == true){
+          var btn = document.getElementById('paynow');
+          btn.setAttribute('data-toggle','modal');
+          btn.setAttribute('data-target','#exampleModalLong');
+      }
+      
+    }
+
     return (
         <div className='container sectionFrame'>
             <div className='passanger'>
@@ -252,7 +346,7 @@ export default function SafariTravellerBooking() {
                                                 <label className='control-label'>Name</label>
                                             </div>
                                             <div className='col-sm-8'>
-                                                <input type="text" value = {Name} onChange = {(e) => setName(e.target.value)} className='form-control' placeholder='Name' />
+                                                <input type="text" value = {Name} onChange = {(e) => setName(e.target.value)} className='form-control pname' placeholder='Name' />
                                             </div>
                                         </div>
                                 </div>
@@ -262,7 +356,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>Mobile No</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text" value = {Phone}  onChange = {(e) => setPhone(e.target.value)} className='form-control' placeholder='Mobile Number' />
+                                            <input type="text" value = {Phone}  onChange = {(e) => setPhone(e.target.value)} className='form-control pmobile' placeholder='Mobile Number' />
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +366,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>Email ID</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text"  value = {Email} onChange = {(e) => setEmail(e.target.value)} className='form-control' placeholder='Email ID' />
+                                            <input type="text"  value = {Email} onChange = {(e) => setEmail(e.target.value)} className='form-control pemail' placeholder='Email ID' />
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +376,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>State</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <select className="form-control ng-pristine ng-invalid ng-touched" value = {State} onChange = {(e) => setState(e.target.value)} formcontrolname="state" id="state">
+                                            <select className="form-control ng-pristine ng-invalid ng-touched pstate" value = {State} onChange = {(e) => setState(e.target.value)} formcontrolname="state" id="state">
                                                 <option>Please Select State</option>
                                                 <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -331,7 +425,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>Full address</label>
                                         </div>
                                         <div className='col-sm-10'>
-                                            <textarea onChange = {(e) => setAddress(e.target.value)} className="form-control ng-untouched ng-pristine ng-invalid" cols="60" formcontrolname="address" id="address" placeholder="Full Address.."  rows="4" tabIndex="4"></textarea>
+                                            <textarea onChange = {(e) => setAddress(e.target.value)} className="form-control ng-untouched ng-pristine ng-invalid paddr" cols="60" formcontrolname="address" id="address" placeholder="Full Address.."  rows="4" tabIndex="4"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -355,7 +449,7 @@ export default function SafariTravellerBooking() {
                             <tbody>
                                 {users.map((user, index) => (
                                     <tr key={user.key}>
-                                    { localStorage.getItem('selAvailable') >= index+1 ?  
+                                    { localStorage.getItem('selAvailable') == 1 ?  
                                     <>
                                          <TravellerInputs
                                             key={user.key}
@@ -383,7 +477,7 @@ export default function SafariTravellerBooking() {
                 </form>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
                             <button className='btn btn-light'>Payable amount : { payable_Amount }</button> &nbsp;
-                            <button type="button" data-toggle="modal" data-target="#exampleModalLong" className='btn btn-success paynow'>Pay Now </button> &nbsp; 
+                            <button type="button" id="paynow" onClick={handlePayNow}   className='btn btn-success paynow'>Pay Now </button> &nbsp; 
                             <br />
 
                 <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
