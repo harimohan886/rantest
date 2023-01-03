@@ -131,7 +131,7 @@ export default function Packages() {
               <h1 className='text-2xl text-black font-bold mb-3'>Packages</h1>
             </div>
             <div className='mt-4'>
-              <Link to='/admin/add-package' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Package</Link>
+              <Link to='/admin/add-package-assets' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Package</Link>
             </div>
           </div>
 
