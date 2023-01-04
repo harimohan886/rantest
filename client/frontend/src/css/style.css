@@ -291,14 +291,16 @@ margin-bottom: 0;
 margin-right: 0;
 }
 .headtop{
-background: #ddd;
-display: block;
-padding: 6px 8px;
-font-weight: 600;
-margin-bottom: 10px;
+	background: #000;
+    display: block;
+    padding: 10px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 16px;
 }
 .timetable ul li{
-line-height: 32px;
+line-height: 23px !important;
 border-bottom: 1px solid #ddd;
 width: 100%;
 position: relative;
@@ -316,8 +318,8 @@ border-right: 1px solid #ddd;
 }
 .timetable{
 border: 1px solid #ddd;
-max-width: 600px;
-margin-top: 10px;
+background: #fcfcfc;
+box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
 }
 .timetable ul{
 margin-bottom: 0;
@@ -3531,16 +3533,21 @@ line-height: 26px;
     font-size: 17px;
     letter-spacing: 0.4px;
 }
-.new-timing ul{
-	padding-left: 30px;
-}
 .new-timing ul li{
-	margin-bottom: 35px;
+	border-bottom: 1px dashed #ccc;
     font-family: 'Source Sans Pro';
     font-size: 15px;
     line-height: 28px;
-    color: #fff;
-    font-weight: 600;
+    color: #000;
+    font-weight: 500;
+    padding: 12px 15px;
+}
+.new-timing ul li:last-child{
+	border-bottom: none;
+}
+.new-timing ul li img{
+	display: inline;
+	margin-right: 5px;
 }
 .new-timing ul li i{
 	background: #fff;
@@ -3550,10 +3557,22 @@ line-height: 26px;
     margin-right: 5px;
 	font-size: 13px;
 }
+.note-timing{
+	margin-top: 15px;
+    font-size: 16px;
+    color: #000;
+}
 .leafBg{
-	padding: 20px 20px 0 20px;
-	margin-top: 35px;
-	background: #333;
+	background: #fcfcfc;
+    box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
+}
+.leafBg h5{
+	background: #000;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px;
+	margin-bottom: 5px;
 }
 .hotelbgIn{
 	margin-top: 20px;
@@ -3782,6 +3801,7 @@ line-height: 26px;
     margin-bottom: 15px;
 }
 @media (max-width: 767px){
+
 .Nabnner h1{
 	line-height: 28px;
     padding-top: 15px;
@@ -3799,6 +3819,7 @@ line-height: 26px;
 	line-height: 30px;
     padding-top: 20px;
     font-size: 20px;
+	letter-spacing: 0;
 }
 .adventures h5{
 	margin-bottom: 15px;
@@ -3809,11 +3830,10 @@ line-height: 26px;
 	margin-top: 0;
 	padding-left: 0;
 }
-.new-timing ul{
-	padding-left: 15px;
+.note-timing{
+	font-size: 14px;
 }
 .new-timing ul li{
-	margin-bottom: 20px;
     font-size: 14px;
     line-height: 25px;
 }
