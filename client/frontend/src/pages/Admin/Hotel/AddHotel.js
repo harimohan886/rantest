@@ -49,6 +49,7 @@ export default function AddHotel() {
     const [address, setAddress] = useState();
     const [description, setDescription] = useState();
     const [status, setStatus] = useState();
+    const [homepage,setHomepage] = useState(); 
     const [meta_title, setMetaTitle] = useState();
     const [meta_description, setMetaDescription] = useState();
 
@@ -69,6 +70,7 @@ export default function AddHotel() {
         formData.append("address", address);
         formData.append("description", description);
         formData.append("status", status);
+        formData.append("homepage", homepage);
         formData.append("meta_title", meta_title);
         formData.append("meta_description", meta_description);
 
@@ -192,6 +194,14 @@ export default function AddHotel() {
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Homepage</label>
+                                <select id="homepage" name="homepage" onChange={(e) => setHomepage(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option>Please Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
                                 </select>
                             </div>
                         </div>

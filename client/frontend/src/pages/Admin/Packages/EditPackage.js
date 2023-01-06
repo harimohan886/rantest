@@ -22,6 +22,7 @@ export default function EditPackage() {
         meta_title: '',
         meta_description: '',
         availability: '',
+        homepage:'',
         image: '',
 
     });
@@ -45,6 +46,7 @@ export default function EditPackage() {
         formData.append("rating", packages.rating);
         formData.append("description", packages.description);
         formData.append("availability", packages.availability);
+        formData.append("homepage", packages.homepage);
         formData.append("meta_title", packages.meta_title);
         formData.append("meta_description", packages.meta_description);
         console.log("formdata", formData);
@@ -122,6 +124,14 @@ export default function EditPackage() {
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Homepage</label>
+                                <select value={packages.homepage} name="homepage" onChange={handleChange} id="homepage" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option>Please Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
                                 </select>
                             </div>
                         </div>

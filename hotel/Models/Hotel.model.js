@@ -54,6 +54,10 @@ const HotelSchema = new Schema({
 	availability: {
 		type: Number,
 	},
+	homepage: {
+		type: Number,
+		default:0
+	},
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,

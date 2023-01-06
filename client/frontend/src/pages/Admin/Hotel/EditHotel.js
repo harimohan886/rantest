@@ -12,6 +12,7 @@ export default function EditHotel() {
 
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [selectedFilesObj, setSelectedFilesObj] = useState([]);
+    const [homepage,sethomepage] = useState();
     const navigate = useNavigate();
     const params = useParams();
     const HSURL = process.env.REACT_APP_HOTEL_SERVER_URL;
@@ -24,6 +25,7 @@ export default function EditHotel() {
         rating: '',
         city: '',
         state: '',
+        homepage: '',
         address: '',
         safari_distance: '',
         description: '',
@@ -140,6 +142,7 @@ export default function EditHotel() {
         formData.append("description", hotels.description);
         formData.append("status", hotels.status);
         formData.append("meta_title", hotels.meta_title);
+        formData.append("homepage", hotels.homepage);
         formData.append("meta_description", hotels.meta_description);
         console.log("formdata", formData);
 
@@ -253,6 +256,14 @@ export default function EditHotel() {
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">homepage</label>
+                                <select id="homepage" name="homepage" onChange={handleChange} value={hotels.homepage} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option>Please Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
                                 </select>
                             </div>
                         </div>

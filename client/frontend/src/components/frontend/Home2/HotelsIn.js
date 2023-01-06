@@ -2,14 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function HotelsIn({ hotels }) {
+  
   return (
     <div className='hotelbgIn'>
       <div className='container'>
         <h3 className='common-title'>Hotels & Resorts in Ranthambore</h3>
         <div className='row'>
           {hotels && hotels.map((hotel, i) => {
-            if (i <= 4) {
-              console.log(hotel);
+            if (i <= 4 && hotel.homepage == 1) {
+            
               return (<div className='col-sm-3'>
                 <div className='hotelBox'>
                   <Link to={ '/hotel-details/'+hotel.slug }>

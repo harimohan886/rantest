@@ -9,7 +9,7 @@ export default function HolidayTour({ packages }) {
                 <h3 className='common-title'>Book your Holiday Tour Packages</h3>
                 <div className='row'>
                     {packages && packages.map((item, i) => {
-                        if (i <= 4) {
+                        if (i <= 4 && item.homepage == 1) {
                             return (<div className='col-sm-3'>
                                 <div className='paBox'>
                                     <Link to={`/package-details/${item.slug}`}>
@@ -17,7 +17,8 @@ export default function HolidayTour({ packages }) {
                                         <h4>{item.name}</h4>
                                         <p>
                                             {item.inclusions && item.inclusions.map((inc, i) => {
-                                                return inc + ',';
+                    
+                                                return inc.inclusion + ' ,';
                                             })}
                                         </p>
                                         <h6>₹ {item.price}</h6>

@@ -10,9 +10,7 @@ import axios from 'axios';
 export default function AddPackage() {
     const navigate = useNavigate();
     const HSURL = process.env.REACT_APP_PACKAGE_SERVER_URL;
-
-
-
+  
     const [packages, setPackages] = useState({
         name: '',
         price: '',
@@ -21,6 +19,7 @@ export default function AddPackage() {
         meta_title: '',
         meta_description: '',
         availability: '',
+        homepage:'',
         image: '',
 
     });
@@ -44,6 +43,7 @@ export default function AddPackage() {
         formData.append("rating", packages.rating);
         formData.append("description", packages.description);
         formData.append("availability", packages.availability);
+        formData.append("homepage", packages.homepage);
         formData.append("meta_title", packages.meta_title);
         formData.append("meta_description", packages.meta_description);
         console.log("formdata", formData);
@@ -108,6 +108,14 @@ export default function AddPackage() {
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Homepage</label>
+                                <select name="homepage" onChange={handleChange} id="homepage" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option>Please Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
                                 </select>
                             </div>
                         </div>

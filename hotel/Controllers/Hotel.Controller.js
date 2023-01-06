@@ -188,6 +188,7 @@ module.exports = {
           meta_title: hotel.meta_title,
           meta_description: hotel.meta_description,
           availability: hotel.availability,
+          homepage:hotel.homepage,
           amenities: await HotelAmenity.find({ hotel_id: hotel._id }).populate('amenity'),
           rooms: await HotelRoom.find({ hotel_id: hotel._id }).populate('facilities')
         })
