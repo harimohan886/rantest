@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
-export default function PackagePricing({ optionData, packageName }) {
+export default function PackagePricing({ optionData, packageName, setData }) {
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -30,7 +30,6 @@ export default function PackagePricing({ optionData, packageName }) {
         else {
 
             var person = '';
-
             var person = document.querySelector('#myTab .active').innerHTML;
             var child_selector = '#tab-indian .active';
             if (person === 'Foreigner') {
@@ -79,7 +78,7 @@ export default function PackagePricing({ optionData, packageName }) {
                 "category_name": package_cat,
 
             }
-
+            //return data;
             axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
                 console.log('result', result.data)
 
@@ -153,17 +152,63 @@ export default function PackagePricing({ optionData, packageName }) {
            var adultss = c_option.getAttribute('adults');
            var childd  = c_option.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[0].value;
            
-           var btn = document.getElementById('#proceed');
           
            if(check == true){
-            btn.setAttribute('data-toggle','modal');
-            btn.setAttribute('data-target','#exampleModalLong');
             e.target.setAttribute('data-toggle','modal');
             e.target.setAttribute('data-target','#exampleModalLong');
             document.getElementById('pcat').innerHTML   = package_sel;
             document.getElementById('acount').innerHTML = adultss;
             document.getElementById('ccount').innerHTML = childd;
+            document.getElementById('mdate').innerHTML  = moment(date).format("YYYY-MM-DD");
+            document.getElementById('amount').innerHTML = amount + ' INR';
            } 
+
+           var person = '';
+           var person = document.querySelector('#myTab .active').innerHTML;
+           var child_selector = '#tab-indian .active';
+           if (person === 'Foreigner') {
+               var child_selector = '#tab-foreigner .active';
+           }
+
+           var current = document.querySelector('.choose_package:checked');
+           var package_cat = document.querySelector(child_selector).innerHTML;
+           var package_id = current.getAttribute('package_id');
+           var category_id = current.getAttribute('category_id');
+
+           let nextSibling = current.parentNode.nextElementSibling;
+           let counter = 0;
+           let children = 0;
+           let adults = current.getAttribute('adults');
+           let rooms = current.getAttribute('rooms');
+           while (nextSibling) {
+               if (counter === 3) {
+                   children = nextSibling.childNodes[0].selectedIndex;
+               }
+               nextSibling = nextSibling.nextElementSibling;
+               counter++;
+           }
+
+           const data = {
+               "date": moment(date).format("YYYY-MM-DD"),
+               "type": "package",
+               "name": name,
+               "mobile": number,
+               "email": email,
+               "country": country,
+               "state": states,
+               "package_option_id": choose,
+               "package_id": package_id,
+               "package_name": packageName,
+               "no_of_adult": adults,
+               "no_of_kids": children,
+               "no_of_rooms": rooms,
+               "amount": amount,
+               "nationality_type": person,
+               "category_id": category_id,
+               "category_name": package_cat,
+
+           }
+           setData(data);
 
         }
 

@@ -3,8 +3,6 @@ import { useAlert } from "react-alert"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-
-
 export default function FinalPackageBooking() {
     const navigate = useNavigate();
 

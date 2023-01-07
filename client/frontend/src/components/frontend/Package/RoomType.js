@@ -1,10 +1,35 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import ContentImage from './ContentImage';
 import PackagePricing from './PackagePricing'
-
+import swal from 'sweetalert'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function RoomType({ packages, type }) {
-    
+
+    const [data,setData] = useState();
+    const navigate = useNavigate();
+
+    const makePayment = () =>{
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
+            console.log('result', result.data)
+
+
+            localStorage.setItem('package_customer_id', result.data.data._id);
+            localStorage.setItem('package_booking_id', result.data.data.package_booking);
+            localStorage.setItem('bookingData', JSON.stringify(data));
+            window.location.href = ("/book-package");
+
+
+        }).catch(
+            function (error) {
+                console.log('Show error notification!', error.response.data.error.message);
+                swal(error.response.data.error.message);
+            }
+        )
+        
+    }
     return (
         <>
             <ul className="nav nav-tabs" id="roomTab" role="tablist">
@@ -24,7 +49,7 @@ export default function RoomType({ packages, type }) {
                         <div key={lindex.toString()} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${type}${lindex}`}>
                             <ContentImage hotels={list.hotels} counterkey={type + lindex} />
 
-                            {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} packageName={packages?.package?.name} /> : <PackagePricing optionData={list?.foreignerOptions} packageName={packages?.package?.name} />}
+                            {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} packageName={packages?.package?.name} setData={setData} /> : <PackagePricing optionData={list?.foreignerOptions} packageName={packages?.package?.name} setData={setData} />}
 
                         </div>
 
@@ -87,7 +112,7 @@ export default function RoomType({ packages, type }) {
                     <div class="modal-footer">
                         <button type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 sm:text-base font-medium rounded text-sm py-2 px-3 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss="modal">Cancel</button>
                         
-                        <button type="button" onClick={() => ('Submit define here')} className="primary-btn bg-lemon py-2 text-center px-3 shadow-lg rounded sm:text-base font-semibold text-kenpozome hover:text-kenpozome">Make Payment</button>
+                        <button type="button" onClick={makePayment} className="primary-btn bg-lemon py-2 text-center px-3 shadow-lg rounded sm:text-base font-semibold text-kenpozome hover:text-kenpozome">Make Payment</button>
                     </div>
                     </div>
                     </div>
