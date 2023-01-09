@@ -53,7 +53,7 @@ const HotelSchema = new Schema({
 	},
 	availability: {
 		type: Number,
-	},
+	}, 
 	homepage: {
 		type: Number,
 		default:0

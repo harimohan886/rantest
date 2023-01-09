@@ -59,7 +59,7 @@ const PackageSchema = new Schema({
 	availability: {
 		type: Number,
 		default: 0,
-	},
+	}, 
 	homepage: {
 		type: Number,
 		default: 0,
