@@ -119,10 +119,6 @@ export default function HotelList() {
                                             <ul className="list-unstyled">
                                                 <li>
                                                     <span>
-                                                        <i className="fa fa-compass"></i> {item.city}</span>
-                                                </li>
-                                                <li>
-                                                    <span>
                                                         <i className="fa fa-compass"></i>{item.address} </span>
                                                 </li>
                                             </ul>
