@@ -63,7 +63,7 @@ const PackageSchema = new Schema({
 	homepage: {
 		type: Number,
 		default: 0,
-	},
+	}, 
 	image: {
 		type: String,
 	}

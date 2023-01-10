@@ -57,7 +57,7 @@ const HotelSchema = new Schema({
 	homepage: {
 		type: Number,
 		default:0
-	},
+	}, 
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,
