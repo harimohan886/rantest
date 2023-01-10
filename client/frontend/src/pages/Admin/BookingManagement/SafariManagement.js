@@ -14,7 +14,7 @@ export default function SafariManagement() {
    const alert = useAlert();
    const [pageCount, setpageCount] = useState(0);
    const [page, setPage] = useState(1);
-
+   const [zones,setZones] = useState([]);
    const GetDetails = useCallback( () =>  {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/safari?page=`+page+'&type=safari', {
             headers: {
@@ -37,8 +37,11 @@ export default function SafariManagement() {
 
     useEffect(() => {
         GetDetails();
+        axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`).then((res)=>{
+            setZones(res.data.data);
+        });
     },[GetDetails]);
-
+    console.log(zones);
     const fetchComments = async (currentPage) => {
         const res = await fetch(
             `${process.env.REACT_APP_BASE_URL}/admin/bookings/safari?page=`+currentPage+'&type=safari' , {
@@ -114,6 +117,7 @@ export default function SafariManagement() {
         setFilterZone('');setTiming('');setFilterStatus('');setFilterDate();setFilterVehicle('');setFilterEmail('');setFilterPhone('');setFilterName('');
         GetDetails();
     }
+    
 
   return (
 
@@ -161,8 +165,9 @@ export default function SafariManagement() {
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Safari Zone</label>
                         <select id="zones" value = {filterZone} onChange = {(e) => setFilterZone(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Please Select</option>
-                            <option value="Zone 1/2/3/4/5">Zone 1/2/3/4/5</option>
-                            <option value="Zone 6/7/8/9/10">Zone 6/7/8/9/10</option>
+                            { zones && zones.map((zone,i)=>{
+                                return <option value={ zone.name }>{ zone.name }</option>;
+                            })}
                         </select>
                     </div>
                     <div>
