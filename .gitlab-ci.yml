@@ -34,6 +34,5 @@ build_staging:
     url: 13.233.31.22
   script:
     - ssh ubuntu@13.233.31.22 "cd ranthambore/ && docker-compose up --build -d"
-  when: manual
   only:
     - main
