@@ -78,11 +78,14 @@ export default function PackageList() {
                         <div className="col-sm-4 col-xs-12 p-0">
                             <div className="package-image">
                                 <div className="image-gallery">
+                                    <Link to={`/package-details/${item.slug}`}>
                                     <img className="img-responsive" src={(`${PSURL}/${item.image}`)} alt={item.name} />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-8 col-xs-12">
+                        <Link to={`/package-details/${item.slug}`}>
                             <div className="packages-listing">
                                 <h2>{item.name} </h2>
                                 <div className="rating">
@@ -107,6 +110,7 @@ export default function PackageList() {
                                     </ul>
                                 </div>
                             </div>
+                            </Link>
                             <div className="price-from">
                                 <h6>Price from</h6>
                                 <div className="price">
@@ -120,6 +124,7 @@ export default function PackageList() {
                             </div>
                         </div>
                     </div>
+                    
                 ))}
 
             </>

@@ -74,11 +74,11 @@ export default function HotelList() {
         <>
             <>
                 {hotels && hotels.map((item, index) => (
-
+                    
                     <div key={index} className="row H-listrow">
                         <div className="col-sm-5 col-xs-12 padding-left">
                             <div className="image img-wrapper">
-                                <Link to="/hotel-details">
+                                <Link to={`/hotel-details/${item.slug}`}>
                                     <img src={(`${HSURL}/${item.image}`)} className="img-responsive inner-img" alt='{item.name}' />
                                 </Link>
                             </div>
@@ -86,7 +86,7 @@ export default function HotelList() {
                         <div className="col-sm-7 col-xs-12 padding-left">
                             <div className="corbett-hotels-list">
                                 <div className="hotel-content">
-                                    <Link to="/hotel-details">
+                                    <Link to={`/hotel-details/${item.slug}`}>
                                         <h3>{item.name}</h3>
                                         <div className="rating">
 
@@ -135,7 +135,7 @@ export default function HotelList() {
                             </div>
                         </div>
                     </div>
-
+                    
                 ))
                 }
 
