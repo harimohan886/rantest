@@ -135,6 +135,6 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - ./custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf:ro
+      - ./custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
     environment:
       NODE_ENV: production
