@@ -137,7 +137,6 @@ services:
     volumes:
       - .:/app/
       - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
-      -  ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - /app/client/frontend/node_modules
     environment:
       NODE_ENV: production
