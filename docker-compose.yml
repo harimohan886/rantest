@@ -132,6 +132,7 @@ services:
     container_name: client
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - "nosql-db"
     volumes:
