@@ -135,8 +135,7 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - .:/app/
-      - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
-      - /app/client/frontend/node_modules
+      - .:/etc/nginx/conf.d
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     environment:
       NODE_ENV: production
