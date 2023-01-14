@@ -138,5 +138,8 @@ services:
       - .:/app/
       - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
       - /app/client/frontend/node_modules
+      - ./nginx/vhost.d:/etc/nginx/vhost.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/conf.d:/etc/nginx/conf.d
     environment:
       NODE_ENV: production
