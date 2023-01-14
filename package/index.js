@@ -11,7 +11,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 var bodyParser = require('body-parser');
 
-app.use(express.limit('100M'));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
