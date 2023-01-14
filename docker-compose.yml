@@ -135,8 +135,9 @@ services:
     depends_on:
       - "nosql-db"
     volumes:
-      - /etc/certs:/etc/nginx/certs
-      - /var/run/docker.sock:/tmp/docker.sock
+      - .:/app/
+      - ./public/uploads:/root/ranthambore/client/frontend/public/uploads
       - /custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
+      - /app/client/frontend/node_modules
     environment:
       NODE_ENV: production
