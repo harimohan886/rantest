@@ -90,7 +90,7 @@ services:
 
     volumes:
       - .:/app/
-      - ./hotel/package:/root/ranthambore/package/uploads
+      - ./package/uploads:/root/ranthambore/package/uploads
       - /app/package/node_modules
     env_file:
       - ./package/.env.dev
