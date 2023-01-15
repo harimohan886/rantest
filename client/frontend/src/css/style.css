@@ -3875,3 +3875,4 @@ line-height: 26px;
 	min-width: 22px;
 }
 }
+.fc-day-other .fc-daygrid-day-frame{ display: none; }
