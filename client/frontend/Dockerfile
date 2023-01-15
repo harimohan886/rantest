@@ -13,9 +13,9 @@ COPY ./.env.dev /app/client/frontend/.env
 RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+COPY --from=build /app/client/frontend/build /usr/share/nginx/html
 FROM nginx:1.17.8-alpine
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/client/frontend/build /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
