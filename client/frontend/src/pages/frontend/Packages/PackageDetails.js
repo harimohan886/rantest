@@ -17,7 +17,7 @@ export default function PackageDetails() {
 
   useEffect(() => {
     const getPackage = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/slug/${params.id}`);
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}`);
 
       setPackages(res.data.data);
       setPackageId(res.data.data.package._id);
