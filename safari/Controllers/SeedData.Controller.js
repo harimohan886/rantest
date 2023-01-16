@@ -11,21 +11,56 @@ module.exports = {
       const zone_category = [
 
           new ZoneCategory({
-            name: "Zone 1/2/3/4/5/6/7",
+            name: "Zone 1",
             sort: "1",
-            availability: 1
+            availability: 0
           }),
 
           new ZoneCategory({
-            name: "Zone 8/9/10",
+            name: "Zone 2",
             sort: "2",
-            availability: 1
+            availability: 0
           }),
 
           new ZoneCategory({
-            name: "Zone 1/2/3/4/5/6/7/8/9/10",
+            name: "Zone 3",
             sort: "3",
-            availability: 1
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 4",
+            sort: "4",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 5",
+            sort: "5",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 6",
+            sort: "6",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 7",
+            sort: "7",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 8",
+            sort: "8",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 9",
+            sort: "9",
+            availability: 0
+          }),
+          new ZoneCategory({
+            name: "Zone 10",
+            sort: "10",
+            availability: 0
           }),
 
           /*new ZoneCategory({
