@@ -41,7 +41,7 @@ export default function SafariManagement() {
             setZones(res.data.data);
         });
     },[GetDetails]);
-    console.log(zones);
+   
     const fetchComments = async (currentPage) => {
         const res = await fetch(
             `${process.env.REACT_APP_BASE_URL}/admin/bookings/safari?page=`+currentPage+'&type=safari' , {

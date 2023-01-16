@@ -89,7 +89,7 @@ export default function EditPackage() {
         getPackage();
 
     }, []);
-
+    
     return (
         <div className="relative md:ml-64 bg-default-skin">
             <Sidebar />

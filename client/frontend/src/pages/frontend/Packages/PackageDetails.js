@@ -14,10 +14,10 @@ export default function PackageDetails() {
   const [packageId, setPackageId] = useState('');
   const [packageName, setPackageName] = useState('');
   const params = useParams();
-
+  console.log(params);
   useEffect(() => {
     const getPackage = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/${params.id}`);
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/slug/${params.id}`);
 
       setPackages(res.data.data);
       setPackageId(res.data.data.package._id);
