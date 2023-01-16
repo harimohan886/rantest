@@ -171,7 +171,6 @@ export default function RanthamboreDates() {
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Vehicle Type</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
-                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Zone</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Availability</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                     </tr>
@@ -182,7 +181,6 @@ export default function RanthamboreDates() {
                          <td className='border border-slate-300 text-center'>{item.date}</td>
                          <td className='border border-slate-300 text-center'>{item.vehicle}</td>
                          <td className='border border-slate-300 text-center'>{item.timing}</td>
-                         <td className='border border-slate-300 text-center'>{item.zone}</td>
                          <td className='border border-slate-300 text-center'>{item.availability}
                          </td>
                          <td className='border border-slate-300 text-center'>

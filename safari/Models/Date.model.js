@@ -6,10 +6,10 @@ const DateSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	zone: {
+	/*zone: {
 		type: String,
 		required: true,
-	},
+	},*/
 	vehicle: {
 		type: String,
 		required: true,
