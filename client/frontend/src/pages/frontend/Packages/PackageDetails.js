@@ -33,7 +33,7 @@ export default function PackageDetails() {
     <div className='packageDetails'>
       <PackageBanner packages={packages} />
       <TourDetails packages={packages} />
-      <PackageItems packages={packages} />
+      {/*<PackageItems packages={packages} />*/}
       <PackageIternary packages={packages} />
       <PackageTermsConditions packages={packages} />
       <PackagePolicy packages={packages} />
