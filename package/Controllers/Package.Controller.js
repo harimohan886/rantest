@@ -337,7 +337,7 @@ module.exports = {
           hotel_ids.push(hotel.hotel_id);
         }
 
-        const apiResponse = await fetch(`${process.env.HOTEL_MiCROSERVICE_URL}/hotels/by-ids?ids=` + hotel_ids.toString());
+        const apiResponse = await fetch(`${process.env.HOTEL_MICROSERVICE_URL}/hotels/by-ids?ids=` + hotel_ids.toString());
 
         const apiResponseJson = await apiResponse.json();
 
