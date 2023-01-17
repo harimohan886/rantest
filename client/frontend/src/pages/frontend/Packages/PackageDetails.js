@@ -14,7 +14,7 @@ export default function PackageDetails() {
   const [packageId, setPackageId] = useState('');
   const [packageName, setPackageName] = useState('');
   const params = useParams();
-  
+  console.log(params);
   useEffect(() => {
     const getPackage = async () => {
       const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/slug/${params.id}`);
@@ -33,7 +33,7 @@ export default function PackageDetails() {
     <div className='packageDetails'>
       <PackageBanner packages={packages} />
       <TourDetails packages={packages} />
-      {/*<PackageItems packages={packages} />*/}
+      <PackageItems packages={packages} />
       <PackageIternary packages={packages} />
       <PackageTermsConditions packages={packages} />
       <PackagePolicy packages={packages} />
