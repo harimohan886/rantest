@@ -38,11 +38,11 @@ module.exports = {
 
   createNewPackageCategory: async (req, res, next) => {
     try {
-
+      
       const hotels = [];
       const for_options = [];
       const ind_options = [];
-
+  
       const package = new PackageCategory({
         category : req.body.category,
         package_id : req.body.package_id,
@@ -69,14 +69,13 @@ module.exports = {
         const package2 = new PackageIndianOption({
           package_id : req.body.package_id,
           category_id : result._id,
-          adults : indian.adults,
-          rooms : indian.rooms,
-          extra_beds : indian.extra_beds,
-          no_of_kids : indian.no_of_kids,
-          kid : indian.kid,
           price : indian.price,
+          extra_adult_price : indian.extra_adult_price,
+          extra_child_price : indian.extra_child_price,
+          extra_bed_price : indian.extra_bed_price,
           festival_kid : indian.festival_kid,
-          festival_price : indian.festival_price
+          festival_price : indian.festival_price,
+          safari_price:indian.safari_price
         });
 
         const result2 = await package2.save();
@@ -90,14 +89,13 @@ module.exports = {
         const package3 = new PackageForeignerOption({
           package_id : req.body.package_id,
           category_id : result._id,
-          adults : foreigner.adults,
-          rooms : foreigner.rooms,
-          extra_beds : foreigner.extra_beds,
-          no_of_kids : foreigner.no_of_kids,
-          kid : foreigner.kid,
           price : foreigner.price,
+          extra_adult_price : foreigner.extra_adult_price,
+          extra_child_price : foreigner.extra_child_price,
+          extra_bed_price : foreigner.extra_bed_price,
           festival_kid : foreigner.festival_kid,
-          festival_price : foreigner.festival_price
+          festival_price : foreigner.festival_price,
+          safari_price:foreigner.safari_price
         });
 
         const result3 = await package3.save();
@@ -184,14 +182,13 @@ module.exports = {
         const package2 = new PackageIndianOption({
           package_id : req.body.package_id,
           category_id : req.params.id,
-          adults : indian.adults,
-          rooms : indian.rooms,
-          extra_beds : indian.extra_beds,
-          no_of_kids : indian.no_of_kids,
-          kid : indian.kid,
           price : indian.price,
+          extra_adult_price : indian.extra_adult_price,
+          extra_child_price : indian.extra_child_price,
+          extra_bed_price : indian.extra_bed_price,
           festival_kid : indian.festival_kid,
-          festival_price : indian.festival_price
+          festival_price : indian.festival_price,
+          safari_price:indian.safari_price
         });
 
         const result2 = await package2.save();
@@ -205,14 +202,13 @@ module.exports = {
         const package3 = new PackageForeignerOption({
           package_id : req.body.package_id,
           category_id : req.params.id,
-          adults : foreigner.adults,
-          rooms : foreigner.rooms,
-          extra_beds : foreigner.extra_beds,
-          no_of_kids : foreigner.no_of_kids,
-          kid : foreigner.kid,
           price : foreigner.price,
+          extra_adult_price : foreigner.extra_adult_price,
+          extra_child_price : foreigner.extra_child_price,
+          extra_bed_price : foreigner.extra_bed_price,
           festival_kid : foreigner.festival_kid,
-          festival_price : foreigner.festival_price
+          festival_price : foreigner.festival_price,
+          safari_price:foreigner.safari_price
         });
 
         const result3 = await package3.save();

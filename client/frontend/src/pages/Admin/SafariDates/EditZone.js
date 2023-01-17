@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
-
+import { DateRangePicker } from 'rsuite';
+import moment from 'moment'
 
 export default function EditZone() {
 
@@ -17,7 +18,11 @@ export default function EditZone() {
     const [name , setName] = useState('');
     const [zone , setZone] = useState('');
     const [status , setStatus] = useState('');
-
+    const [inStart,setInStart] = useState();
+    const [inEnd,setInEnd]     = useState();
+    const [startDate,setStart] = useState();
+    const [endDate,setEnd]   = useState();
+    const [preDate,setPreDate] = useState([]);
         function GetDetails()   {
             axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories/${params.id}`, {
             headers: {
@@ -29,6 +34,10 @@ export default function EditZone() {
                  setName(result.data.data.name);
                  setStatus(result.data.data.availability);
                  setZone(result.data.data._id);
+                 setInStart(result.data.data.startDate);
+                 setInEnd(result.data.data.endDate);
+                 setPreDate([new Date(result.data.data.startDate),new Date(result.data.data.endDate)]);
+
             })
         };
     
@@ -40,7 +49,9 @@ export default function EditZone() {
 
         const data = {
             "name" : name,
-            "availability" : status
+            "availability" : status,
+            "startDate"    : startDate,
+            "endDate"      : endDate
         }
 
         axios.patch(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories/${params.id}`, data, {
@@ -55,7 +66,14 @@ export default function EditZone() {
             })
 
      } 
-
+     const dateRange = (date) => {
+        let start = moment(date[0]).format('YYYY-MM-DD');
+        let end   = moment(date[1]).format('YYYY-MM-DD'); 
+        setPreDate([new Date(start),new Date(end)]);
+        setStart(start);
+        setEnd(end);
+    };
+ 
   return (
     <div className="relative md:ml-64 bg-default-skin">
       <Sidebar/>
@@ -68,6 +86,16 @@ export default function EditZone() {
                     <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Zone name</label>
                     <input type='text' value = {name} onChange={(e) => setName(e.target.value)} className='bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' placeholder='Zone name'/>
                 </div>
+                <div className='form-group'>
+                <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Block Dates between</label>
+                <DateRangePicker 
+                value={preDate}
+                onChange={dateRange}
+                showMeridian
+                format="yyyy-MM-dd"
+                />
+                </div>
+                
                 <div className='form-group'>
                     <label className='block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300'>Availability</label>
                     <select name="availability" value = {status} onChange={(e) => setStatus(e.target.value)} id="packageAvail" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

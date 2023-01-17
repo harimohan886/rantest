@@ -65,7 +65,7 @@ export default function PackageList() {
         const resutl = await paginationData(currentPage);
         setPackages(resutl.packages.data);
     };
-    
+
     return (
 
         <>
@@ -79,37 +79,37 @@ export default function PackageList() {
                             <div className="package-image">
                                 <div className="image-gallery">
                                     <Link to={`/package-details/${item.slug}`}>
-                                    <img className="img-responsive" src={(`${PSURL}/${item.image}`)} alt={item.name} />
+                                        <img className="img-responsive" src={(`${PSURL}/${item.image}`)} alt={item.name} />
                                     </Link>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-8 col-xs-12">
-                        <Link to={`/package-details/${item.slug}`}>
-                            <div className="packages-listing">
-                                <h2>{item.name} </h2>
-                                <div className="rating">
-                                    {[...Array(item.rating)].map((star, index) => {
-                                        return (<span className="fa fa-star checked"></span>)
+                            <Link to={`/package-details/${item.slug}`}>
+                                <div className="packages-listing">
+                                    <h2>{item.name} </h2>
+                                    <div className="rating">
+                                        {[...Array(item.rating)].map((star, index) => {
+                                            return (<span className="fa fa-star checked"></span>)
 
-                                    })}
+                                        })}
+                                    </div>
+                                    <p>{item.description.length > 120 ? item.description.substring(0, 120) + "..." : item.description}</p>
+                                    <div className="package-detail">
+                                        <ul className="list-inline">
+
+                                            {item.features && item.features.slice(0, 3).map((list, lindex) => (
+
+                                                <li className='list-inline-item' key={lindex}>
+                                                    <span> {list.feature}</span>
+                                                </li>
+
+                                            ))}
+
+
+                                        </ul>
+                                    </div>
                                 </div>
-                                <p>{item.description.length > 120 ? item.description.substring(0, 120) + "..." : item.description}</p>
-                                <div className="package-detail">
-                                    <ul className="list-inline">
-
-                                        {item.features && item.features.slice(0, 3).map((list, lindex) => (
-
-                                            <li className='list-inline-item' key={lindex}>
-                                                <span> {list.feature}</span>
-                                            </li>
-
-                                        ))}
-
-
-                                    </ul>
-                                </div>
-                            </div>
                             </Link>
                             <div className="price-from">
                                 <h6>Price from</h6>
@@ -124,7 +124,7 @@ export default function PackageList() {
                             </div>
                         </div>
                     </div>
-                    
+
                 ))}
 
             </>

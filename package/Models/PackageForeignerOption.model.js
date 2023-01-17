@@ -9,7 +9,7 @@ const PackageForeignerOptionSchema = new Schema({
 	category_id: {
 		type: String,
 	},
-	adults: {
+	/*adults: {
 		type: String,
 		required: true,
 	},
@@ -24,22 +24,34 @@ const PackageForeignerOptionSchema = new Schema({
 	no_of_kids: {
 		type: String,
 		required: true,
-	},
+	},*/
 	price: {
 		type: Number,
-		required: true,
+		
 	},
-	kid: {
-		type: String,
-		required: true,
+	extra_adult_price: {
+		type: Number,
+		
+	},
+	extra_child_price: {
+		type: Number,
+		
+	},
+	safari_price:{
+        type: Number,
+		
+	},
+	extra_bed_price :{
+		type: Number,
+		
 	},
 	festival_price: {
 		type: String,
-		required: true,
+		
 	},
 	festival_kid: {
 		type: String,
-		required: true,
+		
 	}
 },{
 	timestamps: true

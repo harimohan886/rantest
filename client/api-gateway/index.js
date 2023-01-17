@@ -21,17 +21,17 @@ const server = gateway({
     routes: [
         {
             prefix: "/api/hotel",
-            target: process.env.HOTEL_MICROSERVICE_URL,
+            target: process.env.HOTEL_MiCROSERVICE_URL,
 
         },
         {
             prefix: "/api/package",
-            target: process.env.PACKAGE_MICROSERVICE_URL,
+            target: process.env.PACKAGE_MiCROSERVICE_URL,
 
         },
         {
             prefix: "/api/safari",
-            target: process.env.SAFARI_MICROSERVICE_URL,
+            target: process.env.SAFARI_MiCROSERVICE_URL,
 
         },
         {
@@ -46,7 +46,7 @@ const server = gateway({
         },
         {
             prefix: "/api/chambal",
-            target: process.env.CHAMBAL_MICROSERVICE_URL,
+            target: process.env.CHAMBAL_MiCROSERVICE_URL,
 
         },
 

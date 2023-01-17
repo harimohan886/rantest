@@ -52,12 +52,11 @@ export default function AddPackageCategory() {
         indian:
           JSON.parse(localStorage.getItem('IndianValues')).map((item, index) => (
             indian.push({
-              "adults": parseInt([item.adults]),
-              "rooms": parseInt([item.rooms]),
-              "extra_beds": parseInt([item.extra_beds]),
-              "no_of_kids": parseInt([item.no_of_kids]),
-              "kid": parseInt([item.kid]),
               "price": parseInt([item.price]),
+              "extra_adult_price": parseInt([item.extra_adult_price]),
+              "extra_child_price": parseInt([item.extra_child_price]),
+              "extra_bed_price": parseInt([item.extra_bed_price]),
+              "safari_price": parseInt([item.safari_price]),
               "festival_kid": parseInt([item.festival_kid]),
               "festival_price": parseInt([item.festival_price])
             })
@@ -68,12 +67,11 @@ export default function AddPackageCategory() {
         foreigner:
           JSON.parse(localStorage.getItem('ForeignerValues')).map((item, index) => (
             foreigner.push({
-              "adults": parseInt([item.adults]),
-              "rooms": parseInt([item.rooms]),
-              "extra_beds": parseInt([item.extra_beds]),
-              "no_of_kids": parseInt([item.no_of_kids]),
-              "kid": parseInt([item.kid]),
               "price": parseInt([item.price]),
+              "extra_adult_price": parseInt([item.extra_adult_price]),
+              "extra_child_price": parseInt([item.extra_child_price]),
+              "extra_bed_price": parseInt([item.extra_bed_price]),
+              "safari_price": parseInt([item.safari_price]),
               "festival_kid": parseInt([item.festival_kid]),
               "festival_price": parseInt([item.festival_price])
             })
@@ -92,7 +90,7 @@ export default function AddPackageCategory() {
         "indian": indian,
         "foreigner": foreigner
       }
-
+      console.log(sendData);
       axios.post(`${process.env.REACT_APP_BASE_URL}/package/package-categories`, sendData, {
         headers: {
           'Accept': 'application/json, text/plain, */*',

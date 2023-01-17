@@ -5,6 +5,12 @@ const ZoneCategorySchema = new Schema({
 	name: {
 		type: String,
 	},
+	startDate:{
+		type: String,
+	},
+	endDate:{
+		type: String,
+	},
 	availability: {
 		type: Number,
 		default: 0,

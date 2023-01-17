@@ -9,26 +9,24 @@ export default function ForeignCategory({ action, package_id }) {
 
   const [foreigner, setForeigner] = useState([{
     key: Date.now(),
-    adults: "",
-    rooms: "",
-    extra_beds: "",
-    no_of_kids: "",
-    kid: "",
     price: "",
+    extra_adult_price: "",
+    extra_child_price: "",
+    extra_bed_price: "",
+    festival_price: "",
     festival_kid: "",
-    festival_price: ""
+    safari_price: "",
   }]);
 
   let onChange = (i, e) => {
     let newforeigners = [...foreigner];
-    newforeigners[i]['adults'] = e.adults || 0;
-    newforeigners[i]['rooms'] = e.rooms || 0;
-    newforeigners[i]['extra_beds'] = e.extra_beds || 0;
-    newforeigners[i]['festival_kid'] = e.festival_kid || 0;
-    newforeigners[i]['festival_price'] = e.festival_price || 0;
     newforeigners[i]['price'] = e.price || 0;
-    newforeigners[i]['no_of_kids'] = e.no_of_kids || 0;
-    newforeigners[i]['kid'] = e.kid || 0;
+    newforeigners[i]['extra_adult_price'] = e.extra_adult_price || 0;
+    newforeigners[i]['extra_child_price'] = e.extra_child_price || 0;
+    newforeigners[i]['extra_bed_price']   = e.extra_bed_price || 0;
+    newforeigners[i]['festival_kid']      = e.festival_kid || 0;
+    newforeigners[i]['festival_price']    = e.festival_price || 0;
+    newforeigners[i]['safari_price']      = e.safari_price || 0;
     setForeigner(newforeigners);
     localStorage.setItem('ForeignerValues', JSON.stringify(foreigner));
 
@@ -37,14 +35,13 @@ export default function ForeignCategory({ action, package_id }) {
   let addFormFields = () => {
     setForeigner([...foreigner, {
       key: Date.now(),
-      adults: "",
-      rooms: "",
-      extra_beds: "",
-      no_of_kids: "",
-      kid: "",
       price: "",
+      extra_adult_price: "",
+      extra_child_price: "",
+      extra_bed_price: "",
+      festival_price: "",
       festival_kid: "",
-      festival_price: ""
+      safari_price: "",
     }])
   }
 
@@ -77,20 +74,18 @@ export default function ForeignCategory({ action, package_id }) {
   return (
     <div className='indianForm'>
       <h5 className='mt-8 text-black'>Category Options (For Foreigner)</h5> &nbsp;
-      <button type="button" onClick={() => addFormFields()} className='text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center mb-4'>Add Slot</button>
+      {/*<button type="button" onClick={() => addFormFields()} className='text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center mb-4'>Add Slot</button>*/}
       <div className='table-responsive'>
       <table className='table bg-white border border-slate-300 mt-2 indianCategory'>
         <thead>
-          <tr>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Adult</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Room</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Bed</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>No of Kids</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Per Kid Price</th>
+        <tr>
             <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Price</th>
-            {/* <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Per Kid Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Price</th> */}
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Adult Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Kid Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Bed Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Kid Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Safari Price</th>
           </tr>
         </thead>
         <tbody>
@@ -102,11 +97,11 @@ export default function ForeignCategory({ action, package_id }) {
                 type={'foreigner'}
                 onChange={e => onChange(index, e)}
               />
-              <td className='border border-slate-300 text-center'>
+              {/*<td className='border border-slate-300 text-center'>
                 <button type="button" onClick={() => removeFormFields(index)} disabled={foreigner.length <= 1} className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded text-sm p-2.5 text-center items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
                   Remove
                 </button>
-              </td>
+          </td>*/}
             </tr>
           ))}
         </tbody>

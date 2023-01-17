@@ -9,7 +9,7 @@ const PackageIndianOptionSchema = new Schema({
 	category_id: {
 		type: String,
 	},
-	adults: {
+	/*adults: {
 		type: String,
 		required: true,
 	},
@@ -25,12 +25,25 @@ const PackageIndianOptionSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	*/
 	price: {
 		type: Number,
 		required: true,
 	},
-	kid: {
-		type: String,
+	extra_adult_price: {
+		type: Number,
+		required: true,
+	},
+	extra_child_price: {
+		type: Number,
+		required: true,
+	},
+	safari_price:{
+        type: Number,
+		required: true,
+	},
+	extra_bed_price :{
+		type: Number,
 		required: true,
 	},
 	festival_price: {
