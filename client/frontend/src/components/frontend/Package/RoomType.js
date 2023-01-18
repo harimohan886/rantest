@@ -11,10 +11,8 @@ export default function RoomType({ packages, type }) {
     const navigate = useNavigate();
 
     const makePayment = () =>{
-
+       
         axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
-            console.log('result', result.data)
-
 
             localStorage.setItem('package_customer_id', result.data.data._id);
             localStorage.setItem('package_booking_id', result.data.data.package_booking);

@@ -47,11 +47,11 @@ const PackageIndianOptionSchema = new Schema({
 		required: true,
 	},
 	festival_price: {
-		type: String,
+		type: Number,
 		required: true,
 	},
 	festival_kid: {
-		type: String,
+		type: Number,
 		required: true,
 	}
 },{

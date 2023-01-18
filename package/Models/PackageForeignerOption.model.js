@@ -46,11 +46,11 @@ const PackageForeignerOptionSchema = new Schema({
 		
 	},
 	festival_price: {
-		type: String,
+		type: Number,
 		
 	},
 	festival_kid: {
-		type: String,
+		type: Number,
 		
 	}
 },{

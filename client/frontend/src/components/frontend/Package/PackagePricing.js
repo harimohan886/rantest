@@ -18,88 +18,6 @@ export default function PackagePricing({ optionData, packageName, setData }) {
     const navigate = useNavigate();
    // const slug = useParams().id;
 
-   
-
-    const submit = () => {
-        if (name === '' || number === '' || email === '' || date === '') {
-            swal("Please fill all feilds to proceed");
-
-        } else if (choose === '') {
-            swal("Please choose one package");
-        }
-        else {
-
-            var person = '';
-            var person = document.querySelector('#myTab .active').innerHTML;
-            var child_selector = '#tab-indian .active';
-            if (person === 'Foreigner') {
-                var child_selector = '#tab-foreigner .active';
-            }
-
-            var current = document.querySelector('.choose_package:checked');
-            var package_cat = document.querySelector(child_selector).innerHTML;
-            var package_id = current.getAttribute('package_id');
-            var category_id = current.getAttribute('category_id');
-
-            let nextSibling = current.parentNode.nextElementSibling;
-            let counter = 0;
-            let children = 0;
-            let adults = current.getAttribute('adults');
-            let rooms = current.getAttribute('rooms');
-            while (nextSibling) {
-                if (counter === 3) {
-                    children = nextSibling.childNodes[0].selectedIndex;
-                }
-                nextSibling = nextSibling.nextElementSibling;
-                counter++;
-            }
-
-            localStorage.setItem('adultss', adults);
-            localStorage.setItem('childd', children);
-            localStorage.setItem('pcat', package_cat)
-
-            const data = {
-                "date": moment(date).format("YYYY-MM-DD"),
-                "type": "package",
-                "name": name,
-                "mobile": number,
-                "email": email,
-                "country": country,
-                "state": states,
-                "package_option_id": choose,
-                "package_id": package_id,
-                "package_name": packageName,
-                "no_of_adult": adults,
-                "no_of_kids": children,
-                "no_of_rooms": rooms,
-                "amount": amount,
-                "nationality_type": person,
-                "category_id": category_id,
-                "category_name": package_cat,
-
-            }
-            //return data;
-            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
-                console.log('result', result.data)
-
-
-                localStorage.setItem('package_customer_id', result.data.data._id);
-                localStorage.setItem('package_booking_id', result.data.data.package_booking);
-                localStorage.setItem('bookingData', JSON.stringify(data));
-                navigate("/book-package");
-
-
-            }).catch(
-                function (error) {
-                    console.log('Show error notification!', error.response.data.error.message);
-                    swal(error.response.data.error.message);
-                }
-            )
-
-        }
-
-
-    }
     const handleChange = (e, price, child_cost) => {
         setChoose(e.target.value);
 
@@ -116,20 +34,54 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
     }
 
+    const RoomInc = ()=>{
+        let adultCount = parseInt(document.querySelector('.no_of_adults').value);
+        let childCount = parseInt(document.querySelector('.no_of_kids').value);
+        let roomCount  = parseInt(document.querySelector('.no_of_rooms').value);
+        let od         = optionData[0];
+        let PkgPrice   = parseInt( (od.festival_price != '' &&  od.festival_price != 0) ? od.festival_price : od.price)+parseInt(od.safari_price)+parseInt( ( adultCount+childCount > 2 ) ? od.extra_bed_price:0); 
+        let fp = PkgPrice * roomCount;
+        document.querySelector('.final-price').innerHTML = fp;
+        setAmount(fp);
+    }
+
     const setTotalPrice = e => {
 
-        let childCount = e.nativeEvent.target.selectedIndex;
-        let childPrice = e.target.getAttribute('cprice');
-        let totalPrice = e.target.getAttribute('ctotal');
-        let p_option_id = e.target.getAttribute('p_option_id');
-        let total = parseInt(childPrice * childCount) + parseInt(totalPrice);
-        e.target.parentNode.nextElementSibling.innerHTML = '';
-        e.target.parentNode.nextElementSibling.innerHTML = total;
+        let adultCount = parseInt(document.querySelector('.no_of_adults').value);
+        let childCount = parseInt(document.querySelector('.no_of_kids').value);
+        let od         = optionData[0];
+        let PkgPrice   = parseInt( (od.festival_price != '' &&  od.festival_price != 0) ? od.festival_price : od.price)+parseInt(od.safari_price)+parseInt( ( adultCount+childCount > 2 ) ? od.extra_bed_price:0); 
+        let rc = Math.ceil((adultCount+childCount)/4);
+        let fp = rc*PkgPrice;
+        document.querySelector('.no_of_rooms').value = rc;   
+        document.querySelector('.final-price').innerHTML = fp;
+        setAmount(fp);
+        /*if( ( adultCount+childCount ) > (4*rc) && ((adultCount+childCount)%rc ) != 0){
+            let rem = ((adultCount+childCount)%roomCount);
 
-        if (choose === '' || p_option_id === choose) {
-            setAmount(total);
+            if(e.target.getAttribute('sname')=='adult'){
+                PkgPrice += ( rem * od.extra_adult_price );
+            } else{
+                PkgPrice += ( rem * od.extra_child_price )
+            }
+            console.log("rem"+rem);
+            console.log("pkg price:"+PkgPrice);
+        } else { PkgPrice = PkgPrice;}*/
 
-        }
+        
+       // let adultPrice = e.target.getAttribute('aprice');
+        //let childPrice = e.target.getAttribute('cprice');
+        //let totalPrice = e.target.getAttribute('ctotal');
+        //let p_option_id = e.target.getAttribute('p_option_id');
+        //let total = parseInt(childPrice * childCount) + parseInt(totalPrice);
+       
+       // e.target.parentNode.nextElementSibling.innerHTML = '';
+       // e.target.parentNode.nextElementSibling.innerHTML = total;
+
+        //if (choose === '' || p_option_id === choose) {
+         //   setAmount(total);
+
+        //}
 
 
     }
@@ -141,17 +93,13 @@ export default function PackagePricing({ optionData, packageName, setData }) {
           swal("Please fill all feilds to proceed","Details are missing");
           check = false;
 
-        } else if (choose === '') {
-            swal("Please choose one package","package is not selected");
-            check = false;
-        }
+        } 
         else {
            
            var package_sel = document.querySelector('#roomTab .active').innerHTML;
-           var c_option = document.querySelector('.choose_package:checked');
-           var adultss = c_option.getAttribute('adults');
-           var childd  = c_option.parentNode.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[0].value;
-           
+           var adultss = document.querySelector('.no_of_adults').value;
+           var childd  = document.querySelector('.no_of_kids').value;
+           var rooms   =  document.querySelector('.no_of_rooms').value;
           
            if(check == true){
             e.target.setAttribute('data-toggle','modal');
@@ -169,25 +117,11 @@ export default function PackagePricing({ optionData, packageName, setData }) {
            if (person === 'Foreigner') {
                var child_selector = '#tab-foreigner .active';
            }
-
-           var current = document.querySelector('.choose_package:checked');
+          
            var package_cat = document.querySelector(child_selector).innerHTML;
-           var package_id = current.getAttribute('package_id');
-           var category_id = current.getAttribute('category_id');
-
-           let nextSibling = current.parentNode.nextElementSibling;
-           let counter = 0;
-           let children = 0;
-           let adults = current.getAttribute('adults');
-           let rooms = current.getAttribute('rooms');
-           while (nextSibling) {
-               if (counter === 3) {
-                   children = nextSibling.childNodes[0].selectedIndex;
-               }
-               nextSibling = nextSibling.nextElementSibling;
-               counter++;
-           }
-
+           var package_id = optionData[0].package_id;
+           var category_id = optionData[0].category_id;
+           
            const data = {
                "date": moment(date).format("YYYY-MM-DD"),
                "type": "package",
@@ -196,11 +130,11 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                "email": email,
                "country": country,
                "state": states,
-               "package_option_id": choose,
+               "package_option_id": optionData[0]._id,
                "package_id": package_id,
                "package_name": packageName,
-               "no_of_adult": adults,
-               "no_of_kids": children,
+               "no_of_adult": adultss,
+               "no_of_kids": childd,
                "no_of_rooms": rooms,
                "amount": amount,
                "nationality_type": person,
@@ -208,6 +142,8 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                "category_name": package_cat,
 
            }
+           console.log("IN");
+           console.log(data);
            setData(data);
 
         }
@@ -230,11 +166,10 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                     <table className="table table-bordered">
                         <thead>
                             <tr key="099">
-                                <th scope="col" className='font-bold text-center'>Select</th>
                                 <th scope="col" className='font-bold text-center'>Adults</th>
+                                <th scope="col" className='font-bold text-center'>Kids </th>
                                 <th scope="col" className='font-bold text-center'>No of Rooms </th>
                                 <th scope="col" className='font-bold text-center'>Price (RS) </th>
-                                <th scope="col" className='font-bold text-center'>Kids </th>
                                 <th scope="col" className='font-bold text-center'>Total Price </th>
                             </tr>
                         </thead>
@@ -251,22 +186,38 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
                                 return (
                                     <tr key={key.toString()} className="package-group">
-                                        <td className='text-center'>
+                                        {/*<td className='text-center'>
                                             <input className="check choose_package" type="radio" onChange={e => handleChange(e, option.price, option.kid)} adults={option.adults} category_id={option.category_id} rooms={option.rooms} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
+                                        </td>*/}
+                                        <td className='text-center'>
+                                        <select id={`adults${option._id}`} sname="adult" p_option_id={option._id} aprice={option.extra_adult_price} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_adults">
+                                           
+                                            {new Array(20).fill().map((ch, i) => {
+                                                return (<option value={i+1}>{i+1}</option>)
+                                            })}
+                                            
+                                            </select>
                                         </td>
-                                        <td className='text-center'>{option.adults}</td>
-                                        <td className='text-center'> {option.rooms} Room {(option.extra_beds !== 0) ? option.extra_beds + " Extra Bed" : ''}</td>
-                                        <td className="package-price text-center"> {option.price}</td>
+                                        <td className='text-center'> 
+                                        <select id={`kids${option._id}`} sname="child" p_option_id={option._id} cprice={option.kid} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_kids">
+
+                                            {new Array(20).fill().map((ch, i) => {
+                                                return (<option value={i}>{i}</option>)
+                                            })}
+
+                                            </select>
+                                        </td>
                                         <td className='text-center'>
 
-                                            <select id={`kids${option._id}`} p_option_id={option._id} cprice={option.kid} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_kids">
+                                            <select id={`room${option._id}`} sname="room" onChange={RoomInc} className="form-control no_of_rooms">
 
-                                                {child && child.map((ch, i) => {
-                                                    return (<option value={i}>{i}</option>)
+                                                {new Array(20).fill().map((ch, i) => {
+                                                    return (<option value={i+1}>{i+1}</option>)
                                                 })}
                                             </select>
                                         </td>
-                                        <td className="final-price text-center" >{option.price}</td>
+                                        <td className="package-price text-center"> {parseInt( (option.festival_price != '' &&  option.festival_price != 0) ? option.festival_price : option.price)+parseInt(option.safari_price)}</td>
+                                        <td className="final-price text-center" > {parseInt( (option.festival_price != '' &&  option.festival_price != 0) ? option.festival_price : option.price)+parseInt(option.safari_price)}</td>
                                     </tr>
 
                                 )
