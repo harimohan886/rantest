@@ -36,10 +36,15 @@ export default function PackagePricing({ optionData, packageName, setData }) {
     }
 
     const RoomInc = () => {
+        var person    = document.querySelector('#myTab .active').innerHTML;
+        let ix = (person =="Indian") ? 0 : 1;
 
-        let adultCount = parseInt(document.querySelector('.no_of_adults').value);
-        let childCount = parseInt(document.querySelector('.no_of_kids').value);
-        let roomCount = parseInt(document.querySelector('.no_of_rooms').value);
+        let tdate = document.querySelectorAll('.travel_date')[ix].value;
+        if(tdate == ''){ swal('Please select travel date',''); return;}
+
+        let adultCount = parseInt(document.querySelectorAll('.no_of_adults')[ix].value);
+        let childCount = parseInt(document.querySelectorAll('.no_of_kids')[ix].value);
+        let roomCount = parseInt(document.querySelectorAll('.no_of_rooms')[ix].value);
         let rc = roomCount;
     
         let extra = ((adultCount+childCount) - rc*2); 
@@ -49,23 +54,23 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
         let PkgPrice = parseInt(opData.price + (ead*opData.eadult) +  (ecc*opData.echild) );
 
-        console.log(PkgPrice);
-        console.log(safariCost);
-        console.log(opData.price);
-        console.log(ead);
-        console.log(ecc);
-
         let fp = (PkgPrice * roomCount)+ safariCost;
-        document.querySelector('.final-price').innerHTML = fp;
+        document.querySelectorAll('.final-price')[ix].innerHTML = fp;
         setAmount(fp);
     }
 
     const setTotalPrice = e => {
         console.log(opData);
-        let adultCount = parseInt(document.querySelector('.no_of_adults').value);
-        let childCount = parseInt(document.querySelector('.no_of_kids').value);
+        var person    = document.querySelector('#myTab .active').innerHTML;
+        let ix = (person =="Indian") ? 0 : 1;
+
+        let tdate = document.querySelectorAll('.travel_date')[ix].value;
+        if(tdate == ''){ swal('Please select travel date',''); return;}
+
+        let adultCount = parseInt(document.querySelectorAll('.no_of_adults')[ix].value);
+        let childCount = parseInt(document.querySelectorAll('.no_of_kids')[ix].value);
         let rc = Math.ceil((adultCount + childCount) / 4);
-    
+        
         let extra = ((adultCount+childCount) - rc*2); 
         let ead = (extra-childCount > 0) ? extra-childCount : 0;
         let ecc = extra - ead;
@@ -73,39 +78,12 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
         let PkgPrice = parseInt(opData.price +  (ead*opData.eadult) + (ecc*opData.echild) );
         let fp = parseInt( (rc * PkgPrice) + safariCost);
-        document.querySelector('.no_of_rooms').value = rc;
-        document.querySelector('.final-price').innerHTML = fp;
+       
+        document.querySelectorAll('.no_of_rooms')[ix].value = rc;
+        document.querySelectorAll('.final-price')[ix].innerHTML = fp;
         setAmount(fp);
         
-        
-
-        /*if( ( adultCount+childCount ) > (4*rc) && ((adultCount+childCount)%rc ) != 0){
-            let rem = ((adultCount+childCount)%roomCount);
-
-            if(e.target.getAttribute('sname')=='adult'){
-                PkgPrice += ( rem * od.extra_adult_price );
-            } else{
-                PkgPrice += ( rem * od.extra_child_price )
-            }
-            console.log("rem"+rem);
-            console.log("pkg price:"+PkgPrice);
-        } else { PkgPrice = PkgPrice;}*/
-
-
-        // let adultPrice = e.target.getAttribute('aprice');
-        //let childPrice = e.target.getAttribute('cprice');
-        //let totalPrice = e.target.getAttribute('ctotal');
-        //let p_option_id = e.target.getAttribute('p_option_id');
-        //let total = parseInt(childPrice * childCount) + parseInt(totalPrice);
-
-        // e.target.parentNode.nextElementSibling.innerHTML = '';
-        // e.target.parentNode.nextElementSibling.innerHTML = total;
-
-        //if (choose === '' || p_option_id === choose) {
-        //   setAmount(total);
-
-        //}
-
+    
 
     }
     const proceed = (e) => {
@@ -191,7 +169,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
              
                document.querySelectorAll('.package-price')[ix].innerHTML = pricedata.price;
                setOpData(pricedata);
-               document.querySelector('.final-price').innerHTML = pricedata.price + pricedata.safari_price;
+               document.querySelectorAll('.final-price')[ix].innerHTML = pricedata.price + pricedata.safari_price;
                setAmount(pricedata.price + pricedata.safari_price);
             }
 
@@ -242,7 +220,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                                             <input className="check choose_package" type="radio" onChange={e => handleChange(e, option.price, option.kid)} adults={option.adults} category_id={option.category_id} rooms={option.rooms} id={"default-radio-" + key} name="default-radio" package_id={option.package_id} value={option._id} />
                                         </td>*/}
                                         <td className='text-center'>
-                                            <input type="date" onChange={(e) => CheckOptions(e, e.target.value)} className="input-travel-date travel-date form-control" name="travel_date" min={moment().format("YYYY-MM-DD")} />
+                                            <input type="date" onChange={(e) => CheckOptions(e, e.target.value)} className="input-travel-date travel-date form-control travel_date" name="travel_date" min={moment().format("YYYY-MM-DD")} />
                                         </td>
                                         <td className='text-center'>
                                             <select id={`adults${option._id}`} sname="adult" p_option_id={option._id} aprice={option.extra_adult_price} ctotal={option.price} onChange={setTotalPrice} className="form-control no_of_adults">
