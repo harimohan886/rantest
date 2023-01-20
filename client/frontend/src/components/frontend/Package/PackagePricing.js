@@ -150,22 +150,17 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
     }
     const CheckOptions = (e,date) => {
+       
        if(date != null){
-         axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/getOptions`,{date:date}).then((res)=>{
+         axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/getOptions`,{date:date, cdata:optionData}).then((res)=>{
 
             if(res.data.block == 1){ swal('Booking Not Available',''); } 
             else{
                
                var person    = document.querySelector('#myTab .active').innerHTML;
                var pricedata = {};
-               var ix = 0;
-               if (person === 'Indian') {
-                   pricedata = (res.data.data[0].IndianPrice);
-                   ix = 0;
-               } else {
-                   pricedata = (res.data.data[1].ForeignerPrice);
-                   ix = 1;
-               }
+               var ix = (person === 'Indian')? 0 : 1;
+               pricedata = (res.data.data[0].pricingData);
              
                document.querySelectorAll('.package-price')[ix].innerHTML = pricedata.price;
                setOpData(pricedata);

@@ -801,6 +801,7 @@ module.exports = {
     try{
 
       const date          = req.body.date;
+      const cdata         = req.body.cdata;
       const blockDates    = await BlockDate.find().lean().exec();
       const festApi       = await fetch(`${process.env.ADMIN_MICROSERVICE_URL}/festival/get-festivals`);
       const festDates     = await festApi.json();
@@ -843,11 +844,9 @@ module.exports = {
       } 
       if(checkBlock == false){
 
-        const festCatApi       = await fetch(`${process.env.PACKAGE_MICROSERVICE_URL}/packages/slug/testpakag`);
-        const festCat = await festCatApi.json();
-        const iop = (festCat.data.categories[0].indianOptions[0]);
-        const fop = (festCat.data.categories[0].foreignerOptions[0]);
-
+        if(cdata.length == 0){ throw createError(404,'No OtionData Added');}
+        const iop = (cdata[0]);
+      
       if( checkFest == true ){
 
         const readyDataIop = {
@@ -856,13 +855,8 @@ module.exports = {
           echild  : iop.fes_ch_price,
           safari_price:iop.safari_fes_price 
         }
-        const readyDataFop = {
-          price   : fop.fes_room_price,
-          eadult  : fop.fes_ad_price,
-          echild  : fop.fes_ch_price,
-          safari_price:fop.safari_fes_price 
-        }
-        data.push({"IndianPrice":readyDataIop},{"ForeignerPrice":readyDataFop}); 
+       
+        data.push({"pricingData":readyDataIop}); 
 
        } else {
 
@@ -872,13 +866,8 @@ module.exports = {
           echild  : iop.extra_ch_price,
           safari_price:iop.safari_de_price 
         }
-        const readydDataFop = {
-          price   : fop.room_price,
-          eadult  : fop.extra_ad_price,
-          echild  : fop.extra_ch_price,
-          safari_price:fop.safari_de_price 
-        }
-        data.push({"IndianPrice":readydDataIop},{"ForeignerPrice":readydDataFop});
+       
+        data.push({"pricingData":readydDataIop}); 
 
        }
 
