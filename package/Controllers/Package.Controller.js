@@ -30,7 +30,6 @@ const PackageCategoryHotel = require('../Models/PackageCategoryHotel.model');
 const PackageIndianOption = require('../Models/PackageIndianOption.model');
 const PackageForeignerOption = require('../Models/PackageForeignerOption.model');
 const BlockDate = require('../Models/BlockDates.model');
-const FestivalDate = require('../../admin/Models/FestivaDates.model');
 async function checkNameIsUnique(name) {
 
   totalPosts = await Package.find({ name: name }).countDocuments().exec();
