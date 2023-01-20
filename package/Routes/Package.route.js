@@ -54,5 +54,5 @@ router.put('/avilability/:id', PackageController.updateAvilability);
 
 //Delete a package by id
 router.delete('/:id', PackageController.deleteAPackage);
-
+router.post('/getOptions',PackageController.getOptionsByDate);
 module.exports = router;

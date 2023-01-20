@@ -52,13 +52,15 @@ export default function AddPackageCategory() {
         indian:
           JSON.parse(localStorage.getItem('IndianValues')).map((item, index) => (
             indian.push({
-              "price": parseInt([item.price]),
-              "extra_adult_price": parseInt([item.extra_adult_price]),
-              "extra_child_price": parseInt([item.extra_child_price]),
-              "extra_bed_price": parseInt([item.extra_bed_price]),
-              "safari_price": parseInt([item.safari_price]),
-              "festival_kid": parseInt([item.festival_kid]),
-              "festival_price": parseInt([item.festival_price])
+              "room_price": parseInt([item.room_price]),
+              "extra_ad_price": parseInt([item.extra_ad_price]),
+              "extra_ch_price": parseInt([item.extra_ch_price]),
+              "fes_room_price": parseInt([item.fes_room_price]),
+              "fes_ad_price": parseInt([item.fes_ad_price]),
+              "fes_ch_price": parseInt([item.fes_ch_price]),
+              "safari_de_price": parseInt([item.safari_de_price]),
+              "safari_we_price": parseInt([item.safari_we_price]),
+              "safari_fes_price": parseInt([item.safari_fes_price])
             })
           ))
       }
@@ -67,13 +69,15 @@ export default function AddPackageCategory() {
         foreigner:
           JSON.parse(localStorage.getItem('ForeignerValues')).map((item, index) => (
             foreigner.push({
-              "price": parseInt([item.price]),
-              "extra_adult_price": parseInt([item.extra_adult_price]),
-              "extra_child_price": parseInt([item.extra_child_price]),
-              "extra_bed_price": parseInt([item.extra_bed_price]),
-              "safari_price": parseInt([item.safari_price]),
-              "festival_kid": parseInt([item.festival_kid]),
-              "festival_price": parseInt([item.festival_price])
+            "room_price": parseInt([item.room_price]),
+            "extra_ad_price": parseInt([item.extra_ad_price]),
+            "extra_ch_price": parseInt([item.extra_ch_price]),
+            "fes_room_price": parseInt([item.fes_room_price]),
+            "fes_ad_price": parseInt([item.fes_ad_price]),
+            "fes_ch_price": parseInt([item.fes_ch_price]),
+            "safari_de_price": parseInt([item.safari_de_price]),
+            "safari_we_price": parseInt([item.safari_we_price]),
+            "safari_fes_price": parseInt([item.safari_fes_price])
             })
           ))
       }

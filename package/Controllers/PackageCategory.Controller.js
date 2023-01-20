@@ -67,15 +67,17 @@ module.exports = {
       for (const indian of req.body.indian) 
       { 
         const package2 = new PackageIndianOption({
-          package_id : req.body.package_id,
-          category_id : result._id,
-          price : indian.price,
-          extra_adult_price : indian.extra_adult_price,
-          extra_child_price : indian.extra_child_price,
-          extra_bed_price : indian.extra_bed_price,
-          festival_kid : indian.festival_kid,
-          festival_price : indian.festival_price,
-          safari_price:indian.safari_price
+          package_id      : req.body.package_id,
+          category_id     : result._id,
+          room_price      : indian.room_price,
+          extra_ad_price  : indian.extra_ad_price,
+          extra_ch_price  : indian.extra_ch_price,
+          fes_room_price  : indian.fes_room_price,
+          fes_ad_price    : indian.fes_ad_price,
+          fes_ch_price    : indian.fes_ch_price,
+          safari_de_price : indian.safari_de_price,
+          safari_we_price : indian.safari_we_price,
+          safari_fes_price: indian.safari_fes_price
         });
 
         const result2 = await package2.save();
@@ -89,13 +91,15 @@ module.exports = {
         const package3 = new PackageForeignerOption({
           package_id : req.body.package_id,
           category_id : result._id,
-          price : foreigner.price,
-          extra_adult_price : foreigner.extra_adult_price,
-          extra_child_price : foreigner.extra_child_price,
-          extra_bed_price : foreigner.extra_bed_price,
-          festival_kid : foreigner.festival_kid,
-          festival_price : foreigner.festival_price,
-          safari_price:foreigner.safari_price
+          room_price      : foreigner.room_price,
+          extra_ad_price  : foreigner.extra_ad_price,
+          extra_ch_price  : foreigner.extra_ch_price,
+          fes_room_price  : foreigner.fes_room_price,
+          fes_ad_price    : foreigner.fes_ad_price,
+          fes_ch_price    : foreigner.fes_ch_price,
+          safari_de_price : foreigner.safari_de_price,
+          safari_we_price : foreigner.safari_we_price,
+          safari_fes_price: foreigner.safari_fes_price
         });
 
         const result3 = await package3.save();
@@ -182,13 +186,15 @@ module.exports = {
         const package2 = new PackageIndianOption({
           package_id : req.body.package_id,
           category_id : req.params.id,
-          price : indian.price,
-          extra_adult_price : indian.extra_adult_price,
-          extra_child_price : indian.extra_child_price,
-          extra_bed_price : indian.extra_bed_price,
-          festival_kid : indian.festival_kid,
-          festival_price : indian.festival_price,
-          safari_price:indian.safari_price
+          room_price      : indian.room_price,
+          extra_ad_price  : indian.extra_ad_price,
+          extra_ch_price  : indian.extra_ch_price,
+          fes_room_price  : indian.fes_room_price,
+          fes_ad_price    : indian.fes_ad_price,
+          fes_ch_price    : indian.fes_ch_price,
+          safari_de_price : indian.safari_de_price,
+          safari_we_price : indian.safari_we_price,
+          safari_fes_price: indian.safari_fes_price
         });
 
         const result2 = await package2.save();
@@ -202,13 +208,15 @@ module.exports = {
         const package3 = new PackageForeignerOption({
           package_id : req.body.package_id,
           category_id : req.params.id,
-          price : foreigner.price,
-          extra_adult_price : foreigner.extra_adult_price,
-          extra_child_price : foreigner.extra_child_price,
-          extra_bed_price : foreigner.extra_bed_price,
-          festival_kid : foreigner.festival_kid,
-          festival_price : foreigner.festival_price,
-          safari_price:foreigner.safari_price
+          room_price      : foreigner.room_price,
+          extra_ad_price  : foreigner.extra_ad_price,
+          extra_ch_price  : foreigner.extra_ch_price,
+          fes_room_price  : foreigner.fes_room_price,
+          fes_ad_price    : foreigner.fes_ad_price,
+          fes_ch_price    : foreigner.fes_ch_price,
+          safari_de_price : foreigner.safari_de_price,
+          safari_we_price : foreigner.safari_we_price,
+          safari_fes_price: foreigner.safari_fes_price
         });
 
         const result3 = await package3.save();

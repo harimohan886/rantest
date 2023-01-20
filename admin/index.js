@@ -23,6 +23,7 @@ const CustomerRoute = require('./Routes/Customer.route');
 const BookingRoute = require('./Routes/Booking.route');
 const SeoManagerRoute = require('./Routes/SeoManager.route');
 const PaymentRoute = require('./Routes/Payment.route');
+const FestivalRoute = require('./Routes/FestivalDates.route');
 console.log('process.env.MONGO_URL',process.env.MONGO_URL)
 
 app.use('/auth', AuthRoute);
@@ -32,6 +33,8 @@ app.use('/enquiries', EnquiryRoute);
 app.use('/contactus/enquiries', ContactUsRoute);
 
 app.use('/settings', SettingRoute);
+
+app.use('/festival',FestivalRoute);
 
 app.use('/customers', CustomerRoute);
 

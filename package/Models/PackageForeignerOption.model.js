@@ -9,50 +9,47 @@ const PackageForeignerOptionSchema = new Schema({
 	category_id: {
 		type: String,
 	},
-	/*adults: {
-		type: String,
+
+	room_price: {
+		type: Number,
 		required: true,
 	},
-	rooms: {
-		type: String,
+	extra_ad_price: {
+		type: Number,
 		required: true,
 	},
-	extra_beds: {
-		type: String,
-		default: 0,
-	},
-	no_of_kids: {
-		type: String,
+	extra_ch_price: {
+		type: Number,
 		required: true,
-	},*/
-	price: {
-		type: Number,
-		
 	},
-	extra_adult_price: {
-		type: Number,
-		
-	},
-	extra_child_price: {
-		type: Number,
-		
-	},
-	safari_price:{
+
+	fes_room_price:{
         type: Number,
-		
+		required: true,
 	},
-	extra_bed_price :{
-		type: Number,
-		
+	fes_ad_price:{
+        type: Number,
+		required: true,
 	},
-	festival_price: {
-		type: Number,
-		
+	fes_ch_price:{
+        type: Number,
+		required: true,
 	},
-	festival_kid: {
-		type: Number,
-		
-	}
+
+
+	safari_de_price:{
+        type: Number,
+		required: true,
+	},
+	safari_we_price:{
+        type: Number,
+		required: true,
+	},
+	safari_fes_price:{
+        type: Number,
+		required: true,
+	},
+
 },{
 	timestamps: true
 });

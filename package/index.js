@@ -35,6 +35,9 @@ app.use('/packages', PackageRoute);
 const CategoryRoute = require('./Routes/Category.route');
 app.use('/categories', CategoryRoute);
 
+const BlockDatesRoute = require('./Routes/BlockDates.route');
+app.use('/blockdate', BlockDatesRoute);
+
 const PackageCategoryRoute = require('./Routes/PackageCategory.route');
 app.use('/package-categories', PackageCategoryRoute);
 

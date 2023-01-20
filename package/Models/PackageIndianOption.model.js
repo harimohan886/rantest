@@ -9,51 +9,48 @@ const PackageIndianOptionSchema = new Schema({
 	category_id: {
 		type: String,
 	},
-	/*adults: {
-		type: String,
-		required: true,
-	},
-	rooms: {
-		type: String,
-		required: true,
-	},
-	extra_beds: {
-		type: String,
-		default: 0,
-	},
-	no_of_kids: {
-		type: String,
-		required: true,
-	},
-	*/
-	price: {
+	
+	room_price: {
 		type: Number,
 		required: true,
 	},
-	extra_adult_price: {
+	extra_ad_price: {
 		type: Number,
 		required: true,
 	},
-	extra_child_price: {
+	extra_ch_price: {
 		type: Number,
 		required: true,
 	},
-	safari_price:{
+
+	fes_room_price:{
         type: Number,
 		required: true,
 	},
-	extra_bed_price :{
-		type: Number,
+	fes_ad_price:{
+        type: Number,
 		required: true,
 	},
-	festival_price: {
-		type: Number,
+	fes_ch_price:{
+        type: Number,
 		required: true,
 	},
-	festival_kid: {
-		type: Number,
+
+
+	safari_de_price:{
+        type: Number,
 		required: true,
-	}
+	},
+	safari_we_price:{
+        type: Number,
+		required: true,
+	},
+	safari_fes_price:{
+        type: Number,
+		required: true,
+	},
+
+	
 },{
 	timestamps: true
 });

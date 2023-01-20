@@ -16,8 +16,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="price"
-            value={user.price}
+            name="room_price"
+            value={user.room_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -26,8 +26,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="extra_adult_price"
-            value={user.extra_adult_price}
+            name="extra_ad_price"
+            value={user.extra_ad_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -36,8 +36,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="extra_child_price"
-            value={user.extra_child_price}
+            name="extra_ch_price"
+            value={user.extra_ch_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -46,8 +46,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="extra_bed_price"
-            value={user.extra_bed_price}
+            name="fes_room_price"
+            value={user.fes_room_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -56,8 +56,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="festival_price"
-            value={user.festival_price}
+            name="fes_ad_price"
+            value={user.fes_ad_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -66,8 +66,8 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="festival_kid"
-            value={user.festival_kid}
+            name="fes_ch_price"
+            value={user.fes_ch_price}
             onChange={this.handleChange}
             type="number"
           />
@@ -76,8 +76,28 @@ class CategoryInputs extends Component {
         <td className='border border-slate-300 text-center'>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            name="safari_price"
-            value={user.safari_price}
+            name="safari_de_price"
+            value={user.safari_de_price}
+            onChange={this.handleChange}
+            type="number"
+          />
+        </td>
+
+        <td className='border border-slate-300 text-center'>
+          <input
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="safari_we_price"
+            value={user.safari_we_price}
+            onChange={this.handleChange}
+            type="number"
+          />
+        </td>
+
+        <td className='border border-slate-300 text-center'>
+          <input
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="safari_fes_price"
+            value={user.safari_fes_price}
             onChange={this.handleChange}
             type="number"
           />

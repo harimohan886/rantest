@@ -9,24 +9,28 @@ export default function ForeignCategory({ action, package_id }) {
 
   const [foreigner, setForeigner] = useState([{
     key: Date.now(),
-    price: "",
-    extra_adult_price: "",
-    extra_child_price: "",
-    extra_bed_price: "",
-    festival_price: "",
-    festival_kid: "",
-    safari_price: "",
+    room_price: "",
+    extra_ad_price: "",
+    extra_ch_price: "",
+    fes_room_price: "",
+    fes_ad_price: "",
+    fes_ch_price: "",
+    safari_de_price: "",
+    safari_we_price: "",
+    safari_fes_price: "",
   }]);
 
   let onChange = (i, e) => {
     let newforeigners = [...foreigner];
-    newforeigners[i]['price'] = e.price || 0;
-    newforeigners[i]['extra_adult_price'] = e.extra_adult_price || 0;
-    newforeigners[i]['extra_child_price'] = e.extra_child_price || 0;
-    newforeigners[i]['extra_bed_price']   = e.extra_bed_price || 0;
-    newforeigners[i]['festival_kid']      = e.festival_kid || 0;
-    newforeigners[i]['festival_price']    = e.festival_price || 0;
-    newforeigners[i]['safari_price']      = e.safari_price || 0;
+    newforeigners[i]['room_price']       = e.room_price       || 0;
+    newforeigners[i]['extra_ad_price']   = e.extra_ad_price   || 0;
+    newforeigners[i]['extra_ch_price']   = e.extra_ch_price   || 0;
+    newforeigners[i]['fes_room_price']   = e.fes_room_price   || 0;
+    newforeigners[i]['fes_ad_price']     = e.fes_ad_price     || 0;
+    newforeigners[i]['fes_ch_price']     = e.fes_ch_price     || 0;
+    newforeigners[i]['safari_de_price']  = e.safari_de_price  || 0;
+    newforeigners[i]['safari_we_price']  = e.safari_we_price  || 0;
+    newforeigners[i]['safari_fes_price'] = e.safari_fes_price || 0;
     setForeigner(newforeigners);
     localStorage.setItem('ForeignerValues', JSON.stringify(foreigner));
 
@@ -79,13 +83,15 @@ export default function ForeignCategory({ action, package_id }) {
       <table className='table bg-white border border-slate-300 mt-2 indianCategory'>
         <thead>
         <tr>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Adult Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Kid Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra Bed Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Festival Kid Price</th>
-            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Safari Price</th>
+        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Room price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra bed AD</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Extra bed CH</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>F. R Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>F. A Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>F. C Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>S De Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>S We Price</th>
+            <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>S Fe Price</th>
           </tr>
         </thead>
         <tbody>

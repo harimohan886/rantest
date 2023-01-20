@@ -29,7 +29,8 @@ const CancellationPolicy = require('../Models/CancellationPolicy.model');
 const PackageCategoryHotel = require('../Models/PackageCategoryHotel.model');
 const PackageIndianOption = require('../Models/PackageIndianOption.model');
 const PackageForeignerOption = require('../Models/PackageForeignerOption.model');
-
+const BlockDate = require('../Models/BlockDates.model');
+const FestivalDate = require('../../admin/Models/FestivaDates.model');
 async function checkNameIsUnique(name) {
 
   totalPosts = await Package.find({ name: name }).countDocuments().exec();
@@ -704,4 +705,201 @@ module.exports = {
       next(error);
     }
   },
+
+  //block dates
+
+  getAllBlockDates: async(req,res,next)=>{
+    try{
+     // const type = req.params.slug;
+     BlockDate.find({},function(err,data){
+
+        if(err)
+        response = {"error": true, "message": "Error fetching data"+err};
+        else
+        response =  {"success": true, "data": data};
+    
+      res.json(response);
+    })
+    } catch (error) {console.log(error)}
+
+  },
+
+  getBlockDateById: async(req,res,next)=>{
+    try{
+      const id = req.params.id;
+      BlockDate.find({"_id":id},function(err,data){
+
+        if(err)
+        response = {"error": true, "message": "Error fetching data"+err};
+        else
+        response =  {"success": true, "data": data};
+    
+      res.json(response);
+    })
+    } catch (error) 
+    {console.log(error)}
+
+  },
+
+  updateBlockDate: async(req,res,next)=>{
+    try{
+       
+         const id     = req.params.id;
+         const op     = {new:true};
+         const result = await BlockDate.findByIdAndUpdate(id, req.body, op);
+         if(!result){
+         throw createError(404, 'Festival date does not exist');
+         }
+         res.send({
+          success:true,
+          status:200,
+          msg:"date updated"
+         });
+
+    }catch(e)
+    {console.log(e.message)}
+  },
+  
+  AddBlockDate: async ( req, res, next) =>{
+   try {
+      
+      const date = new BlockDate(req.body);
+      const result = await date.save();
+  
+      res.send({
+        success: true,
+        message: 'Dates Inserted',
+        data: result
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error.name === 'ValidationError') {
+        next(createError(422, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
+  deleteBlockDate : async(req , res, next) =>{
+     try{
+       
+      const id = req.params.id;
+      let result = await BlockDate.findByIdAndDelete(id);
+      if(!result){
+        throw createError(404, 'Date Not Exist!');
+      }
+      res.send({
+        success:true,
+        msg:"Date Deleted",
+        data_status:200
+      });
+
+     } catch(error){console.log(error)}
+  },
+
+  getOptionsByDate : async(req, res, next) =>{
+    try{
+
+      const date          = req.body.date;
+      const blockDates    = await BlockDate.find().lean().exec();
+      const festApi       = await fetch(`${process.env.ADMIN_MICROSERVICE_URL}/festival/get-festivals`);
+      const festDates     = await festApi.json();
+      const festivalDates = festDates.data;
+      const data = [];
+      let   checkBlock     = false;
+      let   checkFest      = false;
+      let   block          = 0;
+      let   msg = ""; 
+      if(blockDates.length != 0){
+
+      for (let blockDate of blockDates) {
+        
+        const start = Date.parse( blockDate.startDate);
+        const end = Date.parse(blockDate.endDate);
+        const d = Date.parse(date);
+        
+         if(d >= start && d <= end){
+            msg = "Booking Not Available";
+            checkBlock = true;
+            block = 1;
+         }
+        }
+        
+      } 
+     
+      if(festivalDates.length != 0){
+
+      for (let festivalDate of festivalDates) {
+        
+        const start2 = Date.parse( festivalDate.startDate);
+        const end2 = Date.parse(festivalDate.endDate);
+        const d2 = Date.parse(date);
+         if(d2 >= start2 && d2 <= end2){
+            msg = "Festival Data"; 
+            checkFest = true;
+         }
+        }
+
+      } 
+      if(checkBlock == false){
+
+        const festCatApi       = await fetch(`${process.env.PACKAGE_MICROSERVICE_URL}/packages/slug/testpakag`);
+        const festCat = await festCatApi.json();
+        const iop = (festCat.data.categories[0].indianOptions[0]);
+        const fop = (festCat.data.categories[0].foreignerOptions[0]);
+
+      if( checkFest == true ){
+
+        const readyDataIop = {
+          price   : iop.fes_room_price,
+          eadult  : iop.fes_ad_price,
+          echild  : iop.fes_ch_price,
+          safari_price:iop.safari_fes_price 
+        }
+        const readyDataFop = {
+          price   : fop.fes_room_price,
+          eadult  : fop.fes_ad_price,
+          echild  : fop.fes_ch_price,
+          safari_price:fop.safari_fes_price 
+        }
+        data.push({"IndianPrice":readyDataIop},{"ForeignerPrice":readyDataFop}); 
+
+       } else {
+
+        const readydDataIop = {
+          price   : iop.room_price,
+          eadult  : iop.extra_ad_price,
+          echild  : iop.extra_ch_price,
+          safari_price:iop.safari_de_price 
+        }
+        const readydDataFop = {
+          price   : fop.room_price,
+          eadult  : fop.extra_ad_price,
+          echild  : fop.extra_ch_price,
+          safari_price:fop.safari_de_price 
+        }
+        data.push({"IndianPrice":readydDataIop},{"ForeignerPrice":readydDataFop});
+
+       }
+
+    
+    }
+      if( checkBlock == false && checkFest == false ) {
+          msg = "Default Data";  
+      }
+  
+      res.send({
+        success:true,
+        msg:msg,
+        block:block,
+        data:data,
+        data_status:200,
+      });
+
+    } catch(error){
+      console.log(error);
+    }
+  }
+
 };

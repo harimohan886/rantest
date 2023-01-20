@@ -109,6 +109,9 @@ import CurrentBooking from './pages/Admin/Enquiry/CurrentBooking';
 import Razorpay from './pages/Admin/Settings/Razorpay';
 import ContactDetails from './pages/Admin/Settings/ContactDetails';
 import MyAccount from './pages/Admin/Settings/MyAccount';
+import FestivalDates from './pages/Admin/Settings/FestivalDates';
+import AddFestivalDates from './pages/Admin/Settings/AddFestivalDates';
+import EditFestivalDates from './pages/Admin/Settings/EditFestivalDate';
 import ChangePassword from './pages/Admin/Settings/ChangePassword';
 import PackageCategories from './pages/Admin/Packages/PackageCategories';
 import AddPackageCategory from './pages/Admin/Packages/AddPackageCategory';
@@ -124,6 +127,9 @@ import ContactEnquiries from './pages/Admin/Enquiry/ContactEnquiries';
 import ZoneCategory from './pages/Admin/SafariDates/ZonesCategory';
 import EditZone from './pages/Admin/SafariDates/EditZone';
 import Home2 from './pages/frontend/Home2';
+import BlockedDates from './pages/Admin/Packages/BlockedDates';
+import AddBlockedDates from './pages/Admin/Packages/AddBlockedDates';
+import EditBlockedDates from './pages/Admin/Packages/EditBlockedDates';
 
 const options = {
   timeout: 2000,
@@ -261,7 +267,11 @@ function App() {
             <Route exact path="/admin/edit-package-payment-policy/:id" element={<EditPackagePaymentPolicy />} />
             <Route exact path="/admin/add-package-cancellation-policy" element={<CreatePackageCancellationPolicy />} />
             <Route exact path="/admin/edit-package-cancellation-policy/:id" element={<EditPackageCancellationPolicy />} />
-
+            
+            <Route exact path="/admin/block-dates" element={<BlockedDates />} />
+            <Route exact path="/admin/add-block-date" element={<AddBlockedDates />} />
+            <Route exact path="/admin/edit-block-date/:id" element={<EditBlockedDates />} />
+    
             <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
             <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
             <Route exact path="/admin/current-booking-enquiries" element={<CurrentBooking />} />
@@ -269,6 +279,9 @@ function App() {
             <Route exact path="/admin/razorpay-settings" element={<Razorpay />} />
             <Route exact path="/admin/contact-details" element={<ContactDetails />} />
             <Route exact path="/admin/my-account" element={<MyAccount />} />
+            <Route exact path="/admin/festival-dates" element={<FestivalDates />} />
+            <Route exact path="/admin/add-festival-dates" element={<AddFestivalDates />} />
+            <Route exact path="/admin/edit-festival-date/:id" element={<EditFestivalDates />} />
             <Route exact path="/admin/change-password" element={<ChangePassword />} />
             <Route exact path="/admin/package-categories/:id" element={<PackageCategories />} />
             <Route exact path="/admin/add-package-category/:id" element={<AddPackageCategory />} />
