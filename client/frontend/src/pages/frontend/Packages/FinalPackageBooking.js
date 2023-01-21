@@ -289,7 +289,7 @@ export default function FinalPackageBooking() {
                                         <div className="radio">
                                             <label>
                                                 <input type="radio" value="12150" className="nationality-type" name="payment" checked data-payment="paid" />
-                                                <span onClick={HandlePayment} className="forcustom total-payable-amount">Pay full (INR <span>{totalAmountText} </span>)</span>
+                                                <span onClick={HandlePayment} className="forcustom total-payable-amount">Total Payable Amount (INR <span>{totalAmountText} </span>)</span>
                                             </label>
                                         </div>
                                     </li>
