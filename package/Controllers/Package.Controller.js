@@ -850,6 +850,7 @@ module.exports = {
       if( checkFest == true ){
 
         const readyDataIop = {
+          opid    : iop._id,
           price   : iop.fes_room_price,
           eadult  : iop.fes_ad_price,
           echild  : iop.fes_ch_price,
@@ -870,6 +871,7 @@ module.exports = {
           }
 
         const readydDataIop = {
+          opid    : iop._id,
           price   : iop.room_price,
           eadult  : iop.extra_ad_price,
           echild  : iop.extra_ch_price,
