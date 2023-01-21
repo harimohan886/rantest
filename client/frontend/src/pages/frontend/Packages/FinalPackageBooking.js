@@ -242,7 +242,11 @@ export default function FinalPackageBooking() {
                                             <td>No of Rooms :</td>
                                             <td className="text-right">{packageBookingInfo?.no_of_rooms} Rooms </td>
                                         </tr>
-
+                                        <tr>
+                                            <td>Extra Bed :</td>
+                                            <td className="text-right"> {localStorage.getItem('extraBed')} </td>
+                                        </tr>
+                                       
                                         <tr>
                                             <td>Kids :</td>
                                             <td className="text-right">{packageBookingInfo?.no_of_kids}</td>
@@ -273,14 +277,14 @@ export default function FinalPackageBooking() {
                             <div className="paynowoption">
                                 <p className="text-center" id="show-message" style={{ display: "none", fontWeight: "bold" }}>Prices are high due to festival/Long weekend</p>
                                 <ul className="list-inline usertype">
-                                    <li className='list-inline-item'>
+                                    {/*<li className='list-inline-item'>
                                         <div className="radio">
                                             <label>
                                                 <input type="radio" value="6075" className="nationality-type" name="payment" data-payment="partially-paid" />
                                                 <span onClick={HandleHalfPayment} className="forcustom half-payable-amount">Pay 50% ( INR <span>{totalAmountText / 2}</span>)</span>
                                             </label>
                                         </div>
-                                    </li>
+                                    </li>*/}
                                     <li className='list-inline-item'>
                                         <div className="radio">
                                             <label>

@@ -51,7 +51,7 @@ export default function PackageRooms({ packages }) {
                     </div>
                 </div>
 
-                <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div className="modal fade" id="exampleModalLong-DIS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                             <div className="modal-header">

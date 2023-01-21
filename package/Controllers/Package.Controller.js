@@ -859,12 +859,21 @@ module.exports = {
         data.push({"pricingData":readyDataIop}); 
 
        } else {
+         var safari_cst = 0;
+         var dt = new Date(date);
+         if(dt.getDay() == 6 || dt.getDay() == 0)
+          {
+            safari_cst = iop.safari_we_price;
+  
+          } else{
+            safari_cst = iop.safari_de_price;
+          }
 
         const readydDataIop = {
           price   : iop.room_price,
           eadult  : iop.extra_ad_price,
           echild  : iop.extra_ch_price,
-          safari_price:iop.safari_de_price 
+          safari_price:safari_cst
         }
        
         data.push({"pricingData":readydDataIop}); 

@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 export default function PackagePricing({ optionData, packageName, setData }) {
-    
+
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
@@ -15,7 +15,8 @@ export default function PackagePricing({ optionData, packageName, setData }) {
     const [country] = useState('');
     const [choose, setChoose] = useState('');
     const [amount, setAmount] = useState(0);
-    const [opData,setOpData] = useState([]);
+    const [opData, setOpData] = useState([]);
+    const [extraBed,setExtraBed] = useState(0);
     const navigate = useNavigate();
     // const slug = useParams().id;
 
@@ -36,59 +37,61 @@ export default function PackagePricing({ optionData, packageName, setData }) {
     }
 
     const RoomInc = () => {
-        var person    = document.querySelector('#myTab .active').innerHTML;
-        let ix = (person =="Indian") ? 0 : 1;
+        var person = document.querySelector('#myTab .active').innerHTML;
+        let ix = (person == "Indian") ? 0 : 1;
 
         let tdate = document.querySelectorAll('.travel_date')[ix].value;
-        if(tdate == ''){ swal('Please select travel date',''); return;}
+        if (tdate == '') { swal('Please select travel date', ''); return; }
 
         let adultCount = parseInt(document.querySelectorAll('.no_of_adults')[ix].value);
         let childCount = parseInt(document.querySelectorAll('.no_of_kids')[ix].value);
         let roomCount = parseInt(document.querySelectorAll('.no_of_rooms')[ix].value);
         let rc = roomCount;
-    
-        let extra = ((adultCount+childCount) - rc*2); 
-        let ead = (extra-childCount > 0) ? extra-childCount : 0;
-        let ecc = (extra-ead > 0) ? extra-ead : 0;
-        let safariCost = ( (adultCount+childCount) * opData.safari_price );
 
-        let PkgPrice = parseInt(opData.price + (ead*opData.eadult) +  (ecc*opData.echild) );
+        let extra = ((adultCount + childCount) - rc * 2);
+        let ead = (extra - childCount > 0) ? extra - childCount : 0;
+        let ecc = (extra - ead > 0) ? extra - ead : 0;
+        let safariCost = ((adultCount + childCount) * opData.safari_price);
+        setExtraBed( (extra > 0) ? extra : 0 );
+        let PkgPrice = parseInt(opData.price + (ead * opData.eadult) + (ecc * opData.echild));
 
-        let fp = (PkgPrice * roomCount)+ safariCost;
+        let fp = (PkgPrice * roomCount) + safariCost;
         document.querySelectorAll('.final-price')[ix].innerHTML = fp;
         setAmount(fp);
     }
 
     const setTotalPrice = e => {
         console.log(opData);
-        var person    = document.querySelector('#myTab .active').innerHTML;
-        let ix = (person =="Indian") ? 0 : 1;
+        var person = document.querySelector('#myTab .active').innerHTML;
+        let ix = (person == "Indian") ? 0 : 1;
 
         let tdate = document.querySelectorAll('.travel_date')[ix].value;
-        if(tdate == ''){ swal('Please select travel date',''); return;}
+        if (tdate == '') { swal('Please select travel date', ''); return; }
 
         let adultCount = parseInt(document.querySelectorAll('.no_of_adults')[ix].value);
         let childCount = parseInt(document.querySelectorAll('.no_of_kids')[ix].value);
         let rc = Math.ceil((adultCount + childCount) / 4);
-        
-        let extra = ((adultCount+childCount) - rc*2); 
-        let ead = (extra-childCount > 0) ? extra-childCount : 0;
-        let ecc = extra - ead;
-        let safariCost = ( (adultCount+childCount) * opData.safari_price );
 
-        let PkgPrice = parseInt(opData.price +  (ead*opData.eadult) + (ecc*opData.echild) );
-        let fp = parseInt( (rc * PkgPrice) + safariCost);
-       
+        let extra = ((adultCount + childCount) - rc * 2);
+        let ead = (extra - childCount > 0) ? extra - childCount : 0;
+        let ecc = extra - ead;
+        let safariCost = ((adultCount + childCount) * opData.safari_price);
+        setExtraBed( (extra > 0) ? extra : 0 );
+        let PkgPrice = parseInt(opData.price + (ead * opData.eadult) + (ecc * opData.echild));
+        let fp = parseInt((rc * PkgPrice) + safariCost);
+
         document.querySelectorAll('.no_of_rooms')[ix].value = rc;
         document.querySelectorAll('.final-price')[ix].innerHTML = fp;
         setAmount(fp);
-        
-    
+
+
 
     }
     const proceed = (e) => {
 
         e.preventDefault();
+        
+        if (amount == 0) { swal('Please select travel date', ''); return; }
         var check = true;
         if (name === '' || number === '' || email === '' || date === '') {
             swal("Please fill all feilds to proceed", "Details are missing");
@@ -144,33 +147,65 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
             }
 
-            setData(data);
+            //setData(data);
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/package`, data).then((result) => {
+
+                localStorage.setItem('package_customer_id', result.data.data._id);
+                localStorage.setItem('package_booking_id', result.data.data.package_booking);
+                localStorage.setItem('bookingData', JSON.stringify(data));
+                localStorage.setItem('extraBed',extraBed);
+                window.location.href = ("/book-package");
+
+
+            }).catch(
+                function (error) {
+                    console.log('Show error notification!', error.response.data.error.message);
+                    swal(error.response.data.error.message);
+                }
+            )
 
         }
 
     }
-    const CheckOptions = (e,date) => {
-       
-       if(date != null){
-         axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/getOptions`,{date:date, cdata:optionData}).then((res)=>{
+    const CheckOptions = (e, date) => {
 
-            if(res.data.block == 1){ swal('Booking Not Available',''); } 
-            else{
-               
-               var person    = document.querySelector('#myTab .active').innerHTML;
-               var pricedata = {};
-               var ix = (person === 'Indian')? 0 : 1;
-               pricedata = (res.data.data[0].pricingData);
-             
-               document.querySelectorAll('.package-price')[ix].innerHTML = pricedata.price;
-               setOpData(pricedata);
-               document.querySelectorAll('.final-price')[ix].innerHTML = pricedata.price + pricedata.safari_price;
-               setAmount(pricedata.price + pricedata.safari_price);
-            }
+        if (date != null) {
+            axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/getOptions`, { date: date, cdata: optionData }).then((res) => {
+
+                if (res.data.block == 1) { swal('Booking Not Available', ''); }
+                else {
+
+                    var person = document.querySelector('#myTab .active').innerHTML;
+                    var pricedata = {};
+                    var ix = (person === 'Indian') ? 0 : 1;
+                    pricedata = (res.data.data[0].pricingData);
+
+                   // document.querySelectorAll('.package-price')[ix].innerHTML = pricedata.price;
+                    setOpData(pricedata);
+
+                    let adultCount = parseInt(document.querySelectorAll('.no_of_adults')[ix].value);
+                    let childCount = parseInt(document.querySelectorAll('.no_of_kids')[ix].value);
+                    let roomCount = parseInt(document.querySelectorAll('.no_of_rooms')[ix].value);
+                    let rc = roomCount;
+
+                    let extra = ((adultCount + childCount) - rc * 2);
+                    let ead = (extra - childCount > 0) ? extra - childCount : 0;
+                    let ecc = (extra - ead > 0) ? extra - ead : 0;
+                    let safariCost = ((adultCount + childCount) * pricedata.safari_price);
+                    setExtraBed( (extra > 0) ? extra : 0 );
+                    let PkgPrice = parseInt(pricedata.price + (ead * pricedata.eadult) + (ecc * pricedata.echild));
+
+                    let fp = (PkgPrice * roomCount) + safariCost;
+                    document.querySelectorAll('.final-price')[ix].innerHTML = fp;
+                    setAmount(fp);
+
+                    // document.querySelectorAll('.final-price')[ix].innerHTML = pricedata.price + pricedata.safari_price;
+                    //setAmount(pricedata.price + pricedata.safari_price);
+                }
 
 
-         });
-       }
+            });
+        }
     }
     React.useEffect(() => {
         var cat = document.querySelectorAll('#roomTab .nav-item');
@@ -193,7 +228,6 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                                 <th scope="col" className='font-bold text-center'>Adults</th>
                                 <th scope="col" className='font-bold text-center'>Kids </th>
                                 <th scope="col" className='font-bold text-center'>No of Rooms </th>
-                                <th scope="col" className='font-bold text-center'>Price (RS) </th>
                                 <th scope="col" className='font-bold text-center'>Total Price </th>
                             </tr>
                         </thead>
@@ -244,7 +278,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                                                 })}
                                             </select>
                                         </td>
-                                        <td className="package-price text-center">0</td>
+                                        {/*<td className="package-price text-center">0</td>*/}
                                         <td className="final-price text-center" >0</td>
                                     </tr>
 
