@@ -36,6 +36,7 @@ export default function EditZone() {
                  setZone(result.data.data._id);
                  setInStart(result.data.data.startDate);
                  setInEnd(result.data.data.endDate);
+                if( result.data.data.startDate != undefined && result.data.data.endDate != undefined)
                  setPreDate([new Date(result.data.data.startDate),new Date(result.data.data.endDate)]);
 
             })
