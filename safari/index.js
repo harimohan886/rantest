@@ -46,5 +46,5 @@ app.use((err, req, res, next) => {
 
 
 app.listen(process.env.PORT || 5003, () => {
-    console.log("Hotel server is running on port! ", process.env.PORT);
+    console.log("Safari server is running on port! ", process.env.PORT);
 });

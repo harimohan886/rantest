@@ -96,29 +96,23 @@ module.exports = {
       if (!date.length) {
         throw createError(201, 'Date does not exist.');
       }
-      function dateCheck(from,to,check) {
-        
-        var fDate,lDate,cDate;
-        fDate = dateP.parse(from);
-        lDate = dateP.parse(to);
-        cDate = dateP.parse(check);
-        
-        if((cDate <= lDate && cDate >= fDate)) {
-            return true;
+     let zones=[];
+     const zids = await ZoneDate.find({date:req.body.date}).distinct('zone_id');
+     if(zids.length != 0){
+        for(let zid of zids){
+          const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid} }).distinct('name');
+          zones= zname;
         }
-        return false;
+     } else {
+          const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
+          zones = zname;
      }
-    
-     const bdate = dateP.parse(req.body.date,'YYYY-MM-DDD'); 
-     const zid = await ZoneDate.find({date:req.body.date}).distinct('zone_id');
-     const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
+     //const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
      //const zones = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
      res.send({
         success: true,
         message: 'Data fateched',
         data: date,
-        date:req.body.date,
-        zid:zid,
         zones: zones,
         vehicles: vehicles,
         timings: timings
