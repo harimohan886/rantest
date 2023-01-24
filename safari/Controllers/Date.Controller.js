@@ -4,6 +4,7 @@ const csv=require('csvtojson');
 
 const Date = require('../Models/Date.model');
 const ZoneCategory = require('../Models/ZoneCategory.model');
+const ZoneDate     = require('../Models/ZoneDisableDates');
 const dateP = require('date-and-time');
 module.exports = {
   getAllDates: async (req, res, next) => {
@@ -107,13 +108,17 @@ module.exports = {
         }
         return false;
      }
+    
      const bdate = dateP.parse(req.body.date,'YYYY-MM-DDD'); 
+     const zid = await ZoneDate.find({date:req.body.date}).distinct('zone_id');
      const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
      //const zones = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
      res.send({
         success: true,
         message: 'Data fateched',
         data: date,
+        date:req.body.date,
+        zid:zid,
         zones: zones,
         vehicles: vehicles,
         timings: timings
@@ -289,6 +294,79 @@ module.exports = {
         message: 'Csv data uploaded',
       });      
     });
+
+    
+
+  },
+
+  getZoneDates: async(req,res,next) => {
+     try{
+      var page = parseInt(req.query.page)||1;
+      var size = parseInt(req.query.size)||15;
+      var query = {}
+      if(page < 0 || page === 0) {
+        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+        return res.json(response);
+      }
+      query.skip = size * (page - 1);
+      query.limit = size;
+
+      var  totalPosts = await ZoneDate.find({zone_id:req.params.id}).countDocuments().exec();
+
+      ZoneDate.find({zone_id:req.params.id},{},
+        query,function(err,data) {
+          if(err) {
+            response = {"error": true, "message": "Error fetching data"+err};
+          } else {
+            response = {"error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage:size };
+          }
+          res.json(response);
+        }).sort({ $natural: -1 });
+    
+    } catch(err){console.log(err)}
+  },
+
+  dateZoneDelete: async(req, res, next) =>{
+      
+      try{
+         const id     = req.params.id;
+         const result = await ZoneDate.findByIdAndDelete(id);
+         if (!result) {
+          throw createError(404, 'Date does not exist.');
+        }
+        res.send({
+          success: true,
+          message: 'Data deleted',
+        });
+
+      } catch(err){
+        console.log(err);
+      }
+  },
+
+  uploadZoneCsv: async (req, res, next) => {
+
+    if (req.file && (req.file.size > 0)) {
+      var file_path = req.file.path;
+    }
+    
+    await ZoneDate.deleteMany({zone_id:req.body.zone_id});
+    
+    csv()
+    .fromFile(file_path)
+    .then( async(jsonObj) =>{
+      jsonObj.map((jb,i)=>{
+        jsonObj[i].zone_id = req.body.zone_id
+      });
+      const result =  await ZoneDate.insertMany(jsonObj);
+      res.send({
+        success: true,
+        response:result,
+        message: 'Csv data uploaded',
+      });      
+    });
+
+    
 
   },
 
