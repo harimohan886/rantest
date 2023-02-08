@@ -30,7 +30,7 @@ module.exports = {
       /*save data to crm*/
 
       
-      /*const booking = await SafariBooking.findOne({_id: id, customer_id: customer_id}).populate(['customer','booking_customers']);
+      const booking = await SafariBooking.findOne({_id: id, customer_id: customer_id}).populate(['customer','booking_customers']);
       const params = new URLSearchParams();
 
       params.append('name', booking.customer.name);
@@ -53,8 +53,8 @@ module.exports = {
       params.append('transaction_id', req.body.transaction_id);
       params.append('booked_customers', JSON.stringify(booking.booking_customers));
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
-      const data = await response.json();        */
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const data = await response.json();        
 
       /*save data to crm*/
 
@@ -90,7 +90,7 @@ module.exports = {
 
       /*save data to crm*/      
       
-      /*const booking = await PackageBooking.findOne({_id: id, customer_id: customer_id}).populate('customer');
+      const booking = await PackageBooking.findOne({_id: id, customer_id: customer_id}).populate('customer');
 
       const params = new URLSearchParams();
 
@@ -113,8 +113,8 @@ module.exports = {
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
-      const data = await response.json();    */    
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const data = await response.json();       
 
       /*save data to crm*/
 
@@ -151,7 +151,7 @@ module.exports = {
       /*save data to crm*/
 
       
-      /*
+      
       const booking = await ChambalBooking.findOne({_id: id, customer_id: customer_id}).populate('customer');
 
       const params = new URLSearchParams();
@@ -177,10 +177,9 @@ module.exports = {
       params.append('transaction_id', req.body.transaction_id);
       params.append('booked_customers', '');
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+       const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
       const data = await response.json(); 
-             */
-
+            
       /*save data to crm*/
 
       res.send({
