@@ -378,14 +378,14 @@ module.exports = {
         )
       );    
 
-    /*const params1 = new URLSearchParams();
+    const params1 = new URLSearchParams();
 
     params1.append('name', req.body.name);
     params1.append('mobile', req.body.mobile);
     params1.append('email', req.body.email);
     params1.append('website', 'ranthamboretigerreserve.in');
 
-    const response1 = await fetch('https://crm.junglesafariindia.in/api/save-lead', {method: 'POST', body: params1});
+    const response1 = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {method: 'POST', body: params1});
     const data1 = await response1.json();
 
     const params = new URLSearchParams();
@@ -410,7 +410,7 @@ module.exports = {
     params.append('transaction_id', req.body.transaction_id);
     params.append('booked_customers', JSON.stringify(req.body.booked_persons));
 
-    const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+    const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
 
     const data = await response.json();        */
 
@@ -603,7 +603,36 @@ module.exports = {
           )
         );*/
 
-      /*
+          const params2 = new URLSearchParams();
+
+      params2.append('name', req.body.name);
+      params2.append('mobile', req.body.mobile);
+      params2.append('email', req.body.email);
+      params2.append('website', 'ranthamboretigerreserve');
+      params2.append('custom_date', '');
+
+
+      const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
+      const data2 = await response.json(); 
+
+      const params3 = new URLSearchParams();
+
+      params3.append('name', req.body.name);
+      params3.append('mobile', req.body.mobile);
+      params3.append('website', 'ranthamboretigerreserve');
+      params3.append('email', req.body.email);
+      params3.append('address', req.body.address);
+      params3.append('state', req.body.state);
+      params3.append('assigned_to', null);
+      params3.append('booking_type', 'chambal');
+      params3.append('lead_status', 'paid');
+      params3.append('payment_status', 'paid');
+
+
+      const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
+      const data3 = await response.json(); 
+
+      
       const params = new URLSearchParams();
 
       var d = new Date(req.body.safari_date),
@@ -639,9 +668,9 @@ module.exports = {
       params.append('transaction_id', req.body.transaction_id);
       params.append('booked_customers', '');
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
       const data = await response.json(); 
-      */       
+             
 
       /*save data to crm*/
 
@@ -739,7 +768,7 @@ createNewCustomerPackage: async (req, res, next) => {
 
       /*save data to crm*/
 
-      /*const params = new URLSearchParams();
+      const params = new URLSearchParams();
 
       params.append('name', req.body.name);
       params.append('email', req.body.email);
@@ -760,8 +789,8 @@ createNewCustomerPackage: async (req, res, next) => {
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
 
-      const response = await fetch('https://crm.junglesafariindia.in/api/ranthambore-booking', {method: 'POST', body: params});
-      const data = await response.json(); */       
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const data = await response.json();    
 
       /*save data to crm*/
 
