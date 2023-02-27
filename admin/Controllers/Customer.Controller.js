@@ -412,7 +412,7 @@ module.exports = {
 
     const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
 
-    const data = await response.json();        */
+    const data = await response.json();        
 
     /*save data to crm*/
 

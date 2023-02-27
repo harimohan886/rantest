@@ -10,7 +10,7 @@ export default function PackagePaymentPolicy({ packages }) {
             <div className="itinerary-info">
               <ul className="list-unstyled">
 
-                {packages?.cancellation_policies?.map((list, lindex) => (
+                {packages?.payment_policies?.map((list, lindex) => (
 
                   <li key={`pp${lindex}`}>
                     <span><i className='fa fa-check'></i> {list.policy}</span>

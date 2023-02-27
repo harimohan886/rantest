@@ -14,7 +14,7 @@ export default function PackageIternary({ packages }) {
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href={`#collapse${lindex}`} aria-expanded="true" aria-controls={`collapse${lindex}`} className=" "> {list.title} </a>
                                 </h4>
                             </div>
-                            <div id={`collapse${lindex}`} className="panel-collapse collapse in" role="tabpanel" aria-labelledby={`heading${lindex}`}>
+                            <div id={`collapse${lindex}`} className="panel-collapse collapse in" style={{visibility:"visible"}} role="tabpanel" aria-labelledby={`heading${lindex}`}>
                                 <div className="panel-body">
                                     <p>{list.description}</p>
                                 </div>

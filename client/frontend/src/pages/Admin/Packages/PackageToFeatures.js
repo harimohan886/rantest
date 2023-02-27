@@ -120,9 +120,7 @@ export default function PackageToFeatures() {
                         <div className='mt-4'>
                             <h1 className='text-2xl text-black font-bold mb-3'> Package Feature </h1>
                         </div>
-                        <div className='mt-4'>
-                            <Link to='/admin/add-package-feature' type="submit" className="text-white float-right bg-success font-medium rounded px-5 py-2.5 text-center">Add Feature</Link>
-                        </div>
+                        
                     </div>
                     {package_id && <PackageFeatures packageId={package_id} features={features} />}
                     <div className='table-responsive'>

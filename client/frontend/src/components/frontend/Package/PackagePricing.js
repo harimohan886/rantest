@@ -48,12 +48,11 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
         let extra = ((adultCount + childCount) - rc * 2);
         let ead = (extra - childCount > 0) ? extra - childCount : 0;
-        let ecc = (extra - ead > 0) ? extra - ead : 0;
+        let ecc = (extra - ead > 0) ? (extra - ead) : 0;
         let safariCost = ((adultCount + childCount) * opData.safari_price);
         setExtraBed( (extra > 0) ? extra : 0 );
-        let PkgPrice = parseInt(opData.price + (ead * opData.eadult) + (ecc * opData.echild));
-
-        let fp = (PkgPrice * roomCount) + safariCost;
+        let PkgPrice = parseInt((opData.price *roomCount) + (ead * opData.eadult) + (ecc * opData.echild));
+        let fp = parseInt(PkgPrice + safariCost);
         document.querySelector('.final-price'+opData.opid).innerHTML = fp;
         setAmount(fp);
     }
@@ -71,12 +70,13 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
         let extra = ((adultCount + childCount) - rc * 2);
         let ead = (extra - childCount > 0) ? extra - childCount : 0;
-        let ecc = extra - ead;
+        let ecc = ((extra - ead) > 0) ? (extra-ead) :0;
+        console.log("TotalPeople : "+(adultCount+childCount)+" - ExtraAdult : "+ead+" - ExtraChild: "+ecc+" EXTRAS :"+extra);
         let safariCost = ((adultCount + childCount) * opData.safari_price);
         setExtraBed( (extra > 0) ? extra : 0 );
-        let PkgPrice = parseInt(opData.price + (ead * opData.eadult) + (ecc * opData.echild));
-        let fp = parseInt((rc * PkgPrice) + safariCost);
-
+        let PkgPrice = parseInt((opData.price*rc) + (ead * opData.eadult) + (ecc * opData.echild));
+        let fp = parseInt(PkgPrice + safariCost);
+       
         document.querySelector('#room'+opData.opid).value = rc;
         document.querySelector('.final-price'+opData.opid).innerHTML = fp;
         setAmount(fp);
@@ -187,14 +187,13 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
                     let extra = ((adultCount + childCount) - roomCount * 2);
                     let ead = (extra - childCount > 0) ? extra - childCount : 0;
-                    let ecc = (extra - ead > 0) ? extra - ead : 0;
+                    let ecc = (extra - ead > 0) ? (extra - ead) : 0;
                     let safariCost = ((adultCount + childCount) * pricedata.safari_price);
 
                     setExtraBed( (extra > 0) ? extra : 0 );
 
-                    let PkgPrice = parseInt(pricedata.price + (ead * pricedata.eadult) + (ecc * pricedata.echild));
-                    let fp = (PkgPrice * roomCount) + safariCost;
-                    console.log(fp);
+                    let PkgPrice = parseInt((pricedata.price *roomCount) + (ead * pricedata.eadult) + (ecc * pricedata.echild));
+                    let fp = (PkgPrice + safariCost);
                     document.querySelector('.final-price'+pricedata.opid).innerHTML = fp ;
     
                     setAmount(fp);

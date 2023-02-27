@@ -217,7 +217,7 @@ module.exports = {
         );
 
       const response = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {method: 'POST', body: params});
-      const data = await response.json();
+       data = await response.json();
 
       res.send({
         success: true,
