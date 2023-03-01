@@ -104,6 +104,8 @@ import PackagePaymentPolicy from './pages/Admin/Packages/PackagePaymentPolicy';
 import AddPackage from './pages/Admin/Packages/AddPackage';
 import EditPackage from './pages/Admin/Packages/EditPackage';
 import GeneralEnquiries from './pages/Admin/Enquiry/GeneralEnquiries';
+import Pages from './pages/Admin/Pages/Pages';
+import EditPage from './pages/Admin/Pages/EditPage';
 import HotelEnquiries from './pages/Admin/Enquiry/HotelEnquiries';
 import CurrentBooking from './pages/Admin/Enquiry/CurrentBooking';
 import Razorpay from './pages/Admin/Settings/Razorpay';
@@ -273,6 +275,8 @@ function App() {
             <Route exact path="/admin/edit-block-date/:id" element={<EditBlockedDates />} />
     
             <Route exact path="/admin/general-enquiries" element={<GeneralEnquiries />} />
+            <Route exact path="/admin/pages" element={<Pages />} />
+            <Route exact path="/admin/pages/edit/:id" element={<EditPage />} />
             <Route exact path="/admin/hotel-enquiries" element={<HotelEnquiries />} />
             <Route exact path="/admin/current-booking-enquiries" element={<CurrentBooking />} />
             <Route exact path="/admin/contact-enquiries" element={<ContactEnquiries />} />

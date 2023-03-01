@@ -24,7 +24,7 @@ const BookingRoute = require('./Routes/Booking.route');
 const SeoManagerRoute = require('./Routes/SeoManager.route');
 const PaymentRoute = require('./Routes/Payment.route');
 const FestivalRoute = require('./Routes/FestivalDates.route');
-console.log('process.env.MONGO_URL',process.env.MONGO_URL)
+const PageRoute = require('./Routes/Page.route');
 
 app.use('/auth', AuthRoute);
 
@@ -45,6 +45,8 @@ app.use('/seed-data', SeedDataRoute);
 app.use('/seo-managers', SeoManagerRoute);
 
 app.use('/payment', PaymentRoute);
+
+app.use('/pages', PageRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {
