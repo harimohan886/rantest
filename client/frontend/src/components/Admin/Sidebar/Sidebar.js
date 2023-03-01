@@ -334,6 +334,9 @@ export default function Sidebar() {
                       <div className="accordion-body">
                         <ul className="list-none">
                           <li className="items-center">
+                            <Link to='/admin/pages' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Pages</Link>
+                          </li> 
+                          <li className="items-center">
                             <Link to='/admin/razorpay-settings' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Razorpay</Link>
                           </li>
                           <li className="items-center">
