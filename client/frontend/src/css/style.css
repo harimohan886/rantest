@@ -3589,6 +3589,22 @@ line-height: 26px;
     margin-bottom: 5px;
 	padding: 0 10px;
 }
+.paBox a {
+    text-decoration: none;
+}
+.paBox ul {
+    margin-left: 15px;
+    padding-left: 12px;
+    margin-right: 15px;
+    padding-right: 12px;
+	margin-top: 10px;
+}
+.paBox ul li {
+    list-style-type: disc;
+    font-size: 15px;
+    color: #575757;
+    line-height: 24px;
+}
 .hotelbgIn .hotelBox, .paBox, .bBox{
 	box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
     background: #fcfcfc;
@@ -3625,6 +3641,7 @@ line-height: 26px;
 }
 .hotelbgIn a, .hotelbgIn a:hover, .paBox a, .paBox a:hover{
 	color: #000;
+	text-decoration: none;
 }
 .hotelbgIn h2{
 	color: #fff;
