@@ -26,12 +26,13 @@ export default function HolidayTour({ packages }) {
                                 <Link to={`/package-details/${item.slug}`}>
                                     <img src={`${process.env.REACT_APP_PACKAGE_SERVER_URL}/` + item.image} className='img-fluid' alt='Holiday Package' />
                                     <h4>{item.name}</h4>
-                                    <p>
-                                        {item.inclusions && item.inclusions.map((inc, i) => {
+                                    <ul>
+                                    {item.features && item.features.map((feature, i) => {
+                                        return  <li>{feature.feature}</li>
+                                    })}
 
-                                            return inc.inclusion + ' ,';
-                                        })}
-                                    </p>
+                                    </ul>
+                                    
                                     <h6>₹ {item.price}</h6>
                                     <div className='star-buttons'>
                                         <div className='star'>
@@ -51,3 +52,9 @@ export default function HolidayTour({ packages }) {
         </div>
     )
 }
+/*<p>
+                                        {item.inclusions && item.inclusions.map((inc, i) => {
+
+                                            return inc.inclusion + ' ,';
+                                        })}
+                                    </p>*/
