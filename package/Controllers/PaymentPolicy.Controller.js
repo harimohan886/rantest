@@ -54,22 +54,13 @@ module.exports = {
    const validation = new Validator(req.body, rules);
 
     if (validation.fails()) {
-      return res.send({
-        success: false,
-        message: 'Validation failed',
-        data: validation.errors
-      });
+      return next(createError(400, 'Payment Policy Field Required!'));
     }
 
     var checkCount = await checkNameIsUnique(req.body.policy);
 
     if (checkCount) {
-      return res.status(412)
-      .send({
-        success: false,
-        message: 'Validation failed',
-        data: 'duplicate policy'
-      });
+      return next(createError(400, 'Duplicate Payment Policy!'));
     }
 
     try {

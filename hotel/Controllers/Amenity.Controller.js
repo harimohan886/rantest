@@ -69,24 +69,14 @@ module.exports = {
 
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
-        res.status(412)
-          .send({
-            success: false,
-            message: 'Validation failed',
-            data: err
-          });
+        return next(createError(400, 'Amenity Field Required!'));
       }
     }).catch(err => console.log(err));
 
     var checkCount = await checkNameIsUnique(req.body.amenity);
 
     if (checkCount) {
-      return res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: 'duplicate amenity'
-        });
+     return next(createError(400, 'Duplicate Amenity!'));
     }
 
     try {

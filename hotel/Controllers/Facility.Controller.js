@@ -4,6 +4,16 @@ const validator = require('../helpers/validate');
 
 const Facility = require('../Models/Facility.model');
 
+async function checkNameIsUnique(name) {
+
+  totalPosts = await Facility.find({ facility: name }).countDocuments().exec();
+  if (totalPosts > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = {
   getAllFacilitys: async (req, res, next) => {
     try {
@@ -43,14 +53,16 @@ module.exports = {
 
     await validator(req.body, rules, {}, (err, status) => {
       if (!status) {
-        res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: err
-        });
+       return next(createError(400, 'Facility Field Required!'));
       }
     }).catch( err => console.log(err))
+
+
+    var checkCount = await checkNameIsUnique(req.body.facility);
+
+    if (checkCount) {
+     return next(createError(400, 'Duplicate Facility!'));
+    }
 
     try {
       const facility = new Facility(req.body);
