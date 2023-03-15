@@ -139,11 +139,11 @@ export default function EditRoom() {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Room name</label>
-                            <input type="text" id="roomName" value={name} onChange={(e) => setName(e.target.value)} placeholder='Room Name' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Room name</label>
+                            <input type="text" id="roomName" value={name} onChange={(e) => setName(e.target.value)} placeholder='Room Name' className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Availability</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
                             <select id="roomAvail" value={status} onChange={(e) => setStatus(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Please Select</option>
                                 <option value="1">Available</option>
@@ -151,7 +151,7 @@ export default function EditRoom() {
                             </select>
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Image</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Image</label>
                             <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                             {(typeof image === 'string') ? <img src={`${process.env.REACT_APP_HOTEL_SERVER_URL}/${image}`} alt={name} width="300px" /> : <img src={`${src}`} alt={name} width="300px" />}
 

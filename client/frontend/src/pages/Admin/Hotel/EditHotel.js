@@ -187,15 +187,15 @@ export default function EditHotel() {
                     <form onSubmit={handleSubmit}>
                         <div className='grid grid-cols-3 gap-4 mt-2'>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Hotel name</label>
-                                <input type="text" id="hotelName" name="name" onChange={handleChange} placeholder='Hotel name' defaultValue={hotels.name} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">Hotel name</label>
+                                <input type="text" id="hotelName" name="name" onChange={handleChange} placeholder='Hotel name' defaultValue={hotels.name} className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
-                                <input type="text" id="hotelPrice" onChange={handleChange} name="price" placeholder='₹' defaultValue={hotels.price} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">Price</label>
+                                <input type="text" id="hotelPrice" onChange={handleChange} name="price" placeholder='₹' defaultValue={hotels.price} className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Rating</label>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">Rating</label>
                                 <select id="hotelRating" name="rating" onChange={handleChange} value={hotels.rating} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="3">3 star</option>
@@ -204,11 +204,11 @@ export default function EditHotel() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Location</label>
-                                <input type="text" id="location" name="city" onChange={handleChange} defaultValue={hotels.city} placeholder='Location' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">Location</label>
+                                <input type="text" id="location" name="city" onChange={handleChange} defaultValue={hotels.city} placeholder='Location' className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">State</label>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">State</label>
                                 <select id="hotelState" name="state" onChange={handleChange} value={hotels.state} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option disabled>Please Select State</option>
                                     <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
@@ -251,7 +251,7 @@ export default function EditHotel() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Availability</label>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
                                 <select id="hotelAvail" name="status" onChange={handleChange} value={hotels.status} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="1">Available</option>
@@ -259,7 +259,7 @@ export default function EditHotel() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">homepage</label>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 ">homepage</label>
                                 <select id="homepage" name="homepage" onChange={handleChange} value={hotels.homepage} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option>Please Select</option>
                                     <option value="1">Yes</option>
@@ -268,27 +268,27 @@ export default function EditHotel() {
                             </div>
                         </div>
                         <div className='mb-3 mt-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Address</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Address</label>
                             <textarea id="address" name="address" rows="3" onChange={handleChange} defaultValue={hotels.address} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address"></textarea>
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">About Hotel</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">About Hotel</label>
                             <textarea id="aboutHotel" name="description" rows="3" onChange={handleChange} defaultValue={hotels.description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About Hotel"></textarea>
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Meta title</label>
-                            <input type="text" id="hotelMeta" name="meta_title" onChange={handleChange} placeholder='Meta Title' defaultValue={hotels.meta_title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Meta title</label>
+                            <input type="text" id="hotelMeta" name="meta_title" onChange={handleChange} placeholder='Meta Title' defaultValue={hotels.meta_title} className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Meta description</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Meta description</label>
                             <textarea id="hotelMetaDescription" onChange={handleChange} name="meta_description" rows="2" defaultValue={hotels.meta_description} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Meta description"></textarea>
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Safari distance</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Safari distance</label>
                             <textarea id="safariDistance" name="safari_distance" defaultValue={hotels.safari_distance && hotels.safari_distance} onChange={handleChange} rows="2" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Safari distance"></textarea>
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Thumbnail</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Thumbnail</label>
                             <input onChange={handleImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
 
                             {(typeof hotels.image === 'string') && hotels.image && <img src={(`${HSURL}/${hotels.image}`)} alt="" width="300px" />}
@@ -297,13 +297,13 @@ export default function EditHotel() {
                         </div>
 
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Cover Image</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Cover Image</label>
                             <input onChange={handlePackageImage} className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                             {(typeof hotels.package_image === 'string') && hotels.package_image && <img src={(`${HSURL}/${hotels.package_image}`)} alt="" width="300px" />}
 
                         </div>
                         <div className='mb-3 multiImages'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Hotel Images</label>
                             <div className="result">
                                 {hotels.images &&
                                     hotels.images?.map((im, i) => (
@@ -317,7 +317,7 @@ export default function EditHotel() {
                             </div>
 
                             <div className='mb-3 multiImages'>
-                                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300" htmlFor="file_input">Upload Hotel Images</label>
+                                <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Hotel Images</label>
                                 <input type="file" id="file" multiple onChange={handleImageChange} />
                                 <div className="label-holder">
                                     <label htmlFor="file" className="label">
