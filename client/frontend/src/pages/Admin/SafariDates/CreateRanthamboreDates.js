@@ -75,20 +75,20 @@ export default function CreateRanthamboreDates() {
         <h1 className='text-2xl text-black font-bold mb-3'>Add event date</h1>
         <form className='mt-4 shadow-md p-4 rounded bg-white'>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Date</label>
           <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()}/>
         </div>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle</label>
-          <select id="vehicle" onChange = { (e) => setVehicle(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle</label>
+          <select id="vehicle" onChange = { (e) => setVehicle(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
             <option>Please select</option>
             <option value="Canter">Canter</option>
             <option value="Gypsy">Gypsy</option>
         </select>
         </div>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Zone</label>
-          <select id="zone" onChange = { (e) => setZone(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Zone</label>
+          <select id="zone" onChange = { (e) => setZone(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
             <option>Please select</option>
             { zones && zones.map((itm,index) => (
                <option value={itm.name} key={index}>{itm.name}</option>
@@ -96,16 +96,16 @@ export default function CreateRanthamboreDates() {
         </select>
         </div>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Timing</label>
-          <select id="timing" onChange = { (e) => setTiming(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Timing</label>
+          <select id="timing" onChange = { (e) => setTiming(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
             <option>Please select</option>
             <option value="Morning">Morning</option>
             <option value="Evening">Evening</option>
         </select>
         </div>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Availability</label>
-          <input type="text" onChange = { (e) => setAvailability(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>  
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Availability</label>
+          <input type="text" onChange = { (e) => setAvailability(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>  
         </div>
         <div className='flex'>
           <button type="button"  onClick = {HandleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Submit</button>
