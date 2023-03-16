@@ -257,6 +257,7 @@ module.exports = {
     let rules = {
       name: 'required',
       rating: 'required',
+      price: 'required',
     };
 
     const validation = new Validator(req.body, rules);
@@ -280,9 +281,10 @@ module.exports = {
         });
     }
 
-    const fileName = await imageUpload(req);
+      
 
     if (req.file) {
+      const fileName = await imageUpload(req);
       req.body.image = fileName;
     }
 
