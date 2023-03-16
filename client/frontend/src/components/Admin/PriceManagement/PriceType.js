@@ -156,28 +156,28 @@ export default function PriceType({ id , type , action }) {
       type == 'festival' ?
         <>
             <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 ">Start Date</label>
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()}/>
             </div>
             <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start Date</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 ">Start Date</label>
             <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} minDate={moment().toDate()}/>
             </div>
             <div className="tab-content" id="tabs-tabContent">
                 <div className="tab-pane fade show active" id="tabs-indian" role="tabpanel" aria-labelledby="tabs-indian-tab">
                     <div className="pricesColumns">
                     <div className="mb-6">
-                        <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
-                        <input type="text" id="name" readOnly={(type === 'chambal') ? true : false }  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label className="block mb-2 text-sm font-bold text-gray-900 ">Name</label>
+                        <input type="text" id="name" readOnly={(type === 'chambal') ? true : false }  value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
                     </div>
 
                     <div className="mb-6">
-                        <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
-                        <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label className="block mb-2 text-sm font-bold text-gray-900 ">Price</label>
+                        <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
                     </div>
                     <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
-                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">Person Type</label>
+                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option>Please select</option>
                         <option value="Indian">Indian</option>
                         <option value="Foreigner">Foreigner</option>
@@ -185,8 +185,8 @@ export default function PriceType({ id , type , action }) {
                     </div>
 
                     <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
-                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle Type</label>
+                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option>Please select</option>
                         <option value="Gypsy">Gypsy</option>
                         <option value="Canter">Canter</option>
@@ -207,18 +207,18 @@ export default function PriceType({ id , type , action }) {
             <div className="pricesColumns">
 
             <div className="mb-6 max193">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Name</label>
-                <input type="text" id="name" readOnly={(type === 'chambal') ? true : false } value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <label className="block mb-2 text-sm font-bold text-gray-900 ">Name</label>
+                <input type="text" id="name" readOnly={(type === 'chambal') ? true : false } value = {name} onChange = {(e) => setName(e.target.value)}  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
             </div>
  
             <div className="mb-6 max193">
-                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Price</label>
-                <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                <label className="block mb-2 text-sm font-bold text-gray-900 ">Price</label>
+                <input type="number" id="price" value = {price} onChange = {(e) => setPrice(e.target.value)}  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
             </div>
 
                   <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Person Type</label>
-                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">Person Type</label>
+                      <select id="personType" value ={personType} onChange = { (e) => setPersonType(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option>Please select</option>
                         <option value="Indian">Indian</option>
                         <option value="Foreigner">Foreigner</option>
@@ -226,8 +226,8 @@ export default function PriceType({ id , type , action }) {
                     </div>
 
                     <div className="mb-6" style={{display: (type === 'chambal') ? 'none' : 'block' }}>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vehicle Type</label>
-                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle Type</label>
+                      <select id="vehicleType" value = {vehicleType} onChange = { (e) => setVehicleType(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option>Please select</option>
                         <option value="Gypsy">Gypsy</option>
                         <option value="Canter">Canter</option>

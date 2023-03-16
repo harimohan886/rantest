@@ -106,11 +106,11 @@ export default function AddRoom() {
                     </div>
                     <form>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Room name</label>
-                            <input type="text" id="roomName" onChange={(e) => setName(e.target.value)} placeholder='Room Name' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Room name</label>
+                            <input type="text" id="roomName" onChange={(e) => setName(e.target.value)} placeholder='Room Name' className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
                         </div>
                         <div className='mb-3'>
-                            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300">Availability</label>
+                            <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
                             <select id="roomAvail" onChange={(e) => setStatus(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Please Select</option>
                                 <option value="1">Available</option>
