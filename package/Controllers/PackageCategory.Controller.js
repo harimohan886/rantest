@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const validator = require('../helpers/validate');
 const mongoose = require('mongoose');
 
 const PackageCategory = require('../Models/PackageCategory.model');
@@ -37,6 +38,23 @@ module.exports = {
   },
 
   createNewPackageCategory: async (req, res, next) => {
+
+    let rules = {
+      category: 'required'
+    };
+
+    await validator(req.body, rules, {}, (err, status) => {
+      if (!status) {
+        return res.status(200)
+          .send({
+            success: false,
+            message: 'Validation failed',
+            data: err
+          });
+      }
+    }).catch(err => console.log(err))
+
+
     try {
       
       const hotels = [];

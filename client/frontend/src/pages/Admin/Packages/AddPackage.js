@@ -66,8 +66,9 @@ export default function AddPackage() {
         } catch (err) {
 
             if (!err.response.data.success) {
-                console.log(err.response.data.data);
-                if (err.response.data.data.errors.name) {
+                if (err.response.data.error) {
+                    swal(err.response.data.error.message, "error");
+                }else if (err.response.data.data.errors.name) {
                     swal(err.response.data.data.errors.name[0], "error");
                 }else if (err.response.data.data.errors.price) {
                     swal(err.response.data.data.errors.price[0], "error");

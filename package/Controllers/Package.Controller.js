@@ -273,12 +273,7 @@ module.exports = {
     var checkCount = await checkNameIsUnique(req.body.name);
 
     if (checkCount) {
-      return res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: 'duplicate name'
-        });
+      return next(createError(412, 'Duplicate package name!'));
     }
 
       
@@ -386,6 +381,7 @@ module.exports = {
     let rules = {
       name: 'required',
       rating: 'required',
+      price: 'required',
     };
 
     const validation = new Validator(req.body, rules);

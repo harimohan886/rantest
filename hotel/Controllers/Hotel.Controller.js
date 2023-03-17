@@ -258,7 +258,9 @@ module.exports = {
   createNewHotel: async (req, res, next) => {
 
     let rules = {
-      name: 'required'
+      category: 'required',
+      rating: 'required',
+      price: 'required'
     };
 
     await validator(req.body, rules, {}, (err, status) => {
@@ -275,12 +277,7 @@ module.exports = {
     var checkCount = await checkNameIsUnique(req.body.name);
 
     if (checkCount) {
-      return res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: 'duplicate name'
-        });
+     return next(createError(412, 'Duplicate Hotel name!'));
     }
 
     const package_image = req.files.filter(function (item) {
@@ -293,17 +290,20 @@ module.exports = {
 
     /*resize image*/
 
-    const fileNameFile = package_image[0].originalname.replace(/\..+$/, "");
-    const newFilename = `${fileNameFile}-${Date.now()}.jpg`;
+    if (package_image && package_image[0]) {
 
-    await sharp(package_image[0].path)
-    .resize(1140, 300, {fit:"contain"})
-    .jpeg({ quality: 95 })
-    .toFile(
-      path.resolve(package_image[0].destination,newFilename)
-    )
+      const fileNameFile = package_image[0].originalname.replace(/\..+$/, "");
+      const newFilename = `${fileNameFile}-${Date.now()}.jpg`;
 
-    fs.unlinkSync(package_image[0].path);
+      await sharp(package_image[0].path)
+      .resize(1140, 300, {fit:"contain"})
+      .jpeg({ quality: 95 })
+      .toFile(
+        path.resolve(package_image[0].destination,newFilename)
+        )
+
+      fs.unlinkSync(package_image[0].path);
+    }
 
     /*resize image*/
 
@@ -320,17 +320,20 @@ module.exports = {
 
     /*resize image*/
 
-    const fileName = image[0].originalname.replace(/\..+$/, "");
-    const newFilenameFile = `${fileName}-${Date.now()}.jpg`;
+    if (image && image[0]) {
 
-    await sharp(image[0].path)
-    .resize(335, 257, {fit:"contain"})
-    .jpeg({ quality: 95 })
-    .toFile(
-      path.resolve(image[0].destination,newFilenameFile)
-    )
+      const fileName = image[0].originalname.replace(/\..+$/, "");
+      const newFilenameFile = `${fileName}-${Date.now()}.jpg`;
 
-    fs.unlinkSync(image[0].path);
+      await sharp(image[0].path)
+      .resize(335, 257, {fit:"contain"})
+      .jpeg({ quality: 95 })
+      .toFile(
+        path.resolve(image[0].destination,newFilenameFile)
+        )
+
+      fs.unlinkSync(image[0].path);
+    }
 
     /*resize image*/
 

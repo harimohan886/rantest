@@ -8,8 +8,7 @@ import ForeignCategory from '../../../components/Admin/Package/ForeignCategory';
 import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 import axios from 'axios';
-
-
+import swal from 'sweetalert';
 
 export default function AddPackageCategory() {
 
@@ -43,13 +42,13 @@ export default function AddPackageCategory() {
 
   const HandleSubmit = () => {
 
-    if (localStorage.getItem('IndianValues') && localStorage.getItem('ForeignerValues')) {
-      let indian = [];
-      let foreigner = [];
-      let hotels = [];
+      if (localStorage.getItem('IndianValues') && localStorage.getItem('ForeignerValues')) {
+        let indian = [];
+        let foreigner = [];
+        let hotels = [];
 
-      const data1 = {
-        indian:
+        const data1 = {
+          indian:
           JSON.parse(localStorage.getItem('IndianValues')).map((item, index) => (
             indian.push({
               "room_price": parseInt([item.room_price]),
@@ -62,59 +61,73 @@ export default function AddPackageCategory() {
               "safari_we_price": parseInt([item.safari_we_price]),
               "safari_fes_price": parseInt([item.safari_fes_price])
             })
-          ))
-      }
+            ))
+        }
 
-      const data2 = {
-        foreigner:
+        const data2 = {
+          foreigner:
           JSON.parse(localStorage.getItem('ForeignerValues')).map((item, index) => (
             foreigner.push({
-            "room_price": parseInt([item.room_price]),
-            "extra_ad_price": parseInt([item.extra_ad_price]),
-            "extra_ch_price": parseInt([item.extra_ch_price]),
-            "fes_room_price": parseInt([item.fes_room_price]),
-            "fes_ad_price": parseInt([item.fes_ad_price]),
-            "fes_ch_price": parseInt([item.fes_ch_price]),
-            "safari_de_price": parseInt([item.safari_de_price]),
-            "safari_we_price": parseInt([item.safari_we_price]),
-            "safari_fes_price": parseInt([item.safari_fes_price])
+              "room_price": parseInt([item.room_price]),
+              "extra_ad_price": parseInt([item.extra_ad_price]),
+              "extra_ch_price": parseInt([item.extra_ch_price]),
+              "fes_room_price": parseInt([item.fes_room_price]),
+              "fes_ad_price": parseInt([item.fes_ad_price]),
+              "fes_ch_price": parseInt([item.fes_ch_price]),
+              "safari_de_price": parseInt([item.safari_de_price]),
+              "safari_we_price": parseInt([item.safari_we_price]),
+              "safari_fes_price": parseInt([item.safari_fes_price])
             })
-          ))
-      }
-
-      selected.map(item => (
-        hotels.push(item.value)
-      ))
-
-      const sendData = {
-        "package_id": params.id,
-        "status": 1,
-        "category": cat_name,
-        "hotels": hotels,
-        "indian": indian,
-        "foreigner": foreigner
-      }
-      console.log(sendData);
-      axios.post(`${process.env.REACT_APP_BASE_URL}/package/package-categories`, sendData, {
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
-        },
-      }).then(result => {
-        console.log('result', result);
-        if (result.data.success === true) {
-          alert.success("Category has been created");
-          localStorage.removeItem('IndianValues');
-          localStorage.removeItem('ForeignerValues');
-          setTimeout(() => {
-            window.location.href = `/admin/package-categories/${params.id}`
-          }, 1000);
+            ))
         }
-      })
-    } else {
-      alert.error("Category Name , Hotels and Category Options are required");
-    }
+
+        selected.map(item => (
+          hotels.push(item.value)
+          ))
+
+        const sendData = {
+          "package_id": params.id,
+          "status": 1,
+          "category": cat_name,
+          "hotels": hotels,
+          "indian": indian,
+          "foreigner": foreigner
+        }
+
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/package/package-categories`, sendData, {
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ` + localStorage.getItem('tokenkey')
+          },
+        }).then(result => {
+          if (result.data.success === true) {
+            alert.success("Category has been created");
+            localStorage.removeItem('IndianValues');
+            localStorage.removeItem('ForeignerValues');
+            setTimeout(() => {
+              window.location.href = `/admin/package-categories/${params.id}`
+            }, 1000);
+          }else{
+            console.log(result);
+            if (!result.data.success) {
+              if (result.data.error) {
+                swal(result.data.error.message, "error");
+              }else if (result.data.data.errors.category) {
+                swal(result.data.data.errors.category[0], "error");
+              }else{
+                swal('Validation errors, please fill form carefully!', "error");
+              }
+            }else{
+
+              swal(result.data.message, "error");
+            }
+          }
+        })
+      } else {
+        alert.error("Category Name , Hotels and Category Options are required");
+      }
   }
 
 

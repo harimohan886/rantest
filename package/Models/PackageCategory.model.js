@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const PackageCategorySchema = new Schema({
 	category: {
 		type: String,
-		required: true,
 	},
 	package_id: {
 		type: String,

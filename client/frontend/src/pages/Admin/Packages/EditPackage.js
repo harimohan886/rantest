@@ -42,7 +42,7 @@ export default function EditPackage() {
         formData.append("image", packages.image);
 
         formData.append("name", packages.name);
-        formData.append("price", packages.price);
+        formData.append("price", packages.price ?? 0);
         formData.append("rating", packages.rating);
         formData.append("description", packages.description);
         formData.append("availability", packages.availability);
@@ -69,10 +69,22 @@ export default function EditPackage() {
 
 
         } catch (err) {
+            if (!err.response.data.success) {
+                if (err.response.data.error) {
+                    swal(err.response.data.error.message, "error");
+                }else if (err.response.data.data.errors.name) {
+                    swal(err.response.data.data.errors.name[0], "error");
+                }else if (err.response.data.data.errors.price) {
+                    swal(err.response.data.data.errors.price[0], "error");
+                }else if (err.response.data.data.errors.rating) {
+                    swal(err.response.data.data.errors.rating[0], "error");
+                }else{
+                    swal('Validation errors, please fill form carefully!', "error");
+                }
+            }else{
 
-            swal(err.response.data.message, "error");
-
-
+                swal(err.response.data.message, "error");
+            }
         }
     }
 
@@ -112,7 +124,7 @@ export default function EditPackage() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Rating</label>
                                 <select value={packages.rating} name="rating" onChange={handleChange} id="packageRating" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="">Please Select</option>
                                     <option value="3">3 star</option>
                                     <option value="4">4 star</option>
                                     <option value="5">5 star</option>
@@ -121,7 +133,7 @@ export default function EditPackage() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
                                 <select value={packages.availability} name="availability" onChange={handleChange} id="packageAvail" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="">Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
                                 </select>
@@ -129,7 +141,7 @@ export default function EditPackage() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Homepage</label>
                                 <select value={packages.homepage} name="homepage" onChange={handleChange} id="homepage" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>
