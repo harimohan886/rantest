@@ -83,7 +83,7 @@ export default function PackageListing({ packages }) {
                                         Iternary
                                     </Link>
                                     <div className="h-0 border border-solid border-t-0 border-blueGray-800" />
-                                    <button type="button" className="text-left border-b-1 border-black text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-danger">
+                                    <button type="button" onClick={(e) => handleDelete(item._id)} className="text-left border-b-1 border-black text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-danger">
                                         Delete
                                     </button>
                                 </div>

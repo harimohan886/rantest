@@ -258,7 +258,7 @@ module.exports = {
   createNewHotel: async (req, res, next) => {
 
     let rules = {
-      category: 'required',
+      name: 'required',
       rating: 'required',
       price: 'required'
     };

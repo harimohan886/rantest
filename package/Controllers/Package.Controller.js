@@ -143,7 +143,7 @@ module.exports = {
             response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
           }
           res.json(response);
-        }).sort({ $natural: -1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
+        }).sort({ $natural: 1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
     } catch (error) {
       console.log(error.message);
     }
@@ -683,9 +683,9 @@ module.exports = {
       await PackageForeignerOption.deleteMany({ package_id: id });
 
       const result = await Package.findByIdAndDelete(id);
-      if (!result) {
+      /*if (!result) {
         throw createError(404, 'Package does not exist.');
-      }
+      }*/
 
       res.send({
         success: true,
