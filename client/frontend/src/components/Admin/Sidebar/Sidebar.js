@@ -145,7 +145,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link type="button" className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" data-toggle="collapse" data-target="#collapse-safari" aria-expanded="true" aria-controls="collapse-safari">
+                    <Link type="button" className="bg-safari-brown block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full" data-toggle="collapse" data-target="#collapse-safari" aria-expanded="true" aria-controls="collapse-safari">
                       <i className="fas fa-th-large mr-2 text-md opacity-75"></i>{" "}
                       Manage Safari Dates
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
@@ -173,7 +173,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <div className="accordion" id="accordionMenu">
                   <div className="accordion-item">
-                    <Link className="block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full dark:hover:text-white" type="button" data-toggle="collapse" data-target="#collapse-prices" aria-expanded="true" aria-controls="collapse-prices">
+                    <Link className="bg-safari-brown block cursor-pointer transition focus:outline-none text-white items-left py-3 w-full" type="button" data-toggle="collapse" data-target="#collapse-prices" aria-expanded="true" aria-controls="collapse-prices">
                       <i className="fas fa-suitcase mr-2 text-md opacity-75"></i>{" "}
                       Price Management
                       <i className="fas fa-angle-down mt-1 float-right text-md opacity-75"></i>
