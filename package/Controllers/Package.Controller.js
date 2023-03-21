@@ -143,7 +143,7 @@ module.exports = {
             response = { "error": false, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
           }
           res.json(response);
-        }).sort({ $natural: -1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
+        }).sort({ $natural: 1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
     } catch (error) {
       console.log(error.message);
     }
@@ -257,6 +257,7 @@ module.exports = {
     let rules = {
       name: 'required',
       rating: 'required',
+      price: 'required',
     };
 
     const validation = new Validator(req.body, rules);
@@ -272,17 +273,13 @@ module.exports = {
     var checkCount = await checkNameIsUnique(req.body.name);
 
     if (checkCount) {
-      return res.status(412)
-        .send({
-          success: false,
-          message: 'Validation failed',
-          data: 'duplicate name'
-        });
+      return next(createError(412, 'Duplicate package name!'));
     }
 
-    const fileName = await imageUpload(req);
+      
 
     if (req.file) {
+      const fileName = await imageUpload(req);
       req.body.image = fileName;
     }
 
@@ -384,6 +381,7 @@ module.exports = {
     let rules = {
       name: 'required',
       rating: 'required',
+      price: 'required',
     };
 
     const validation = new Validator(req.body, rules);
@@ -685,9 +683,9 @@ module.exports = {
       await PackageForeignerOption.deleteMany({ package_id: id });
 
       const result = await Package.findByIdAndDelete(id);
-      if (!result) {
+      /*if (!result) {
         throw createError(404, 'Package does not exist.');
-      }
+      }*/
 
       res.send({
         success: true,

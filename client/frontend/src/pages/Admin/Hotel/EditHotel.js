@@ -164,11 +164,23 @@ export default function EditHotel() {
 
 
         } catch (err) {
+            if (!err.response.data.success) {
+                if (err.response.data.error) {
+                    swal(err.response.data.error.message, "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.name) {
+                    swal(err.response.data.data.errors.name[0], "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.price) {
+                    swal(err.response.data.data.errors.price[0], "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.rating) {
+                    swal(err.response.data.data.errors.rating[0], "error");
+                }else{
+                    swal('Validation errors, please fill form carefully!', "error");
+                }
+            }else{
 
-            swal(err.response.data.message, "error");
-
-
+            swal(err.response.data.data.message, "error");
         }
+    }
     }
 
 

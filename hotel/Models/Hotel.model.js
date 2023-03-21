@@ -50,6 +50,7 @@ const HotelSchema = new Schema({
 	},
 	status: {
 		type: Number,
+		default: 0
 	},
 	availability: {
 		type: Number,

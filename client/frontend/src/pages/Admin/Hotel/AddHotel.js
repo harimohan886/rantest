@@ -39,19 +39,19 @@ export default function AddHotel() {
         setPackageImage(e.target.files[0]);
     }
 
-    const [image, setImage] = useState();
-    const [package_image, setPackageImage] = useState();
-    const [name, setName] = useState();
-    const [price, setPrice] = useState();
-    const [rating, setRating] = useState();
-    const [city, setCity] = useState();
-    const [state, setState] = useState();
-    const [address, setAddress] = useState();
-    const [description, setDescription] = useState();
-    const [status, setStatus] = useState();
-    const [homepage,setHomepage] = useState(); 
-    const [meta_title, setMetaTitle] = useState();
-    const [meta_description, setMetaDescription] = useState();
+    const [image, setImage] = useState('');
+    const [package_image, setPackageImage] = useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState(0);
+    const [rating, setRating] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [address, setAddress] = useState('');
+    const [description, setDescription] = useState('');
+    const [status, setStatus] = useState('');
+    const [homepage,setHomepage] = useState(''); 
+    const [meta_title, setMetaTitle] = useState('');
+    const [meta_description, setMetaDescription] = useState('');
 
     const HandleSaveData = async (e) => {
         e.preventDefault();
@@ -74,11 +74,10 @@ export default function AddHotel() {
         formData.append("meta_title", meta_title);
         formData.append("meta_description", meta_description);
 
-
-        console.log(formData);
-
         try {
             const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData);
+
+            console.log('res',res);
 
             if (res.data.success === true) {
                 swal("Hotel is added successfully", "success");
@@ -91,25 +90,23 @@ export default function AddHotel() {
             }
 
         } catch (err) {
-            swal(err.response.data.message, "error");
+            if (!err.response.data.success) {
+                if (err.response.data.error) {
+                    swal(err.response.data.error.message, "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.name) {
+                    swal(err.response.data.data.errors.name[0], "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.price) {
+                    swal(err.response.data.data.errors.price[0], "error");
+                }else if (err.response.data.data.errors && err.response.data.data.errors.rating) {
+                    swal(err.response.data.data.errors.rating[0], "error");
+                }else{
+                    swal('Validation errors, please fill form carefully!', "error");
+                }
+            }else{
 
+            swal(err.response.data.data.message, "error");
         }
-
-        // axios.post(`${process.env.REACT_APP_BASE_URL}/hotel/hotels`, formData).then(res => {
-
-        //     if (res.data.status == 200) {
-        //         swal("Hotel is added successfully", "success");
-        //         navigate('/admin/hotels');
-
-
-        //     } else if (res.data.validation_errors) {
-        //         // setTimeError();
-        //         // if (res.data.validation_errors.time)
-        //         //setTimeError(res.data.validation_errors.time[0]);
-        //     } else if (res.data.status == 401) {
-        //         //  setDuplicateDate(true);
-        //     }
-        // });
+    }
     }
 
 
@@ -135,7 +132,7 @@ export default function AddHotel() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Rating</label>
                                 <select id="hotelRating" onChange={(e) => setRating(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="" >Please Select</option>
                                     <option value="3">3 Star</option>
                                     <option value="4">4 Star</option>
                                     <option value="5">5 Star</option>
@@ -191,7 +188,7 @@ export default function AddHotel() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
                                 <select id="hotelAvail" onChange={(e) => setStatus(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="" >Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
                                 </select>
@@ -199,7 +196,7 @@ export default function AddHotel() {
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Homepage</label>
                                 <select id="homepage" name="homepage" onChange={(e) => setHomepage(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option>Please Select</option>
+                                    <option value="" >Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>

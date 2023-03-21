@@ -360,16 +360,19 @@ margin-bottom: 5px;
 .mb20{
 margin-bottom: 20px !important;
 }
+.fillTraveller .table tr td {
+    padding: 8px !important;
+}
 .addperson{
 border-radius: 100px!important;
-padding: 6px 12px !important;
+padding: 6px 10px !important;
 background: green !important;
 border-color: green !important;
 margin-right: 10px;
 }
 .deletePerson{
 border-radius: 100px;
-padding: 6px 11px !important;
+padding: 6px 9px !important;
 }
 /*.payable{
 margin-left: 15px;
