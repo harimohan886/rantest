@@ -123,7 +123,7 @@ export default function EditPackage() {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Rating</label>
-                                <select value={packages.rating} name="rating" onChange={handleChange} id="packageRating" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select value={packages.rating} name="rating" onChange={handleChange} id="packageRating" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="">Please Select</option>
                                     <option value="3">3 star</option>
                                     <option value="4">4 star</option>
@@ -132,7 +132,7 @@ export default function EditPackage() {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Availability</label>
-                                <select value={packages.availability} name="availability" onChange={handleChange} id="packageAvail" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select value={packages.availability} name="availability" onChange={handleChange} id="packageAvail" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="">Please Select</option>
                                     <option value="1">Available</option>
                                     <option value="0">Not available</option>
@@ -140,7 +140,7 @@ export default function EditPackage() {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900 ">Homepage</label>
-                                <select value={packages.homepage} name="homepage" onChange={handleChange} id="homepage" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select value={packages.homepage} name="homepage" onChange={handleChange} id="homepage" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -149,7 +149,7 @@ export default function EditPackage() {
                         </div>
                         <div className='mb-3 mt-2'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 ">About Package</label>
-                            <textarea defaultValue={packages.description} name="description" onChange={handleChange} id="aboutPackage" rows="3" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About Hotel"></textarea>
+                            <textarea defaultValue={packages.description} name="description" onChange={handleChange} id="aboutPackage" rows="3" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="About Hotel"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 ">Meta title</label>
@@ -157,7 +157,7 @@ export default function EditPackage() {
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 ">Meta description</label>
-                            <textarea defaultValue={packages.meta_description} name="meta_description" onChange={handleChange} id="PackageMetaDescription" rows="2" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Meta description"></textarea>
+                            <textarea defaultValue={packages.meta_description} name="meta_description" onChange={handleChange} id="PackageMetaDescription" rows="2" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Meta description"></textarea>
                         </div>
                         <div className='mb-3'>
                             <label className="block mb-2 text-sm font-bold text-gray-900 " htmlFor="file_input">Upload Image</label>
