@@ -340,6 +340,8 @@ module.exports = {
     /*resize image*/
 
     if (req.files && image && image[0]) {
+      const fileName = image[0].originalname.replace(/\..+$/, "");
+      const newFilenameFile = `${fileName}-${Date.now()}.jpg`;
       req.body.image = image[0].destination+newFilenameFile;
     }else{
       req.body.image = '';

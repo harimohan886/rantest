@@ -108,27 +108,26 @@ module.exports = {
     const user = await Auth.find({ mobile: mobile }).count();
 
     if (user<=0) {
-return next(createError(201, 'Mobile number not exist!'));
-}
+      return next(createError(201, 'Mobile number not exist!'));
+    }
 
     var otp = Math.floor(1000 + Math.random() * 9000);
-    console.log(otp);
 
-   /* const response = await fetch(`http://login.pacttown.com/api/mt/SendSMS?user=N2RTECHNOLOGIES&password=994843&senderid=NTRTEC&channel=Trans&DCS=0&flashsms=0&number=${mobile}&text=Your one time password to activate your account is ${otp}`, {method: 'GET'});
-      const data = await response.json();
-      // console.log('logg',data);
-*/
-      await Auth.updateOne(
+    const response = await fetch(`http://login.pacttown.com/api/mt/SendSMS?user=N2RTECHNOLOGIES&password=994843&senderid=NTRTEC&channel=Trans&DCS=0&flashsms=0&number=${mobile}&text=Your one time password to activate your account is ${otp}`, {method: 'GET'});
+    const data = await response.json();
+    // console.log('logg',data);
+
+    await Auth.updateOne(
       { mobile: mobile },
       { $set: { otp: otp } },
       { new: true }
-    );
+      );
 
-      res.status(200)
-        .send({
-          message: "Login Otp sended successfully"+otp,
-          mobile: mobile,
-        });
+    res.status(200)
+    .send({
+      message: "Login Otp sended successfully"+otp,
+      mobile: mobile,
+    });
 
   },
 
