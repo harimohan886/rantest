@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = 'youraccesstokensecret';
 var bcrypt = require("bcrypt");
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) =>
+  fetch(...args));
 
 const Auth = require('../Models/Auth.model');
 
@@ -63,6 +65,7 @@ module.exports = {
       const user1 = new Auth({
         name: req.body.name,
         email: req.body.email,
+        mobile: req.body.mobile,
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, 8)
       });
@@ -93,6 +96,80 @@ module.exports = {
       }
       next(error);
     }
+  },
+
+  adminLoginWithOtp: async (req, res, next) => {
+    const { mobile } = req.body;
+
+    if (mobile.length > 10) {
+      return next(createError(201, 'Invalid mobile number!'));
+    }
+
+    const user = await Auth.find({ mobile: mobile }).count();
+
+    if (user<=0) {
+return next(createError(201, 'Mobile number not exist!'));
+}
+
+    var otp = Math.floor(1000 + Math.random() * 9000);
+    console.log(otp);
+
+   /* const response = await fetch(`http://login.pacttown.com/api/mt/SendSMS?user=N2RTECHNOLOGIES&password=994843&senderid=NTRTEC&channel=Trans&DCS=0&flashsms=0&number=${mobile}&text=Your one time password to activate your account is ${otp}`, {method: 'GET'});
+      const data = await response.json();
+      // console.log('logg',data);
+*/
+      await Auth.updateOne(
+      { mobile: mobile },
+      { $set: { otp: otp } },
+      { new: true }
+    );
+
+      res.status(200)
+        .send({
+          message: "Login Otp sended successfully"+otp,
+          mobile: mobile,
+        });
+
+  },
+
+
+  verifyAndLoginWithOtp: async (req, res, next) => {
+    const { mobile, otp } = req.body;
+
+    const user = await Auth.find({ mobile: mobile, otp: otp }).count();
+
+    if (user) {
+
+
+      const user = await Auth.findOne({ mobile: mobile });
+
+      var token = jwt.sign({
+        id: user.id
+      }, process.env.JWT_SEC, {
+        expiresIn: 86400
+      });
+
+      user.tokens = user.tokens.concat({ token })
+      await user.save();
+
+      res.status(200)
+      .send({
+        user: {
+          id: user._id,
+          email: user.email,
+          username: user.username,
+          name: user.name,
+        },
+        message: "Login successfull",
+        accessToken: token,
+      });
+
+
+    }else{
+      return next(createError(201, 'Invalid Otp'));
+    }
+
+    
   },
 
   adminLogin: async (req, res, next) => {

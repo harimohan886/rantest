@@ -15,6 +15,14 @@ const AuthSchema = new Schema({
 		required: [true, "username required!"],
 		unique: [true, "duplicate username!"]
 	},
+	mobile: {
+		type: String,
+		default:'',
+	},
+	otp: {
+		type: Number,
+		default:0,
+	},
 	email: {
 		type: String,
 		required: [true, "email required!"],

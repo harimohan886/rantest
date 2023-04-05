@@ -29,6 +29,9 @@ router.get('/profile', [verifyUserToken], AuthController.profile);
 //Create a new user admin
 router.post('/login', AuthController.adminLogin);
 
+router.post('/login-by-otp', AuthController.adminLoginWithOtp);
+router.post('/verify-and-login', AuthController.verifyAndLoginWithOtp);
+
 router.get('/logout', [verifyUserToken], AuthController.adminLogout);
 
 router.post('/register', AuthController.adminRegister);

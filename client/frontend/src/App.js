@@ -30,6 +30,7 @@ import HotelDetails from './pages/frontend/Hotel/HotelDetails';
 
 // Admin import starts here
 import Login from './pages/Admin/Auth/Login';
+import LoginWithOtp from './pages/Admin/Auth/LoginWithOtp';
 import AdminDashboard from './pages/Admin/Dashboard/AdminDashboard';
 
 
@@ -187,6 +188,7 @@ function App() {
 
 
           (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+          (<Route path='/admin-login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <LoginWithOtp />} />)
 
 
 

@@ -308,6 +308,8 @@ module.exports = {
     /*resize image*/
 
     if (req.files && package_image && package_image[0]) {
+      const fileNameFile = package_image[0].originalname.replace(/\..+$/, "");
+      const newFilename = `${fileNameFile}-${Date.now()}.jpg`;
       req.body.package_image = package_image[0].destination+''+newFilename;
     }else{
       req.body.package_image = '';
