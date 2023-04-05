@@ -187,8 +187,8 @@ function App() {
 
 
 
-          (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
-          (<Route path='/admin-login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <LoginWithOtp />} />)
+          (<Route path='/admin-login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <Login />} />)
+          (<Route path='/admin/login' element={(accessToken && accessToken !== 'null') ? <Navigate to="/admin/dashboard" replace /> : <LoginWithOtp />} />)
 
 
 
