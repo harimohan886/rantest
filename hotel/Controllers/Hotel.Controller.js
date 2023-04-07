@@ -301,16 +301,8 @@ module.exports = {
       .toFile(
         path.resolve(package_image[0].destination,newFilename)
         )
-
-      fs.unlinkSync(package_image[0].path);
-    }
-
-    /*resize image*/
-
-    if (req.files && package_image && package_image[0]) {
-      const fileNameFile = package_image[0].originalname.replace(/\..+$/, "");
-      const newFilename = `${fileNameFile}-${Date.now()}.jpg`;
       req.body.package_image = package_image[0].destination+''+newFilename;
+      // fs.unlinkSync(package_image[0].path);
     }else{
       req.body.package_image = '';
     }
@@ -333,16 +325,8 @@ module.exports = {
       .toFile(
         path.resolve(image[0].destination,newFilenameFile)
         )
-
-      fs.unlinkSync(image[0].path);
-    }
-
-    /*resize image*/
-
-    if (req.files && image && image[0]) {
-      const fileName = image[0].originalname.replace(/\..+$/, "");
-      const newFilenameFile = `${fileName}-${Date.now()}.jpg`;
       req.body.image = image[0].destination+newFilenameFile;
+      // fs.unlinkSync(image[0].path);
     }else{
       req.body.image = '';
     }
@@ -377,7 +361,7 @@ module.exports = {
             path.resolve(image.destination,newFilename)
             )
 
-          fs.unlinkSync(image.path);
+          // fs.unlinkSync(image.path);
 
           /*resize image*/
 
