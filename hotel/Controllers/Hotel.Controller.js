@@ -97,8 +97,6 @@ module.exports = {
         var search = {};
       }
 
-      console.log('search',search);
-
       var totalPosts = await Hotel.find(search).countDocuments().exec();
 
       Hotel.find(search, {},
@@ -168,7 +166,7 @@ module.exports = {
 
       var totalPosts = await Hotel.find(search).countDocuments().exec();
 
-      const data = await Hotel.find(search, {}, query).sort({ $natural: -1 }).populate('images');
+      const data = await Hotel.find(search, {}, query).sort({ price: 1 }).populate('images');
 
       let CategoryList = [];
 
