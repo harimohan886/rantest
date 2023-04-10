@@ -18,7 +18,7 @@ export default function FinalPackageBooking() {
     }
 
     const alert = useAlert();
-    const gstPerc = 18;
+    const gstPerc = 5;
 
 
 
