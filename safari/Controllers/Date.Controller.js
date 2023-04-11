@@ -109,11 +109,17 @@ module.exports = {
      }
      //const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
      //const zones = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
+     const zonesa = await ZoneCategory.find({availability:1});
+     let zoneArr = [];
+     for(let zonea of zonesa){
+        zoneArr.push(zonea.name);
+      }
+
      res.send({
         success: true,
         message: 'Data fateched',
         data: date,
-        zones: zones,
+        zones: zoneArr,
         vehicles: vehicles,
         timings: timings
       });
