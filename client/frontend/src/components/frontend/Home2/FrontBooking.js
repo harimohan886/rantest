@@ -65,16 +65,18 @@ export default function FrontBooking() {
     <section id='select-date'>
         <div className='n2rCalendar'>
             <FullCalendar
-            longPressDelay={0}
-            defaultView="dayGridMonth"
             displayEventTime={true}
+            editable={true}
+            selectable={true}
+            longPressDelay={0}
+            eventLongPressDelay={0}
+            selectLongPressDelay={0}
+            defaultView="dayGridMonth"
             header={{
                 left: "prev,next today",
                 center: "title",
                 right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
             }}
-            editable={true}
-            selectable={true}
             selectAllow= { function(select) {
                 return moment().diff(select.start, 'days') <= 0
                 }}

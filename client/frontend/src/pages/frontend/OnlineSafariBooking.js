@@ -77,6 +77,8 @@ export default function OnlineSafariBooking() {
                         <h1>Ranthambore Safari Booking</h1>
                         <FullCalendar
                             longPressDelay={0}
+                            eventLongPressDelay={0}
+                            selectLongPressDelay={0}
                             defaultView="dayGridMonth"
                             displayEventTime={true}
                             header={{
