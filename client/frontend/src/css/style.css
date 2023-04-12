@@ -2387,8 +2387,8 @@ ul#roomTab {
 	height: 234.296px!important;
 }	
 .fc .fc-daygrid-day-top{
-	padding-top: 0px;
-	padding-bottom: 5px;
+	padding-top: 2px;
+    padding-bottom: 3px;
 }
 .fc .fc-col-header-cell-cushion {
     padding: 5px 4px !important;
@@ -3882,7 +3882,8 @@ line-height: 26px;
     padding: 0px !important;
 }
 .goWild table tbody tr td{
-	padding: 3.5px !important;
+	padding: 0px !important;
+    line-height: 27px !important;
 }
 .goWild {
     margin-top: 0px;
