@@ -2455,7 +2455,7 @@ font-size: 17px;
 	max-width: inherit;
 }
 .option img {
-	margin-right: 10px;
+	margin-right: 25px;
 	width: 22px;
 }
 .zoneinfo.option {
@@ -3286,7 +3286,7 @@ line-height: 26px;
 	float: unset;
   }
   .package-detail ul{
-	margin-top: 0;
+	margin-top: 10px;
 	margin-bottom: 15px;
   }
   .packages-listing .package-detail ul li{
@@ -3311,6 +3311,9 @@ line-height: 26px;
 	font-size: 21px;
 	line-height: 32px;
   }
+  .chm2 .title {
+    padding-top: 0px;
+}
   .packages-view .package-detail ul{
 	margin-top: 15px;
   }
