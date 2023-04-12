@@ -11,6 +11,19 @@ import BookSafari2 from './BookSafari2';
 
 export default function FrontBooking() {
 
+    document.addEventListener("touchstart", function (ev) {
+        let dt = ev.target.parentNode.parentNode.parentNode.getAttribute('data-date');
+        if(dt != null){
+            var telems  = document.querySelectorAll(".fc-daygrid-day-frame");
+            [].forEach.call(telems, function(el) {
+                el.classList.remove("fc-highlight");
+            });
+            let trow = document.querySelector("td[data-date='"+dt+"'] .fc-daygrid-day-frame");
+            trow.classList.add('fc-highlight');
+            handleDateSelect(dt);
+        }
+    }, false);
+
     const [booking_date , setBookingDate] = useState([]);
 
     const [details , setDetails] = useState([]);
@@ -25,6 +38,34 @@ export default function FrontBooking() {
 
 
     const handleDateSelect = (selectInfo) => {
+  
+      const data = {
+        "date": selectInfo
+      }
+  
+      axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByDate`, data).then(res => {
+            console.log("res", res);
+          if (res.status === 200) {
+              setZones(res.data.zones);
+              setTimings(res.data.timings);
+              setVehicles(res.data.vehicles);
+              setBookingDate(res.data.data);
+              setDate(res.data.data[0].date);
+              setTiming(res.data.data[0].timing);
+              setVehicle(res.data.data[0].vehicle);
+              setZone(res.data.data[0].zone);
+          } else {
+            setDetails([]);
+              setBookingDate([]);
+              swal("Warning", res.data.error.message, "warning");
+          }
+      }).catch(error => {
+            swal("Warning", error, "warning");
+      })
+  }
+
+
+    const handleDateSelect1 = (selectInfo) => {
   
       var elems  = document.querySelectorAll(".fc-daygrid-day-frame");
   
@@ -81,7 +122,7 @@ export default function FrontBooking() {
                 return moment().diff(select.start, 'days') <= 0
                 }}
             
-            select={handleDateSelect}
+            select={handleDateSelect1}
             plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
             />
         </div>
