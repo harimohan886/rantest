@@ -69,6 +69,7 @@ export default function Dates() {
                 <div className='col-sm-6 col-xs-12'>
                 <div className='n2rCalendar'>
                     <FullCalendar
+                    longPressDelay={0}
                     defaultView="dayGridMonth"
                     displayEventTime={true}
                     header={{

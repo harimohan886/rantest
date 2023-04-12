@@ -76,6 +76,7 @@ export default function OnlineSafariBooking() {
                     <div className='col-sm-6 col-xs-12 goWild'>
                         <h1>Ranthambore Safari Booking</h1>
                         <FullCalendar
+                            longPressDelay={0}
                             defaultView="dayGridMonth"
                             displayEventTime={true}
                             header={{
@@ -88,7 +89,6 @@ export default function OnlineSafariBooking() {
                             selectAllow={function (select) {
                                 return moment().diff(select.start, 'days') <= 0
                             }}
-                            longPressDelay={3}
                             select={handleDateSelect}
                             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         />

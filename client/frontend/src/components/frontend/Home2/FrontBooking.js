@@ -65,6 +65,7 @@ export default function FrontBooking() {
     <section id='select-date'>
         <div className='n2rCalendar'>
             <FullCalendar
+            longPressDelay={0}
             defaultView="dayGridMonth"
             displayEventTime={true}
             header={{
