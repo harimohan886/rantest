@@ -3309,6 +3309,7 @@ line-height: 26px;
   }
   .packages-views h1{
 	font-size: 21px;
+	line-height: 32px;
   }
   .packages-view .package-detail ul{
 	margin-top: 15px;
@@ -3339,12 +3340,19 @@ line-height: 26px;
   }
   #roomTab .nav-link{
 	font-size: 12px;
-	padding: 10px 15px;
+    padding: 10px 13px;
   }
   .packTab .nav-tabs {
 	justify-content: unset;
-	margin-left: -12px;
+	margin-left: -7px;
   }
+.packTab h5 {
+    color: #000;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 15px;
+}
   #myTab.nav-tabs{
 	justify-content: center;
 	margin-bottom: 15px;
