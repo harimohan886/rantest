@@ -88,7 +88,7 @@ export default function OnlineSafariBooking() {
                             selectAllow={function (select) {
                                 return moment().diff(select.start, 'days') <= 0
                             }}
-
+                            longPressDelay={3}
                             select={handleDateSelect}
                             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         />

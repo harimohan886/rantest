@@ -3290,6 +3290,14 @@ line-height: 26px;
 	margin-top: 10px;
 	margin-bottom: 15px;
   }
+  .bodyHeight {
+    min-height: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.grid-box {
+    margin-bottom: 15px;
+}
   .packages-listing .package-detail ul li{
 	margin-bottom: 7px;
   }
