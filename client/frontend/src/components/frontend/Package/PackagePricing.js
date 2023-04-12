@@ -152,7 +152,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                 localStorage.setItem('package_booking_id', result.data.data.package_booking);
                 localStorage.setItem('bookingData', JSON.stringify(data));
                 localStorage.setItem('extraBed',extraBed);
-                window.location.href = ("/book-package");
+               // window.location.href = ("/book-package");
 
 
             }).catch(

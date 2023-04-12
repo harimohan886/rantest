@@ -15,10 +15,10 @@ export default function Home2() {
     const [packages,setPackages] = useState([]);
     const [hotels,setHotels]     = useState([]);
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/front`).then((res)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/package/packages/home`).then((res)=>{
             setPackages(res.data.data);
         });
-        axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/front`).then((res)=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/hotel/hotels/home`).then((res)=>{
             setHotels(res.data.data);
         });
     },[])

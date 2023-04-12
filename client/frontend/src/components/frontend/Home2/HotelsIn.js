@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function HotelsIn({ hotels }) {
-  const data = [];
-  hotels && hotels.map((hotel, i) => {
+  const data = hotels;
+  /*hotels && hotels.map((hotel, i) => {
     if (i <= 4 && hotel.homepage == 1) {
       data.push(hotel);
     }
-  });
+  });*/
 
   return (
     <div className='hotelbgIn'>

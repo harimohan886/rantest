@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function HolidayTour({ packages }) {
-    const data = [];
-    packages && packages.map((itm, i) => {
+    const data = packages;
+   /* packages && packages.map((itm, i) => {
         if (i <= 4 && itm.homepage == 1) {
             data.push(itm);
         }
-    });
+    });*/
 
     return (
         <div className='container'>

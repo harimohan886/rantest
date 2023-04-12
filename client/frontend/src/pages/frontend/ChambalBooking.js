@@ -9,6 +9,9 @@ import "react-datepicker/dist/react-datepicker.css"
 
 export default function ChambalBooking() {
 
+    const [agree, setAgree] = useState(false);
+
+
     const params = useParams();
     const alert = useAlert();
 
@@ -20,6 +23,10 @@ export default function ChambalBooking() {
     const [Gst , setGst] = useState(0);
     const [Persons , setPersons] = useState(0);
     const [Price , setPrice] = useState(0);
+
+    const checkboxHandler = () => {
+        setAgree(!agree);
+    }
 
     const IndianPersonHandle = (e) => {
 
@@ -472,14 +479,19 @@ export default function ChambalBooking() {
                     </div>
                 </div>
                 <div className="formsection" style={{marginTop: "20px"}}>
+
                     <div className="text-center paynow">
+                    <div>
+                    <input type="checkbox" id="agree" onChange={checkboxHandler} />
+                    <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                    </div>
                         <ul className='inline-flex'>
                             <li className="list-inline-item paybtn">
                                 Payable Amount : <input id="booking_amount" type="hidden" value={PayAmount} />
                                 <span id="amount">{PayAmount}</span>
                             </li>
                             <li className="list-inline-item">
-                                <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" type="button">Pay Now</button>
+                                <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} title="Please agree terms and conditions" type="button">Pay Now</button>
                             </li>
                             <li className="list-inline-item">
                                 <Link className="btn btn-default" to="/online-Chambal-moter-boat-safari-booking">Go Back</Link>

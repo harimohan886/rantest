@@ -6,6 +6,8 @@ import swal from 'sweetalert';
 
 export default function SafariTravellerBooking() {
 
+const [agree, setAgree] = useState(false);
+
     useEffect(() => {
 
         getSettings();
@@ -24,6 +26,10 @@ export default function SafariTravellerBooking() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
             setRazorpaykey(res.data.data.value.razorpay_key);
         })  
+    }
+
+     const checkboxHandler = () => {
+        setAgree(!agree);
     }
 
       const alert = useAlert();
@@ -476,8 +482,12 @@ export default function SafariTravellerBooking() {
                     </div>
                 </form>
                         <div className='border border-slate-300 text-center plusMinusInputs'>
+                        <div>
+                    <input type="checkbox" id="agree" onChange={checkboxHandler} />
+                    <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                    </div>
                             <button className='btn btn-light'>Payable amount : { payable_Amount }</button> &nbsp;
-                            <button type="button" id="paynow" onClick={handlePayNow}   className='btn btn-success paynow'>Pay Now </button> &nbsp; 
+                            <button type="button" id="paynow" onClick={handlePayNow} disabled={!agree}  title="Please agree terms and conditions"  className='btn btn-success paynow'>Pay Now </button> &nbsp; 
                             <br />
 
                 <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

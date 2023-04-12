@@ -204,6 +204,44 @@ module.exports = {
     }
   },
 
+  getAllHotelsHome: async (req, res, next) => {
+    try {      
+
+      const data = await Hotel.find({homepage:1, status:1}).sort({ price: 1 });
+
+      let CategoryList = [];
+
+      for (let hotel of data) {
+        CategoryList.push({
+          _id: hotel._id,
+          name: hotel.name,
+          image: hotel.image,
+          slug: hotel.slug,
+          address: hotel.address,
+          city: hotel.city,
+          state: hotel.state,
+          rating: hotel.rating,
+          price: hotel.price,
+          description: hotel.description,
+          meta_title: hotel.meta_title,
+          meta_description: hotel.meta_description,
+          availability: hotel.status,
+          homepage: hotel.homepage,
+        })
+      }
+
+      if (!data) {
+        response = { "error": true, "message": "Error fetching data" + err };
+      } else {
+        response = { "error": false, "message": 'data fetched', 'data': CategoryList };
+      }
+      res.json(response);
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   getAllHotelsCount: async (req, res, next) => {
     try {
 

@@ -25,6 +25,7 @@ router.get('/by-ids', HotelController.findHotelByIds);
 
 router.get('/', HotelController.getAllHotels);
 router.get('/front', HotelController.getAllHotelsFront);
+router.get('/home', HotelController.getAllHotelsHome);
 
 //Create a new product
 router.post('/', uploads.any(), HotelController.createNewHotel);

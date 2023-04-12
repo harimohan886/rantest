@@ -149,6 +149,23 @@ module.exports = {
     }
   },
 
+
+  getAllPackagesHome: async (req, res, next) => {
+    try {
+
+      Package.find({ availability: 1, homepage: 1 }, {__v: 0, updatedAt: 0, status: 0}, function (err, data) {
+          if (err) {
+            response = { "error": true, "message": "Error fetching data" + err };
+          } else {
+            response = { "error": false, "message": 'data fetched', 'data': data };
+          }
+          res.json(response);
+        }).sort({ $natural: 1 }).populate('inclusions', 'inclusion').populate('exclusions', 'exclusion').populate('features', 'feature').populate('iternaries', 'title description');
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+
   countAllPackages: async (req, res, next) => {
     try {
 

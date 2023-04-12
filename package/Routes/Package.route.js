@@ -19,6 +19,7 @@ const PackageController = require('../Controllers/Package.Controller');
 router.get('/', PackageController.getAllPackages);
 
 router.get('/front', PackageController.getAllPackagesFront);
+router.get('/home', PackageController.getAllPackagesHome);
 
 router.get('/dashboard', PackageController.countAllPackages);
 
