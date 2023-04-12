@@ -9,20 +9,17 @@ import "react-datepicker/dist/react-datepicker.css"
 
 export default function ChambalBooking() {
 
-    const [agree, setAgree] = useState(false);
-
-
     const params = useParams();
     const alert = useAlert();
 
     const [startDate, setStartDate] = useState();
-
     const [Indian , setIndian] = useState(0);
     const [Foreigner , setForeigner] = useState(0);
     const [PayAmount , setPayAmount] = useState(0);
     const [Gst , setGst] = useState(0);
     const [Persons , setPersons] = useState(0);
     const [Price , setPrice] = useState(0);
+    const [agree, setAgree] = useState(false);
 
     const checkboxHandler = () => {
         setAgree(!agree);
@@ -85,8 +82,6 @@ export default function ChambalBooking() {
     const [address , setAddress] = useState('');
 
     const HandlePayment = () => {
-
-        console.log("StartDate", startDate);
 
         if((email === '' && state === '' && address === '') || PayAmount === 0 || startDate === undefined) {
             alert.error("Please do not leave any fields blank.");
@@ -482,21 +477,21 @@ export default function ChambalBooking() {
 
                     <div className="text-center paynow">
                     <div>
-                    <input type="checkbox" id="agree" onChange={checkboxHandler} />
-                    <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                        <input type="checkbox" id="agree" onChange={checkboxHandler} />
+                        <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                     </div>
-                        <ul className='inline-flex'>
-                            <li className="list-inline-item paybtn">
-                                Payable Amount : <input id="booking_amount" type="hidden" value={PayAmount} />
-                                <span id="amount">{PayAmount}</span>
-                            </li>
-                            <li className="list-inline-item">
-                                <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} title="Please agree terms and conditions" type="button">Pay Now</button>
-                            </li>
-                            <li className="list-inline-item">
-                                <Link className="btn btn-default" to="/online-Chambal-moter-boat-safari-booking">Go Back</Link>
-                            </li>
-                        </ul>
+                    <ul className='inline-flex'>
+                        <li className="list-inline-item paybtn">
+                            Payable Amount : <input id="booking_amount" type="hidden" value={PayAmount} />
+                            <span id="amount">{PayAmount}</span>
+                        </li>
+                        <li className="list-inline-item">
+                            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} title="Please agree terms and conditions" type="button">Pay Now</button>
+                        </li>
+                        <li className="list-inline-item">
+                            <Link className="btn btn-default" to="/online-Chambal-moter-boat-safari-booking">Go Back</Link>
+                        </li>
+                    </ul>
 
                      <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div className="modal-dialog" role="document">
