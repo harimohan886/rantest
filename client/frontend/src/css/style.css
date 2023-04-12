@@ -3280,6 +3280,7 @@ line-height: 26px;
   }
   .packages-listing h2{
 	font-size: 21px;
+    line-height: 32px;
   }
   .package-margin .package-detail{
 	width: 100%;
