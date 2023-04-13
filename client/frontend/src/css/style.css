@@ -2631,14 +2631,17 @@ font-size: 14px;
 }
 .plusMinusInputs .btn-light{
 	font-size: 17px !important;
+    margin-bottom: 10px;
 }
 .plusMinusInputs .btn-success.paynow {
     font-size: 17px;
+    margin-bottom: 10px;
 }
 .plusMinusInputs .btn-danger.goback {
     font-size: 17px;
     margin-left: 0px;
     margin-bottom: 15px;
+    margin-top: 5px;
 }
 .passanger h3 {
 margin-bottom: 10px;
