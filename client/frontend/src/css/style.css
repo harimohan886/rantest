@@ -511,6 +511,35 @@ padding: 10px !important;
 header{
 padding-top: 30px;
 }
+.tremsbooking {
+    text-align: left;
+	padding: 15px;
+}
+.customrow .form-control {
+    max-width: 90%;
+    margin: 10px;
+}
+.customrow .actionbtn {
+    text-align: center;
+    margin: 10px;
+}
+.customrow {
+    border: 1px solid #ddd;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.customrow .col-sm-2 label {
+    background-color: #6083b6;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 0px;
+	color: #fff;
+}
+.customrow .col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 1px solid #6083b6;
+}
 /********newstyle********/
 .top-header {
 	background-color: #000;
@@ -1235,8 +1264,8 @@ border-left:1px solid #5d5d5d;
 	color: #000;
   }
 .plusMinusInputs {
-	padding-top: 10px;
-    padding-bottom: 10px;
+	padding-top: 0px;
+    padding-bottom: 0px;
 }
 .plusMinusInputs .btn-light {
     background: #ff9b34;
@@ -2582,13 +2611,42 @@ font-size: 12px;
 font-size: 14px;
 }
 .passanger h2{
-font-size: 20px;
+	font-size: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.plusMinusInputs .btn-light{
+	font-size: 17px !important;
+}
+.plusMinusInputs .btn-success.paynow {
+    font-size: 17px;
+}
+.plusMinusInputs .btn-danger.goback {
+    font-size: 17px;
+    margin-left: 0px;
+    margin-bottom: 15px;
 }
 .passanger h3 {
 margin-bottom: 10px;
 padding-left: 15px;
 font-size: 16px;
 font-weight: 600;
+margin-top: 10px;
+}
+.fillTraveller {
+    padding: 15px;
+    padding-top: 0px;
+}
+.customrow .form-control {
+    max-width: 94%;
+    margin: 10px;
+}
+.tremsbooking {
+    display: flex;
+}
+.tremsbooking input#agree {
+    margin-right: 10px;
+    margin-top: 4px;
 }
 #sectiontwo form input, #sectiontwo form select{
 height: 36px;
