@@ -482,6 +482,7 @@ export default function SafariTravellerBooking() {
                             
                                 {users.map((user, index) => (
                                     <div className='row customrow' key={user.key}>
+                                        <span>1</span>
                                         {localStorage.getItem('selAvailable') == 1 ?
                                             <>
                                                 <TravellerInputs
@@ -491,7 +492,7 @@ export default function SafariTravellerBooking() {
                                                     onChange={e => onChange(index, e)}
                                                 />
                                                 <div className='col-sm-2 col-12 plusMinusInputs'>
-                                                <label for="label-control">Action</label>
+                                                {/* <label for="label-control">Action</label> */}
                                                     <div className='actionbtn'>
                                                         <button type="button" onClick={addElement} className='btn btn-success'>Add</button>
                                                         <button type="button" onClick={() => removeElement(index)} disabled={users.length <= 1} className='btn btn-danger'>

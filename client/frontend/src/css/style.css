@@ -530,6 +530,7 @@ padding-top: 30px;
     border: 1px solid #ddd;
     margin-left: 0px;
     margin-right: 0px;
+	padding-left: 15px;
 }
 .customrow .col-sm-2 label {
     background-color: #6083b6;
@@ -541,7 +542,17 @@ padding-top: 30px;
 .customrow .col-sm-2 {
     padding-left: 0px;
     padding-right: 0px;
-    border: 1px solid #6083b6;
+    max-width: 16%;
+}
+.customrow span {
+    width: 35px;
+    height: 35px;
+    background: #6083b6;
+    padding: 7px;
+    color: #fff;
+    border-radius: 100%;
+    text-align: center;
+    margin-top: 11px;
 }
 /********newstyle********/
 .top-header {
@@ -2641,8 +2652,25 @@ margin-top: 10px;
     padding-top: 0px;
 }
 .customrow .form-control {
-    max-width: 94%;
+    max-width: 95%;
     margin: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.customrow span {
+    width: 95%;
+    height: auto;
+    background: #6083b6;
+    padding: 7px;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 11px;
+}
+.customrow .col-sm-2 {
+    padding-left: 0px;
+    padding-right: 0px;
+    max-width: 100%;
 }
 .tremsbooking {
     display: flex;

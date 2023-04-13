@@ -15,7 +15,7 @@ class TravellerInputs extends Component {
     return (
       <>
         <div className='col-sm-2 col-12'>
-        <label for="label-control">Full name</label>
+        {/* <label for="label-control">Full name</label> */}
         <input
           className="form-control tname"
           name="name"
@@ -26,25 +26,25 @@ class TravellerInputs extends Component {
         />
         </div>
         <div className='col-sm-2 col-12 order'>
-        <label for="label-control">Gender</label>
+        {/* <label for="label-control">Gender</label> */}
             <select className="form-control tgender" name="gender" value={user.gender} onChange={this.handleChange}>
-                <option>Please Select</option>
+                <option>Gender</option>
                 <option value = "Male">Male</option>
                 <option value = "Female">Female</option>
             </select>
         </div>
         <div className='col-sm-2 col-12'>
-        <label for="label-control">Nationality</label>
+        {/* <label for="label-control">Nationality</label> */}
             <select className="form-control tnation" name="nationality" value={user.nationality} onChange={this.handleChange}>
-                <option>Please Select</option>
+                <option>Nationality</option>
                 <option value = "Indian">Indian</option>
                 <option value = "Foreigner">Foreigner</option>
             </select>
         </div>
         <div className='col-sm-2 col-12'>
-        <label for="label-control">ID Proof</label>
+        {/* <label for="label-control">ID Proof</label> */}
             <select className="form-control tidproof" name="id_proof" value={user.id_proof} onChange={this.handleChange}>
-                <option>Please Select</option>
+                <option>ID Proof</option>
                 <option value = "Aadhar Card">Aadhar Card</option>
                 <option value = "Voter Id">Voter ID</option>
                 <option value = "Driving Licence">Driving License</option>
@@ -52,7 +52,7 @@ class TravellerInputs extends Component {
             </select>
         </div>
         <div className='col-sm-2 col-12'>
-        <label for="label-control">ID Number</label>
+        {/* <label for="label-control">ID Number</label> */}
             <input
             className="form-control tidno"
             name="idnumber"
