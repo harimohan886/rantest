@@ -97,6 +97,10 @@ export default function FinalPackageBooking() {
 
     const HandlePayment = () => {
 
+        if (!agree) {
+            alert.error('Please accept terms and conditions first!');
+        }else{
+
         let amount = parseInt(packageBookingInfo.amount)
         let gstAmount = amount * (gstPerc / 100);
         let totalAmount = amount + gstAmount;
@@ -153,6 +157,7 @@ export default function FinalPackageBooking() {
             const paymentObject = new window.Razorpay(options);
             paymentObject.open();
         }
+    }
     }
 
     const loadScript = (src) => {
@@ -303,7 +308,7 @@ export default function FinalPackageBooking() {
                     <input type="checkbox" id="agree" onChange={checkboxHandler} />
                     <label htmlFor="agree">I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                 </div>
-                                <button onClick={HandlePayment} className="btn btn-warning btn-lg" title="Please agree terms and conditions" disabled={!agree} id="razorpay">Pay Now</button>
+                                <button onClick={HandlePayment} className="btn btn-warning btn-lg" title="Please agree terms and conditions" id="razorpay">Pay Now</button>
                             </div>
                         </div>
                     </div>

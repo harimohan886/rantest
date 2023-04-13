@@ -233,6 +233,12 @@ export default function SafariTravellerBooking() {
 
     const handlePayNow = (e) => {
         e.preventDefault();
+
+
+        if (!agree) {
+            alert.error('Please accept terms and conditions first!');
+        }else{
+            
         var an = document.querySelector('.pname').value;
         var am = document.querySelector('.pmobile').value;
         var ae = document.querySelector('.pemail').value;
@@ -321,7 +327,7 @@ export default function SafariTravellerBooking() {
             btn.setAttribute('data-toggle', 'modal');
             btn.setAttribute('data-target', '#exampleModalLong');
         }
-
+    }
     }
 
     return (
@@ -516,7 +522,7 @@ export default function SafariTravellerBooking() {
                         <label htmlFor="agree">I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                     </div>
                     <button className='btn btn-light'>Payable amount : {payable_Amount}</button> &nbsp;
-                    <button type="button" id="paynow" onClick={handlePayNow} disabled={!agree} title="Please agree terms and conditions" className='btn btn-success paynow'>Pay Now </button> &nbsp;
+                    <button type="button" id="paynow" onClick={handlePayNow} title="Please agree terms and conditions" className='btn btn-success paynow'>Pay Now </button> &nbsp;
                     <br />
 
                     <div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

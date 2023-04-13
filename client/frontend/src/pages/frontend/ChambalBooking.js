@@ -480,12 +480,14 @@ export default function ChambalBooking() {
                         <input type="checkbox" id="agree" onChange={checkboxHandler} />
                         <label htmlFor="agree">I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                     </div>
+                        {!agree && <p style={{ color: 'red', marginBottom:'5px' }}> Please select terms and conditions first! </p> }
                     <ul className='inline-flex'>
                         <li className="list-inline-item paybtn">
                             Payable Amount : <input id="booking_amount" type="hidden" value={PayAmount} />
                             <span id="amount">{PayAmount}</span>
                         </li>
-                        <li className="list-inline-item">
+                        <li className="list-inline-item"> 
+
                             <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} title="Please agree terms and conditions" type="button">Pay Now</button>
                         </li>
                         <li className="list-inline-item">
