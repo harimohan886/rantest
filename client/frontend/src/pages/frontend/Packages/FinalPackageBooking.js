@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAlert } from "react-alert"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 export default function FinalPackageBooking() {
     const navigate = useNavigate();
+    const [agree, setAgree] = useState(false);
 
     let packageBookingInfo = localStorage.getItem("bookingData");
     const packageCustomerId = localStorage.getItem("package_customer_id");
@@ -26,7 +27,9 @@ export default function FinalPackageBooking() {
     let gstAmountText = amountText * (gstPerc / 100);
     let totalAmountText = amountText + gstAmountText;
 
-
+    const checkboxHandler = () => {
+        setAgree(!agree);
+    }
 
 
     const HandleHalfPayment = () => {
@@ -296,7 +299,11 @@ export default function FinalPackageBooking() {
                                 </ul>
                             </div>
                             <div className="findButton text-center">
-                                <button onClick={HandlePayment} className="btn btn-warning btn-lg" id="razorpay">Pay Now</button>
+                            <div>
+                    <input type="checkbox" id="agree" onChange={checkboxHandler} />
+                    <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                </div>
+                                <button onClick={HandlePayment} className="btn btn-warning btn-lg" title="Please agree terms and conditions" disabled={!agree} id="razorpay">Pay Now</button>
                             </div>
                         </div>
                     </div>
