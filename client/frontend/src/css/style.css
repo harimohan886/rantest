@@ -519,6 +519,9 @@ padding-top: 30px;
     max-width: 90%;
     margin: 10px;
 }
+.tremsbooking input#agree {
+    margin-right: 10px;
+}
 .customrow .actionbtn {
     text-align: center;
     margin: 10px;
