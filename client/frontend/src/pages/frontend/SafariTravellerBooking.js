@@ -482,7 +482,7 @@ export default function SafariTravellerBooking() {
                             
                                 {users.map((user, index) => (
                                     <div className='row customrow' key={user.key}>
-                                        <span>1</span>
+                                        <span>{index+1}</span>
                                         {localStorage.getItem('selAvailable') == 1 ?
                                             <>
                                                 <TravellerInputs
