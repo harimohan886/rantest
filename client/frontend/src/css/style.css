@@ -3006,6 +3006,10 @@ font-size: 12px;
 }
 .chambaBooking h1{
 	font-size: 18px;
+    padding: 0px;
+}
+.chambaBooking .formsection .tremsbooking {
+    padding: 0px;
 }
 .paynow .inline-flex{
 	display: block;
@@ -3013,6 +3017,7 @@ font-size: 12px;
 .paynow li {
 	display: block;
 	margin-bottom: 10px;
+    margin-right: 0px !important;
   }
 .zoneinfo {
 	max-width: 100%;
@@ -3465,7 +3470,7 @@ line-height: 26px;
 	font-size: 12px;
   }
   .package-pricing table tbody tr td{
-	font-size: 12px;
+	font-size: 11px;
 	padding: 2px !important;
 	vertical-align: middle;
   }
@@ -3497,10 +3502,16 @@ line-height: 26px;
 	top: 7px;
   }
   .package-group select{
-	font-size: 12px;
+	font-size: 11px;
 	height: 30px;
 	background: none;
+    width: 50px;
+    padding-left: 5px;
+    padding-right: 5px !important;
   }
+  .package-group input.travel-date {
+    font-size: 11px;
+}
   .package-group td [type="radio"]{
 	height: 12px;
 	width: 12px;
@@ -3527,7 +3538,7 @@ line-height: 26px;
 	margin-top: 30px;
   }
   .paynowoption .usertype label > input + .forcustom{
-	font-size: 17px;
+	font-size: 14px;
   }
   .paynowoption .usertype{
 	margin-bottom: 0;
@@ -3537,7 +3548,33 @@ line-height: 26px;
   }
   .banner-packageinfo h1{
 	font-size: 32px;
+    line-height: 40px;
   }
+.traveler-D .table>tbody>tr>td {
+    font-size: 14px;
+    width: 10%;
+}
+.traveler-D h2{
+    font-size: 22px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 32px;
+}
+.booking-detail-online {
+    padding-top: 20px;
+}
+.package-D h2{
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    line-height: 32px;
+}
+.package-D .table>tbody>tr>td{
+    font-size: 14px;
+}
+.package-D .table>tbody>tr>td.payable{
+    font-size: 15px;
+}
   .paynowoption{
 	margin-bottom: 0;
   }

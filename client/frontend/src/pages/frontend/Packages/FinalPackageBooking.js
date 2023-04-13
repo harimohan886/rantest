@@ -299,9 +299,9 @@ export default function FinalPackageBooking() {
                                 </ul>
                             </div>
                             <div className="findButton text-center">
-                            <div>
+                            <div className='tremsbooking'>
                     <input type="checkbox" id="agree" onChange={checkboxHandler} />
-                    <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                    <label htmlFor="agree">I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                 </div>
                                 <button onClick={HandlePayment} className="btn btn-warning btn-lg" title="Please agree terms and conditions" disabled={!agree} id="razorpay">Pay Now</button>
                             </div>

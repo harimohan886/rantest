@@ -476,9 +476,9 @@ export default function ChambalBooking() {
                 <div className="formsection" style={{marginTop: "20px"}}>
 
                     <div className="text-center paynow">
-                    <div>
+                    <div className='tremsbooking'>
                         <input type="checkbox" id="agree" onChange={checkboxHandler} />
-                        <label htmlFor="agree">   &nbsp;&nbsp;I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
+                        <label htmlFor="agree">I read all <b> <a href="/terms-and-conditions" > terms and condition </a></b> mentioned  and agree to it.</label>
                     </div>
                     <ul className='inline-flex'>
                         <li className="list-inline-item paybtn">
