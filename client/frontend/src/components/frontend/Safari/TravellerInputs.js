@@ -44,10 +44,10 @@ class TravellerInputs extends Component {
         <div className='col-sm-2 col-12'>
         {/* <label for="label-control">ID Proof</label> */}
             <select className="form-control tidproof" name="id_proof" value={user.id_proof} onChange={this.handleChange}>
-                {user.nationality === 'Indian' && <option value="">ID Proof</option> }
-                {user.nationality === 'Indian' && <option value = "Aadhar Card">Aadhar Card</option> }
-                {user.nationality === 'Indian' && <option value = "Voter Id">Voter ID</option> }
-                {user.nationality === 'Indian' && <option value = "Driving Licence">Driving License</option> }
+                {user.nationality != 'Foreigner'  && <option value="">ID Proof</option> }
+                {user.nationality != 'Foreigner' && <option value = "Aadhar Card">Aadhar Card</option> }
+                {user.nationality != 'Foreigner' && <option value = "Voter Id">Voter ID</option> }
+                {user.nationality != 'Foreigner' && <option value = "Driving Licence">Driving License</option> }
                 <option value="Passport">Passport</option>
             </select>
         </div>
