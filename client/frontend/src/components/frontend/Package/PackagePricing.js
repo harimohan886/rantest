@@ -20,6 +20,27 @@ export default function PackagePricing({ optionData, packageName, setData }) {
     const navigate = useNavigate();
     // const slug = useParams().id;
 
+    const handleChangeMobile = (e) => {
+
+        setNumber(e.target.value);
+
+        const data = {
+            "name": name,
+            "mobile": e.target.value
+        }
+
+        if (e.target.value.length >= 10) {
+
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/enquiries/save-enquery`, data).then(res => {
+                if (res.status === 200) {
+                } else {
+                }
+            }).catch(error => {
+                swal("Warning", error, "warning");
+            })
+        }
+    }
+
     const handleChange = (e, price, child_cost) => {
         setChoose(e.target.value);
 
@@ -294,7 +315,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                             <input type="text" className="form-control" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" required="" />
                         </div>
                         <div className="form-group col-md-4">
-                            <input type="number" name="number" id="number" onChange={(e) => setNumber(e.target.value)} className="form-control" placeholder="Phone No" required="" />
+                            <input type="number" name="number" id="number" onChange={handleChangeMobile} className="form-control" placeholder="Phone No" required="" />
                         </div>
                         <div className="form-group col-md-4">
                             <input type="text" className="form-control" name="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
