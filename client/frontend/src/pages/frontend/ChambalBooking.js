@@ -165,7 +165,7 @@ export default function ChambalBooking() {
                                        },
                                     }).then((response)=>{});
                                 });
-                                window.location.href = '/thankyou';
+                                // window.location.href = '/thankyou';
                             }
                     })
                     

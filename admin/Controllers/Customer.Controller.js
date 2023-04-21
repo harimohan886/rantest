@@ -603,7 +603,7 @@ module.exports = {
           )
         );*/
 
-          const params2 = new URLSearchParams();
+      const params2 = new URLSearchParams();
 
       params2.append('name', req.body.name);
       params2.append('mobile', req.body.mobile);
@@ -613,7 +613,7 @@ module.exports = {
 
 
       const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
-      const data2 = await response.json(); 
+      const data2 = await response2.json(); 
 
       const params3 = new URLSearchParams();
 
@@ -630,7 +630,7 @@ module.exports = {
 
 
       const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
-      const data3 = await response.json(); 
+      const data3 = await response3.json(); 
 
       
       const params = new URLSearchParams();
