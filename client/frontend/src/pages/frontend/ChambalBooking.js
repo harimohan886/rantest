@@ -110,12 +110,14 @@ export default function ChambalBooking() {
             alert.error("Please do not leave any fields blank.");
             return true;
         } else {
+                var amount = PayAmount + PayAmount*0.03;
             const options = {
+
 
                 // key: credentials.razorpay_key,
                 key: razorpaykey,
                 // amount: PayAmount+('00').toString(),
-                amount: Math.round(PayAmount*100),
+                amount: Math.round(amount*100),
                 currency: "INR",
                 name: "Gir national park",
                 description: "Test Transaction",
@@ -165,7 +167,7 @@ export default function ChambalBooking() {
                                        },
                                     }).then((response)=>{});
                                 });
-                                // window.location.href = '/thankyou';
+                                window.location.href = '/thankyou';
                             }
                     })
                     

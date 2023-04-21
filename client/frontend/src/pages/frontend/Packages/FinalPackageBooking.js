@@ -110,12 +110,13 @@ export default function FinalPackageBooking() {
             alert.error("Data are missing please try again!");
             return true;
         } else {
+            var amountN = totalAmount + totalAmount*0.03;
             const options = {
 
                 // key: credentials.razorpay_key,
                 key: 'rzp_test_FvMwf7j3FOOnh8',
                 // amount: PayAmount+('00').toString(),
-                amount: Math.round(totalAmount * 100),
+                amount: Math.round(amountN * 100),
                 currency: "INR",
                 name: "Ranthambore",
                 description: "Test Transaction",
