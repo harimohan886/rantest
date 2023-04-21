@@ -29,6 +29,7 @@ admin/uploads/
 admin/uploads
 safari/uploads
 safari/uploads/
+hotel/uploads/hotels/rooms/
 
 
 admin/initDB.js
