@@ -3,9 +3,15 @@ import HotelBanner from '../../../components/frontend/Hotel/HotelBanner'
 import HotelList from '../../../components/frontend/Hotel/HotelList'
 import EnquiryForm from '../../../components/frontend/Common/EnquiryForm'
 import { Link } from 'react-router-dom'
+import {Helmet} from "react-helmet";
 
 export default function Hotel() {
   return (
+    <>
+    <Helmet>
+        <title>Hotels in Ranthambore National Park</title>
+        <meta name="description" content="Discover the best hotels and accommodations for your trip to Ranthambore National Park through our online booking platform. Our website offers a variety of options, including luxury resorts, budget-friendly lodges, and eco-friendly stays. Whether you're planning a family vacation or a solo adventure, we have the perfect accommodation for you. Browse through our listings, check availability and book your stay today for an unforgettable experience in the wild." />
+    </Helmet>
     <div className='hotel-listing-page'>
       <HotelBanner />
       <div className='container sectionFrame'>
@@ -23,5 +29,6 @@ export default function Hotel() {
 
       </div>
     </div>
+    </>
   )
 }

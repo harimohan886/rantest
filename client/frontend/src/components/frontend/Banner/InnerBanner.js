@@ -8,7 +8,7 @@ export default function InnerBanner() {
             <div className="row">
             <div className="col-sm-12 col-xs-12">
                 <div className="bannercaption">
-                <h1>Contact</h1>
+                <h1>Ranthambore National Park Contact Details</h1>
                 </div>
             </div>
             </div>
