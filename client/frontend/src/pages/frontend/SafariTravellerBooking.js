@@ -119,11 +119,14 @@ export default function SafariTravellerBooking() {
             swal('Please fill all person details', ' Email/ State / Adress', 'warning');
             return true;
         } else {
+
+            var amount = payable_Amount + payable_Amount*0.03;
+            
             const options = {
 
                 // key: credentials.razorpay_key,
                 key: razorpaykey,
-                amount: payable_Amount + ('00').toString(),
+                amount: amount + ('00').toString(),
                 currency: "INR",
                 name: "Gir national park",
                 description: "Test Transaction",

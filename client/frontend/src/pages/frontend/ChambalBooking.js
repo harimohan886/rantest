@@ -2,6 +2,7 @@ import React , { useState , useEffect } from 'react'
 import { Link } from 'react-router-dom' 
 import { useAlert } from "react-alert"
 import axios from 'axios'
+import swal from 'sweetalert'
 import { useParams } from "react-router-dom";
 import moment from 'moment';
 import DatePicker from "react-datepicker"
@@ -23,6 +24,28 @@ export default function ChambalBooking() {
 
     const checkboxHandler = () => {
         setAgree(!agree);
+    }
+
+
+    const handleChangeMobile = (e) => {
+
+        setPhone(e.target.value);
+
+        const data = {
+            "name": name,
+            "mobile": e.target.value
+        }
+
+        if (e.target.value.length >= 10) {
+
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/enquiries/save-enquery`, data).then(res => {
+                if (res.status === 200) {
+                } else {
+                }
+            }).catch(error => {
+                swal("Warning", error, "warning");
+            })
+        }
     }
 
     const IndianPersonHandle = (e) => {
@@ -87,12 +110,14 @@ export default function ChambalBooking() {
             alert.error("Please do not leave any fields blank.");
             return true;
         } else {
+                var amount = PayAmount + PayAmount*0.03;
             const options = {
+
 
                 // key: credentials.razorpay_key,
                 key: razorpaykey,
                 // amount: PayAmount+('00').toString(),
-                amount: Math.round(PayAmount*100),
+                amount: Math.round(amount*100),
                 currency: "INR",
                 name: "Gir national park",
                 description: "Test Transaction",
@@ -239,7 +264,7 @@ export default function ChambalBooking() {
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <label>Mobile number</label>
-                            <input type='tel' className='form-control' onChange = {(e) => setPhone(e.target.value)}  placeholder='Mobile number' />
+                            <input type='tel' className='form-control' onChange={handleChangeMobile}  placeholder='Mobile number' />
                         </div>
                     </div>
 

@@ -101,7 +101,7 @@ module.exports = {
       params.append('state', booking.customer.state);
       params.append('website', 'ranthamboretigerreserve.in');
       params.append('custom_data', '');
-      params.append('payment_status', 'unpaid');
+      params.append('payment_status', 'paid');
       params.append('lead_status', 4);
       params.append('date', booking.date);
       params.append('time', booking.timing);
