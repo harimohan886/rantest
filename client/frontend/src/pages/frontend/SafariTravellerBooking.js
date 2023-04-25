@@ -126,7 +126,8 @@ export default function SafariTravellerBooking() {
 
                 // key: credentials.razorpay_key,
                 key: razorpaykey,
-                amount: amount + ('00').toString(),
+                // amount: amount + ('00').toString(),
+                amount: Math.round(amount * 100),
                 currency: "INR",
                 name: "Gir national park",
                 description: "Test Transaction",

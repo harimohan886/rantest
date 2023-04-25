@@ -6,6 +6,7 @@ import axios from 'axios'
 export default function FinalPackageBooking() {
     const navigate = useNavigate();
     const [agree, setAgree] = useState(false);
+    const [razorpaykey, setRazorpaykey] = useState('');
 
     let packageBookingInfo = localStorage.getItem("bookingData");
     const packageCustomerId = localStorage.getItem("package_customer_id");
@@ -30,6 +31,9 @@ export default function FinalPackageBooking() {
     const checkboxHandler = () => {
         setAgree(!agree);
     }
+
+
+    
 
 
     const HandleHalfPayment = () => {
@@ -114,7 +118,7 @@ export default function FinalPackageBooking() {
             const options = {
 
                 // key: credentials.razorpay_key,
-                key: 'rzp_test_FvMwf7j3FOOnh8',
+                key: razorpaykey,
                 // amount: PayAmount+('00').toString(),
                 amount: Math.round(amountN * 100),
                 currency: "INR",
@@ -177,6 +181,8 @@ export default function FinalPackageBooking() {
 
     useEffect(() => {
 
+        getSettings();
+
         const res = loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -187,6 +193,13 @@ export default function FinalPackageBooking() {
         }
 
     }, []);
+
+
+    function getSettings() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
+            setRazorpaykey(res.data.data.value.razorpay_key);
+        })
+    }
 
 
     return (
