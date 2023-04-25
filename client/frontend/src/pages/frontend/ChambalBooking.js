@@ -119,9 +119,9 @@ export default function ChambalBooking() {
                 // amount: PayAmount+('00').toString(),
                 amount: Math.round(amount*100),
                 currency: "INR",
-                name: "Gir national park",
-                description: "Test Transaction",
-                image: "/image/logo.png",
+                name: "Ranthambore Jungle Safari",
+                description: "Ranthambore Jungle Safari Pay for Booking",
+                image: "/static/media/Logo.463247709567bbe71e26.png",
               
                 handler: async function (response) {
 

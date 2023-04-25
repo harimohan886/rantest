@@ -122,9 +122,9 @@ export default function FinalPackageBooking() {
                 // amount: PayAmount+('00').toString(),
                 amount: Math.round(amountN * 100),
                 currency: "INR",
-                name: "Ranthambore",
-                description: "Test Transaction",
-                image: "/image/logo.png",
+                name: "Ranthambore Jungle Safari",
+                description: "Ranthambore Jungle Safari Pay for Booking",
+                image: "/static/media/Logo.463247709567bbe71e26.png",
 
                 handler: async function (response) {
 
