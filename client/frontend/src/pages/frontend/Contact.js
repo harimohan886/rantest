@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import InnerBanner from '../../components/frontend/Banner/InnerBanner'
 import ContactForm from '../../components/frontend/Common/ContactForm'
 import axios from 'axios'
+import {Helmet} from "react-helmet";
 import swal from 'sweetalert'
 
 export default function Contact() {
@@ -32,8 +33,14 @@ export default function Contact() {
     getContactInfo();
   }, [])
 
+  
+
   return (
     <>
+     <Helmet>
+      <title>Ranthambore National Park Contact Details</title>
+      <meta name="description" content="Contact us through our website to get all the information you need about Ranthambore National Park. Our customer support team is available to answer your queries regarding safari tours, accommodation, packages, and more. We are committed to providing excellent service and ensuring a hassle-free experience for our customers. Get in touch with us today and start planning your unforgettable trip to Ranthambore." />
+    </Helmet>
       <InnerBanner />
       <div className="container lg:pt-10 lg:pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">

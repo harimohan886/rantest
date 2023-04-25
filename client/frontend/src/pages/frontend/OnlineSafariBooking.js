@@ -15,6 +15,7 @@ import axios from 'axios';
 import moment from 'moment';
 import SafariTiming from '../../components/frontend/Home2/SafariTiming'
 import Newzone from '../../components/frontend/Home2/Newzone'
+import {Helmet} from "react-helmet";
 
 export default function OnlineSafariBooking() {
 
@@ -106,6 +107,11 @@ export default function OnlineSafariBooking() {
   }
 
     return (
+        <>
+        <Helmet>
+            <title>Ranthambore Safari Booking</title>
+            <meta name="description" content="Discover the wild side of Rajasthan with Ranthambore National Park Safari Safari Booking. Our online platform makes it easy to book your safari tour and embark on an exciting adventure through the park. Witness the majestic Royal Bengal Tigers and other exotic wildlife in their natural habitat. Choose from a variety of safari options and create unforgettable memories on your trip to Ranthambore. Start planning your adventure today!" />
+        </Helmet>
         <section id='safaribanner'>
             <div className='container-fluid'>
                 <div className='row'>
@@ -150,5 +156,7 @@ export default function OnlineSafariBooking() {
             <BookingProcedure />
             <TransportMode />
         </section>
+        </>
+        
     )
 }
