@@ -9,6 +9,12 @@ const ZoneDateSchema = new Schema({
 	date: {
 		type: String,
 	},
+	vehicle_type: {
+		type: Number,
+	},
+	timing: {
+		type: Number,
+	},
 	createdBy: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: false,

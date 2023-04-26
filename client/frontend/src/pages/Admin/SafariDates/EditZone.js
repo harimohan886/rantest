@@ -222,6 +222,8 @@ export default function EditZone() {
                         <thead>
                             <tr>
                                 <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date</th>
+                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Vehicle Type</th>
+                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
                                 <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
                             </tr>
                         </thead>
@@ -229,6 +231,8 @@ export default function EditZone() {
                             {details && details.map((item, index) => (
                                 <tr>
                                     <td className='border border-slate-300 text-center'>{item.date}</td>
+                                    <td className='border border-slate-300 text-center'>{item.vehicle_type}</td>
+                                    <td className='border border-slate-300 text-center'>{item.timing}</td>
                                     <td className='border border-slate-300 text-center'>
                                         <Link onClick={() => HandleDelete(item._id)} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                             <i className="fas fa-trash"></i>

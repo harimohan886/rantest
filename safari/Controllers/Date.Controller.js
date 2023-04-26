@@ -88,6 +88,99 @@ module.exports = {
     }
   },
 
+
+  checkAvilabilityByData: async (req, res, next) => {
+    try {
+      const date = await Date.find({date:req.body.date});
+      if (!date.length) {
+        throw createError(201, 'Date does not exist.');
+      }
+     let zones=[];
+     const zids = await ZoneDate.find({date:req.body.date});
+
+     if(zids.length != 0){
+      for(let zid of zids){
+        if (zid.vehicle == 0 && zid.timing == 0) {
+          const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid.zone_id} }).distinct('name');
+          zones= zname;
+        }else{
+
+          var vehicle_id = 0;
+          var time_id = 0;
+
+          switch(req.body.vehicle) {
+          case 'Canter':
+            vehicle_id = 2;
+            break;
+          case 'Gypsy':
+            vehicle_id = 1;
+            break;
+          default:
+            vehicle_id = 0;
+          }
+
+          switch(req.body.timing) {
+          case 'Evening':
+            time_id = 2;
+            break;
+          case 'Morning':
+            time_id = 1;
+            break;
+          default:
+            time_id = 0;
+          }
+
+          console.log(vehicle_id, time_id);
+
+
+          const zid_e = await ZoneDate.findOne({date: req.body.date, zone_id: zid.zone_id,  vehicle_type: vehicle_id, timing: time_id});
+
+          console.log('zone_id',zid_e);
+
+          
+
+          if(zid_e){
+            const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid.zone_id} }).distinct('name');
+            console.log('zname',zname);
+            zones= zname;
+
+          }else{
+            // zones = [];
+          }
+
+        }
+      }
+    } else {
+        const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
+        zones = zname;
+   }
+
+   if (zones.length <= 0) {
+    const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
+    zones = zname;
+  }
+
+     let zoneArr = [];
+     for(let zonea of zones){
+        zoneArr.push(zonea.name);
+      }
+     console.log('zones',zones);
+     res.send({
+        success: true,
+        message: 'Data fateched',
+        data: date,
+        zones: zones,
+      });
+    } catch (error) {
+      if (error.name === 'ValidationError') {
+        next(createError(201, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
+
   checkAvilabilityByDate: async (req, res, next) => {
     try {
       const date = await Date.find({date:req.body.date});
