@@ -107,9 +107,9 @@ module.exports = {
           const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
           zones = zname;
      }
-     const zonesa = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
-     // const zonesa = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
-     // const zonesa = await ZoneCategory.find({availability:1});
+     //const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
+     //const zones = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
+     const zonesa = await ZoneCategory.find({availability:1});
      let zoneArr = [];
      for(let zonea of zonesa){
         zoneArr.push(zonea.name);
