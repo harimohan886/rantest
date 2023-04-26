@@ -63,6 +63,10 @@ const PackageBookingSchema = new Schema({
 	status: {
 		type: String,
 	},
+	seen: {
+		type: Number,
+		default: 0
+	},
 	addedAt: {
 		type: String,
 	}
