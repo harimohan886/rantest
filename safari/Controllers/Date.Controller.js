@@ -130,12 +130,10 @@ module.exports = {
             time_id = 0;
           }
 
-          console.log(vehicle_id, time_id);
 
 
           const zid_e = await ZoneDate.findOne({date: req.body.date, zone_id: zid.zone_id,  vehicle_type: vehicle_id, timing: time_id});
 
-          console.log('zone_id',zid_e);
 
           
 
@@ -164,7 +162,6 @@ module.exports = {
      for(let zonea of zones){
         zoneArr.push(zonea.name);
       }
-     console.log('zones',zones);
      res.send({
         success: true,
         message: 'Data fateched',

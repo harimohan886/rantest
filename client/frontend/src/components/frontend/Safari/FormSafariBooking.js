@@ -10,6 +10,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
     const [ zone , setZone ] =  useState('');
     const [ vehicle , setVehicle ] =  useState('');
     const [ timing , setTiming ] =  useState('');
+    const [ zoneArr, setZoneArr ] =  useState(zones);
 
 
     const handleChange = (e) => {
@@ -31,6 +32,29 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                 swal("Warning", error, "warning");
             })
         }
+    }
+
+    const handleTimingChange = (e) => {
+
+        setTiming(e.target.value);
+
+        const data = {
+        date : date,
+        vehicle: vehicle,
+        timing: e.target.value
+      }
+  
+      axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByData`, data).then(res => {
+            console.log("res", res);
+          if (res.status === 200) {
+              setZoneArr(res.data.zones);
+          } else {
+              swal("Warning", res.data.error.message, "warning");
+          }
+      }).catch(error => {
+            swal("Warning", error, "warning");
+      })
+
     }
 
     const HandleSubmit = () => {
@@ -81,19 +105,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <input className="form-control" id="mobile_number"  onChange={handleChange} placeholder="Mobile number" type="number"/>
                         </div>
                     </div>
-                    <div className="col-sm-4 col-xs-12">
-                        <div className="input-group selectdesign">
-                            <span className="input-group-btn">
-                                <img alt="zone" src="../image/icons/zone.png"/>
-                            </span>
-                            <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
-                                <option>Select your Zone</option>
-                                { zones && zones.map((item,index) => (
-                                    <option value={item} key={index}>{item}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+
                     <div className="col-sm-4 col-xs-12">
                         <div className="input-group selectdesign">
                             <span className="input-group-btn">
@@ -112,7 +124,7 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             <span className="input-group-btn">
                                 <img alt="zone" src="../image/icons/zone2.png"/>
                             </span>
-                            <select className="form-control" id="timing" name="timing" onChange = {(e) => setTiming(e.target.value)} required="">
+                            <select className="form-control" id="timing" name="timing" onChange = {handleTimingChange} required="">
                                 <option>Select Timing</option>
                                 { timings && timings.map((item,index) => (
                                     <option value={item} key={index}>{item}</option>
@@ -120,6 +132,21 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
                             </select>
                         </div>
                     </div>
+
+                    <div className="col-sm-4 col-xs-12">
+                        <div className="input-group selectdesign">
+                            <span className="input-group-btn">
+                                <img alt="zone" src="../image/icons/zone.png"/>
+                            </span>
+                            <select className="form-control" id="zone" name="zone" onChange = {(e) => setZone(e.target.value)} required="">
+                                <option>Select your Zone</option>
+                                { zoneArr && zoneArr.map((item,index) => (
+                                    <option value={item} key={index}>{item}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    
                     { bookingDate && bookingDate.length > 0 &&
                         <div className="col-sm-4 col-xs-12">
                             <div className="booknowbtn">
