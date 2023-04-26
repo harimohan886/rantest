@@ -98,28 +98,40 @@ module.exports = {
       }
      let zones=[];
      const zids = await ZoneDate.find({date:req.body.date}).distinct('zone_id');
-     if(zids.length != 0){
-        for(let zid of zids){
-          const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid} }).distinct('name');
-          zones= zname;
-        }
-     } else {
-          const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
-          zones = zname;
-     }
+    //  if(zids.length != 0){
+    //     for(let zid of zids){
+    //       const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid} }).distinct('name');
+    //       zones= zname;
+    //     }
+    //  } else {
+    //       const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
+    //       zones = zname;
+    //  }
      //const zones = await ZoneCategory.find({  startDate: { $lte : req.body.date }, endDate: {$gte: req.body.date}  , availability:1 }).distinct('name');
      //const zones = await ZoneCategory.find({availability:1},{$not:[{startDate: {$not:{$gte:["startDate",req.body.date]}}},{endDate: {$not:{$lte:["endDate",req.body.date]} }}]});
-     const zonesa = await ZoneCategory.find({availability:1});
+    //  const zonesa = await ZoneCategory.find({availability:1, _id:{$ne:zid} });
+
+
+     if(zids.length != 0){
+      for(let zid of zids){
+        const zname = await ZoneCategory.find({ availability:1 , _id:{$ne:zid} }).distinct('name');
+        zones= zname;
+      }
+   } else {
+        const zname = await ZoneCategory.find({ availability:1 }).distinct('name');
+        zones = zname;
+   }
+
      let zoneArr = [];
-     for(let zonea of zonesa){
+     for(let zonea of zones){
         zoneArr.push(zonea.name);
       }
-
+     console.log(zones);
      res.send({
         success: true,
         message: 'Data fateched',
         data: date,
-        zones: zoneArr,
+        zones: zones,
         vehicles: vehicles,
         timings: timings
       });
