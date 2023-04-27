@@ -5,6 +5,8 @@ import Navbar from '../../../components/Admin/Navbar/AdminNavbar';
 import FooterAdmin from '../../../components/Admin/Footer/FooterAdmin';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import { DateRangePicker } from 'rsuite';
@@ -29,6 +31,10 @@ export default function EditZone() {
     const [details, setDetails] = useState([]);
     const [pageCount, setpageCount] = useState(0);
     const [page, setPage] = useState(1);
+
+    const [startDisableDate, setStartDisableDate] = useState(new Date());
+  const [timing, setTiming] = useState('');
+  const [vehicle, setVehicle] = useState('');
 
     const GetDetails = useCallback(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/safari/dates/getZoneDates/${params.id}?page=` + page, {
@@ -168,6 +174,33 @@ export default function EditZone() {
         }
     }
 
+    const HandleSaveData = (e) => {
+    e.preventDefault();
+
+    const data = {
+        zone_id : params.id,
+        date : moment(startDisableDate).format("YYYY-MM-DD"),
+        vehicle_type : vehicle,
+        timing : timing,
+    }
+
+    axios.post(`${process.env.REACT_APP_BASE_URL}/safari/dates/disable-zones` , data , {
+        headers: {
+            'Authorization': `Bearer `+localStorage.getItem('accessToken')
+        },
+    }).then(res => {
+        if(res.status === 200) {
+            alert.success("Data is created successfully");
+            setTimeout(() => {
+                window.location.reload(true);
+            }, 1000);
+
+        } else {
+            alert.error("Please fill all the blank fields");
+        }
+    });
+  }
+
 
 
     return (
@@ -214,6 +247,45 @@ export default function EditZone() {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="file_input">Import CSV file</label>
                             <input onChange={ImportCsv} name="file" className="block text-sm text-gray-900 bg-white rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                         </div>
+                    </form>
+                </div>
+
+                 <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+                    <h1 className='text-2xl text-black font-bold mb-3'>Add Disable Data</h1>
+                    <form>
+                        
+                        <div className="mb-6">
+                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Select Date :</label>
+                          <DatePicker selected={startDisableDate} onChange={(date) => setStartDisableDate(date)} minDate={moment().toDate()}/>
+                        </div>
+
+                       <div className="mb-6">
+                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle</label>
+                          <select id="vehicle" onChange = { (e) => setVehicle(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option>Please select</option>
+                            <option value="0">Both</option>
+                            <option value="1">Gypsy</option>
+                            <option value="2">Canter</option>
+                        </select>
+                        </div>
+
+
+                        <div className="mb-6">
+                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Timing</label>
+                          <select id="timing" onChange = { (e) => setTiming(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option>Please select</option>
+                            <option value="0">Both</option>
+                            <option value="1">Morning</option>
+                            <option value="2">Evening</option>
+                        </select>
+                        </div>
+
+                        <div className='form-group'>
+                            <div className='flex'>
+                                <button type="button" onClick={HandleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
 

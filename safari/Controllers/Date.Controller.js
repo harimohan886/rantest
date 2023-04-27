@@ -88,6 +88,25 @@ module.exports = {
     }
   },
 
+  createNewDisableZones: async (req, res, next) => {
+    try {
+      const date = new ZoneDate(req.body);
+      const result = await date.save();
+      res.send({
+        success: true,
+        message: 'Data inserted',
+        data: result
+      });
+    } catch (error) {
+      console.log(error.message);
+      if (error.name === 'ValidationError') {
+        next(createError(201, error.message));
+        return;
+      }
+      next(error);
+    }
+  },
+
 
   checkAvilabilityByData: async (req, res, next) => {
     try {

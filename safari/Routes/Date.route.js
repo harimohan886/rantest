@@ -28,6 +28,7 @@ router.get('/', DateController.getAllDates);
 
 //Create a new date
 router.post('/', DateController.createNewDate);
+router.post('/disable-zones', DateController.createNewDisableZones);
 
 //Get a date by id
 router.get('/:id', DateController.findDateById);
