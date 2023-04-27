@@ -88,12 +88,14 @@ export default function ChambalManagement() {
    const [filterName , setFilterName] = useState('');
    const [filterEmail , setFilterEmail] = useState('');
    const [filterPhone , setFilterPhone] = useState('');
+   const [filterOrderDate , setFilterOrderDate] = useState();
 
    const HandleFilter = () => {
 
        const filterDateSelected = filterDate != undefined ? moment(filterDate).format("YYYY-MM-DD") : '';
+       const filterOrderDateSelected = filterOrderDate != undefined ? moment(filterOrderDate).format("YYYY-MM-DD") : '';
 
-       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_name='+filterName+'&filter_email='+filterEmail+'&filter_mobile='+filterPhone+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
+       axios.get(`${process.env.REACT_APP_BASE_URL}/admin/bookings/chambal?page=`+page+'&filter_date='+filterDateSelected+'&filter_created_at='+filterOrderDateSelected+'&filter_name='+filterName+'&filter_email='+filterEmail+'&filter_mobile='+filterPhone+'&filter_timing='+filterTiming+'&filter_status='+filterStatus, {
            headers: {
              'Accept': 'application/json, text/plain, */*',
              'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export default function ChambalManagement() {
    }
 
    const HandelReset = () => {
-       setTiming('');setFilterStatus('');setFilterDate();setFilterEmail('');setFilterPhone('');setFilterName('');
+       setTiming('');setFilterStatus('');setFilterDate();setFilterOrderDate();setFilterEmail('');setFilterPhone('');setFilterName('');
        GetDetails();
    }
    
@@ -128,6 +130,10 @@ export default function ChambalManagement() {
                     <div className='controlEnquiryDate'>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booking Date</label>
                         <DatePicker placeholderText={'Please select a date'} selected={filterDate} onChange={(date) => setFilterDate(date)} />
+                    </div>
+                    <div className='controlEnquiryDate'>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Order Date</label>
+                        <DatePicker placeholderText={'Please select a date'}  selected={filterOrderDate} onChange={(date) => setFilterOrderDate(date)} />
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
@@ -179,12 +185,13 @@ export default function ChambalManagement() {
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Booking Name</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Amount</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Status</th>
+                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Order Date</th>
                         <th className='border border-slate-300 text-center bg-hotel-maroon text-white min150'>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                   { details && details.map((item,index) => (
-                        <tr key={index}>
+                        <tr style={{ backgroundColor: item.seen == 0 ? '#6083B0': ''}} key={index}>
                             <td className='border border-slate-300 text-center'>{index+1}</td>
                             <td className='border border-slate-300 text-center'>{item.date} </td>
                             <td className='border border-slate-300 text-center'>{item.customer_name}</td>
@@ -193,6 +200,7 @@ export default function ChambalManagement() {
                             <td className='border border-slate-300 text-center'>{item.booking_name}</td>
                             <td className='border border-slate-300 text-center'>{item.amount}</td>
                             <td className='border border-slate-300 text-center'>{item.status}</td>
+                            <td className='border border-slate-300 text-center'>{moment(item.createdAt).format("YYYY-MM-DD h:mm:ss a")} </td>
                             <td className='border border-slate-300 text-center min150'>
                                 <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/view-chambal-bookings/${item._id}`}><i className='fas fa-eye'></i></Link>
                                 <button onClick = {() => HandleDelete(item._id)} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">

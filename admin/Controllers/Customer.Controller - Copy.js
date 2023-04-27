@@ -200,6 +200,17 @@ module.exports = {
       return res.status(400).json({ errors: errors.array() });
     }
 
+    /*req.body.booked_persons.forEach(function callback(value, index) {
+      if (value.idnumber === '') {
+        return res.status(412).send({
+          success: false,
+          message: 'In Booking persons at index '+index+' idnumber field is required!',
+          error: 'data required'
+        });
+      }
+
+    });*/
+
     let rules = {
       name: 'required',
       mobile: 'required',
@@ -284,31 +295,98 @@ module.exports = {
     await safari_booking_result.save();
     await customer_data_result.save();
 
-    /*save data to crm*/  
+    /*save data to crm*/
 
-    const params2 = new URLSearchParams();
 
-    params2.append('name', req.body.name);
-    params2.append('mobile', req.body.mobile);
-    params2.append('email', req.body.email);
-    params2.append('website', 'ranthamboretigerreserve');
-    params2.append('custom_date', '');
+    var json_arr = {};
+    json_arr["name"] = req.body.name;
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["website"] = 'ranthamboretigerreserve.in';
+    json_arr["custom_data"] = "";
+    json_arr["method"] = "save-lead";
 
-    const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
-    const data2 = await response2.json(); 
+    const result = await channel.sendToQueue(
+      process.env.RABBITMQ_QUEUE,
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
 
-    const params3 = new URLSearchParams();
 
-    params3.append('name', req.body.name);
-    params3.append('mobile', req.body.mobile);
-    params3.append('website', 'ranthamboretigerreserve');
-    params3.append('email', req.body.email);
-    params3.append('address', req.body.address);
-    params3.append('state', req.body.state);
-    params3.append('booking_type', 'safari');
+    var json_arr = {};
+    json_arr["name"] = req.body.name;
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["email"] = req.body.email;
+    json_arr["method"] = "update-lead-data";
 
-    const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
-    const data3 = await response3.json(); 
+    const result1 = await channel.sendToQueue(
+      process.env.RABBITMQ_QUEUE,
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["payment_status"] = 'paid';
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["method"] = "update-lead-status";
+
+    const result4 = await channel.sendToQueue(
+      process.env.RABBITMQ_QUEUE,
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["address"] = req.body.address;
+    json_arr["state"] = req.body.state;
+    json_arr["method"] = "save-address";
+
+    const result2 = await channel.sendToQueue(
+      process.env.RABBITMQ_QUEUE,
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );
+
+
+    var json_arr = {};
+    json_arr["mobile"] = req.body.mobile;
+    json_arr["website"] = 'ranthamboretigerreserve.in';
+    json_arr["address"] = req.body.address;
+    json_arr["date"] = req.body.date;
+    json_arr["transaction_id"] = req.body.transaction_id;
+    json_arr["booked_customers"] = JSON.stringify(req.body.booked_persons);
+    json_arr["time"] = req.body.timing;
+    json_arr["adult"] = 0;
+    json_arr["child"] = 0;
+    json_arr["mode"] = req.body.vehicle;
+    json_arr["zone"] = req.body.zone;
+    json_arr["amount"] = req.body.amount;
+    json_arr["sanctuary"] = "ranthambore";
+    json_arr["method"] = "direct-booking";
+
+
+    const result3 = await channel.sendToQueue(
+      process.env.RABBITMQ_QUEUE,
+      Buffer.from(
+        JSON.stringify(json_arr)
+        )
+      );    
+
+    const params1 = new URLSearchParams();
+
+    params1.append('name', req.body.name);
+    params1.append('mobile', req.body.mobile);
+    params1.append('email', req.body.email);
+    params1.append('website', 'ranthamboretigerreserve.in');
+
+    const response1 = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {method: 'POST', body: params1});
+    const data1 = await response1.json();
 
     const params = new URLSearchParams();
 
@@ -444,6 +522,87 @@ module.exports = {
 
       /*save data to crm*/
 
+
+      /*var json_arr = {};
+      json_arr["name"] = req.body.name;
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["website"] = 'ranthamboretigerreserve.in';
+      json_arr["custom_data"] = "";
+      json_arr["method"] = "save-lead";
+
+      const result = await channel.sendToQueue(
+        'booking',
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );
+
+
+      var json_arr = {};
+      json_arr["name"] = req.body.name;
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["email"] = req.body.email;
+      json_arr["method"] = "update-lead-data";
+
+      const result1 = await channel.sendToQueue(
+        'booking',
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );
+
+
+      var json_arr = {};
+      json_arr["payment_status"] = 'paid';
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["method"] = "update-lead-status";
+
+      const result4 = await channel.sendToQueue(
+        'booking',
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );
+
+
+      var json_arr = {};
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["address"] = req.body.address;
+      json_arr["state"] = req.body.state;
+      json_arr["method"] = "save-address";
+
+      const result2 = await channel.sendToQueue(
+        'booking',
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );
+
+
+      var json_arr = {};
+      json_arr["mobile"] = req.body.mobile;
+      json_arr["website"] = 'ranthamboretigerreserve.in';
+      json_arr["address"] = req.body.address;
+      json_arr["date"] = req.body.date;
+      json_arr["transaction_id"] = req.body.transaction_id;
+      json_arr["booked_customers"] = JSON.stringify(req.body.booked_persons);
+      json_arr["time"] = req.body.timing;
+      json_arr["adult"] = 0;
+      json_arr["child"] = 0;
+      json_arr["mode"] = req.body.vehicle;
+      json_arr["zone"] = req.body.zone;
+      json_arr["amount"] = req.body.amount;
+      json_arr["sanctuary"] = "ranthambore";
+      json_arr["method"] = "direct-booking";
+
+
+      const result3 = await channel.sendToQueue(
+        'booking',
+        Buffer.from(
+          JSON.stringify(json_arr)
+          )
+        );*/
+
       const params2 = new URLSearchParams();
 
       params2.append('name', req.body.name);
@@ -451,6 +610,7 @@ module.exports = {
       params2.append('email', req.body.email);
       params2.append('website', 'ranthamboretigerreserve');
       params2.append('custom_date', '');
+
 
       const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
       const data2 = await response2.json(); 
@@ -463,13 +623,29 @@ module.exports = {
       params3.append('email', req.body.email);
       params3.append('address', req.body.address);
       params3.append('state', req.body.state);
-      params3.append('booking_type', 'safari');
+      params3.append('assigned_to', null);
+      params3.append('booking_type', 'chambal');
+      params3.append('lead_status', 'paid');
+      params3.append('payment_status', 'paid');
+
 
       const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
       const data3 = await response3.json(); 
 
       
       const params = new URLSearchParams();
+
+      var d = new Date(req.body.safari_date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+      if (month.length < 2) 
+      month = '0' + month;
+      if (day.length < 2) 
+      day = '0' + day;
+
+      var newDate = [year, month, day].join('-');
 
       params.append('name', req.body.name);
       params.append('email', req.body.email);
@@ -478,22 +654,24 @@ module.exports = {
       params.append('state', req.body.state);
       params.append('website', 'ranthamboretigerreserve.in');
       params.append('custom_data', '');
-      params.append('date', req.body.safari_date);
+      params.append('payment_status', 'unpaid');
+      params.append('lead_status', 4);
+      params.append('date', newDate);
       params.append('time', req.body.time);
       params.append('adult', req.body.no_of_persons_indian);
       params.append('child', req.body.no_of_persons_foreigner);
       params.append('mode', 'Boat');
-      params.append('payment_status', 'paid');
-      params.append('lead_status', 4);
       params.append('area', booking_name);
-      params.append('zone', 'All Zone');
+      params.append('zone', booking_option);
       params.append('sanctuary', 'ranthambore');
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
+      params.append('booked_customers', '');
 
       const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
       const data = await response.json(); 
              
+
       /*save data to crm*/
 
       res.send({
@@ -589,37 +767,6 @@ createNewCustomerPackage: async (req, res, next) => {
 
 
       /*save data to crm*/
-
-
-      const params2 = new URLSearchParams();
-
-      params2.append('name', req.body.name);
-      params2.append('mobile', req.body.mobile);
-      params2.append('email', req.body.email);
-      params2.append('website', 'ranthamboretigerreserve');
-      params2.append('custom_date', '');
-
-
-      const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
-      const data2 = await response2.json(); 
-
-      const params3 = new URLSearchParams();
-
-      params3.append('name', req.body.name);
-      params3.append('mobile', req.body.mobile);
-      params3.append('website', 'ranthamboretigerreserve');
-      params3.append('email', req.body.email);
-      params3.append('address', req.body.address);
-      params3.append('state', req.body.state);
-      params3.append('assigned_to', null);
-      params3.append('booking_type', 'chambal');
-      params3.append('lead_status', 'paid');
-      params3.append('payment_status', 'paid');
-
-
-      const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
-      const data3 = await response3.json(); 
-
 
       const params = new URLSearchParams();
 

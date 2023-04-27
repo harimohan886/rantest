@@ -59,6 +59,21 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
 
     const HandleSubmit = () => {
 
+        if (name == '') {
+            swal("warning", "Please Enter Name", "warning");
+            return;
+        }
+
+        if (phone == '') {
+            swal("warning", "Please Enter Phone", "warning");  
+            return;         
+        }
+
+        if (phone.length < 10) {
+            swal("warning", "Please Enter 10 digit mobile no.", "warning"); 
+            return;    
+        }
+
         const data = {
             "date": date,
             "timing": timing,

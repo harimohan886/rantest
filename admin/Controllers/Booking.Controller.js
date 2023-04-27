@@ -323,6 +323,9 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
+
+      await SafariBooking.updateOne({_id : id},{seen: 1});
+
       res.send({
           success: true,
           message: "data fetched",
@@ -345,6 +348,9 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Customer does not exist!.');
       }
+
+      await PackageBooking.updateOne({_id : id},{seen: 1});
+
       res.send({
           success: true,
           message: "data fetched",
@@ -367,6 +373,9 @@ module.exports = {
       if (!result) {
         throw createError(404, 'Customer does not exist.');
       }
+
+      await ChambalBooking.updateOne({_id : id},{seen: 1});
+      
       res.send({
           success: true,
           message: "data fetched",

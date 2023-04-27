@@ -36,16 +36,11 @@ module.exports = {
       params.append('name', booking.customer.name);
       params.append('email', booking.customer.email);
       params.append('mobile', booking.customer.mobile);
-      params.append('address', booking.customer.address);
-      params.append('state', booking.customer.state);
       params.append('website', 'ranthamboretigerreserve.in');
-      params.append('custom_data', '');
       params.append('payment_status', 'paid');
       params.append('lead_status', 4);
       params.append('date', booking.date);
       params.append('time', booking.timing);
-      params.append('adult', 0);
-      params.append('child', 0);
       params.append('mode', booking.vehicle);
       params.append('zone', booking.zone);
       params.append('sanctuary', 'ranthambore');
@@ -53,7 +48,7 @@ module.exports = {
       params.append('transaction_id', req.body.transaction_id);
       params.append('booked_customers', JSON.stringify(booking.booking_customers));
 
-      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params});
       const data = await response.json();        
 
       /*save data to crm*/
@@ -113,7 +108,7 @@ module.exports = {
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
 
-      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params});
       const data = await response.json();       
 
       /*save data to crm*/
@@ -148,13 +143,11 @@ module.exports = {
         throw createError(404, 'Payment does not exist');
       }
 
-      /*save data to crm*/
-
-      
+      /*save data to crm*/      
       
       const booking = await ChambalBooking.findOne({_id: id, customer_id: customer_id}).populate('customer');
 
-      const params = new URLSearchParams();
+      const params = new URLSearchParams();      
 
       params.append('name', booking.customer.name);
       params.append('email', booking.customer.email);
@@ -170,16 +163,18 @@ module.exports = {
       params.append('adult', booking.no_of_persons_indian);
       params.append('child', booking.no_of_persons_foreigner);
       params.append('mode', 'Boat');
-      params.append('area', booking.booking_name);
-      params.append('zone', booking.zone);
+      params.append('zone', 'All Zone');
       params.append('sanctuary', 'ranthambore');
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
-      params.append('booked_customers', '');
 
-       const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
       const data = await response.json(); 
-            
+
+
+      const response1 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params});
+      const data1 = await response1.json(); 
+
       /*save data to crm*/
 
       res.send({

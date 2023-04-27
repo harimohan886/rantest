@@ -363,7 +363,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>Name</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text" value={Name} onChange={(e) => setName(e.target.value)} className='form-control pname' placeholder='Name' />
+                                            <input type="text" readOnly value={Name} onChange={(e) => setName(e.target.value)} className='form-control pname' placeholder='Name' />
                                         </div>
                                     </div>
                                 </div>
@@ -373,7 +373,7 @@ export default function SafariTravellerBooking() {
                                             <label className='control-label'>Mobile No</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <input type="text" value={Phone} onChange={(e) => setPhone(e.target.value)} className='form-control pmobile' placeholder='Mobile Number' />
+                                            <input type="text" readOnly value={Phone} onChange={(e) => setPhone(e.target.value)} className='form-control pmobile' placeholder='Mobile Number' />
                                         </div>
                                     </div>
                                 </div>
