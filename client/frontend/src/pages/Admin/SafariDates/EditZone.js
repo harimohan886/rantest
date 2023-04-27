@@ -250,92 +250,103 @@ export default function EditZone() {
                     </form>
                 </div>
 
-                 <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
-                    <h1 className='text-2xl text-black font-bold mb-3'>Add Disable Data</h1>
-                    <form>
-                        
-                        <div className="mb-6">
-                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Select Date :</label>
-                          <DatePicker selected={startDisableDate} onChange={(date) => setStartDisableDate(date)} minDate={moment().toDate()}/>
+                <div className='row w-full'>
+                    <div className='col-sm-5 col-12'>
+                        <div className="w-full mb-12 xl:mb-0 px-4 padding-top80">
+                            <h1 className='text-2xl text-black font-bold mb-3'>Add Disable Data</h1>
+                            <form>
+                                
+                                <div className="mb-6">
+                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Select Date :</label>
+                                <DatePicker selected={startDisableDate} onChange={(date) => setStartDisableDate(date)} minDate={moment().toDate()}/>
+                                </div>
+
+                            <div className="mb-6">
+                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle</label>
+                                <select id="vehicle" onChange = { (e) => setVehicle(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option>Please select</option>
+                                    <option value="0">Both</option>
+                                    <option value="1">Gypsy</option>
+                                    <option value="2">Canter</option>
+                                </select>
+                                </div>
+
+
+                                <div className="mb-6">
+                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Timing</label>
+                                <select id="timing" onChange = { (e) => setTiming(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option>Please select</option>
+                                    <option value="0">Both</option>
+                                    <option value="1">Morning</option>
+                                    <option value="2">Evening</option>
+                                </select>
+                                </div>
+
+                                <div className='form-group'>
+                                    <div className='flex'>
+                                        <button type="button" onClick={HandleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
+                    </div>
+                    <div className='col-sm-7 col-12'>
+                        <div className='w-full px-4 mb-12 xl:mb-0 padding-top80'>
+                        <div className='table-responsive xl:mt-0 mt-5'>
+                            <table className='table bg-white border border-slate-300' style={{ "width": "365px" }}>
+                                <thead>
+                                    <tr>
+                                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date</th>
+                                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Vehicle Type</th>
+                                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
+                                        <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {details && details.map((item, index) => (
+                                        <tr>
+                                            <td className='border border-slate-300 text-center'>{item.date}</td>
+                                            <td className='border border-slate-300 text-center'>{item.vehicle_type}</td>
+                                            <td className='border border-slate-300 text-center'>{item.timing}</td>
+                                            <td className='border border-slate-300 text-center'>
+                                                <Link onClick={() => HandleDelete(item._id)} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                                    <i className="fas fa-trash"></i>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
 
-                       <div className="mb-6">
-                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Vehicle</label>
-                          <select id="vehicle" onChange = { (e) => setVehicle(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option>Please select</option>
-                            <option value="0">Both</option>
-                            <option value="1">Gypsy</option>
-                            <option value="2">Canter</option>
-                        </select>
+                            <ReactPaginate
+                                previousLabel={"previous"}
+                                nextLabel={"next"}
+                                breakLabel={"..."}
+                                pageCount={pageCount}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={3}
+                                onPageChange={handlePageClick}
+                                containerClassName={"pagination justify-content-center"}
+                                pageClassName={"page-item"}
+                                pageLinkClassName={"page-link"}
+                                previousClassName={"page-item"}
+                                previousLinkClassName={"page-link"}
+                                nextClassName={"page-item"}
+                                nextLinkClassName={"page-link"}
+                                breakClassName={"page-item"}
+                                breakLinkClassName={"page-link"}
+                                activeClassName={"active"}
+                            />
+
                         </div>
-
-
-                        <div className="mb-6">
-                          <label className="block mb-2 text-sm font-medium text-gray-900 ">Timing</label>
-                          <select id="timing" onChange = { (e) => setTiming(e.target.value)} className="max193 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option>Please select</option>
-                            <option value="0">Both</option>
-                            <option value="1">Morning</option>
-                            <option value="2">Evening</option>
-                        </select>
                         </div>
-
-                        <div className='form-group'>
-                            <div className='flex'>
-                                <button type="button" onClick={HandleSaveData} className="text-white bg-hotel-maroon font-medium rounded text-sm max-w-xs sm:w-auto px-5 py-2.5 text-center">Save</button>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
 
-                <div className='table-responsive'>
-                    <table className='table bg-white border border-slate-300' style={{ "width": "365px" }}>
-                        <thead>
-                            <tr>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Date</th>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Vehicle Type</th>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Timing</th>
-                                <th className='border border-slate-300 text-center bg-hotel-maroon text-white'>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {details && details.map((item, index) => (
-                                <tr>
-                                    <td className='border border-slate-300 text-center'>{item.date}</td>
-                                    <td className='border border-slate-300 text-center'>{item.vehicle_type}</td>
-                                    <td className='border border-slate-300 text-center'>{item.timing}</td>
-                                    <td className='border border-slate-300 text-center'>
-                                        <Link onClick={() => HandleDelete(item._id)} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                            <i className="fas fa-trash"></i>
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                 
 
-                    <ReactPaginate
-                        previousLabel={"previous"}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination justify-content-center"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        previousClassName={"page-item"}
-                        previousLinkClassName={"page-link"}
-                        nextClassName={"page-item"}
-                        nextLinkClassName={"page-link"}
-                        breakClassName={"page-item"}
-                        breakLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                    />
-
-                </div>
+                
             </div>
             <FooterAdmin />
         </div>
