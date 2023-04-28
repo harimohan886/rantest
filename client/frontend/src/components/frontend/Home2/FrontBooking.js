@@ -38,6 +38,10 @@ export default function FrontBooking() {
 
 
     const handleDateSelect = (selectInfo) => {
+
+        setZones([]);
+        setTimings([]);
+        setVehicles([]);
   
       const data = {
         "date": selectInfo
@@ -66,6 +70,10 @@ export default function FrontBooking() {
 
 
     const handleDateSelect1 = (selectInfo) => {
+
+        setZones([]);
+        setTimings([]);
+        setVehicles([]);
   
       var elems  = document.querySelectorAll(".fc-daygrid-day-frame");
   
@@ -82,7 +90,6 @@ export default function FrontBooking() {
       }
   
       axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByDate`, data).then(res => {
-            console.log("res", res);
           if (res.status === 200) {
               setZones(res.data.zones);
               setTimings(res.data.timings);

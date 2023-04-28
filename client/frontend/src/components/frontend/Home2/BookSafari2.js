@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -12,6 +12,11 @@ export default function BookSafari2({ zones , timings , vehicles, bookingDate  ,
     const [ timing , setTiming ] =  useState('');
     const [ zoneArr, setZoneArr ] =  useState(zones);
 
+     useEffect(() => {
+        if (zones && zones.length <= 0) {
+            setZoneArr([]);
+        }
+    }, [zones]);
 
     const handleChange = (e) => {
 

@@ -33,7 +33,6 @@ export default function OnlineSafariBooking() {
     }, false);
 
     const [booking_date, setBookingDate] = useState([]);
-    // const [details , setDetails] = useState([]);
     const [date, setDate] = useState();
     const [setTiming] = useState();
     const [setVehicle] = useState();
@@ -44,12 +43,15 @@ export default function OnlineSafariBooking() {
 
     const handleDateSelect = (selectInfo) => {
     
+        setZones([]);
+        setTimings([]);
+        setVehicles([]);
+
         const data = {
             "date": selectInfo
         }
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByDate`, data).then(res => {
-            console.log("res", res);
             if (res.status === 200) {
                 setZones(res.data.zones);
                 setTimings(res.data.timings);
@@ -70,7 +72,12 @@ export default function OnlineSafariBooking() {
 
 
       const handleDateSelect1 = (selectInfo) => {
-  
+
+        setZones([]);
+        setTimings([]);
+        setVehicles([]);
+
+
       var elems  = document.querySelectorAll(".fc-daygrid-day-frame");
   
       [].forEach.call(elems, function(el) {
@@ -97,7 +104,6 @@ export default function OnlineSafariBooking() {
               setVehicle(res.data.data[0].vehicle);
               setZone(res.data.data[0].zone);
           } else {
-            // setDetails([]);
               setBookingDate([]);
               swal("Warning", res.data.error.message, "warning");
           }

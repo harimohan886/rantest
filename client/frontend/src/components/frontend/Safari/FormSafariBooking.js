@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React , { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -12,6 +12,13 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
     const [ timing , setTiming ] =  useState('');
     const [ zoneArr, setZoneArr ] =  useState(zones);
 
+    useEffect(() => {
+        if (zones && zones.length <= 0) {
+            setZoneArr([]);
+        }
+    }, [zones]);
+
+   
 
     const handleChange = (e) => {
 
@@ -45,7 +52,6 @@ export default function FormSafariBooking({ zones , timings , vehicles, bookingD
       }
   
       axios.post(`${process.env.REACT_APP_BASE_URL}/safari/checkAvilabilityByData`, data).then(res => {
-            console.log("res", res);
           if (res.status === 200) {
               setZoneArr(res.data.zones);
           } else {
