@@ -13,6 +13,7 @@ export default function ContentImage({ hotels, counterkey }) {
          {hotels?.map((list, lindex) => (
 
                 <div key={lindex}>
+                    <h5>{list.name}</h5>
                     <img src={`${HSURL}/${list.package_image}`} />
                 </div>
 
