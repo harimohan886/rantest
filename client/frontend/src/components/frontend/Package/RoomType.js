@@ -22,7 +22,7 @@ export default function RoomType({ packages, type ,setData}) {
                 {packages?.categories?.map((list, lindex) => (
                     <>
                         <div key={lindex.toString()} className={`tab-pane ${lindex === 0 ? 'active' : ''}`} id={`tab-cat${type}${lindex}`}>
-                            <ContentImage hotels={list.hotels} counterkey={type + lindex} />
+                            { list.hotels && <ContentImage hotels={list.hotels} counterkey={type + lindex} /> }
 
                             {type === 'indian' ? <PackagePricing optionData={list?.indianOptions} packageName={packages?.package?.name} setData={setData} /> : <PackagePricing optionData={list?.foreignerOptions} packageName={packages?.package?.name} setData={setData} />}
 
