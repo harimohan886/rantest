@@ -327,6 +327,30 @@ export default function SafariTravellerBooking() {
         }
 
         if (mpop == true) {
+
+            const data = {
+                "booked_persons": users,
+                "name": Name,
+                "mobile": Phone,
+                "email": Email,
+                "address": Address,
+                "state": State,
+                "date": localStorage.getItem('selDate'),
+                "zone": localStorage.getItem('selZone'),
+                "vehicle": localStorage.getItem('selVehicle'),
+                "amount": payable_Amount,
+                "timing": localStorage.getItem('selTiming'),
+                "transaction_id": ''
+            }
+
+            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
+                if (result.status === 200) {
+
+                    console.log('data saved');
+
+                }
+            })
+
             var btn = document.getElementById('paynow');
             btn.setAttribute('data-toggle', 'modal');
             btn.setAttribute('data-target', '#exampleModalLong');

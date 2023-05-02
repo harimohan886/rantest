@@ -27,6 +27,35 @@ export default function ChambalBooking() {
     }
 
 
+    const handlePayNow = (e) => {
+
+        const data = {
+            name: name,
+            mobile: phone,
+            email:  email,
+            address: address,
+            state: state,
+            date: moment(startDate).format("YYYY-MM-DD"),
+            zone: params.id,
+            amount: PayAmount,
+            vehicle: 'boat',
+            time: time,
+            id_proof_no: proof,
+            transaction_id: '',
+            no_of_persons_indian: Indian,
+            no_of_persons_foreigner: Foreigner,
+        }
+
+        axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/chambal`, data).then(result => {
+            if (result.status === 200) {
+
+                console.log('data saved');
+
+            }
+        });
+    }
+
+
     const handleChangeMobile = (e) => {
 
         setPhone(e.target.value);
@@ -513,7 +542,7 @@ export default function ChambalBooking() {
                         </li>
                         <li className="list-inline-item"> 
 
-                            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} title="Please agree terms and conditions" type="button">Pay Now</button>
+                            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" disabled={!agree} onClick={handlePayNow} title="Please agree terms and conditions" type="button">Pay Now</button>
                         </li>
                         <li className="list-inline-item">
                             <Link className="btn btn-default" to="/online-Chambal-moter-boat-safari-booking">Go Back</Link>

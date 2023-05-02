@@ -42,6 +42,8 @@ export default function OnlineSafariBooking() {
     const [vehicles, setVehicles] = useState([]);
 
     const handleDateSelect = (selectInfo) => {
+
+        
     
         setZones([]);
         setTimings([]);

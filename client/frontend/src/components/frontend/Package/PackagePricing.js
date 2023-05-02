@@ -118,6 +118,11 @@ export default function PackagePricing({ optionData, packageName, setData }) {
         }
         else {
 
+            if (number.length < 10) {
+                swal("Please Enter 10 digit mobile no.");
+                return false;
+            }
+
             var package_sel = document.querySelector('#roomTab .active').innerHTML;
             let adultss = parseInt(document.querySelector('#adults'+opData.opid).value);
             let childd = parseInt(document.querySelector('#kids'+opData.opid).value);

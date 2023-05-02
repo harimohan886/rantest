@@ -310,31 +310,35 @@ module.exports = {
     const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
     const data3 = await response3.json(); 
 
-    const params = new URLSearchParams();
+    if (req.body.transaction_id && req.body.transaction_id != '') {
 
-    params.append('name', req.body.name);
-    params.append('email', req.body.email);
-    params.append('mobile', req.body.mobile);
-    params.append('address', req.body.address);
-    params.append('state', req.body.state);
-    params.append('website', 'ranthamboretigerreserve.in');
-    params.append('custom_data', '');
-    params.append('payment_status', 'unpaid');
-    params.append('lead_status', 4);
-    params.append('date', req.body.date);
-    params.append('time', req.body.timing);
-    params.append('adult', 0);
-    params.append('child', 0);
-    params.append('mode', req.body.vehicle);
-    params.append('zone', req.body.zone);
-    params.append('sanctuary', 'ranthambore');
-    params.append('amount', req.body.amount);
-    params.append('transaction_id', req.body.transaction_id);
-    params.append('booked_customers', JSON.stringify(req.body.booked_persons));
+      const params = new URLSearchParams();
 
-    const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+      params.append('name', req.body.name);
+      params.append('email', req.body.email);
+      params.append('mobile', req.body.mobile);
+      params.append('address', req.body.address);
+      params.append('state', req.body.state);
+      params.append('website', 'ranthamboretigerreserve.in');
+      params.append('custom_data', '');
+      params.append('payment_status', 'unpaid');
+      params.append('lead_status', 4);
+      params.append('date', req.body.date);
+      params.append('time', req.body.timing);
+      params.append('adult', 0);
+      params.append('child', 0);
+      params.append('mode', req.body.vehicle);
+      params.append('zone', req.body.zone);
+      params.append('sanctuary', 'ranthambore');
+      params.append('amount', req.body.amount);
+      params.append('transaction_id', req.body.transaction_id);
+      params.append('booked_customers', JSON.stringify(req.body.booked_persons));
 
-    const data = await response.json();        
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+
+      const data = await response.json();        
+
+    }
 
     /*save data to crm*/
 
@@ -360,7 +364,7 @@ module.exports = {
       vehicle: 'required',
       time: 'required',
       id_proof_no: 'required',
-      transaction_id: 'required',
+      // transaction_id: 'required',
       no_of_persons_indian: 'required',
       no_of_persons_foreigner: 'required',
     };
@@ -468,31 +472,33 @@ module.exports = {
       const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
       const data3 = await response3.json(); 
 
-      
-      const params = new URLSearchParams();
+      if (req.body.transaction_id && req.body.transaction_id != '') {
 
-      params.append('name', req.body.name);
-      params.append('email', req.body.email);
-      params.append('mobile', req.body.mobile);
-      params.append('address', req.body.address);
-      params.append('state', req.body.state);
-      params.append('website', 'ranthamboretigerreserve.in');
-      params.append('custom_data', '');
-      params.append('date', req.body.safari_date);
-      params.append('time', req.body.time);
-      params.append('adult', req.body.no_of_persons_indian);
-      params.append('child', req.body.no_of_persons_foreigner);
-      params.append('mode', 'Boat');
-      params.append('payment_status', 'paid');
-      params.append('lead_status', 4);
-      params.append('area', booking_name);
-      params.append('zone', 'All Zone');
-      params.append('sanctuary', 'ranthambore');
-      params.append('amount', req.body.amount);
-      params.append('transaction_id', req.body.transaction_id);
+        const params = new URLSearchParams();
 
-      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
-      const data = await response.json(); 
+        params.append('name', req.body.name);
+        params.append('email', req.body.email);
+        params.append('mobile', req.body.mobile);
+        params.append('address', req.body.address);
+        params.append('state', req.body.state);
+        params.append('website', 'ranthamboretigerreserve.in');
+        params.append('custom_data', '');
+        params.append('date', req.body.safari_date);
+        params.append('time', req.body.time);
+        params.append('adult', req.body.no_of_persons_indian);
+        params.append('child', req.body.no_of_persons_foreigner);
+        params.append('mode', 'Boat');
+        params.append('payment_status', 'paid');
+        params.append('lead_status', 4);
+        params.append('area', booking_name);
+        params.append('zone', 'All Zone');
+        params.append('sanctuary', 'ranthambore');
+        params.append('amount', req.body.amount);
+        params.append('transaction_id', req.body.transaction_id);
+
+        const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
+        const data = await response.json(); 
+    }
              
       /*save data to crm*/
 
