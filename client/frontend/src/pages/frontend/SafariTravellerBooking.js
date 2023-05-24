@@ -85,6 +85,10 @@ export default function SafariTravellerBooking() {
     };
 
     let addElement = () => {
+        console.log('length',users.length)
+        if (localStorage.getItem('selVehicle') == 'Gypsy' && users.length > 5) {
+            return false;
+        }
         setUsers([...users, {
             key: Date.now(),
             name: "",
