@@ -360,7 +360,7 @@ module.exports = {
       const updates = req.body;
       const options = { new: true };
 
-      const result = await Date.updateMany( { date: req.body.date, zone: req.body.zone, vehicle: req.body.vehicle, timing: req.body.timing },{ $inc: { availability: -req.body.booking_persons }});
+      const result = await Date.updateMany( { date: req.body.date, zone: req.body.zone, vehicle: req.body.vehicle, timing: req.body.timing },{ $inc: { availability: req.body.booking_persons }});
 
       if (!result) {
         throw createError(201, 'Date does not exist');
