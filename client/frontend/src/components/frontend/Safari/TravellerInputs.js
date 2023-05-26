@@ -48,6 +48,7 @@ class TravellerInputs extends Component {
                 {user.nationality != 'Foreigner' && <option value = "Aadhar Card">Aadhar Card</option> }
                 {user.nationality != 'Foreigner' && <option value = "Voter Id">Voter ID</option> }
                 {user.nationality != 'Foreigner' && <option value = "Driving Licence">Driving License</option> }
+                <option value="">select</option>
                 <option value="Passport">Passport</option>
             </select>
         </div>
