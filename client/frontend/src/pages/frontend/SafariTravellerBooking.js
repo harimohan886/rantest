@@ -29,7 +29,7 @@ export default function SafariTravellerBooking() {
     function getSettings() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
             // console.log(res);
-            // if(res.data.data !== null) { setRazorpaykey(res.data.data.razorpay_key); }
+            if(res.data.data !== null) { setRazorpaykey(res.data.data.razorpay_key); }
         })
     }
 
