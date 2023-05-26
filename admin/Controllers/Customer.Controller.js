@@ -4,7 +4,7 @@ const validator = require('../helpers/validate');
 const ApiFeatures = require("../Utils/ApiFeatures");
 
 
-const amqp = require('amqplib');
+//const amqp = require('amqplib');
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
  fetch(...args));
@@ -22,15 +22,15 @@ const ChambalBooking = require('../Models/ChambalBooking.model');
 const BookingCustomer = require('../Models/BookingCustomer.model');
 
 
-let channel;
+// let channel;
 
-async function connect() {
-  const amqpServer = process.env.RABBITMQ_URL;
-  const connection = await amqp.connect(amqpServer);
-  channel = await connection.createChannel();
-  await channel.assertQueue('booking');
-}
-connect();
+// async function connect() {
+//   const amqpServer = process.env.RABBITMQ_URL;
+//   const connection = await amqp.connect(amqpServer);
+//   channel = await connection.createChannel();
+//   await channel.assertQueue('booking');
+// }
+// connect();
 
 
 async function checkNameIsUnique(email,type) {
@@ -206,6 +206,7 @@ module.exports = {
       email: 'required',
       address: 'required',
       state: 'required',
+      country: 'required',
       date: 'required',
       zone: 'required',
       amount: 'required',
@@ -230,6 +231,7 @@ module.exports = {
       type : 'safari',
       address : req.body.address,
       state : req.body.state,
+      country: req.body.country
     });
 
     const customer_data_result = await customer_data.save();

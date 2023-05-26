@@ -39,6 +39,9 @@ const CustomerSchema = new Schema({
 	},
 	state: {
 		type: String,
+	},
+	country: {
+		type: String,
 	}
 },{
 	timestamps:true

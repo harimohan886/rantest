@@ -3,13 +3,16 @@ import TravellerInputs from '../../components/frontend/Safari/TravellerInputs';
 import axios from 'axios';
 import { useAlert } from "react-alert";
 import swal from 'sweetalert';
-
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 
 export default function SafariTravellerBooking() {
 
     const [agree, setAgree] = useState(false);
+    const [country, setCountry] = useState('');
+
 
     useEffect(() => {
+
 
         getSettings();
 
@@ -25,7 +28,8 @@ export default function SafariTravellerBooking() {
 
     function getSettings() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/admin/settings/razorpay`).then(res => {
-            setRazorpaykey(res.data.data.value.razorpay_key);
+            // console.log(res);
+            // if(res.data.data !== null) { setRazorpaykey(res.data.data.razorpay_key); }
         })
     }
 
@@ -250,6 +254,7 @@ export default function SafariTravellerBooking() {
         var am = document.querySelector('.pmobile').value;
         var ae = document.querySelector('.pemail').value;
         var as = document.querySelector('.pstate').value;
+        var ac = document.querySelector('.pcountry').value;
         var aa = document.querySelector('.paddr').value;
         var mpop = true;
         if (an == '') {
@@ -267,7 +272,12 @@ export default function SafariTravellerBooking() {
             mpop = false;
             return;
         }
-        if (as == 'Please Select State') {
+        if (ac == '') {
+            swal('Please select Country', 'person country is not selected', 'warning');
+            mpop = false;
+            return;
+        }
+            if (as == '') {
             swal('Please select state', 'person state is not selected', 'warning');
             mpop = false;
             return;
@@ -338,6 +348,7 @@ export default function SafariTravellerBooking() {
                 "email": Email,
                 "address": Address,
                 "state": State,
+                "country": country,
                 "date": localStorage.getItem('selDate'),
                 "zone": localStorage.getItem('selZone'),
                 "vehicle": localStorage.getItem('selVehicle'),
@@ -359,6 +370,12 @@ export default function SafariTravellerBooking() {
             btn.setAttribute('data-target', '#exampleModalLong');
         }
     }
+    }
+
+    const CountryChange = (e) => {
+        console.log(e.target.value);
+        console.log("States",State.getStatesOfCountry('IN'));
+        
     }
 
     return (
@@ -414,55 +431,40 @@ export default function SafariTravellerBooking() {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className='col-sm-4' style={{ marginTop: "20px" }}>
+                                    <div className='row'>
+                                        <div className='col-sm-4'>
+                                            <label className='control-label'>Country</label>
+                                        </div>
+                                        <div className='col-sm-8'>
+                                            <CountryDropdown
+                                             className='form-control ng-pristine ng-invalid ng-touched pcountry'
+                                             value={country}
+                                             onChange={(val) => setCountry(val)} 
+                                             style={{ width: "100%" }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>  
+
                                 <div className='col-sm-4' style={{ marginTop: "20px" }}>
                                     <div className='row'>
                                         <div className='col-sm-4'>
                                             <label className='control-label'>State</label>
                                         </div>
                                         <div className='col-sm-8'>
-                                            <select className="form-control ng-pristine ng-invalid ng-touched pstate" value={State} onChange={(e) => setState(e.target.value)} formcontrolname="state" id="state">
-                                                <option>Please Select State</option>
-                                                <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
-                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                                <option value="Assam">Assam</option>
-                                                <option value="Bihar">Bihar</option>
-                                                <option value="Chandigarh">Chandigarh</option>
-                                                <option value="Chattisgarh">Chattisgarh</option>
-                                                <option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
-                                                <option value="Daman & Diu">Daman & Diu</option>
-                                                <option value="Delhi">Delhi</option>
-                                                <option value="Goa">Goa</option>
-                                                <option value="Gujarat">Gujarat</option>
-                                                <option value="Haryana">Haryana</option>
-                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                                <option value="Jharkhand">Jharkhand</option>
-                                                <option value="Karnataka">Karnataka</option>
-                                                <option value="Kerala">Kerala</option>
-                                                <option value="Lakshadweep">Lakshadweep</option>
-                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                                <option value="Maharashtra">Maharashtra</option>
-                                                <option value="Manipur">Manipur</option>
-                                                <option value="Meghalaya">Meghalaya</option>
-                                                <option value="Mizoram">Mizoram</option>
-                                                <option value="Nagaland">Nagaland</option>
-                                                <option value="Odisha">Odisha</option>
-                                                <option value="Poducherry">Poducherry</option>
-                                                <option value="Punjab">Punjab</option>
-                                                <option value="Rajasthan">Rajasthan</option>
-                                                <option value="Sikkim">Sikkim</option>
-                                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                                <option value="Telangana">Telangana</option>
-                                                <option value="Tripura">Tripura</option>
-                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                                <option value="Uttarakhand">Uttarakhand</option>
-                                                <option value="West Bengal">West Bengal</option>
-                                                <option value="Other">Other</option>
-                                            </select>
+                                            <RegionDropdown
+                                                className='form-control ng-pristine ng-invalid ng-touched pstate'
+                                                country={country}
+                                                value={State}
+                                                onChange={(val) => setState(val)} 
+                                                style={{ width: "100%" }}
+                                            />  
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
+                                
                                 <div className='col-sm-8' style={{ marginTop: "20px" }}>
                                     <div className='row'>
                                         <div className='col-sm-2'>
@@ -520,7 +522,7 @@ export default function SafariTravellerBooking() {
                                 {users.map((user, index) => (
                                     <div className='row customrow' key={user.key}>
                                         <span>{index+1}</span>
-                                        {localStorage.getItem('selAvailable') == 1 ?
+                                        {localStorage.getItem('selAvailable') > 1 ?
                                             <>
                                                 <TravellerInputs
                                                     key={user.key}
