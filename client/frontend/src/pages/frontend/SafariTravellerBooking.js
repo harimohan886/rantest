@@ -147,6 +147,7 @@ export default function SafariTravellerBooking() {
                         "mobile": Phone,
                         "email": Email,
                         "address": Address,
+                        "country": country,
                         "state": State,
                         "date": localStorage.getItem('selDate'),
                         "zone": localStorage.getItem('selZone'),
