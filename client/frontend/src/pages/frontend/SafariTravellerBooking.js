@@ -164,7 +164,7 @@ export default function SafariTravellerBooking() {
                             const paymentData = {
                                 "customer_id": result.data.data._id,
                                 "transaction_id": response.razorpay_payment_id,
-                                "amount": payable_Amount,
+                                "amount": amount,
                                 "booking_type": 'safari'
                             }
 

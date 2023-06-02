@@ -42,9 +42,9 @@ module.exports = {
       params.append('date', booking.date);
       params.append('time', booking.timing);
       params.append('mode', booking.vehicle);
+      params.append('amount', req.body.amount);
       params.append('zone', booking.zone);
       params.append('sanctuary', 'ranthambore');
-      params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
       params.append('booked_customers', JSON.stringify(booking.booking_customers));
 
