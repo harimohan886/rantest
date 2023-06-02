@@ -81,7 +81,6 @@ export default function SafariTravellerBooking() {
                 amt = parseInt(amt) + parseInt(itm.price);
                 setPayableAmount(amt);
             })
-
         ));
 
         setUsers(newUsers);
@@ -301,13 +300,13 @@ export default function SafariTravellerBooking() {
             return node.value != ''
         });
         var $e_tg = filter.call(tg, function (node) {
-            return node.value != 'Please Select'
+            return node.value != 'Gender'
         });
         var $e_tna = filter.call(tna, function (node) {
-            return node.value != 'Please Select'
+            return node.value != 'Nationality'
         });
         var $e_tp = filter.call(tp, function (node) {
-            return node.value != 'Please Select'
+            return node.value != 'ID Proof'
         });
         var $e_tpi = filter.call(tpi, function (node) {
             return node.value != ''
@@ -601,7 +600,7 @@ export default function SafariTravellerBooking() {
                                                         <p className='text-black italic mb-3'>Once you click on button, you will be redirected to payment page.</p>
                                                         <p className='text-black italic mb-3'>Please choose your payment mode (Netbanking, Credit Cards, Debit Cards etc.) and proceed for payment.</p>
                                                         <p className='text-black italic mb-3'>Once you successfully complete the transaction your Transaction ID is generated which you can use for further query if any related to transaction.</p>
-                                                        <p className='text-black italic mb-3'>Once you click the payment button, you are agreed to mentioned terms and conditions to make payment with <div className='font-bold'>DTNT</div></p>
+                                                        <p className='text-black italic mb-3'>Once you click the payment button, you are agreed to mentioned terms and conditions to make payment with <div className='font-bold'>JSI</div></p>
                                                         <p className='text-black italic mb-3'>Call the driver one day before Safari for confirming the reporting point. Contact details of the driver is mentioned at your booking voucher.</p>
                                                         <p className='text-black italic mb-3'>Slight changes in visit time may be done by authority due to Weather/Seasonal changes.</p>
                                                     </td>
