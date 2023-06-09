@@ -358,7 +358,7 @@ export default function SafariTravellerBooking() {
                 "date": localStorage.getItem('selDate'),
                 "zone": localStorage.getItem('selZone'),
                 "vehicle": localStorage.getItem('selVehicle'),
-                "amount": payable_Amount,
+                "amount": payable_Amount + payable_Amount*0.03,
                 "timing": localStorage.getItem('selTiming'),
                 "transaction_id": ''
             }
