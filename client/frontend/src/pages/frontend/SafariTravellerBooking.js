@@ -120,6 +120,9 @@ export default function SafariTravellerBooking() {
 
     const handleSaveData = () => {
 
+        // console.log(process.env.REACT_APP_BASE_URL);
+        // return;
+
         if (Email === '' && State === '' && Address === '') {
             swal('Please fill all person details', ' Email/ State / Adress', 'warning');
             return true;
@@ -151,10 +154,15 @@ export default function SafariTravellerBooking() {
                         "date": localStorage.getItem('selDate'),
                         "zone": localStorage.getItem('selZone'),
                         "vehicle": localStorage.getItem('selVehicle'),
-                        "amount": payable_Amount,
+                        "amount": amount,
                         "timing": localStorage.getItem('selTiming'),
                         "transaction_id": response.razorpay_payment_id
                     }
+
+                    // console.log("Amount", amount);
+                    // console.log("Data", data);
+                    // return;
+                    // return;
 
                     //successPay
                     axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
@@ -164,7 +172,7 @@ export default function SafariTravellerBooking() {
                             const paymentData = {
                                 "customer_id": result.data.data._id,
                                 "transaction_id": response.razorpay_payment_id,
-                                "amount": payable_Amount,
+                                "amount": amount,
                                 "booking_type": 'safari'
                             }
 
@@ -243,7 +251,6 @@ export default function SafariTravellerBooking() {
 
     const handlePayNow = (e) => {
         e.preventDefault();
-
 
         if (!agree) {
             alert.error('Please accept terms and conditions first!');
