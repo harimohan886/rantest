@@ -256,126 +256,141 @@ export default function SafariTravellerBooking() {
             alert.error('Please accept terms and conditions first!');
         }else{
             
-        var an = document.querySelector('.pname').value;
-        var am = document.querySelector('.pmobile').value;
-        var ae = document.querySelector('.pemail').value;
-        var as = document.querySelector('.pstate').value;
-        var ac = document.querySelector('.pcountry').value;
-        var aa = document.querySelector('.paddr').value;
-        var mpop = true;
-        if (an == '') {
-            swal('Please fill Name', 'person name is fillable', 'warning');
-            mpop = false;
-            return;
-        }
-        if (am == '') {
-            swal('Please fill mobile', 'person mobile number is fillable', 'warning');
-            mpop = false;
-            return;
-        }
-        if (ae == '') {
-            swal('Please fill email', 'person email is fillable', 'warning');
-            mpop = false;
-            return;
-        }
-        if (ac == '') {
-            swal('Please select Country', 'person country is not selected', 'warning');
-            mpop = false;
-            return;
-        }
+            var an = document.querySelector('.pname').value;
+            var am = document.querySelector('.pmobile').value;
+            var ae = document.querySelector('.pemail').value;
+            var as = document.querySelector('.pstate').value;
+            var ac = document.querySelector('.pcountry').value;
+            var aa = document.querySelector('.paddr').value;
+            var mpop = true;
+            if (an == '') {
+                swal('Please fill Name', 'person name is fillable', 'warning');
+                mpop = false;
+                return;
+            }
+            if (am == '') {
+                swal('Please fill mobile', 'person mobile number is fillable', 'warning');
+                mpop = false;
+                return;
+            }
+            if (ae == '') {
+                swal('Please fill email', 'person email is fillable', 'warning');
+                mpop = false;
+                return;
+            }
+            if (ac == '') {
+                swal('Please select Country', 'person country is not selected', 'warning');
+                mpop = false;
+                return;
+            }
             if (as == '') {
-            swal('Please select state', 'person state is not selected', 'warning');
-            mpop = false;
-            return;
-        }
-        if (aa == '') {
-            swal('Please fill Address', 'person address is mandatory', 'warning');
-            mpop = false;
-            return;
-        }
-        var alen = localStorage.getItem('adults');
-        var filter = Array.prototype.filter;
+                swal('Please select state', 'person state is not selected', 'warning');
+                mpop = false;
+                return;
+            }
+            if (aa == '') {
+                swal('Please fill Address', 'person address is mandatory', 'warning');
+                mpop = false;
+                return;
+            }
+            var alen = localStorage.getItem('adults');
+            var filter = Array.prototype.filter;
 
-        var tn = document.querySelectorAll('.tname');
-        var tg = document.querySelectorAll('.tgender');
-        var tna = document.querySelectorAll('.tnation');
-        var tp = document.querySelectorAll('.tidproof');
-        var tpi = document.querySelectorAll('.tidno');
-        var tlen = tn.length;
+            var tn = document.querySelectorAll('.tname');
+            var tg = document.querySelectorAll('.tgender');
+            var tna = document.querySelectorAll('.tnation');
+            var tp = document.querySelectorAll('.tidproof');
+            var tpi = document.querySelectorAll('.tidno');
+            var tlen = tn.length;
 
-        var $e_tn = filter.call(tn, function (node) {
-            return node.value != ''
-        });
-        var $e_tg = filter.call(tg, function (node) {
-            return node.value != 'Gender'
-        });
-        var $e_tna = filter.call(tna, function (node) {
-            return node.value != 'Nationality'
-        });
-        var $e_tp = filter.call(tp, function (node) {
-            return node.value != 'ID Proof'
-        });
-        var $e_tpi = filter.call(tpi, function (node) {
-            return node.value != ''
-        });
+            var $e_tn = filter.call(tn, function (node) {
+                return node.value != ''
+            });
+            var $e_tg = filter.call(tg, function (node) {
+                return node.value != 'Gender'
+            });
+            var $e_tna = filter.call(tna, function (node) {
+                return node.value != 'Nationality'
+            });
+            var $e_tp = filter.call(tp, function (node) {
+                return node.value != 'ID Proof'
+            });
+            var $e_tpi = filter.call(tpi, function (node) {
+                return node.value != ''
+            });
 
-        if ($e_tn.length < tlen) {
-            swal('Please fill traveller name', 'One of the traveller name is missing', 'warning');
-            mpop = false;
-            return;
-        }
-        if ($e_tg.length < tlen) {
-            swal('Please select traveller gender', 'One of the traveller gender is not selected', 'warning');
-            mpop = false;
-            return;
-        }
-        if ($e_tna.length < tlen) {
-            swal('Please select traveller nationality', 'One of the traveller nationality  is not selected', 'warning');
-            mpop = false;
-            return;
-        }
-        if ($e_tp.length < tlen) {
-            swal('Please select traveller ID Proof', 'One of the traveller ID Proof is not selected', 'warning');
-            mpop = false;
-            return;
-        }
-        if ($e_tpi.length < tlen) {
-            swal('Please fill traveller ID number', 'One of the traveller ID number is missing', 'warning');
-            mpop = false;
-            return;
-        }
-
-        if (mpop == true) {
-
-            const data = {
-                "booked_persons": users,
-                "name": Name,
-                "mobile": Phone,
-                "email": Email,
-                "address": Address,
-                "state": State,
-                "country": country,
-                "date": localStorage.getItem('selDate'),
-                "zone": localStorage.getItem('selZone'),
-                "vehicle": localStorage.getItem('selVehicle'),
-                "amount": payable_Amount + payable_Amount*0.03,
-                "timing": localStorage.getItem('selTiming'),
-                "transaction_id": ''
+            if ($e_tn.length < tlen) {
+                var btn = document.getElementById('paynow');
+                btn.removeAttribute('data-toggle', 'modal');
+                btn.removeAttribute('data-target', '#exampleModalLong');
+                swal('Please fill traveller name', 'One of the traveller name is missing', 'warning');
+                mpop = false;
+                return;
+            }
+            if ($e_tg.length < tlen) {
+                var btn = document.getElementById('paynow');
+                btn.removeAttribute('data-toggle', 'modal');
+                btn.removeAttribute('data-target', '#exampleModalLong');
+                swal('Please select traveller gender', 'One of the traveller gender is not selected', 'warning');
+                mpop = false;
+                return;
+            }
+            if ($e_tna.length < tlen) {
+                var btn = document.getElementById('paynow');
+                btn.removeAttribute('data-toggle', 'modal');
+                btn.removeAttribute('data-target', '#exampleModalLong');
+                swal('Please select traveller nationality', 'One of the traveller nationality  is not selected', 'warning');
+                mpop = false;
+                return;
+            }
+            if ($e_tp.length < tlen) {
+                var btn = document.getElementById('paynow');
+                btn.removeAttribute('data-toggle', 'modal');
+                btn.removeAttribute('data-target', '#exampleModalLong');
+                swal('Please select traveller ID Proof', 'One of the traveller ID Proof is not selected', 'warning');
+                mpop = false;
+                return;
+            }
+            if ($e_tpi.length < tlen) {
+                var btn = document.getElementById('paynow');
+                btn.removeAttribute('data-toggle', 'modal');
+                btn.removeAttribute('data-target', '#exampleModalLong');
+                swal('Please fill traveller ID number', 'One of the traveller ID number is missing', 'warning');
+                mpop = false;
+                return;
             }
 
-            axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
-                if (result.status === 200) {
+            if (mpop == true) {
 
-                    console.log('data saved');
-
+                const data = {
+                    "booked_persons": users,
+                    "name": Name,
+                    "mobile": Phone,
+                    "email": Email,
+                    "address": Address,
+                    "state": State,
+                    "country": country,
+                    "date": localStorage.getItem('selDate'),
+                    "zone": localStorage.getItem('selZone'),
+                    "vehicle": localStorage.getItem('selVehicle'),
+                    "amount": payable_Amount + payable_Amount*0.03,
+                    "timing": localStorage.getItem('selTiming'),
+                    "transaction_id": ''
                 }
-            })
 
-            var btn = document.getElementById('paynow');
-            btn.setAttribute('data-toggle', 'modal');
-            btn.setAttribute('data-target', '#exampleModalLong');
+                axios.post(`${process.env.REACT_APP_BASE_URL}/admin/customers/safari`, data).then(result => {
+                    if (result.status === 200) {
+
+                        console.log('data saved');
+
+                    }
+                })
+
+                var btn = document.getElementById('paynow');
+                btn.setAttribute('data-toggle', 'modal');
+                btn.setAttribute('data-target', '#exampleModalLong');
+            }
         }
-    }
     }
 
     const CountryChange = (e) => {
