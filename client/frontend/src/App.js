@@ -42,6 +42,9 @@ import ChambalDates from './pages/Admin/SafariDates/ChambalDates';
 import CreateChambalDates from './pages/Admin/SafariDates/CreateChambalDates';
 import EditChambalDates from './pages/Admin/SafariDates/EditChambalDates';
 
+import Marquees from './pages/Admin/Marquees/Marquees';
+import CreateMarquees from './pages/Admin/Marquees/CreateMarquees';
+import EditMarquees from './pages/Admin/Marquees/EditMarquees';
 
 import KankaiEvents from './pages/Admin/SafariDates/KankaiEvents';
 import CreateKankaiEvent from './pages/Admin/SafariDates/CreateKankaiEvent';
@@ -292,6 +295,10 @@ function App() {
             <Route exact path="/admin/package-categories/:id" element={<PackageCategories />} />
             <Route exact path="/admin/add-package-category/:id" element={<AddPackageCategory />} />
             <Route exact path="/admin/edit-package-category/:id" element={<EditPackageCategory />} />
+
+            <Route exact path="/admin/marquees" element={<Marquees />} />
+            <Route exact path="/admin/add-marquee" element={<CreateMarquees />} />
+            <Route exact path="/admin/edit-marquee/:id" element={<EditMarquees />} />
 
           </Route>
 

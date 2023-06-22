@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SafariZone from '../../components/frontend/Home/SafariZone'
 import AboutSafari from '../../components/frontend/Safari/AboutSafari'
 import BookingProcedure from '../../components/frontend/Safari/BookingProcedure'
@@ -18,6 +18,14 @@ import Newzone from '../../components/frontend/Home2/Newzone'
 import {Helmet} from "react-helmet";
 
 export default function OnlineSafariBooking() {
+
+    const [marquee,setMarquee] = useState('');
+
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/marquees`).then((res)=>{
+            setMarquee((res.data.data[0].content == 'Marquee Content') ? '' : res.data.data[0].content);
+        });
+    },[])
 
     document.addEventListener("touchstart", function (ev) {
         let dt = ev.target.parentNode.parentNode.parentNode.getAttribute('data-date');
@@ -130,6 +138,7 @@ export default function OnlineSafariBooking() {
                     </div>
                     <div className='col-sm-6 col-xs-12 goWild'>
                         <h1>Ranthambore Safari Booking</h1>
+                        <marquee style={{ color: 'red', fontSize: '2em' }}>{marquee}</marquee>
                         <FullCalendar
                             longPressDelay={0}
                             eventLongPressDelay={0}

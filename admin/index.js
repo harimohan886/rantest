@@ -19,6 +19,7 @@ const SeedDataRoute = require('./Routes/SeedData.route');
 const EnquiryRoute = require('./Routes/Enquiry.route');
 const ContactUsRoute = require('./Routes/ContactUs.route');
 const SettingRoute = require('./Routes/Setting.route');
+const MarqueeRoute = require('./Routes/Marquee.route');
 const CustomerRoute = require('./Routes/Customer.route');
 const BookingRoute = require('./Routes/Booking.route');
 const SeoManagerRoute = require('./Routes/SeoManager.route');
@@ -33,6 +34,7 @@ app.use('/enquiries', EnquiryRoute);
 app.use('/contactus/enquiries', ContactUsRoute);
 
 app.use('/settings', SettingRoute);
+app.use('/marquees', MarqueeRoute);
 
 app.use('/festival',FestivalRoute);
 

@@ -348,6 +348,9 @@ export default function Sidebar() {
                           <li className="items-center">
                             <Link to='/admin/change-password' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Change password</Link>
                           </li>
+                          <li className="items-center">
+                            <Link to='/admin/marquees' className="text-white pt-3 pb-3 pl-2 pr-2 font-medium block"><i className="fas fa-dot-circle mr-2"></i> Marquees</Link>
+                          </li>
                         </ul>
                       </div>
                     </div>

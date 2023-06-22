@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -10,6 +10,14 @@ import BookSafari2 from './BookSafari2';
 
 
 export default function FrontBooking() {
+
+    const [marquee,setMarquee] = useState('');
+
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BASE_URL}/admin/marquees`).then((res)=>{
+            setMarquee((res.data.data[0].content == 'Marquee Content') ? '' : res.data.data[0].content);
+        });
+    },[])
 
     document.addEventListener("touchstart", function (ev) {
         let dt = ev.target.parentNode.parentNode.parentNode.getAttribute('data-date');
@@ -111,6 +119,7 @@ export default function FrontBooking() {
 
   return (
     <section id='select-date'>
+    <marquee style={{ color: 'red', fontSize: '2em' }}>{marquee}</marquee>
         <div className='n2rCalendar'>
             <FullCalendar
             displayEventTime={true}
