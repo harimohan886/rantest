@@ -118,8 +118,8 @@ export default function FrontBooking() {
   }
 
   return (
-    <section id='select-date'>
-    <marquee style={{ color: 'red', fontSize: '2em' }}>{marquee}</marquee>
+    <section id='select-date' className='marq'>
+    <marquee>{marquee}</marquee>
         <div className='n2rCalendar'>
             <FullCalendar
             displayEventTime={true}
