@@ -92,24 +92,56 @@ module.exports = {
       params.append('name', booking.customer.name);
       params.append('email', booking.customer.email);
       params.append('mobile', booking.customer.mobile);
-      params.append('address', booking.customer.address);
+      // params.append('address', booking.customer.address);
       params.append('state', booking.customer.state);
       params.append('website', 'ranthamboretigerreserve.in');
       params.append('custom_data', '');
+      params.append('assigned_to', null);
       params.append('payment_status', 'paid');
       params.append('lead_status', 4);
       params.append('date', booking.date);
-      params.append('time', booking.timing);
+      // params.append('time', booking.timing);
       params.append('adult', 0);
+      params.append('booking_type', 'package');
       params.append('child', 0);
-      params.append('mode', booking.vehicle);
+      // params.append('mode', booking.vehicle);
       params.append('zone', booking.zone);
       params.append('sanctuary', 'ranthambore');
       params.append('amount', req.body.amount);
       params.append('transaction_id', req.body.transaction_id);
 
       const response = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params});
-      const data = await response.json();       
+      const data = await response.json();     
+
+
+      const params1 = new URLSearchParams();
+
+      params1.append('name', booking.customer.name);
+      params1.append('email', booking.customer.email);
+      params1.append('mobile', booking.customer.mobile);
+      params1.append('address', booking.customer.address);
+      params1.append('state', booking.customer.state);
+      params1.append('website', 'ranthamboretigerreserve.in');
+      params1.append('custom_data', '');
+      params1.append('payment_status', 'paid');
+      params1.append('date', booking.date);
+      params1.append('time', booking.timing);
+      params1.append('adult', 0);
+      params1.append('child', 0);
+      params1.append('type', 'package');
+      params1.append('mode', booking.vehicle);
+      params1.append('zone', booking.zone);
+      params1.append('sanctuary', 'ranthambore');
+      params1.append('amount', req.body.amount);
+      params1.append('package_name', booking.package_name);
+      params1.append('package_type', booking.category_name);
+      params1.append('nationality', booking.nationality_type);
+      params1.append('due_amount', 0);
+      params1.append('transaction_id', req.body.transaction_id);
+
+      const response1 = await fetch(`${process.env.CRM_LEAD_URL}/booking`, {method: 'POST', body: params1});
+
+      const dadada = await response1.json();    
 
       /*save data to crm*/
 

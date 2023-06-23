@@ -602,10 +602,10 @@ createNewCustomerPackage: async (req, res, next) => {
       const params2 = new URLSearchParams();
 
       params2.append('name', req.body.name);
-      params2.append('mobile', req.body.mobile);
       params2.append('email', req.body.email);
+      params2.append('mobile', req.body.mobile);
       params2.append('website', 'ranthamboretigerreserve');
-      params2.append('custom_date', '');
+      params2.append('payment_status', 'unpaid');
 
 
       const response2 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-data`, {method: 'POST', body: params2});
@@ -614,44 +614,22 @@ createNewCustomerPackage: async (req, res, next) => {
       const params3 = new URLSearchParams();
 
       params3.append('name', req.body.name);
+      params3.append('email', req.body.email);
       params3.append('mobile', req.body.mobile);
       params3.append('website', 'ranthamboretigerreserve');
-      params3.append('email', req.body.email);
       params3.append('address', req.body.address);
       params3.append('state', req.body.state);
       params3.append('assigned_to', null);
-      params3.append('booking_type', 'chambal');
-      params3.append('lead_status', 'paid');
-      params3.append('payment_status', 'paid');
+      params3.append('booking_type', 'package');
+      params3.append('lead_status', 'unpaid');
+      params3.append('payment_status', 'unpaid');
 
 
       const response3 = await fetch(`${process.env.CRM_LEAD_URL}/update-lead-status`, {method: 'POST', body: params3});
       const data3 = await response3.json(); 
 
 
-      const params = new URLSearchParams();
-
-      params.append('name', req.body.name);
-      params.append('email', req.body.email);
-      params.append('mobile', req.body.mobile);
-      params.append('address', req.body.address);
-      params.append('state', req.body.state);
-      params.append('website', 'ranthamboretigerreserve.in');
-      params.append('custom_data', '');
-      params.append('payment_status', 'unpaid');
-      params.append('lead_status', 4);
-      params.append('date', req.body.date);
-      params.append('time', req.body.timing);
-      params.append('adult', 0);
-      params.append('child', 0);
-      params.append('mode', req.body.vehicle);
-      params.append('zone', req.body.zone);
-      params.append('sanctuary', 'ranthambore');
-      params.append('amount', req.body.amount);
-      params.append('transaction_id', req.body.transaction_id);
-
-      const response = await fetch(`${process.env.CRM_LEAD_URL}/ranthambore-booking`, {method: 'POST', body: params});
-      const data = await response.json();    
+        
 
       /*save data to crm*/
 
