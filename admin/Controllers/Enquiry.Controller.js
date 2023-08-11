@@ -209,12 +209,12 @@ module.exports = {
       json_arr["custom_data"] = "";
       json_arr["method"] = "save-lead";
 
-      const result = await channel.sendToQueue(
+      /*const result = await channel.sendToQueue(
         process.env.RABBITMQ_QUEUE,
         Buffer.from(
           JSON.stringify(json_arr)
           )
-        );
+        );*/
 
       const response = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {method: 'POST', body: params});
        data = await response.json();
