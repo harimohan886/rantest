@@ -66,6 +66,10 @@ padding-top: 0px;
 	display: block;
 	margin: 0 auto;
 }
+.marq marquee{
+	color: red;
+	font-size: 2em;
+}
 .padding-right-zero{
 padding-right: 0;
 }
