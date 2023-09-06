@@ -106,7 +106,9 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
     }
     const proceed = (e) => {
-
+        
+        let date = document.querySelector('.travel_date'+opData.opid).value;
+       
         e.preventDefault();
         
         if (amount == 0) { swal('Please select travel date', ''); return; }
@@ -149,7 +151,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
             var package_cat = document.querySelector(child_selector).innerHTML;
             var package_id = optionData[0].package_id;
             var category_id = optionData[0].category_id;
-
+             
             const data = {
                 "date": moment(date).format("YYYY-MM-DD"),
                 "type": "package",
@@ -192,8 +194,9 @@ export default function PackagePricing({ optionData, packageName, setData }) {
 
     }
     const CheckOptions = (e, date) => {
-
+      
         if (date != null) {
+            
             axios.post(`${process.env.REACT_APP_BASE_URL}/package/packages/getOptions`, { date: date, cdata: optionData }).then((res) => {
 
                 if (res.data.block == 1) { swal('Booking Not Available', ''); }
@@ -205,6 +208,7 @@ export default function PackagePricing({ optionData, packageName, setData }) {
                     pricedata = (res.data.data[0].pricingData);
 
                    // document.querySelectorAll('.package-price')[ix].innerHTML = pricedata.price;
+                  
                     setOpData(pricedata);
                     
                     let adultCount = parseInt(document.querySelector('#adults'+pricedata.opid).value);
