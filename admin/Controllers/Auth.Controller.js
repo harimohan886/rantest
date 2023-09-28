@@ -112,8 +112,8 @@ module.exports = {
     }
 
     var otp = Math.floor(1000 + Math.random() * 9000);
-
-    const response = await fetch(`http://login.pacttown.com/api/mt/SendSMS?user=N2RTECHNOLOGIES&password=994843&senderid=NTRTEC&channel=Trans&DCS=0&flashsms=0&number=${mobile}&text=Your one time password to activate your account is ${otp}`, {method: 'GET'});
+/*senderid=JUNGSI&channel=Trans&DCS=0&flashsms=0&number=9718717115&text=Your one time password to activate your account is Ranthambore_' . $otp . '. Jungle Safari India'*/
+    const response = await fetch(`http://login.pacttown.com/api/mt/SendSMS?user=N2RTECHNOLOGIES&password=994843&senderid=JUNGSI&channel=Trans&DCS=0&flashsms=0&number=${mobile}&text=Your one time password to activate your account is Ranthambore_${otp}. Jungle Safari India`, {method: 'GET'});
     const data = await response.json();
     // console.log('logg',data);
 
