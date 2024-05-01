@@ -56,7 +56,7 @@ export default function LoginWithOtp() {
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/admin/auth/login-by-otp`, {mobile:mobile});
 
-        console.log('err res', res)
+       // console.log('err res', res)
 
         if (res.status !== 200) {
 
@@ -70,7 +70,7 @@ export default function LoginWithOtp() {
 
         }else{
 
-          swal('Otp sended successfully!', "success");
+          swal('Otp send successfully!', "success");
           setShow(true);
         }
 
