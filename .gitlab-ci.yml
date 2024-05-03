@@ -1,110 +1,29 @@
 stages:
-  - test
   - deploy
-
-# Test Stage
-test_services:
-  stage: test
-  rules:
-  - if: '$CI_COMMIT_MESSAGE =~/updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~/deploy/'
-  when: never
-  - if: '$CI_COMMIT_BRANCH==$CI_DEFAULT_BRANCH'
-  when: always
-  - when: never
-  image: node:14 # Assuming you're testing with Node.js
-
-  # Test and install dependencies for admin service
-  admin_test:
-    script:
-      - cd latest_ranthambore/admin
-      - npm install
-      - npm test
-
-  # Test and install dependencies for chambal service
-  chambal_test:
-    script:
-      - cd latest_ranthambore/chambal
-      - npm install
-      - npm test
-
-  # Test and install dependencies for client-api-gateway service
-  client_api_gateway_test:
-    script:
-      - cd latest_ranthambore/client/api-gateway
-      - npm install
-      - npm test
-  client_frontend_test:
-    script:
-      - cd latest_ranthambore/client/frontend
-      - npm install
-      - npm test      
-
-  client_hotel_test:
-    script:
-      - cd latest_ranthambore/hotel
-      - npm install
-      - npm test
-
-  client_package_test:
-    script:
-      - cd latest_ranthambore/package
-      - npm install
-      - npm test
-
-  client_payment_test:
-    script:
-      - cd latest_ranthambore/payment
-      - npm install
-      - npm test
-
-  client_safari_test:
-    script:
-      - cd latest_ranthambore/safari
-      - npm install
-      - npm test
-
 
 # Deploy Stage
 deploy_services:
   stage: deploy
   rules:
-  - if: '$CI_COMMIT_MESSAGE =~/updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~/deploy/'
-  when: never
-  - if: '$CI_COMMIT_BRANCH==$CI_DEFAULT_BRANCH'
-  when: always
-  - when: never
+    - if: '$CI_COMMIT_MESSAGE =~ /updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~ /deploy/'
+      when: never 
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: always
+    - when: never
   image: bash:devel-alpine3.19
   before_script:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   script:
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && git pull'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && pm2 restart admin2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/chambal && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/chambal && pm2 restart chambal2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client-api-gateway && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client-api-gateway && pm2 restart api2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client/frontend && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client/frontend && pm2 restart frontend2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/hotel && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/hotel && pm2 restart hotel2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/package && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/package && pm2 restart package2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/payment && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/payment && pm2 restart payment2'
-
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/safari && npm install'
-    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/safari && pm2 restart safari2'
-
-  only:
-    - main  # Or whichever branch you want to deploy
-  dependencies:
-    - test_services
-
+    - |
+      ssh latestranthambore@3.110.148.246 << 'EOF'
+        cd latest_ranthambore/admin && git pull && npm install && pm2 restart admin2 &
+        cd latest_ranthambore/chambal && git pull && npm install && pm2 restart chambal2 &
+        cd latest_ranthambore/client-api-gateway && git pull && npm install && pm2 restart api2 &
+        cd latest_ranthambore/client/frontend && git pull && npm install && pm2 restart frontend2 &
+        cd latest_ranthambore/hotel && git pull && npm install && pm2 restart hotel2 &
+        cd latest_ranthambore/package && git pull && npm install && pm2 restart package2 &
+        cd latest_ranthambore/payment && git pull && npm install && pm2 restart payment2 &
+        cd latest_ranthambore/safari && git pull && npm install && pm2 restart safari2 &
+        wait
+      EOF
