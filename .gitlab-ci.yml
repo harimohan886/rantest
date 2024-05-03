@@ -5,6 +5,12 @@ stages:
 # Test Stage
 test_services:
   stage: test
+  rules:
+  - if: '$CI_COMMIT_MESSAGE =~/updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~/deploy/'
+  when: never
+  - if: '$CI_COMMIT_BRANCH==$CI_DEFAULT_BRANCH'
+  when: always
+  - when: never
   image: node:14 # Assuming you're testing with Node.js
 
   # Test and install dependencies for admin service
@@ -57,9 +63,16 @@ test_services:
       - npm install
       - npm test
 
+
 # Deploy Stage
 deploy_services:
   stage: deploy
+  rules:
+  - if: '$CI_COMMIT_MESSAGE =~/updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~/deploy/'
+  when: never
+  - if: '$CI_COMMIT_BRANCH==$CI_DEFAULT_BRANCH'
+  when: always
+  - when: never
   image: bash:devel-alpine3.19
   before_script:
     - eval $(ssh-agent -s)
