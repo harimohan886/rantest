@@ -96,3 +96,7 @@ deploy_services:
     - main  # Or whichever branch you want to deploy
   dependencies:
     - test_services
+<<<<<<< HEAD
+=======
+
+>>>>>>> c45966f (ci-cd)
