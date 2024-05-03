@@ -57,8 +57,6 @@ test_services:
       - npm install
       - npm test
 
-stages:
-  - deploy
 # Deploy Stage
 deploy_services:
   stage: deploy
