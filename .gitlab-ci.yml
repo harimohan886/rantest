@@ -27,3 +27,7 @@ deploy_services:
         cd latest_ranthambore/safari && git pull && npm install && pm2 restart safari2 &
         wait
       EOF
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6fb48c (ci-cd addition2)
