@@ -1,39 +1,98 @@
 stages:
-#  - test
+  - test
   - deploy
-  - build
 
-#include:
-# - project: 'arsh/ranthambore'
-#   file: '/admin/.gitlab-ci.yml'
+# Test Stage
+test_services:
+  stage: test
+  image: node:14 # Assuming you're testing with Node.js
 
-before_script:
-  - apt-get update -qq
-  - apt-get install -qq git
-  # Setup SSH deploy keys
-  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-  - eval $(ssh-agent -s)
-  - ssh-add <(echo "$SSH_PRIVATE_KEY")
-  - mkdir -p ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    
-deploy_staging:
+  # Test and install dependencies for admin service
+  admin_test:
+    script:
+      - cd latest_ranthambore/admin
+      - npm install
+      - npm test
+
+  # Test and install dependencies for chambal service
+  chambal_test:
+    script:
+      - cd latest_ranthambore/chambal
+      - npm install
+      - npm test
+
+  # Test and install dependencies for client-api-gateway service
+  client_api_gateway_test:
+    script:
+      - cd latest_ranthambore/client/api-gateway
+      - npm install
+      - npm test
+  client_frontend_test:
+    script:
+      - cd latest_ranthambore/client/frontend
+      - npm install
+      - npm test      
+
+  client_hotel_test:
+    script:
+      - cd latest_ranthambore/hotel
+      - npm install
+      - npm test
+
+  client_package_test:
+    script:
+      - cd latest_ranthambore/package
+      - npm install
+      - npm test
+
+  client_payment_test:
+    script:
+      - cd latest_ranthambore/payment
+      - npm install
+      - npm test
+
+  client_safari_test:
+    script:
+      - cd latest_ranthambore/safari
+      - npm install
+      - npm test
+
+stages:
+  - deploy
+# Deploy Stage
+deploy_services:
   stage: deploy
-  environment:
-    name: staging
-    url: 13.233.31.22
+  image: bash:devel-alpine3.19
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   script:
-    - ssh ubuntu@13.233.31.22 "cd ranthambore/ && git checkout main && git pull origin main && exit"
-  only:
-    - main
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && git pull'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/admin && pm2 restart admin2'
 
-build_staging:
-  stage: build
-  environment:
-    name: staging
-    url: 13.233.31.22
-  script:
-    - ssh ubuntu@13.233.31.22 "cd ranthambore/ && docker-compose up --build -d"
-  when: manual
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/chambal && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/chambal && pm2 restart chambal2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client-api-gateway && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client-api-gateway && pm2 restart api2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client/frontend && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/client/frontend && pm2 restart frontend2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/hotel && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/hotel && pm2 restart hotel2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/package && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/package && pm2 restart package2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/payment && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/payment && pm2 restart payment2'
+
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/safari && npm install'
+    - ssh latestranthambore@3.110.148.246 'cd latest_ranthambore/safari && pm2 restart safari2'
+
   only:
-    - main
+    - main  # Or whichever branch you want to deploy
+  dependencies:
+    - test_services
