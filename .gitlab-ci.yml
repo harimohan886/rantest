@@ -16,17 +16,17 @@ deploy_services:
   before_script:
     - apk add --no-cache openssh sshpass
     # Copy the SSH private key to a temporary file
-    - echo "$SSH_PRIVATE_KEY" > /tmp/id_rsa
+    - echo "$SSH_PRIVATE_KEY" > /home/ubuntu/id_rsa
     # Set appropriate permissions on the private key file
     - chmod 600 /tmp/id_rsa
 
   script:
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/admin && git pull && npm install && pm2 restart admin2" 
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/chambal && npm install && pm2 restart chambal2"
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client-api-gateway && npm install && pm2 restart api2" 
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client/frontend && npm install && pm2 restart frontend2"
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/hotel && npm install && pm2 restart hotel2"
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/package && npm install && pm2 restart package2"
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/payment && npm install && pm2 restart payment2"
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/safari && npm install && pm2 restart safari2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/admin && git pull && npm install && pm2 restart admin2" 
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/chambal && npm install && pm2 restart chambal2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client-api-gateway && npm install && pm2 restart api2" 
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client/frontend && npm install && pm2 restart frontend2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/hotel && npm install && pm2 restart hotel2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/package && npm install && pm2 restart package2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/payment && npm install && pm2 restart payment2"
+    - ssh -i /home/ubuntu/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/safari && npm install && pm2 restart safari2"
 
