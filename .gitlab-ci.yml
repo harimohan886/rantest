@@ -5,6 +5,8 @@ stages:
 deploy_services:
   stage: deploy
   rules:
+    - if: '$TRIGGER_PIPELINE == "true"'
+      when: always
     - if: '$CI_COMMIT_MESSAGE =~ /updated package.json and package-lock.json/ || $CI_COMMIT_MESSAGE =~ /deploy/'
       when: never 
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -18,12 +20,12 @@ deploy_services:
     - |
       ssh latestranthambore@3.110.148.246 << 'EOF'
         cd latest_ranthambore/admin && git pull && npm install && pm2 restart admin2 &
-        cd latest_ranthambore/chambal && git pull && npm install && pm2 restart chambal2 &
-        cd latest_ranthambore/client-api-gateway && git pull && npm install && pm2 restart api2 &
-        cd latest_ranthambore/client/frontend && git pull && npm install && pm2 restart frontend2 &
-        cd latest_ranthambore/hotel && git pull && npm install && pm2 restart hotel2 &
-        cd latest_ranthambore/package && git pull && npm install && pm2 restart package2 &
-        cd latest_ranthambore/payment && git pull && npm install && pm2 restart payment2 &
-        cd latest_ranthambore/safari && git pull && npm install && pm2 restart safari2 &
+        cd latest_ranthambore/chambal && npm install && pm2 restart chambal2 &
+        cd latest_ranthambore/client-api-gateway && npm install && pm2 restart api2 &
+        cd latest_ranthambore/client/frontend && npm install && pm2 restart frontend2 &
+        cd latest_ranthambore/hotel && npm install && pm2 restart hotel2 &
+        cd latest_ranthambore/package && npm install && pm2 restart package2 &
+        cd latest_ranthambore/payment && npm install && pm2 restart payment2 &
+        cd latest_ranthambore/safari && npm install && pm2 restart safari2 &
         wait
       EOF
