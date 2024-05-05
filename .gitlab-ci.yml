@@ -21,7 +21,7 @@ deploy_services:
     - chmod 600 /tmp/id_rsa
 
   script:
-    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore && git pull && cd latest_ranthambore/admin && npm i && pm2 restart admin2" 
+    - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore && git pull && cd admin && npm i && pm2 restart admin2" 
     - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/chambal && npm i && pm2 restart chambal2"
     - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client-api-gateway && npm i && pm2 restart api2" 
     - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/client/frontend && npm i && pm2 restart frontend2"
