@@ -18,7 +18,7 @@ deploy_services:
     # Copy the SSH private key to a temporary file
     - echo "$SSH_PRIVATE_KEY" > /tmp/id_rsa
     # Set appropriate permissions on the private key file
-    - sudo chmod 600 /tmp/id_rsa
+    - chmod 600 /tmp/id_rsa
 
   script:
     - ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no latestranthambore@3.110.148.246 "cd latest_ranthambore/admin && git pull && npm install && pm2 restart admin2" 
