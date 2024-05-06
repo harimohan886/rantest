@@ -34,7 +34,7 @@ export default function Home2() {
     <Adventures/>
     <div className='container'>
         <div className='goWild'>
-            <h3 className='common-title mt-2 mb-2'>Let's go Wild. Reserve your slots now.</h3>
+            <h3 className='common-title mt-2 mb-2'>Let's go Wilds. Reserve your slots now.</h3>
             <div className='row'>
                 <div className='col-sm-6'>
                     <FrontBooking/>

@@ -4,7 +4,7 @@ export default function NewTiming() {
   return (
     <div className='container'>
         <div className='new-timing'>
-            <h3 className='common-title'>Safari Zoness & Timings</h3>
+            <h3 className='common-title'>Safari Zones & Timings</h3>
             <div className='row'>
                 <div className='col-sm-6'>
                     <div className='leafBg'>
@@ -17,7 +17,7 @@ export default function NewTiming() {
                                 <img src='../image/icons/approved.png' className='img-fluid' alt='Check' /> Visitor can select either Zone 1 to 7 or 8 to 10
                             </li>
                             <li>
-                                <img src='../image/icons/approved.png' className='img-fluid' alt='Check' /> There are 10 Safari Zone in Ranthambore National park
+                                <img src='../image/icons/approved.png' className='img-fluid' alt='Check' /> There are 10 Safari Zone in Ranthambore  National park
                             </li>
                             <li>
                                 <img src='../image/icons/approved.png' className='img-fluid' alt='Check' /> If you select Safari for 1 to 7 Zone that means your safari will be conducted in any one Zone, same as for Zone 8 to 10
