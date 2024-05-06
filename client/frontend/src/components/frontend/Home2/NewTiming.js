@@ -4,7 +4,7 @@ export default function NewTiming() {
   return (
     <div className='container'>
         <div className='new-timing'>
-            <h3 className='common-title'>Safari Zone & Timings</h3>
+            <h3 className='common-title'>Safari Zoness & Timings</h3>
             <div className='row'>
                 <div className='col-sm-6'>
                     <div className='leafBg'>
