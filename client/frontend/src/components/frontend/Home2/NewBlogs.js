@@ -19,7 +19,7 @@ export default function NewBlogs() {
                         </a>
                     </div>
                 </div>
-                <div className='col-sm-4'>
+                {/* <div className='col-sm-4'>
                     <div className='bBox'>
                         <a rel="noreferrer" target='_blank' href='https://blog.ranthamboretigerreserve.in/trip-to-ranthambhore-national-park/'>
                             <img src='../image/blog/blog2.jpeg' className='img-fluid' alt='Blog' />
@@ -31,7 +31,7 @@ export default function NewBlogs() {
                             </div> 
                         </a>
                     </div>
-                </div>
+                </div> */}
                 <div className='col-sm-4'>
                     <div className='bBox'>
                         <a rel="noreferrer" target='_blank' href='https://blog.ranthamboretigerreserve.in/ways-to-ranthambhore-national-park/'>
@@ -45,7 +45,7 @@ export default function NewBlogs() {
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>g
         </div>
     </div>
   )
