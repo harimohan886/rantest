@@ -14,7 +14,7 @@ export default function HolidayTour({ packages }) {
             <div className='holidays'>
                 {data && data.map((d, i) => {
                     if (i == 0) {
-                        return <h3 className='common-title'>Book your Holiday Tour Packages</h3>
+                        return <h3 className='common-title'>Book your Holiday Tour Packages </h3>
                     }
                 })}
 
