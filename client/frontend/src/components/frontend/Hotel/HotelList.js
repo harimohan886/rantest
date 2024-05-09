@@ -93,7 +93,7 @@ export default function HotelList() {
 
                                             {[...Array(item.rating)].map((star, index) => {
 
-                                                return (<span className="fa fa-star checked"></span>)
+                                                return (<span  key={index} className="fa fa-star checked"></span>)
 
                                             })}
                                         </div>
@@ -102,7 +102,6 @@ export default function HotelList() {
                                             <ul className="list-inline">
 
                                                 {item.amenities && item.amenities.slice(0, 3).map((list, lindex) => (
-
                                                     <li key={lindex} className='list-inline-item'>
                                                         <span> {list.amenity.amenity}</span>
                                                     </li>
