@@ -157,7 +157,6 @@ module.exports = {
       console.log(error.message);
     }
   },
-
   createNewEnquiry: async (req, res, next) => {
     try {
 
