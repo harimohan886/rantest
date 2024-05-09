@@ -133,7 +133,7 @@ export default function OnlineSafariBooking() {
                 <div className='row'>
                     <div className='col-sm-6 col-xs-12 padding-left-zero'>
                         <div className='safaribgmain'>
-                            <img alt="Safari" class="img-responsive" src="../image/safari-banner.png" />
+                            <img alt="Safari" className="img-responsive" src="../image/safari-banner.png" />
                         </div>
                     </div>
                     <div className='col-sm-6 col-xs-12 goWild'>

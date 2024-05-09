@@ -6,7 +6,7 @@ export default function TourDetails({ packages }) {
             <div className='container sectionFrame'>
                 <div className='packages-views'>
                     <h1>{packages?.package?.name}</h1>
-                    <div class="rating">
+                    <div className="rating">
                         {[...Array(packages?.package?.rating)].map((star, index) => {
                             return (<span key={index} className="fa fa-star checked"></span>)
 

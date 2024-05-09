@@ -5,14 +5,14 @@ export default function NewFAQ() {
     <div className='container' id="tab-faq">
         <h4 className='mb-2 text-dark'><strong>Frequently Asked Questions</strong></h4>
         <div id="accordion">
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionOne">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionOne">
                     Q. Which time safari is better for spotting tigers – morning or evening?
                     </a>
                 </div>
-                <div id="sectionOne" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionOne" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}> Spotting tigers in the national park is all dependent on luck. Knowledge about the tiger’s route is very important. The guides usually have the right and appropriate knowledge about these facts.&nbsp;</span>
                         </p>
@@ -23,14 +23,14 @@ export default function NewFAQ() {
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionTwo">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionTwo">
                     Q. What are zones for tiger sighting in the Ranthambhore national park?
                     </a>
                 </div>
-                <div id="sectionTwo" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionTwo" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}>- there are 10 zones for tiger sighting. And every track takes you to the heart of the park. Whether canter or jeep, both travel on the same track in the national park. No region of the forest is bad for the sighting of animals. Also, for the zone availability, the tourist needs to book in 90 days advance to the date of the visit. Every zone is better on different days. The best zone for a particular visit can be ascertained only 2- 3 ago to the visit.</span>
                         </p>
@@ -38,14 +38,14 @@ export default function NewFAQ() {
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionThree">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionThree">
                     Q. Is tiger sighting easy in RANTHAMBHORE NATIONAL PARK?
                     </a>
                 </div>
-                <div id="sectionThree" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionThree" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}> Ranthambhore National park is the biggest and only national park with a wide variety of flora and fauna. Also, among all the nations, this park is the only park with the largest number of tigers in the natural habitat.</span>
                         </p>
@@ -59,14 +59,14 @@ export default function NewFAQ() {
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionFour">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionFour">
                     Q. Which is a better mode for Jungle safari- jeep or Canter?
                     </a>
                 </div>
-                <div id="sectionFour" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionFour" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}>- Both of the vehicles are good and appropriate for traveling in Ranthambhore National park. Whether it is jeep or canter, both take the similar track route of the safari.&nbsp;</span>
                         </p>
@@ -80,14 +80,14 @@ export default function NewFAQ() {
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionFive">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionFive">
                     Q. How to reach Ranthambhore National Park?
                     </a>
                 </div>
-                <div id="sectionFive" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionFive" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}> There is no direct flight or train to Ranthambhore national park. The nearest airport is Jaipur airport. Also, it is 180 km away from the national park and the tourist can take a cab or taxi to commute from the airport to the park.&nbsp;</span>
                         </p>
@@ -98,14 +98,14 @@ export default function NewFAQ() {
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionSix">
+            <div className="card">
+                <div className="card-header">
+                    <a className="collapsed card-link accordion-title" data-toggle="collapse" href="#sectionSix">
                     Q. Which is the best time to visit the RANTHAMBHORE national park?
                     </a>
                 </div>
-                <div id="sectionSix" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                <div id="sectionSix" className="collapse" data-parent="#accordion">
+                    <div className="card-body">
                         <p>
                             <span style={{fontWeight: "400"}}> The RANTHAMBHORE national park is open for public visits from the 1</span>
                             <span style={{fontWeight: "400"}}>st</span>

@@ -62,8 +62,8 @@ export default function FestivalDates() {
                                         <td className='border border-slate-300 text-center'>{index + 1}</td>
                                         <td className='border border-slate-300 text-center'>{item.startDate} - {item.endDate}</td>
 
-                                        <td  class="border border-slate-300 text-center"><a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href={`/admin/edit-festival-date/${item._id}`}><i class="fas fa-pencil"></i></a>
-                                           <a onClick={e=>deleteDate(e,item._id)}  class="text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"><i class="fas fa-trash"></i></a></td>
+                                        <td  className="border border-slate-300 text-center"><a className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href={`/admin/edit-festival-date/${item._id}`}><i className="fas fa-pencil"></i></a>
+                                           <a onClick={e=>deleteDate(e,item._id)}  className="text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"><i className="fas fa-trash"></i></a></td>
 
 
                                     </tr>

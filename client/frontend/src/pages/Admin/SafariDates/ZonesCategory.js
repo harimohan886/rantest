@@ -49,11 +49,11 @@ export default function ZoneCategory() {
                             <td className='border border-slate-300 text-center'>{index+1}</td>
                             <td className='border border-slate-300 text-center'>{item.name}</td>
                             <td className='border border-slate-300 text-center'>{item.availability == 1 ? 'Available' : 'NA'}</td>
-                            <td class="border border-slate-300 text-center">
-                                <Link class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/edit-zone/${item._id}`} >
-                                    <i class="fas fa-pencil"></i>
+                            <td className="border border-slate-300 text-center">
+                                <Link className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/edit-zone/${item._id}`} >
+                                    <i className="fas fa-pencil"></i>
                                 </Link>
-                                {/* <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i class="fas fa-trash"></i></a> */}
+                                {/* <a className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" href="/admin/ranthambore-dates"><i className="fas fa-trash"></i></a> */}
                             </td>
                          </tr>
                     )) }

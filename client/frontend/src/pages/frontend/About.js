@@ -20,7 +20,7 @@ export default function About() {
     }, [])
 
       return (
-        <div class="container" style={{padding: "30px 0"}}>
+        <div className="container" style={{padding: "30px 0"}}>
             <div className='bodyHeight'>
               <div className='discription'>
                 <h3 style={{textAlign: "center"}}>{title}</h3>

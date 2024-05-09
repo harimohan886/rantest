@@ -20,7 +20,7 @@ export default function Cancellation() {
     }, [])
 
       return (
-        <div class="container" style={{padding: "30px 0"}}>
+        <div className="container" style={{padding: "30px 0"}}>
             <div className='bodyHeight'>
                 <h3 style={{textAlign: "center"}}>{title}</h3>
                 <div dangerouslySetInnerHTML={{ __html: content }} />

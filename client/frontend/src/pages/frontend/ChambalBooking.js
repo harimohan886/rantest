@@ -560,7 +560,7 @@ export default function ChambalBooking() {
                             </div>
                          <div className="modal-body">
                             <div className='table-responsive'>
-                            <table class="table table-bordered">
+                            <table className="table table-bordered">
                                 <tbody>
                                     <tr>
                                     <th className='text-black italic'>Date of Visit</th>
@@ -603,7 +603,7 @@ export default function ChambalBooking() {
                             </div>
 
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                         <button type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 sm:text-base font-medium rounded text-sm py-2 px-3 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss="modal">Cancel</button>
                         <button type="button" onClick = {HandlePayment} className="primary-btn bg-lemon py-2 text-center px-3 shadow-lg rounded sm:text-base font-semibold text-kenpozome hover:text-kenpozome">Make Payment</button>
                     </div>
