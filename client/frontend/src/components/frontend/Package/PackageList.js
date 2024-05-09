@@ -90,7 +90,7 @@ export default function PackageList() {
                                     <h2>{item.name} </h2>
                                     <div className="rating">
                                         {[...Array(item.rating)].map((star, index) => {
-                                            return (<span className="fa fa-star checked"></span>)
+                                            return (<span key={index} className="fa fa-star checked"></span>)
 
                                         })}
                                     </div>
