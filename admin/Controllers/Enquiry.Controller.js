@@ -1,12 +1,12 @@
-const createError = require('http-errors');
-const mongoose = require('mongoose');
+const createError = require("http-errors");
+const mongoose = require("mongoose");
 
-const amqp = require('amqplib');
+const amqp = require("amqplib");
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => 
- fetch(...args));
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-const Enquiry = require('../Models/Enquiry.model');
+const Enquiry = require("../Models/Enquiry.model");
 
 let channel;
 
@@ -14,75 +14,92 @@ async function connect() {
   const amqpServer = process.env.RABBITMQ_URL;
   const connection = await amqp.connect(amqpServer);
   channel = await connection.createChannel();
-  await channel.assertQueue('booking');
+  await channel.assertQueue("booking");
 }
 connect();
-
 
 module.exports = {
   getAllEnquirys: async (req, res, next) => {
     try {
-
       const filter_date = req.query.filter_date
         ? {
-          booking_date: {
-            $regex: req.query.filter_date
-          },
-        }
+            booking_date: {
+              $regex: req.query.filter_date,
+            },
+          }
         : {};
 
       const filter_created_at = req.query.filter_created_at
         ? {
-          addedAt: {
-            $regex: req.query.filter_created_at
+            addedAt: {
+              $regex: req.query.filter_created_at,
+            },
           }
-        }
         : {};
 
       const filter_name = req.query.filter_name
         ? {
-          traveller_name: {
-            $regex: req.query.filter_name,
-            $options: "i",
-          },
-        }
+            traveller_name: {
+              $regex: req.query.filter_name,
+              $options: "i",
+            },
+          }
         : {};
 
       const filter_type = req.query.filter_type
         ? {
-          type: req.query.filter_type
-        }
+            type: req.query.filter_type,
+          }
         : {};
 
       const filter_phone = req.query.filter_phone
         ? {
-          phone: {
-            $regex: req.query.filter_phone,
-            $options: "i",
+            phone: {
+              $regex: req.query.filter_phone,
+              $options: "i",
+            },
           }
-        }
         : {};
 
       var page = parseInt(req.query.page) || 1;
       var size = parseInt(req.query.size) || 15;
-      var type = req.query.type || 'general';
-      var query = {}
+      var type = req.query.type || "general";
+      var query = {};
       if (page < 0 || page === 0) {
-        response = { "error": true, "message": "invalid page number, should start with 1" };
+        response = {
+          error: true,
+          message: "invalid page number, should start with 1",
+        };
         return res.json(response);
       }
       query.skip = size * (page - 1);
       query.limit = size;
 
-      var totalPosts = await Enquiry.find({ ...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type }).countDocuments().exec();
+      var totalPosts = await Enquiry.find({
+        ...filter_date,
+        ...filter_name,
+        ...filter_phone,
+        ...filter_created_at,
+        ...filter_type,
+      })
+        .countDocuments()
+        .exec();
 
-      const data = await Enquiry.find({ ...filter_date, ...filter_name, ...filter_phone, ...filter_created_at, ...filter_type }, {},
-        query).sort({ $natural: -1 });
+      const data = await Enquiry.find(
+        {
+          ...filter_date,
+          ...filter_name,
+          ...filter_phone,
+          ...filter_created_at,
+          ...filter_type,
+        },
+        {},
+        query
+      ).sort({ $natural: -1 });
 
       if (!data) {
-        response = { "error": true, "message": "Error fetching data" + err };
+        response = { error: true, message: "Error fetching data" + err };
       } else {
-
         /*let enqueryList = [];
 
         for (let resData of data) {
@@ -110,11 +127,17 @@ module.exports = {
 
         }*/
 
-        response = { "success": true, "message": 'data fetched', 'data': data, 'page': page, 'total': totalPosts, perPage: size };
+        response = {
+          success: true,
+          message: "data fetched",
+          data: data,
+          page: page,
+          total: totalPosts,
+          perPage: size,
+        };
       }
 
       return res.json(response);
-
     } catch (error) {
       console.log(error.message);
     }
@@ -122,16 +145,15 @@ module.exports = {
 
   getAllEnquiriesCustomer: async (req, res, next) => {
     try {
+      var type = req.query.type || "general";
 
-      var type = req.query.type || 'general';
-
-      const enq_cust = await Enquiry.distinct('traveller_name', { type: type });
+      const enq_cust = await Enquiry.distinct("traveller_name", { type: type });
       if (!enq_cust) {
-            response = { "error": true, "message": "Error fetching data" + err };
-          } else {
-            response = { "success": true, "message": 'data fetched', 'data': enq_cust };
-          }
-          return res.json(response);
+        response = { error: true, message: "Error fetching data" + err };
+      } else {
+        response = { success: true, message: "data fetched", data: enq_cust };
+      }
+      return res.json(response);
     } catch (error) {
       console.log(error.message);
     }
@@ -139,16 +161,19 @@ module.exports = {
 
   getAllEnquiesDashboard: async (req, res, next) => {
     try {
-
       var totalEnq = await Enquiry.find({}).countDocuments().exec();
 
-      const general_enqs = await Enquiry.find({type: {$ne: "hotel"}}).sort({ $natural: -1 }).limit(5);
+      const general_enqs = await Enquiry.find({ type: { $ne: "hotel" } })
+        .sort({ $natural: -1 })
+        .limit(5);
 
-      const hotel_enqs = await Enquiry.find({type: 'hotel' }).sort({ $natural: -1 }).limit(5);
+      const hotel_enqs = await Enquiry.find({ type: "hotel" })
+        .sort({ $natural: -1 })
+        .limit(5);
 
       res.send({
         success: true,
-        message: 'Data fetched',
+        message: "Data fetched",
         total_enquiries: totalEnq,
         hotel_enquiries: hotel_enqs,
         general_enquiries: general_enqs,
@@ -160,12 +185,11 @@ module.exports = {
 
   createNewEnquiry: async (req, res, next) => {
     try {
-
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0");
       var yyyy = today.getFullYear();
-      today = yyyy + '-' + mm + '-' + dd;
+      today = yyyy + "-" + mm + "-" + dd;
 
       req.body.addedAt = today;
 
@@ -174,12 +198,12 @@ module.exports = {
       const result = await date.save();
       res.send({
         success: true,
-        message: 'Data inserted',
-        data: result
+        message: "Data inserted",
+        data: result,
       });
     } catch (error) {
       console.log(error.message);
-      if (error.name === 'ValidationError') {
+      if (error.name === "ValidationError") {
         next(createError(422, error.message));
         return;
       }
@@ -189,23 +213,22 @@ module.exports = {
 
   SveEnquiry: async (req, res, next) => {
     try {
-
       const params = new URLSearchParams();
 
-      const meta = {type:req.body.type};
+      const meta = { type: req.body.type };
 
-      params.append('name', req.body.name);
-      params.append('mobile', req.body.mobile);
+      params.append("name", req.body.name);
+      params.append("mobile", req.body.mobile);
       // params.append('email', req.body.email ?? '');
-      params.append('website', 'ranthamboretigerreserve.in');
-      params.append('meta', meta);
+      params.append("website", "ranthamboretigerreserve.in");
+      params.append("meta", meta);
 
       const data = {};
 
       var json_arr = {};
       json_arr["name"] = req.body.name;
       json_arr["mobile"] = req.body.mobile;
-      json_arr["website"] = 'ranthamboretigerreserve.in';
+      json_arr["website"] = "ranthamboretigerreserve.in";
       json_arr["custom_data"] = "";
       json_arr["method"] = "save-lead";
 
@@ -215,18 +238,21 @@ module.exports = {
           JSON.stringify(json_arr)
           )
         );*/
-
-      const response = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {method: 'POST', body: params});
-       data = await response.json();
+      console.log(process.env.CRM_LEAD_URL);
+      const response = await fetch(`${process.env.CRM_LEAD_URL}/save-lead`, {
+        method: "POST",
+        body: params,
+      });
+      result = await response.json();
 
       res.send({
         success: true,
-        message: 'Data inserted',
-        data: result
+        message: "Data inserted",
+        data: result,
       });
     } catch (error) {
       console.log(error.message);
-      if (error.name === 'ValidationError') {
+      if (error.name === "ValidationError") {
         next(createError(422, error.message));
         return;
       }
@@ -239,17 +265,17 @@ module.exports = {
     try {
       const date = await Enquiry.findById(id);
       if (!date) {
-        throw createError(404, 'Enquiry does not exist.');
+        throw createError(404, "Enquiry does not exist.");
       }
       res.send({
         success: true,
-        message: 'Data fetched',
-        data: date
+        message: "Data fetched",
+        data: date,
       });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Enquiry id'));
+        next(createError(400, "Invalid Enquiry id"));
         return;
       }
       next(error);
@@ -261,16 +287,16 @@ module.exports = {
     try {
       const result = await Enquiry.findByIdAndDelete(id);
       if (!result) {
-        throw createError(404, 'Enquiry does not exist.');
+        throw createError(404, "Enquiry does not exist.");
       }
       res.send({
         success: true,
-        message: 'Data deleted',
+        message: "Data deleted",
       });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Enquiry id'));
+        next(createError(400, "Invalid Enquiry id"));
         return;
       }
       next(error);

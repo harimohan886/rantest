@@ -20,8 +20,8 @@ export default function CurrentBooking() {
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
   };
-
   function GetAllZones()   {
+      console.log("...............",process.env.REACT_APP_BASE_URL);
         axios.get(`${process.env.REACT_APP_BASE_URL}/safari/zone-categories`, {
         headers: {
             'Accept': 'application/json, text/plain, */*',
