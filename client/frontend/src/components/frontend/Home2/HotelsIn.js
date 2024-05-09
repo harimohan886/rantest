@@ -14,7 +14,7 @@ export default function HotelsIn({ hotels }) {
       <div className='container'>
         {data && data.map((d, i) => {
           if (i == 0) {
-            return <h3 className='common-title'>Hotels & Resorts in Ranthambore</h3>
+            return <h3 className='common-title'>Hotels & Resorts !!! in Ranthambore</h3>
           }
         })}
         <div className='row'>
