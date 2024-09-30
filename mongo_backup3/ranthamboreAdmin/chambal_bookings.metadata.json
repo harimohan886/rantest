@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"date":{"$numberInt":"1"}},"name":"date_1","background":true}],"uuid":"ebb693ff18534076b47ec19723da9372","collectionName":"chambal_bookings","type":"collection"}

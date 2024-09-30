@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"page_name":{"$numberInt":"1"}},"name":"page_name_1","background":true}],"uuid":"b268e9acf1d641ccabe2eed46c01c8dc","collectionName":"seo_managers","type":"collection"}
