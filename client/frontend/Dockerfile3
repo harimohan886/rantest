@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy the package.json and package-lock.json files first
 COPY package*.json ./
 
-# Install dependencies, including ajv and ajv-keywords, using --force to handle dependency conflicts
-RUN npm install ajv@^6 ajv-keywords@^3 --save --force && npm install --legacy-peer-deps --force
+# Install dependencies, including ajv and ajv-keywords
+RUN npm install ajv@^6 ajv-keywords@^3 --save && npm install --legacy-peer-deps
 
 # Copy the rest of the app's source code
 COPY . .
